@@ -1,0 +1,80 @@
+* {
+  font-family: Calibri, sans-serif;
+}
+
+/* login and register */
+
+.form-background {
+  background-color: #9424ff;
+  padding-top: 13em;
+}
+
+.form {
+  background-color: #fefefe;
+  border-radius: 25px;
+
+  padding: 0.1em 4em 2em 2em;
+  /* kan ik hier beter met width en height werken?  ipv 17em*/
+}
+
+/* .logo{
+  width: 100%;
+  height: auto;
+} */
+
+.form-title {
+  color: #9424ff;
+  font-size: 1.7em;
+}
+
+.form-label{
+  color: #A7A7A7;
+  font-size: 0.9em;
+}
+
+.form-input{
+  width: 100%;
+  padding: 0.7em;
+  border-radius: 0.4em;
+}
+
+.form-field{
+  padding-bottom: 1em;
+}
+
+.error{
+  color: black;
+  background-color: #fc0b2b63;
+  border-left: 0.7em solid #FC0B2C;
+  border-radius: 0.4em;
+  padding: 0.8em 0.6em ;
+}
+
+.hidden{
+  display: none;
+}
+
+.form-btn{
+  background-color: #9424ff;
+  color: #fefefe;
+  padding: 0.8em 12em;
+  border-radius: 0.4em;
+  border: none;
+}
+
+.form-switch{
+  text-align: center;
+}
+
+.switch{
+  text-decoration: none;
+  color: #9424ff;
+  font-weight: 700;
+}
+
+.forgot{
+  text-decoration: none;
+  color: #9424ff;
+  font-weight: 700;
+  /* iets van center */
+}
