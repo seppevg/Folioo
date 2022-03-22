@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php 
+
+include_once("bootstrap.php");
+
+Security::onlyLoggedInUsers();	
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

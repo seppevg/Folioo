@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php 
+
+include_once("bootstrap.php");
+	
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -48,7 +52,7 @@
                 </div>
 
                 <div class="form-switch">
-                    <p>No account yet? <a class="forgot" href="#">Register</a></p>
+                    <p>No account yet? <a class="forgot" href="register.php">Register</a></p>
                 </div>
             </form>
         </div>
