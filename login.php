@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php 
+
+include_once("bootstrap.php");
+	
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,11 +15,9 @@
 </head>
 
 <body class="form-background">
-        
-        <div class="logo-row">
-            <img src="./assets/Folioo.png" alt="Foolio Logo" class="logo">
-        </div>
-        
+    <div class="logo-row">
+        <img src="./assets/Folioo.png" alt="Foolio Logo" class="logo">
+    </div>
             <div class="form-container">
                 <form action="" method="post" class="form">
                     <div class="container">    
