@@ -1,80 +1,118 @@
+@import url("https://use.typekit.net/vqb1drq.css");
+
 * {
-  font-family: Calibri, sans-serif;
+  font-family: museo-sans, sans-serif;
 }
 
 /* login and register */
-
-.form-background {
-  background-color: #9424ff;
-  padding-top: 13em;
-}
-
-.form {
-  background-color: #fefefe;
-  border-radius: 25px;
-
-  padding: 0.1em 4em 2em 2em;
-  /* kan ik hier beter met width en height werken?  ipv 17em*/
-}
-
-/* .logo{
-  width: 100%;
-  height: auto;
-} */
-
-.form-title {
-  color: #9424ff;
-  font-size: 1.7em;
-}
-
-.form-label{
-  color: #A7A7A7;
-  font-size: 0.9em;
-}
-
-.form-input{
-  width: 100%;
-  padding: 0.7em;
-  border-radius: 0.4em;
-}
-
-.form-field{
-  padding-bottom: 1em;
-}
-
-.error{
-  color: black;
-  background-color: #fc0b2b63;
-  border-left: 0.7em solid #FC0B2C;
-  border-radius: 0.4em;
-  padding: 0.8em 0.6em ;
-}
-
-.hidden{
+.hidden {
   display: none;
 }
 
-.form-btn{
-  background-color: #9424ff;
-  color: #fefefe;
-  padding: 0.8em 12em;
-  border-radius: 0.4em;
-  border: none;
+.flex{
+  display: flex;
 }
 
-.form-switch{
+.center {
   text-align: center;
 }
 
-.switch{
+.form-background {
+  background-color: #0600FF;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.form-container {
+  background-color: #fefefe;
+  border-radius: 25px 25px 0 0;
+  width: 100vw;
+  height: 100%;
+}
+
+.form{
+  height: 100%;
+  margin: 0 2em;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.logo{
+  width: 140px;
+  height: auto;
+  text-align: center;
+  margin: 60px 0;
+}  
+
+.logo-row{
+  width: 140px;
+  margin: 0 auto;
+}
+
+.form-title {
+  color: #0600FF;
+  font-size: 1.7em;
+  margin: 1em 0 1em 0;
+}
+
+.form-label {
+  color: #a7a7a7;
+  font-size: 0.9em;
+}
+
+.input-container{
+  display: flex;
+}
+
+.form-input {
+  padding: 0.7em;
+  border-radius: 0.4em;
+  flex: 1 1 auto;
+  margin: 5px 0 1.7em 0;
+}
+
+.form-field {
+  position: relative;
+}
+
+.error {
+  color: black;
+  background-color: #fc0b2b63;
+  border-left: 0.7em solid #fc0b2c;
+  border-radius: 0.4em;
+  padding: 0.8em 0.6em;
+}
+
+.form-btn {
+  background-color: #BFFD00;
+  color: black;
+  font-weight: 600;
+  border-radius: 0.4em;
+  margin-bottom: 1em;
+  border: none;
+  flex: 1 1 auto;
+  padding: 0.8em;
+}
+
+.switch {
   text-decoration: none;
-  color: #9424ff;
+  color: #0600FF;
   font-weight: 700;
 }
 
-.forgot{
-  text-decoration: none;
-  color: #9424ff;
-  font-weight: 700;
-  /* iets van center */
+.line{
+  border-top: 1px solid #a7a7a7;
+  width: 220px;
+  padding: 1.7em 0 1em 0;
+}
+
+.switch-container{
+  display: flex;
+  justify-content: center;
 }
