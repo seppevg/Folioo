@@ -1,6 +1,28 @@
 <?php 
-
 include_once("bootstrap.php");
+
+if( !empty($_POST) ){
+    try {        
+        // create a new user
+        $user = new User();
+        $user->setEmail(($_POST['email']));
+        $user->setPassword(($_POST['password']));
+        
+        $user->canLogin();
+        
+        // if user is allowed to log in -> start a session and redirect the user
+        session_start();
+        $_SESSION['email'] = $user->getEmail();
+        header("Location: index.php");
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    }
+
+}	
+
+
 	
 ?><!DOCTYPE html>
 <html lang="en">
@@ -16,7 +38,7 @@ include_once("bootstrap.php");
 
 <body class="form-background">
     <div class="logo-row">
-        <img src="./assets/Folioo.png" alt="Foolio Logo" class="logo">
+        <img src="./assets/folioo-white.png" alt="Foolio Logo" class="logo">
     </div>
             <div class="form-container">
                 <form action="" method="post" class="form">
@@ -44,16 +66,17 @@ include_once("bootstrap.php");
                         </div>
 
                         <div>
-                            <div>
-                                <p class="error hidden">
-                                    Email can't be empty
-                                    <!-- 
-                                    -password can't be empty
-                                    -no user found with this email
-                                    -password is incorrect
-                                    -->
-                                </p>
-                            </div>
+                            <?php if(isset($error)):?>
+                                <div>
+                                    <p class="error"> <?php echo $error ?>
+                                        <!--Email can't be empty
+                                        -password can't be empty
+                                        -no user found with this email
+                                        -password is incorrect
+                                        -->
+                                    </p>
+                                </div>
+                            <?php endif;?>
 
                             <div class="flex">
                                 <input class="form-btn" type="submit" value="Log in">

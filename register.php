@@ -7,8 +7,9 @@ if( !empty($_POST) ){
         // create a new user
         $user = new User();
         $user->setEmail($_POST['email']);
-        $user->setPassword(($_POST['password']));
-        $user->setUsername(($_POST['username']));
+        $user->setPassword($_POST['password']);
+        $user->setUsername($_POST['username']);
+        $user->canRegister();
         $user->save();
         
         // start a session and redirect the user
@@ -40,7 +41,7 @@ if( !empty($_POST) ){
 <body class="form-background">
     
         <div class="logo-row">
-            <img src="./assets/Folioo.png" alt="Foolio Logo" class="logo">
+            <img src="./assets/folioo-white.png" alt="Foolio Logo" class="logo">
         </div>
 
         <div class="form-container">
