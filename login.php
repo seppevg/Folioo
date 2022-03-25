@@ -5,8 +5,8 @@ if( !empty($_POST) ){
     try {        
         // create a new user
         $user = new User();
-        $user->setEmail(($_POST['email']));
-        $user->setPassword(($_POST['password']));
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
         
         $user->canLogin();
         
