@@ -18,13 +18,12 @@ Security::onlyLoggedInUsers();
 </head>
 
 <body>
-    <div>
-        <img id="full-logo" src="./assets/folioo-blue.png" alt="Folioo logo">
-    </div>
-
     <div id="home">
+        <div>
+            <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
+        </div>
         <div id="no-uploads">
-            <img src="./assets/no-uploads.png" alt="No uploads yet">
+            <img src="./assets/no-uploads.svg" alt="No uploads yet">
         </div>
 
         <nav class="bottom-nav">
@@ -57,7 +56,7 @@ Security::onlyLoggedInUsers();
                     <img src="./assets/more.svg" alt="More">
                 </div>
                 <div class="nav-link">
-                    <a href="#">More</a>
+                    <a href="#">Profile</a>
                 </div>
             </div>
         </nav>

@@ -1,7 +1,7 @@
 <?php 
 
-include_once("../bootstrap.php");
-	
+include_once("bootstrap.php");
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@ include_once("../bootstrap.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styling/style.css">
     <link rel="stylesheet" href="./styling/normalize.css">
-    <title>Folioo - Log out</title>
+    <title>Folioo - Profile</title>
 </head>
 <body>
     

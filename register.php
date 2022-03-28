@@ -41,7 +41,7 @@ if( !empty($_POST) ){
 <body class="form-background">
     
         <div class="logo-row">
-            <img src="./assets/folioo-white.png" alt="Foolio Logo" class="logo">
+            <img src="./assets/folioo-white.svg" alt="Foolio Logo" class="logo">
         </div>
 
         <div class="form-container">
@@ -57,9 +57,6 @@ if( !empty($_POST) ){
                             <div class="flex">
                                 <input name="username" autofocus="" autocomplete="off" class="form-input" type="text" placeholder="den-David">
                             </div>
-                        </div>
-
-                        <div class="form-field">
                             <div>
                                 <label class="form-label" for="email">Email</label>
                             </div>
