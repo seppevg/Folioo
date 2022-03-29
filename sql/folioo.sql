@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 22 mrt 2022 om 21:20
+-- Gegenereerd op: 29 mrt 2022 om 22:05
 -- Serverversie: 5.7.24
 -- PHP-versie: 8.0.1
 
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `passwordreset`
+--
+
+CREATE TABLE `passwordreset` (
+  `Id` int(11) NOT NULL,
+  `Email` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Selector` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Token` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Expires` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `users`
 --
 
@@ -40,11 +54,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`) VALUES
-(3, 'r0748140@student.thomasmore.be', '$2y$15$xNrbdwdHcpdz7LOeOdtS3Ohd.XV9r4o2.2YGSV0/yyMNlxhbGnssC', 'Seep', NULL);
+(3, 'r0748140@student.thomasmore.be', '$2y$15$Agj1ewRUlMYJwL.squ/Xfe7lfUBchj7EJ6YAF12J4QLwsHkvYfT5G', 'Seep', NULL),
+(4, 'svg@student.thomasmore.be', '$2y$15$HyfQVfvypJSoJjo1XJBZdeZl0NLalTxnEu85PhQk7Yi4YLPSeFt.6', 'svg', NULL),
+(6, 'test@thomasmore.be', '$2y$15$YXQR0vCThNRYxKxAl74dt./AMnmP26m7veCaxG2tPXmAxolrYKTia', 'testerke', NULL);
 
 --
 -- Indexen voor geëxporteerde tabellen
 --
+
+--
+-- Indexen voor tabel `passwordreset`
+--
+ALTER TABLE `passwordreset`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexen voor tabel `users`
@@ -55,6 +77,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
+
+--
+-- AUTO_INCREMENT voor een tabel `passwordreset`
+--
+ALTER TABLE `passwordreset`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
