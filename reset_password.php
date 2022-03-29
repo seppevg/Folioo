@@ -1,4 +1,37 @@
-<!DOCTYPE html>
+<?php
+
+    include_once("bootstrap.php");
+
+
+    $selector = $_GET["selector"];
+    $validator = $_GET["validator"];
+
+    if (empty($selector) || empty($validator)) {
+        $error = "Could not validate your request!";
+    }
+    else {
+        if (ctype_xdigit($selector) == false && ctype_xdigit($validator) == false) {
+            $error = "Could not validate your request bitch!";
+        }
+    }
+
+    if( !empty($_POST) ){
+        try {        
+            // create a new user
+            $user = new User();
+            $user->setPassword($_POST['password']);        
+            $user->resetPassword();
+    
+            // If the user entered a valid email he gets redirected
+            header("Location: login.php");
+        }
+        catch(Throwable $error) {
+            // if any errors are thrown in the class, they can be caught here
+            $error = $error->getMessage();
+        }
+    }	
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,6 +50,8 @@
 
     <div class="form-container">
         <form action="" method="post" class="form">
+            <input type="hidden" name="selector" value="<?php echo $selector; ?>">
+            <input type="hidden" name="validator" value="<?php echo $validator; ?>">
             <div class="container">
                 <div>
                     <h3 class="form-title">Reset password</h3>
@@ -26,13 +61,13 @@
                             <label class="form-label" for="password">Password</label>
                         </div>
                         <div class="flex">
-                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Must be at least 6 characters">
+                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Enter new password">
                         </div>
                         <div>
                             <label class="form-label" for="password">Repeat password</label>
                         </div>
                         <div class="flex">
-                            <input name="password" autocomplete="off" class="form-input" type="password">
+                            <input name="password-repeat" autocomplete="off" class="form-input" type="password" placeholder="Repeat new password">
                         </div>
                     </div>
                 </div>
@@ -40,18 +75,12 @@
                 <div>
                     <?php if (isset($error)) : ?>
                         <div>
-                            <p class="error"> <?php echo $error ?>
-                                <!--Email can't be empty
-                                -password can't be empty
-                                -no user found with this email
-                                -password is incorrect
-                                -->
-                            </p>
+                            <p class="error"> <?php echo $error ?></p>
                         </div>
                     <?php endif; ?>
 
                     <div class="flex">
-                        <input class="form-btn" type="submit" value="Save new password">
+                        <input name="reset-password-submit" class="form-btn" type="submit" value="Reset password">
                     </div>
 
 
