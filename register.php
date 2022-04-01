@@ -9,6 +9,7 @@ if( !empty($_POST) ){
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
         $user->setUsername($_POST['username']);
+        $user->setImage($_POST['image']);
         $user->canRegister();
         $user->save();
         
@@ -74,6 +75,12 @@ if( !empty($_POST) ){
                             </div>
                             <div class="flex">
                                 <input name="password" autocomplete="off" class="form-input" type="password" placeholder="123456">
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <div class="flex">
+                                <input type="hidden" name="image">
                             </div>
                         </div>
                     </div>
