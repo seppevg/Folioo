@@ -153,10 +153,11 @@ class User
         return $this;
     }
 
-    public static function getAll()
+    public static function getProfileImg($email)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("select * from users");
+        $statement = $conn->prepare("select image, email, username from users where email = :email;");
+        $statement->bindValue(':email', $email);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }

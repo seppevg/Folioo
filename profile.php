@@ -3,6 +3,7 @@
 include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
+$email = $_SESSION['email'];
 
 if( !empty($_POST) ){
     try {        
@@ -10,6 +11,7 @@ if( !empty($_POST) ){
         $user = new User();
         $user->setImage($_POST['image']);
         $user->setUsername($_POST['username']);
+        $user->getEmail();
 
     }
     catch(Throwable $error) {
@@ -19,7 +21,7 @@ if( !empty($_POST) ){
 
 }	
 
-$profile = User::getAll();
+$profile = User::getProfileImg($email);
 
 
 ?><!DOCTYPE html>
