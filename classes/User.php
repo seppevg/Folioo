@@ -5,6 +5,7 @@ class User
     private $password;
     private $username;
     private $secondaryEmail;
+    private $image;
 
     /**
      * Get the value of email
@@ -144,7 +145,7 @@ class User
         ];
         $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
         $conn = DB::getInstance();
-        $statement = $conn->prepare("insert into users (email, password, username) values (:email, :password, :username);");
+        $statement = $conn->prepare("insert into users (email, password, username, image) values (:email, :password, :username, 'profiledefault.jpg');");
         $statement->bindValue(':email', $this->email);
         $statement->bindValue(':password', $password);
         $statement->bindValue(':username', $this->username);
@@ -253,4 +254,34 @@ class User
             }
         }
     }
+    
+    /**
+     * Get the value of image
+     */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public static function getProfileImg($email)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("select image, email, username from users where email = :email;");
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }
