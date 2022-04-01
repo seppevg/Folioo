@@ -1,9 +1,9 @@
 <?php
-    session_start();
 
     include_once("bootstrap.php");
-    $email = $_SESSION['email'];
+
     Security::onlyLoggedInUsers();
+    $email = $_SESSION['email'];
 
     
 
