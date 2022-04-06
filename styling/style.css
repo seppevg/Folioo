@@ -1,4 +1,5 @@
 @import url("https://use.typekit.net/vqb1drq.css");
+
 @font-face {
   font-family: BlaakBold_PERSONAL;
   src: url("../font/BlaakBlack_PERSONAL.ttf");
@@ -6,6 +7,7 @@
 
 * {
   font-family: museo-sans, sans-serif;
+  box-sizing: border-box;
 }
 
 html,
@@ -131,6 +133,7 @@ body {
   justify-content: center;
 }
 
+/* INDEX (projects) */
 .bottom-nav {
   display: flex;
   flex-direction: row;
@@ -189,11 +192,78 @@ body {
 #filler {
   align-self: center;
 }
+
+.project {
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-picture {
+  background: #E5E3E3;
+  border-radius: 10px;
+  padding: 5em;
+}
+
+.project-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.project-author {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+}
+
+.project-author-picture {
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 5em;
+  margin-right: 10px;
+}
+
+.project-author-username {
+  color: black;
+}
+
+.project-interactions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.project-interactions-like {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.project-interactions-comment {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.like-icon,
+.comment-icon {
+  max-width: 27px;
+  max-height: 24px;
+  margin-right: 5px;
+}
+
+/* PROFILE */
+
 .profileimg img {
   width: 100px;
   height: 100px;
   border-radius: 1000px;
 }
-
-
-
