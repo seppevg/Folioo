@@ -36,15 +36,18 @@ $profile = User::getProfileImg($email);
 </head>
 <body>
     <?php foreach($profile as $p): ?>
-    <div class="profileimg">
-        <img src="./uploads/<?php echo $p['image']; ?>">
-        <p><?php echo $p['username']; ?></p>
-    </div>
+        <div class="profileimg">
+            <img src="./uploads/<?php echo $p['image']; ?>">
+            <p><?php echo $p['username']; ?></p>
+        </div>
     <?php endforeach; ?>
+    
     <form action="upload.php" method="POST" enctype="multipart/form-data">
         <input type="file" name="image">
         <button type="submit" name="submit">Change profile picture</button>
     </form>
+
+    <?php include_once("./includes/nav-bottom.inc.php"); ?>
 
 </body>
 </html>
