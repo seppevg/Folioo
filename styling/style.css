@@ -197,7 +197,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateX(-125px) translateY(-125px);
+  transform: translateX(-125px) translateY(-75px);
 }
 
 #no-uploads img {
@@ -306,9 +306,24 @@ body {
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  margin: 2.1875em 1.75em 2.1875em 2.1875em;
+  margin: 2.1875em 1.75em 1em 2.1875em;
 }
 
+.profile-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-bio {
+  margin: 0em 2.1875em 1em 2.1875em;
+}
+
+.profile-text {
+  margin: 0;
+  font-size: 16px;
+  color: var(--IMDblue);
+}
 
 /* EDIT PROFILE */
 .profile-img-edit img {
@@ -345,6 +360,7 @@ body {
 .form-input-closer {
   margin: 5px 0 5px 0;
 }
+
 
 
 /* REUSABLE PARTS */

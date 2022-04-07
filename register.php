@@ -85,17 +85,7 @@ if( !empty($_POST) ){
                     <div>                    
                         <?php if(isset($error)): ?>
                             <div>
-                                <p class="error"> <?php echo $error; ?>
-                                    <!-- Email has to contain @thomasmore.be or @student.thomasmore.be
-                                    Email can't be empty.
-                                    This email has already been used.
-                                    Username can't be empty
-                                    Username is already taken. 
-                                    Password can't be empty
-                                    Password must be at least 6 characters.
-                                    No user found with this email... -->
-                                
-                                </p>
+                                <p class="error"> <?php echo $error; ?></p>
                             </div>
                         <?php endif; ?>
 

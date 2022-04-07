@@ -27,7 +27,9 @@
                     $fileDestination = 'uploads/'. $fileNameNew;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $conn = DB::getInstance();
-                    $statement = $conn->prepare("update users set image = '$fileNameNew' where email = '$email'");
+                    $statement = $conn->prepare("UPDATE users SET image = :fileNameNew WHERE email = :email");
+                    $statement->bindValue(':fileNameNew', $fileNameNew);
+                    $statement->bindValue(':email', $email);
                     $statement->execute();
                     header("Location: profile.php");
                     return $statement->fetchAll();
@@ -41,7 +43,7 @@
             }
         }
         else {
-            echo "You cannot upload a file of this type";
+            echo"You cannot upload a file of this type";
         }
     }
 

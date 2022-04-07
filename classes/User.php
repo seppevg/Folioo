@@ -6,6 +6,22 @@ class User
     private $username;
     private $secondaryEmail;
     private $image;
+    private $education;
+    private $bio;
+    private $instagramLink;
+    private $behanceLink;
+    private $linkedinLink;
+    
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
 
     /**
      * Get the value of email
@@ -20,11 +36,20 @@ class User
      *
      * @return  self
      */
-    public function setEmail($email)
+    public function setSecondaryEmail($secondaryEmail)
     {
-        $this->email = $email;
+        $this->secondaryEmail = $secondaryEmail;
         return $this;
     }
+
+    /**
+     * Get the value of email
+     */
+    public function getSecondaryEmail()
+    {
+        return $this->secondaryEmail;
+    }
+
     /**
      * Get the value of password
      */
@@ -275,13 +300,121 @@ class User
         return $this;
     }
 
-    public static function getProfileImg($email)
+    public static function getProfileInfo($email)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("select image, email, username from users where email = :email;");
+        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email OR secondary_email = :email;");
         $statement->bindValue(':email', $email);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
+    /**
+     * Get the value of education
+     */ 
+    public function getEducation()
+    {
+        return $this->education;
+    }
+
+    /**
+     * Set the value of education
+     *
+     * @return  self
+     */ 
+    public function setEducation($education)
+    {
+        $this->education = $education;
+        return $this;
+    }
+
+    /**
+     * Get the value of bio
+     */ 
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    /**
+     * Set the value of bio
+     *
+     * @return  self
+     */ 
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+        return $this;
+    }
+
+    /**
+     * Get the value of instagramLink
+     */ 
+    public function getInstagramLink()
+    {
+        return $this->instagramLink;
+    }
+
+    /**
+     * Set the value of instagramLink
+     *
+     * @return  self
+     */ 
+    public function setInstagramLink($instagramLink)
+    {
+        $this->instagramLink = $instagramLink;
+        return $this;
+    }
+
+    /**
+     * Get the value of behanceLink
+     */ 
+    public function getBehanceLink()
+    {
+        return $this->behanceLink;
+    }
+
+    /**
+     * Set the value of behanceLink
+     *
+     * @return  self
+     */ 
+    public function setBehanceLink($behanceLink)
+    {
+        $this->behanceLink = $behanceLink;
+        return $this;
+    }
+
+    /**
+     * Get the value of linkedinLink
+     */ 
+    public function getLinkedinLink()
+    {
+        return $this->linkedinLink;
+    }
+
+    /**
+     * Set the value of linkedinLink
+     *
+     * @return  self
+     */ 
+    public function setLinkedinLink($linkedinLink)
+    {
+        $this->linkedinLink = $linkedinLink;
+        return $this;
+    }
+
+    public function update()
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET secondary_email=:secondary_email, education=:education, bio=:bio, instagramlink=:instagramlink, behancelink=:behancelink, linkedinlink=:linkedinlink WHERE email=:email OR secondary_email=:email;");
+        $statement->bindValue(':secondary_email', $this->secondaryEmail);
+        $statement->bindValue(':education', $this->education);
+        $statement->bindValue(':bio', $this->bio);
+        $statement->bindValue(':instagramlink', $this->instagramLink);
+        $statement->bindValue(':behancelink', $this->behanceLink);
+        $statement->bindValue(':linkedinlink', $this->linkedinLink);
+        $statement->bindValue(':email', $this->email);
+        return $statement->execute();
+    }
 }

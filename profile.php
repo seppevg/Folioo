@@ -5,7 +5,7 @@ include_once("bootstrap.php");
 Security::onlyLoggedInUsers();
 
 $email = $_SESSION['email'];
-$profile = User::getProfileImg($email);
+$profile = User::getProfileInfo($email);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -24,8 +24,16 @@ $profile = User::getProfileImg($email);
                 <h3 class="profile-username"><?php echo $p['username']; ?></h3>
                 <img src="./assets/settings.svg" alt="Settings">
             </div>
-            <div class="profile-img">
-                <img src="./uploads/<?php echo $p['image']; ?>">
+            <div class="profile-info">
+                <div class="profile-img">
+                    <img src="./uploads/<?php echo $p['image']; ?>">
+                </div>
+                <div class="profile-info-extra">
+                    <p class="profile-text"><?php echo $p['education']; ?></p>
+                </div>
+            </div>
+            <div class="profile-bio">
+                <p class="profile-text"><?php echo $p['bio']; ?></p>
             </div>
         <?php endforeach; ?>
         
