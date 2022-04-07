@@ -5,6 +5,11 @@
   src: url("../font/BlaakBlack_PERSONAL.ttf");
 }
 
+:root {
+  --IMDblue: #0600ff;
+  --IMDgreen: #bffd00;
+}
+
 * {
   font-family: museo-sans, sans-serif;
   box-sizing: border-box;
@@ -33,7 +38,7 @@ body {
 }
 
 .form-background {
-  background-color: #0600ff;
+  background-color: var(--IMDblue);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -72,7 +77,7 @@ body {
 
 .form-title {
   font-family: BlaakBold_PERSONAL, serif;
-  color: #0600ff;
+  color: var(--IMDblue);
   font-size: 1.7em;
   margin: 1em 0 0 0;
 }
@@ -106,7 +111,7 @@ body {
 }
 
 .form-btn {
-  background-color: #bffd00;
+  background-color: var(--IMDgreen);
   color: black;
   font-weight: 600;
   border-radius: 0.4em;
@@ -118,7 +123,7 @@ body {
 
 .switch {
   text-decoration: none;
-  color: #0600ff;
+  color: var(--IMDblue);
   font-weight: 700;
 }
 
@@ -133,12 +138,13 @@ body {
   justify-content: center;
 }
 
-/* INDEX (projects) */
+/* mobile nav */
+
 .bottom-nav {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  box-shadow: #0600ff 0px 15px 40px;
+  box-shadow: var(--IMDblue) 0px 15px 40px;
 }
 
 .nav-item {
@@ -155,16 +161,18 @@ body {
 
 .nav-link a {
   text-decoration: none;
-  color: #0600ff;
+  color: var(--IMDblue);
 }
 
-.nav-img {
-  width: 40px;
-  height: 40px;
+.nav-img img {
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* INDEX (projects) */
 
 #full-logo {
   width: 100px;
@@ -261,6 +269,12 @@ body {
 }
 
 /* PROFILE */
+
+.profile-username {
+  font-size: 20px;
+  color: var(--IMDblue);
+  padding-left: 2em;
+}
 
 .profileimg img {
   width: 100px;

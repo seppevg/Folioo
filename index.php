@@ -12,13 +12,11 @@ if( !empty($_POST) ){
         $user->setImage($_POST['image']);
         $user->setUsername($_POST['username']);
         $user->getEmail();
-
     }
     catch(Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
     }
-
 }	
 
 $profile = User::getProfileImg($email);
