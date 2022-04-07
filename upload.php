@@ -5,9 +5,7 @@
     Security::onlyLoggedInUsers();
     $email = $_SESSION['email'];
 
-    
-
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['save-user'])) {
         $file = $_FILES['image'];
 
         $fileName = $file['name'];

@@ -1,9 +1,11 @@
 <?php
+
     $url = $_SERVER["REQUEST_URI"]; 
     $currentHome = strrpos($url, "index.php"); 
     $currentSearch = strrpos($url, "search.php"); 
     $currentAdd = strrpos($url, "add.php"); 
     $currentProfile = strrpos($url, "profile.php"); 
+
 ?><nav class="bottom-nav">
     <div class="nav-item">
         <a href="index.php" class="nav-img">

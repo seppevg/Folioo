@@ -96,6 +96,7 @@ body {
   border-radius: 0.4em;
   flex: 1 1 auto;
   margin: 5px 0 1.2em 0;
+  border: 2px solid #E5E3E3;
 }
 
 .form-field {
@@ -275,8 +276,8 @@ body {
   margin-right: 5px;
 }
 
-/* PROFILE */
 
+/* PROFILE */
 #profile {
   display: flex;
   flex-direction: column;
@@ -308,11 +309,45 @@ body {
   margin: 2.1875em 1.75em 2.1875em 2.1875em;
 }
 
+
+/* EDIT PROFILE */
+.profile-img-edit img {
+  margin: 2.1875em 0em 0.5em 0em;
+}
+
+.profile-img-edit {
+  display: flex;
+  justify-content: center;
+}
+
 .profile-edit {
   display: flex;
   margin: 0 2.1875em;
 }
 
+.clickable-text {
+  color: var(--IMDblue);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+.form-container-edit-profile {
+  padding: 2em 2em 0 2em;
+  height: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input-closer {
+  margin: 5px 0 5px 0;
+}
+
+
+/* REUSABLE PARTS */
 .main-btn {
   background-color: var(--IMDgreen);
   color: black;
@@ -324,4 +359,5 @@ body {
   flex: 1 1 auto;
   padding: 0.8em;
   cursor: pointer;
+  width: 100%;
 }

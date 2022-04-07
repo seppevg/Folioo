@@ -1,11 +1,11 @@
 <?php 
 
-include_once("bootstrap.php");
+    include_once("bootstrap.php");
 
-Security::onlyLoggedInUsers();
+    Security::onlyLoggedInUsers();
 
-$email = $_SESSION['email'];
-$profile = User::getProfileImg($email);
+    $email = $_SESSION['email'];
+    $profile = User::getProfileImg($email);
 
 
 ?><!DOCTYPE html>
@@ -24,20 +24,44 @@ $profile = User::getProfileImg($email);
             <h3 class="profile-username">Edit profile</h3>
             <img src="./assets/settings.svg" alt="Settings">
         </div>
-        <?php foreach($profile as $p): ?>
-            <div class="profile-img">
-                <img src="./uploads/<?php echo $p['image']; ?>">
-            </div>
-        <?php endforeach; ?>
-
+        
         <form action="upload.php" method="POST" enctype="multipart/form-data">
-            <input type="file" name="image">
-            <button class="main-btn" type="submit" name="submit">Change profile picture</button>
+            <?php foreach($profile as $p): ?>
+                <div>
+                    <div class="profile-img profile-img-edit">
+                        <img style="cursor:pointer" id="profile-display" src="./uploads/<?php echo $p['image']; ?>" onclick="triggerClick()">
+                    </div>
+                    <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change profile picture</label>
+                    <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
+                </div>
+                <div class="form-container form-container-edit-profile">
+                    <div class="form-group">
+                        <label class="form-label" for="secondary-email">Secondary email</label>
+                        <input name="secondary-email" autofocus="" autocomplete="off" class="form-input" type="email" placeholder="Secondary email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="education">Education</label>
+                        <input name="education" autocomplete="off" class="form-input" type="text" placeholder="Education">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bio">Bio</label>
+                        <input name="bio" autocomplete="off" class="form-input" type="text" placeholder="Bio">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="social-links">Social Links</label>
+                        <input name="social-links" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Facebook">
+                        <input name="social-links" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Instagram">
+                        <input name="social-links" autocomplete="off" class="form-input" type="text" placeholder="Behance">
+                    </div>
+                    <button class="main-btn" type="submit" name="save-user">Update profile</button>
+                </div>         
+            <?php endforeach; ?>
         </form>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
         
+    <script src="./js/app.js"></script>
 
 </body>
 </html>
