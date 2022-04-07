@@ -3,26 +3,9 @@
 include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
+
 $email = $_SESSION['email'];
-
-if( !empty($_POST) ){
-    try {        
-        // create a new user
-        $user = new User();
-        $user->setImage($_POST['image']);
-        $user->setUsername($_POST['username']);
-        $user->getEmail();
-
-    }
-    catch(Throwable $error) {
-        // if any errors are thrown in the class, they can be caught here
-        $error = $error->getMessage();
-    }
-
-}	
-
 $profile = User::getProfileImg($email);
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -35,20 +18,20 @@ $profile = User::getProfileImg($email);
     <title>Folioo - Profile</title>
 </head>
 <body>
-    <div id="home">
+    <div id="profile">
         <?php foreach($profile as $p): ?>
-            <div>
+            <div class="profile-header">
                 <h3 class="profile-username"><?php echo $p['username']; ?></h3>
+                <img src="./assets/settings.svg" alt="Settings">
             </div>
-            <div class="profileimg">
+            <div class="profile-img">
                 <img src="./uploads/<?php echo $p['image']; ?>">
             </div>
         <?php endforeach; ?>
         
-        <form action="upload.php" method="POST" enctype="multipart/form-data">
-            <input type="file" name="image">
-            <button type="submit" name="submit">Change profile picture</button>
-        </form>
+        <div class="profile-edit">
+            <a href="edit_profile.php" class="main-btn">Edit profile</a>
+        </div>
 
         <div id="no-uploads">
             <img src="./assets/no-posts.svg" alt="No posts yet">

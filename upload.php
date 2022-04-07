@@ -35,15 +35,15 @@
                     return $statement->fetchAll();
                 }
                 else {
-                    echo "Your file is to big";
+                    echo "Your file is too big";
                 }
             }
             else {
-                echo "There was and error uploading your file"; 
+                echo "There was an error uploading your file"; 
             }
         }
         else {
-            echo "You cannot upload file of this type";
+            echo "You cannot upload a file of this type";
         }
     }
 

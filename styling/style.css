@@ -119,6 +119,7 @@ body {
   border: none;
   flex: 1 1 auto;
   padding: 0.8em;
+  cursor: pointer;
 }
 
 .switch {
@@ -145,6 +146,11 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   box-shadow: var(--IMDblue) 0px 15px 40px;
+  background: white;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  z-index: 100;
 }
 
 .nav-item {
@@ -183,13 +189,14 @@ body {
 #home {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100vh;
 }
 
 #no-uploads {
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-125px) translateY(-125px);
 }
 
 #no-uploads img {
@@ -270,14 +277,51 @@ body {
 
 /* PROFILE */
 
-.profile-username {
-  font-size: 20px;
-  color: var(--IMDblue);
-  padding-left: 2em;
+#profile {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.profileimg img {
+.profile-username {
+  margin: 0;
+  font-size: 20px;
+  color: var(--IMDblue);
+}
+
+.profile-header {
+  padding: 2.1875em;
+  border-bottom: 1px solid #a7a7a7;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-header img {
+  max-height: 25px;
+}
+
+.profile-img img {
   width: 100px;
   height: 100px;
-  border-radius: 1000px;
+  border-radius: 10px;
+  margin: 2.1875em 1.75em 2.1875em 2.1875em;
+}
+
+.profile-edit {
+  display: flex;
+  margin: 0 2.1875em;
+}
+
+.main-btn {
+  background-color: var(--IMDgreen);
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 0.4em;
+  border: none;
+  flex: 1 1 auto;
+  padding: 0.8em;
+  cursor: pointer;
 }
