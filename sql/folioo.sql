@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Gegenereerd op: 01 apr 2022 om 13:54
--- Serverversie: 10.4.22-MariaDB
--- PHP-versie: 8.1.2
+-- Host: localhost:3306
+-- Gegenereerd op: 07 apr 2022 om 20:35
+-- Serverversie: 5.7.24
+-- PHP-versie: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,18 +47,22 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `secondary_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `education` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bio` text COLLATE utf8mb4_unicode_ci,
+  `instagramlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `behancelink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedinlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`) VALUES
-(3, 'r0748140@student.thomasmore.be', '$2y$15$Agj1ewRUlMYJwL.squ/Xfe7lfUBchj7EJ6YAF12J4QLwsHkvYfT5G', 'Seep', NULL, 'profiledefault.jpg'),
-(4, 'svg@student.thomasmore.be', '$2y$15$HyfQVfvypJSoJjo1XJBZdeZl0NLalTxnEu85PhQk7Yi4YLPSeFt.6', 'svg', NULL, 'profiledefault.jpg'),
-(6, 'test@thomasmore.be', '$2y$15$YXQR0vCThNRYxKxAl74dt./AMnmP26m7veCaxG2tPXmAxolrYKTia', 'testerke', NULL, 'profiledefault.jpg'),
-(8, 'r0831894@student.thomasmore.be', '$2y$15$0dTt7nrSzq9J9DkOyL2mrOV1PfWz6XY2XAfCN7opFCw4Ty0LpS6r6', 'Marie', NULL, 'r0831894@student.thomasmore.be.jpg');
+INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`) VALUES
+(3, 'r0748140@student.thomasmore.be', '$2y$15$Agj1ewRUlMYJwL.squ/Xfe7lfUBchj7EJ6YAF12J4QLwsHkvYfT5G', 'Seep', NULL, 'r0748140@student.thomasmore.be.jpg', NULL, NULL, NULL, NULL, NULL),
+(8, 'r0831894@student.thomasmore.be', '$2y$15$0dTt7nrSzq9J9DkOyL2mrOV1PfWz6XY2XAfCN7opFCw4Ty0LpS6r6', 'Marie', NULL, 'r0831894@student.thomasmore.be.jpg', NULL, NULL, NULL, NULL, NULL),
+(11, 'test@thomasmore.be', '$2y$15$dN6hTlPj3HQCnNiRk3ZWfu5WsgF4lpKUQxpyckGBc1AO9DuE4u74q', 'Test Test', 'seppe.vg@live.be', 'test@thomasmore.be.jpg', 'Interactive Multimedia Design Thomas More Mechelen', 'I am a professional who loves to design and post stuff online to jjdjd jfzijfzp pjzpo :) Follow me!', '@thetestingmachine', 'www.behance.com/thetestingmachine', 'www.linkedin.com/thetestingmachine');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -84,13 +88,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `passwordreset`
 --
 ALTER TABLE `passwordreset`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
