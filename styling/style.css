@@ -340,6 +340,12 @@ body {
   margin: 0 2.1875em;
 }
 
+.profile-delete {
+  display: flex;
+  margin: 0 2.1875em;
+  padding-top: 1em;
+}
+
 .clickable-text {
   color: var(--IMDblue);
   font-weight: bold;
