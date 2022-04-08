@@ -6,25 +6,10 @@
     $email = $_SESSION['email'];
     $profile = User::getProfileInfo($email);
 
-    if( isset($_POST['delete-user'])){
-        try {        
-            // create a new user
-            $user = new User();
-            if (!empty($_POST['image'])) {
-                $user->setImage($_POST['image']);
-                $user->setEmail($email);
-
-            }
-            session_destroy();
-            header("Location: register.php");
-            
-        }
-        catch(Throwable $error) {
-            // if any errors are thrown in the class, they can be caught here
-            $error = $error->getMessage();
-        }
+    if(isset($_POST['delete-user'])){      
+        session_destroy();
+        header("Location: register.php");
         User::deleteProfile($email);
-
     }
 
 
@@ -45,11 +30,7 @@
             <h3 class="profile-username">Delete profile</h3>
             <img src="./assets/settings.svg" alt="Settings">
         </div>
-        <?php if(isset($error)): ?>
-            <div>
-                <p class="error"> <?php echo $error; ?></p>
-            </div>
-        <?php endif; ?>
+
         <?php foreach($profile as $p): ?>
             <div class="profile-img profile-img-edit">                
                 <div class="profile-img">                    
