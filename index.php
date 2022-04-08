@@ -19,7 +19,7 @@ if( !empty($_POST) ){
     }
 }	
 
-$profile = User::getProfileImg($email);
+$profile = User::getProfileInfo($email);
 
 
 ?>
