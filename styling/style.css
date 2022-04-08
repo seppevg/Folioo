@@ -346,6 +346,22 @@ body {
   padding-top: 1em;
 }
 
+.profile-delete-yes {
+  display: flex;
+  margin: 0 2.1875em;
+  padding-top: 1em;
+}
+
+.profile-delete-no {
+  display: flex;
+  margin: 0 2.1875em;
+  padding-top: 1em;
+}
+
+.profile-delete-confirmation{
+  margin: 0 2.1875em;
+}
+
 .clickable-text {
   color: var(--IMDblue);
   font-weight: bold;

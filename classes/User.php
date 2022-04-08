@@ -417,4 +417,12 @@ class User
         $statement->bindValue(':email', $this->email);
         return $statement->execute();
     }
+
+    public static function deleteProfile($email)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("DELETE FROM users WHERE email=:email;");
+        $statement->bindValue(':email', $email);
+        return $statement->execute();
+    }
 }
