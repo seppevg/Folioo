@@ -1,6 +1,8 @@
 <?php 
-
-include_once("../bootstrap.php");
+//include_once("../bootstrap.php");
+session_start();
+session_destroy();
+header("Location: login.php");
 	
 ?><!DOCTYPE html>
 <html lang="en">

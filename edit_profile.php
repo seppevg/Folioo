@@ -47,7 +47,7 @@
     <div id="profile">
         <div class="profile-header">
             <h3 class="profile-username">Edit profile</h3>
-            <img src="./assets/settings.svg" alt="Settings">
+            <img src="./assets/burger-menu.svg" alt="Burger menu">
         </div>
         <?php if(isset($error)): ?>
             <div>

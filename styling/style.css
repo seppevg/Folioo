@@ -29,6 +29,10 @@ body {
   display: none;
 }
 
+.display{
+  display: block;
+}
+
 .flex {
   display: flex;
 }
@@ -96,7 +100,7 @@ body {
   border-radius: 0.4em;
   flex: 1 1 auto;
   margin: 5px 0 1.2em 0;
-  border: 2px solid #E5E3E3;
+  border: 2px solid #fefefe;
 }
 
 .form-field {
@@ -147,7 +151,7 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   box-shadow: var(--IMDblue) 0px 15px 40px;
-  background: white;
+  background: #fefefe;
   position: absolute;
   width: 100%;
   bottom: 0px;
@@ -198,6 +202,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translateX(-125px) translateY(-75px);
+  z-index: -1;
 }
 
 #no-uploads img {
@@ -216,7 +221,7 @@ body {
 }
 
 .project-picture {
-  background: #E5E3E3;
+  background: #fefefe;
   border-radius: 10px;
   padding: 5em;
 }
@@ -323,6 +328,49 @@ body {
   margin: 0;
   font-size: 16px;
   color: var(--IMDblue);
+}
+
+/* PROFILE MODAL */
+.modal-icon{
+  max-width: 27px;
+  max-height: 24px;
+}
+
+.modal-container{
+  background-color: #fefefe;
+  box-shadow: var(--IMDblue) 0px 15px 40px;
+  width: 100%;
+  display:flex;
+  align-items: flex-end;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  z-index: 101;
+  border-radius: 25px 25px 0 0;
+}
+
+.modal-content{
+  margin: 1em;
+  width: 100%;
+  padding: 1em;
+}
+
+.modal-content a{
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modal p{
+  color: black;
+  font-weight: 600;
+  margin-left: 1em;
+}
+
+.modal-close{
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* EDIT PROFILE */

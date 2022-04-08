@@ -22,7 +22,7 @@ $profile = User::getProfileInfo($email);
         <?php foreach($profile as $p): ?>
             <div class="profile-header">
                 <h3 class="profile-username"><?php echo $p['username']; ?></h3>
-                <img src="./assets/settings.svg" alt="Settings">
+                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
             <div class="profile-info">
                 <div class="profile-img">
@@ -41,15 +41,33 @@ $profile = User::getProfileInfo($email);
             <a href="edit_profile.php" class="main-btn">Edit profile</a>
         </div>
 
-        <div class="profile-delete">
-            <a href="delete_profile.php" class="main-btn">Delete profile</a>
-        </div>
-
         <div id="no-uploads">
             <img src="./assets/no-posts.svg" alt="No posts yet">
         </div>
 
+        <section class="modal modal-container ">
+            <div id="modal" class="modal-content hidden">
+                <div class="modal-close">
+                    <img class="modal-icon" src="./assets/close.svg" alt="close">
+                </div>
+                <a href="reset_password.php">
+                    <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                    <p>Reset password</p>
+                </a>
+                <a href="logout.php">
+                    <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                    <p>Log out</p>
+                </a>
+                <a href="delete_profile.php">
+                    <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                    <p>Delete your profile</p>
+                </a>
+            </div>
+
+        </section>
+
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
+    <script src="./js/app.js"></script>
 </body>
 </html>
