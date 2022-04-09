@@ -100,7 +100,7 @@ body {
   border-radius: 0.4em;
   flex: 1 1 auto;
   margin: 5px 0 1.2em 0;
-  border: 2px solid #fefefe;
+  border: 2px solid #d2d2d2;
 }
 
 .form-field {
@@ -431,6 +431,10 @@ body {
   margin: 5px 0 5px 0;
 }
 
+/* ADD */
+.input-spacing{
+  margin: 0 2em;
+}
 
 
 /* REUSABLE PARTS */

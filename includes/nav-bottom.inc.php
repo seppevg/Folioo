@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="nav-item">
-        <a href="#" class="nav-img"> 
+        <a href="search.php" class="nav-img"> 
             <?php if($currentSearch != false): ?>
                 <img src="./assets/search.svg" alt="Search">
             <?php else: ?>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="nav-item">
-        <a href="#" class="nav-img">
+        <a href="add.php" class="nav-img">
             <?php if($currentAdd != false): ?>
                 <img src="./assets/add.svg" alt="Add">
             <?php else: ?>
