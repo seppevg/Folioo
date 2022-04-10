@@ -4,6 +4,8 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
+$email = $_SESSION['email'];
+$profile = User::getProfileInfo($email);
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,25 +61,27 @@ Security::onlyLoggedInUsers();
                 <a href="edit_profile.php" class="main-btn">Inspire others</a>
             </div>
         </form>
-        <section class="modal modal-container ">
-            <div id="modal" class="modal-content hidden">
-                <div class="modal-close">
-                    <img class="modal-icon" src="./assets/close.svg" alt="close">
+        <?php foreach($profile as $p): ?>
+            <section class="modal modal-container ">
+                <div id="modal" class="modal-content hidden">
+                    <div class="modal-close">
+                        <img class="modal-icon" src="./assets/close.svg" alt="close">
+                    </div>
+                    <a href="reset_password.php">
+                        <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                        <p>Reset password</p>
+                    </a>
+                    <a href="logout.php">
+                        <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                        <p>Log out</p>
+                    </a>
+                    <a href="delete_profile.php?id=<?php echo $p['id']; ?>">
+                        <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                        <p>Delete your profile</p>
+                    </a>
                 </div>
-                <a href="reset_password.php">
-                    <img class="modal-icon" src="./assets/lock.svg" alt="lock">
-                    <p>Reset password</p>
-                </a>
-                <a href="logout.php">
-                    <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
-                    <p>Log out</p>
-                </a>
-                <a href="delete_profile.php">
-                    <img class="modal-icon" src="./assets/delete.svg" alt="delete">
-                    <p>Delete your profile</p>
-                </a>
-            </div>
-        </section>
+            </section>
+        <?php endforeach; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
