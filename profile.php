@@ -41,6 +41,10 @@ $profile = User::getProfileInfo($email);
             <a href="edit_profile.php" class="main-btn">Edit profile</a>
         </div>
 
+        <div class="profile-delete">
+            <a href="delete_profile.php?id=<?php echo $p['id']; ?>" class="main-btn">Delete profile</a>
+        </div>
+
         <div id="no-uploads">
             <img src="./assets/no-posts.svg" alt="No posts yet">
         </div>

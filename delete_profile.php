@@ -5,11 +5,15 @@
 
     $email = $_SESSION['email'];
     $profile = User::getProfileInfo($email);
+    $id = $_GET['id'];
+    //var_dump($id);
+
 
     if(isset($_POST['delete-user'])){      
         session_destroy();
         header("Location: register.php");
         User::deleteProfile($email);
+        Post::deleteAllPostsUser($id);
     }
 
 
@@ -30,7 +34,6 @@
             <h3 class="profile-username">Delete profile</h3>
             <img src="./assets/settings.svg" alt="Settings">
         </div>
-
         <?php foreach($profile as $p): ?>
             <div class="profile-img profile-img-edit">                
                 <div class="profile-img">                    
@@ -39,7 +42,7 @@
                 </div>
             </div>
 
-        <?php endforeach; ?>
+
 
         <form action="" method="POST">
             <div class="profile-delete-confirmation">
@@ -54,9 +57,10 @@
             </div>
 
             <div class="profile-delete-yes">
-                <button class="main-btn" type="submit" name="delete-user">Yes, I want to delete my profile</button>
+                <button class="main-btn" type="submit" name="delete-user" href="delete_profile.php?id=<?php echo $p['id']; ?>">Yes, I want to delete my profile</button>
             </div>
         </form>
+        <?php endforeach; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>

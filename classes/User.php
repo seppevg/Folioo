@@ -425,4 +425,5 @@ class User
         $statement->bindValue(':email', $email);
         return $statement->execute();
     }
+
 }
