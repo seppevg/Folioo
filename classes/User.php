@@ -426,7 +426,7 @@ class User
         return $statement->execute();
     }
 
-    public function canChangePassword($id)
+    public function validatePassword($id)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("select * from users where id = :id");

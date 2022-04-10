@@ -11,7 +11,7 @@ if( !empty($_POST) ){
         $user = new User();
         $user->setPassword($_POST['current-password']);
         
-        $user->canChangePassword($id);
+        $user->validatePassword($id);
         $user->changePassword($id);
 
         header("Location: login.php");
