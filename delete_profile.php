@@ -14,6 +14,8 @@
         header("Location: register.php");
         User::deleteProfile($email);
         Post::deleteAllPostsUser($id);
+        Comment::deleteAllCommentsUser($id);
+        Like::deleteAllLikesUser($id);
     }
 
 
