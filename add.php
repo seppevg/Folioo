@@ -67,7 +67,7 @@ $profile = User::getProfileInfo($email);
                     <div class="modal-close">
                         <img class="modal-icon" src="./assets/close.svg" alt="close">
                     </div>
-                    <a href="change_password.php">
+                    <a href="change_password.php?id=<?php echo $p['id']; ?>">
                         <img class="modal-icon" src="./assets/lock.svg" alt="lock">
                         <p>Change password</p>
                     </a>

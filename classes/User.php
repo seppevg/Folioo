@@ -426,4 +426,51 @@ class User
         return $statement->execute();
     }
 
+    public function canChangePassword($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("select * from users where id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        $realUser = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!$realUser) {
+            return false;
+        }
+        $hash = $realUser["password"];
+        if (password_verify($this->password, $hash)) {
+            return true;
+        } else {
+            throw new Exception("Password is incorrect ❌");
+            return false;
+        }
+
+    }
+
+    public function changePassword($id) 
+    {
+        $password = $_POST["new-password"];
+        $passwordRepeat = $_POST["new-password-repeat"];
+
+        if (empty($password) || empty($passwordRepeat)) {
+            throw new Exception("Password can't be empty 👆");
+            return false;
+        }
+        else if ( $password != $passwordRepeat ) {
+            throw new Exception("Please repeat the same password.");
+            return false;
+        }
+        else if (strlen($password) < 6) {
+            throw new Exception("Password must contain 6 or more characters 🔑");
+        }
+        
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET password = :password WHERE id = :id;");
+        $options = [
+            'cost' => 15
+        ];
+        $newPasswordHash = password_hash($password, PASSWORD_DEFAULT, $options);
+        $statement->bindValue(':password', $newPasswordHash);
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+    }
 }

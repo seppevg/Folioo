@@ -1,4 +1,31 @@
-<!DOCTYPE html>
+<?php 
+include_once("bootstrap.php");
+
+Security::onlyLoggedInUsers();
+
+//$email = $_SESSION['email'];
+$id = $_GET['id'];
+
+if( !empty($_POST) ){
+    try {        
+        $user = new User();
+        $user->setPassword($_POST['current-password']);
+        
+        $user->canChangePassword($id);
+        $user->changePassword($id);
+
+        header("Location: login.php");
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    }
+
+}	
+
+
+	
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -26,19 +53,19 @@
                             <label class="form-label" for="password">Current password</label>
                         </div>
                         <div class="flex">
-                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Enter current password">
+                            <input name="current-password" autocomplete="off" class="form-input" type="password" placeholder="Enter current password">
                         </div>
                         <div>
-                            <label class="form-label" for="password"> New password</label>
+                            <label class="form-label" for="password">New password</label>
                         </div>
                         <div class="flex">
-                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="New password must be at least 6 characters">
+                            <input name="new-password" autocomplete="off" class="form-input" type="password" placeholder="New password must be at least 6 characters">
                         </div>
                         <div>
                             <label class="form-label" for="password">Repeat new password</label>
                         </div>
                         <div class="flex">
-                            <input name="password-repeat" autocomplete="off" class="form-input" type="password" placeholder="Repeat new password">
+                            <input name="new-password-repeat" autocomplete="off" class="form-input" type="password" placeholder="Repeat new password">
                         </div>
                     </div>
                 </div>
@@ -51,7 +78,8 @@
                     <?php endif; ?>
 
                     <div class="flex">
-                        <input name="reset-password-submit" class="form-btn" type="submit" value="Save new password">
+                        <!--<input name="change-password-submit" class="form-btn" type="submit" value="Save new password">-->
+                        <button class="main-btn" type="submit" name="change-password-submit">Save new password</button>
                     </div>
 
 
