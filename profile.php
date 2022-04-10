@@ -42,7 +42,7 @@ $profile = User::getProfileInfo($email);
         </div>
 
         <div class="profile-delete">
-            <a href="delete_profile.php" class="main-btn">Delete profile</a>
+            <a href="delete_profile.php?id=<?php echo $p['id']; ?>" class="main-btn">Delete profile</a>
         </div>
 
         <div id="no-uploads">

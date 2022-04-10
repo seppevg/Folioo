@@ -19,6 +19,7 @@ if( !empty($_POST) ){
     }
 }	
 
+
 $profile = User::getProfileInfo($email);
 
 
