@@ -9,6 +9,7 @@
     //var_dump($id);
 
 
+
     if(isset($_POST['delete-user'])){      
         session_destroy();
         header("Location: register.php");
@@ -16,6 +17,22 @@
         Post::deleteAllPostsUser($id);
         Comment::deleteAllCommentsUser($id);
         Like::deleteAllLikesUser($id);
+
+        $filename = "uploads/" . $email . "*";
+        $fileinfo = glob($filename); 
+        $fileext = explode(".", $fileinfo[0]);
+        $fileactualext = $fileext[3];
+        //var_dump($fileactualext);
+    
+        $file = "uploads/" . $email . "." . $fileactualext;
+        //var_dump($file);
+    
+        if(!unlink($file)){
+            echo "File was not deleted";
+        }
+        else {
+            echo "File was deleted";
+        }
     }
 
 
