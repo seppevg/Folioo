@@ -32,7 +32,7 @@
                             <label class="form-label" for="password"> New password</label>
                         </div>
                         <div class="flex">
-                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Enter new password">
+                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="New password must be at least 6 characters">
                         </div>
                         <div>
                             <label class="form-label" for="password">Repeat new password</label>
