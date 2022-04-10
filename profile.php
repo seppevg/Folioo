@@ -50,9 +50,9 @@ $profile = User::getProfileInfo($email);
                     <div class="modal-close">
                         <img class="modal-icon" src="./assets/close.svg" alt="close">
                     </div>
-                    <a href="reset_password.php">
+                    <a href="change_password.php">
                         <img class="modal-icon" src="./assets/lock.svg" alt="lock">
-                        <p>Reset password</p>
+                        <p>Change password</p>
                     </a>
                     <a href="logout.php">
                         <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
