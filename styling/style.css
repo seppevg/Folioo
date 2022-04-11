@@ -82,7 +82,7 @@ body {
 .form-title {
   font-family: BlaakBold_PERSONAL, serif;
   color: var(--IMDblue);
-  font-size: 1.7em;
+  font-size: 2em;
   margin: 1em 0 0 0;
 }
 
@@ -125,12 +125,18 @@ body {
   flex: 1 1 auto;
   padding: 0.8em;
   cursor: pointer;
+  text-decoration: none;
+  font-size: 1.2em;
 }
 
 .switch {
   text-decoration: none;
   color: var(--IMDblue);
   font-weight: 700;
+}
+
+.form-link {
+  margin: 19px 0 35px 0;
 }
 
 .line {
@@ -218,10 +224,12 @@ body {
   margin: 2em;
   display: flex;
   flex-direction: column;
+  max-width: 350px;
 }
 
 .project-picture {
   background: #fefefe;
+  border: 2px solid var(--IMDblue);
   border-radius: 10px;
   padding: 5em;
 }
@@ -452,4 +460,16 @@ body {
   padding: 0.8em;
   cursor: pointer;
   width: 100%;
+}
+
+.main-margin {
+  margin: 0 2em;
+}
+
+.welcomeIcon {
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

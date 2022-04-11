@@ -31,8 +31,8 @@ if( !empty($_POST) ){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styling/style.css">
     <link rel="stylesheet" href="./styling/normalize.css">
+    <link rel="stylesheet" href="./styling/style.css">
     <title>Folioo - Log in</title>
 </head>
 
@@ -66,13 +66,7 @@ if( !empty($_POST) ){
                 <div>
                     <?php if(isset($error)):?>
                         <div>
-                            <p class="error"> <?php echo $error ?>
-                                <!--Email can't be empty
-                                -password can't be empty
-                                -no user found with this email
-                                -password is incorrect
-                                -->
-                            </p>
+                            <p class="error"><?php echo $error ?></p>
                         </div>
                     <?php endif;?>
 
@@ -80,7 +74,7 @@ if( !empty($_POST) ){
                         <input class="form-btn" type="submit" value="Log in">
                     </div>
 
-                    <div class="center">
+                    <div class="center form-link">
                         <a class="switch" href="forgot_password.php">Forgot password?</a>
                     </div>
 
