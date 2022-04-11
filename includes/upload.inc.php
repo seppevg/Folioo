@@ -3,7 +3,10 @@
     include_once("bootstrap.php");
 
     Security::onlyLoggedInUsers();
-    $email = $_SESSION['email'];
+
+    $getMail = $_SESSION['email'];
+    $mainEmail = User::getMainEmail($getMail);
+    $email = $mainEmail['email'];
 
     if(isset($_POST['save-user'])) {
         $file = $_FILES['image'];

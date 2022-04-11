@@ -379,6 +379,11 @@ body {
 .modal-close {
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
+}
+
+.modal-button {
+  cursor: pointer;
 }
 
 /* EDIT PROFILE */

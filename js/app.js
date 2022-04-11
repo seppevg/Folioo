@@ -13,13 +13,17 @@ function displayImage(e) {
     }
 }
 
+function preventReload() {
+    e.preventDefault();
+}
+
 let burger = document.querySelector(".modal-button");
 let modal = document.getElementById("modal");
 let x = document.querySelector(".modal-close");
-burger.addEventListener("click", function(){
+burger.addEventListener("click", function () {
     modal.classList.toggle("display");
 });
 
-x.addEventListener("click", function(){
+x.addEventListener("click", function () {
     modal.classList.remove("display");
 });

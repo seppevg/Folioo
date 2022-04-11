@@ -5,23 +5,13 @@ include_once("bootstrap.php");
 Security::onlyLoggedInUsers();
 $email = $_SESSION['email'];
 
+$projectsAmount = 10;
+$posts = Post::getPosts($projectsAmount);
+
 if( !empty($_POST) ){
-    try {        
-        // create a new user
-        $user = new User();
-        $user->setImage($_POST['image']);
-        $user->setUsername($_POST['username']);
-        $user->getEmail();
-    }
-    catch(Throwable $error) {
-        // if any errors are thrown in the class, they can be caught here
-        $error = $error->getMessage();
-    }
+    $projectsAmount += 10;
+    $posts = Post::getPosts($projectsAmount);
 }	
-
-
-$profile = User::getProfileInfo($email);
-
 
 ?>
 <!DOCTYPE html>
@@ -42,36 +32,47 @@ $profile = User::getProfileInfo($email);
             <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
         </div>
 
-        <!-- <div id="no-uploads">
-            <img src="./assets/no-uploads.svg" alt="No uploads yet">
-        </div> -->
-
-        <article class="project">
-            <img class="project-picture" src="./assets/no-uploads.svg" alt="comment icon">
-            <div class="project-info">
-                <a class="project-author" href="#">
-                    <?php foreach($profile as $p): ?>
-                        <img class="project-author-picture" src="./uploads/<?php echo $p['image']; ?>" alt="profile picture">
-                        <h4 class="project-author-username"><?php echo $p['username']; ?></h4>
-                    <?php endforeach; ?>
-                </a>
-                <div class="project-interactions">
-                    <div class="project-interactions-like">
-                        <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                        <h4>number</h4>
-                    </div>
-                    <div class="project-interactions-comment">
-                        <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                        <h4>number</h4>
-                    </div>
-                </div>
+        <?php if (empty($posts)): ?>
+            <div id="no-uploads">
+                <img src="./assets/no-uploads.svg" alt="No uploads yet">
             </div>
-        </article>
+        <?php else: ?>
+            <?php foreach($posts as $post): ?>
+                <?php $profile = Post::getUserOfPost($post['user_id']); ?>
+                <article class="project">
+                    <img class="project-picture" src="./assets/no-uploads.svg" alt="comment icon">
+                    <div class="project-info">
+                        <a class="project-author" href="#">
+                            <img class="project-author-picture" src="./uploads/<?php echo $profile['image']; ?>" alt="profile picture">
+                            <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
+                        </a>
+                        <div class="project-interactions">
+                            <div class="project-interactions-like">
+                                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                <h4>number</h4>
+                            </div>
+                            <div class="project-interactions-comment">
+                                <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                                <h4>number</h4>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+            <form action="" method="post" class="form">
+                <input style="display:none" type="text" name="loadMore">
+                <div class="flex">
+                    <input onclick="preventReload()" class="main-btn" type="submit" value="Load more">
+                </div>
+            </form>
+            <br><br><br><br><br><br><br><br><br><br>
+        <?php endif; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
 
     </div>
     
+    <script src="./js/app.js"></script>
 
 </body>
 

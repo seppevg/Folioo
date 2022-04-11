@@ -307,7 +307,6 @@ class User
     public function setImage($image)
     {
         $this->image = $image;
-
         return $this;
     }
 
@@ -483,5 +482,14 @@ class User
         $statement->bindValue(':password', $newPasswordHash);
         $statement->bindValue(':id', $id);
         $statement->execute();
+    }
+
+    public static function getMainEmail($mail)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT email FROM users WHERE email = :email OR secondary_email = :email;");
+        $statement->bindValue(':email', $mail);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
