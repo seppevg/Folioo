@@ -99,7 +99,7 @@ class User
     {
         // this function checks if a user can login with the password and email provided
         $conn = DB::getInstance();
-        $statement = $conn->prepare("select * from users where email = :email or secondary_email = :email");
+        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email OR secondary_email = :email");
         $statement->bindValue(":email", $this->email);
         $statement->execute();
         $realUser = $statement->fetch(PDO::FETCH_ASSOC);
@@ -120,7 +120,7 @@ class User
     {
         //Checking if username is already used
         $conn = DB::getInstance();
-        $statement = $conn->prepare("select * from users where username = :username");
+        $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
         $statement->bindValue(":username", $this->username);
         $statement->execute();
         $resultUsername = $statement->rowCount();
@@ -131,7 +131,7 @@ class User
 
         //Checking if email is already used
         $conn = DB::getInstance();
-        $statement = $conn->prepare("select * from users where email = :email");
+        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
         $statement->bindValue(":email", $this->email);
         $statement->execute();
         $resultEmail = $statement->rowCount();
@@ -163,7 +163,7 @@ class User
             return false;
         }
         $conn = DB::getInstance();
-        $statement = $conn->prepare("select * from users where email = :email or secondary_email = :email");
+        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email OR secondary_email = :email");
         $statement->bindValue(":email", $this->email);
         $statement->execute();
         $realUser = $statement->fetch(PDO::FETCH_ASSOC);
@@ -181,7 +181,7 @@ class User
         ];
         $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
         $conn = DB::getInstance();
-        $statement = $conn->prepare("insert into users (email, password, username, image) values (:email, :password, :username, 'profiledefault.jpg');");
+        $statement = $conn->prepare("INSERT INTO users (email, password, username, image) VALUES (:email, :password, :username, 'profiledefault.jpg');");
         $statement->bindValue(':email', $this->email);
         $statement->bindValue(':password', $password);
         $statement->bindValue(':username', $this->username);
@@ -418,7 +418,7 @@ class User
     public function update()
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("UPDATE users SET secondary_email=:secondary_email, education=:education, bio=:bio, instagramlink=:instagramlink, behancelink=:behancelink, linkedinlink=:linkedinlink WHERE email=:email OR secondary_email=:email;");
+        $statement = $conn->prepare("UPDATE users SET secondary_email = :secondary_email, education = :education, bio = :bio, instagramlink = :instagramlink, behancelink = :behancelink, linkedinlink = :linkedinlink WHERE email = :email OR secondary_email = :email;");
         $statement->bindValue(':secondary_email', $this->secondaryEmail);
         $statement->bindValue(':education', $this->education);
         $statement->bindValue(':bio', $this->bio);
@@ -432,7 +432,7 @@ class User
     public static function deleteProfile($email)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("DELETE FROM users WHERE email=:email;");
+        $statement = $conn->prepare("DELETE FROM users WHERE email = :email;");
         $statement->bindValue(':email', $email);
         return $statement->execute();
     }
@@ -440,7 +440,7 @@ class User
     public function validatePassword($id)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("select * from users where id = :id");
+        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
         $statement->bindValue(":id", $id);
         $statement->execute();
         $realUser = $statement->fetch(PDO::FETCH_ASSOC);
