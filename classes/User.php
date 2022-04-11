@@ -118,13 +118,24 @@ class User
 
     public function canRegister()
     {
+        //Checking if username is already used
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("select * from users where username = :username");
+        $statement->bindValue(":username", $this->username);
+        $statement->execute();
+        $resultUsername = $statement->rowCount();
+        if ($resultUsername > 0) {
+            throw new Exception("Username has already been used 🙈");
+            return false;
+        }
+
         //Checking if email is already used
         $conn = DB::getInstance();
         $statement = $conn->prepare("select * from users where email = :email");
         $statement->bindValue(":email", $this->email);
         $statement->execute();
-        $result = $statement->rowCount();
-        if ($result > 0) {
+        $resultEmail = $statement->rowCount();
+        if ($resultEmail > 0) {
             throw new Exception("Email has already been used 🙈");
             return false;
         }

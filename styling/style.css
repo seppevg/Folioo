@@ -29,7 +29,7 @@ body {
   display: none;
 }
 
-.display{
+.display {
   display: block;
 }
 
@@ -331,16 +331,16 @@ body {
 }
 
 /* PROFILE MODAL */
-.modal-icon{
+.modal-icon {
   max-width: 27px;
   max-height: 24px;
 }
 
-.modal-container{
+.modal-container {
   background-color: #fefefe;
   box-shadow: var(--IMDblue) 0px 15px 40px;
   width: 100%;
-  display:flex;
+  display: flex;
   align-items: flex-end;
   overflow: hidden;
   position: absolute;
@@ -349,26 +349,26 @@ body {
   border-radius: 25px 25px 0 0;
 }
 
-.modal-content{
+.modal-content {
   margin: 1em;
   width: 100%;
   padding: 1em;
 }
 
-.modal-content a{
+.modal-content a {
   text-decoration: none;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.modal p{
+.modal p {
   color: black;
   font-weight: 600;
   margin-left: 1em;
 }
 
-.modal-close{
+.modal-close {
   display: flex;
   justify-content: flex-end;
 }
@@ -376,6 +376,8 @@ body {
 /* EDIT PROFILE */
 .profile-img-edit img {
   margin: 2.1875em 0em 0.5em 0em;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .profile-img-edit {
@@ -406,7 +408,7 @@ body {
   padding-top: 1em;
 }
 
-.profile-delete-confirmation{
+.profile-delete-confirmation {
   margin: 0 2.1875em;
 }
 
@@ -432,7 +434,7 @@ body {
 }
 
 /* ADD */
-.input-spacing{
+.input-spacing {
   margin: 0 2em;
 }
 
