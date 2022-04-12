@@ -90,11 +90,11 @@ class Post
         return $statement->execute();
     }
 
-    public static function getPosts($amount)
+    public static function getPosts($start)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts LIMIT :amount;");
-        $statement->bindValue(':amount', (int)$amount, PDO::PARAM_INT);
+        $statement = $conn->prepare("SELECT * FROM posts LIMIT :start, 5;");
+        $statement->bindValue(':start', (int)$start, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }

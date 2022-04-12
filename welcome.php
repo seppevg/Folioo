@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="switch-container">
-                        <p class="center line"><a class="switch" href="#">Continue without account</a></p>
+                        <p class="center line"><a class="switch" href="index.php">Continue without account</a></p>
                     </div>
                 </div>
             </div>
