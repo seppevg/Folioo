@@ -16,7 +16,7 @@ function displayImage(e) {
 let projectStart = 0;
 document.querySelector("#loadMoreProjectsButton").addEventListener("click", e => {
     e.preventDefault(); //reload vermijden
-    projectStart += 5;
+    projectStart += 10;
     //Deze waarde bepaalt vanaf welke startpositie de 5 volgende posts uit de database gehaald moeten worden
 
     let data = new FormData();
@@ -50,6 +50,7 @@ document.querySelector("#loadMoreProjectsButton").addEventListener("click", e =>
                                     <article class="project">
                                         <img class="project-picture" src="./assets/no-uploads.svg" alt="project image">
                                         <div class="project-info">
+                                        <? php if (!empty($email)): ?>
                                             <a class="project-author" href="#">
                                                 <img class="project-author-picture" src="./uploads/${userData['image']}" alt="profile picture">
                                                 <h4 class="project-author-username">${userData['username']}</h4>
@@ -64,6 +65,7 @@ document.querySelector("#loadMoreProjectsButton").addEventListener("click", e =>
                                                     <h4>number</h4>
                                                 </div>
                                             </div>
+                                        <? php endif; ?>
                                         </div>
                                     </article>`;
 

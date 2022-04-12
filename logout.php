@@ -2,7 +2,7 @@
 //include_once("../bootstrap.php");
 session_start();
 session_destroy();
-header("Location: login.php");
+header("Location: welcome.php");
 	
 ?><!DOCTYPE html>
 <html lang="en">
