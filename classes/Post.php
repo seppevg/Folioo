@@ -3,8 +3,20 @@ class Post
 {
     private $userId;
     private $title;
+    private $text;
     private $image;
     private $tags;
+
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
+    }
 
     /**
      * Set the value of userId
@@ -106,5 +118,32 @@ class Post
         $statement->bindValue(':userId', $userId);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function save()
+    {
+        $conn = DB::getInstance();
+
+        $statement = $conn->prepare("INSERT INTO posts(user_id, title, tags, image, text) VALUES (:userId, :title, :tags, :image, :text);");
+
+        $statement->bindValue(':userId', $this->userId);
+        $statement->bindValue(':title', $this->title);
+        $statement->bindValue(':tags', $this->tags);
+        $statement->bindValue(':image', $this->image);
+        $statement->bindValue(':text', $this->text);
+
+        var_dump($statement);
+
+        return $statement->execute();
+    }
+
+    public function getId()
+    {
+        $conn = DB::getInstance();
+
+        $statement = $conn->prepare("SELECT count(id) FROM posts");
+        $statement->execute();
+        $postId = intval($statement->fetchColumn()) + 1;
+        return $postId;
     }
 }
