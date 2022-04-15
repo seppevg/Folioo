@@ -105,7 +105,7 @@ class Post
     public static function getPosts($start)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts LIMIT :start, 10;");
+        $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT :start, 10;");
         $statement->bindValue(':start', (int)$start, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -123,24 +123,18 @@ class Post
     public function save()
     {
         $conn = DB::getInstance();
-
         $statement = $conn->prepare("INSERT INTO posts(user_id, title, tags, image, text) VALUES (:userId, :title, :tags, :image, :text);");
-
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':title', $this->title);
         $statement->bindValue(':tags', $this->tags);
         $statement->bindValue(':image', $this->image);
         $statement->bindValue(':text', $this->text);
-
-        var_dump($statement);
-
         return $statement->execute();
     }
 
     public function getId()
     {
         $conn = DB::getInstance();
-
         $statement = $conn->prepare("SELECT count(id) FROM posts");
         $statement->execute();
         $postId = intval($statement->fetchColumn()) + 1;

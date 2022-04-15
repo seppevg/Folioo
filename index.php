@@ -10,7 +10,21 @@ if (empty($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 
-$posts = Post::getPosts(0);
+$pageCounter = 1;
+if (!empty($_GET['page'])) {
+    $pageCounter = $_GET['page'];
+    $pageCounter += 1;
+}
+
+if ($pageCounter !== 1) {
+    $buttonStyling = 'style="margin-left: 2em"';
+} else {
+    $buttonStyling = "";
+}
+
+
+$loadedPosts = ($pageCounter - 1)*10;
+$posts = Post::getPosts($loadedPosts);
 
 ?>
 <!DOCTYPE html>
@@ -35,12 +49,15 @@ $posts = Post::getPosts(0);
             <div id="no-uploads">
                 <img src="./assets/no-uploads.svg" alt="No uploads yet">
             </div>
+            <div class="main-margin flex">
+                <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-top: 72vh">Previous page</a>
+            </div>
         <?php else: ?>
             <div class="allPosts">
                 <?php foreach($posts as $post): ?>
                     <?php $profile = Post::getUserOfPost($post['user_id']); ?>
                     <article class="project">
-                        <img class="project-picture" src="./assets/no-uploads.svg" alt="project image">
+                        <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                         <div class="project-info">
                             <?php if (!empty($email)): ?>
                                 <a class="project-author" href="#">
@@ -62,29 +79,19 @@ $posts = Post::getPosts(0);
                     </article>
                 <?php endforeach; ?>
             </div>
-            <?php if (!empty($email)): ?>
-                <form action="" method="post" class="form">
-                    <input style="display:none" type="text" name="loadMore">
-                    <div class="flex">
-                        <input id="loadMoreProjectsButton" class="main-btn" type="submit" value="Load more">
-                    </div>
-                </form>
-                <br><br><br><br><br><br><br><br>
-            <?php else: ?>
-                <div class="profile-edit">
-                    <a href="welcome.php" class="main-btn">Log in to see more!</a>
-                </div>
-                <br><br><br><br><br><br><br><br>
-            <?php endif; ?>
-
+            <div class="main-margin flex">
+                <?php if ($pageCounter !== 1): ?>
+                    <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>
+                <?php endif; ?>
+                <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" <?php echo $buttonStyling; ?> >Next page</a>
+            </div>
+            <br><br><br><br><br><br><br><br>
         <?php endif; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
 
     </div>
     
-    <script src="./js/app.js"></script>
-
 </body>
 
 </html>
