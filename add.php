@@ -4,7 +4,13 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-$email = $_SESSION['email'];
+//$email = $_SESSION['email'];
+if (empty($_SESSION['email'])) {
+    $email = "";
+} else {
+    $email = $_SESSION['email'];
+}
+
 $profile = User::getProfileInfo($email);
 
 if (!empty($_POST)) {

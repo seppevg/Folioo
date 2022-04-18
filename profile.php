@@ -4,7 +4,13 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-$email = $_SESSION['email'];
+//$email = $_SESSION['email'];
+if (empty($_SESSION['email'])) {
+    $email = "";
+} else {
+    $email = $_SESSION['email'];
+}
+
 $profile = User::getProfileInfo($email);
 
 ?><!DOCTYPE html>
@@ -20,6 +26,7 @@ $profile = User::getProfileInfo($email);
 <body>
     <div id="profile">
         <?php foreach($profile as $p): ?>
+            <?php if(!empty($email)):?>
             <div class="profile-header">
                 <h3 class="profile-username"><?php echo $p['username']; ?></h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -40,6 +47,8 @@ $profile = User::getProfileInfo($email);
             <div class="profile-edit">
                 <a href="edit_profile.php" class="main-btn">Edit profile</a>
             </div>
+
+            <?php endif;?>
 
             <div id="no-uploads">
                 <img src="./assets/no-posts.svg" alt="No posts yet">
