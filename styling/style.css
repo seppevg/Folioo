@@ -216,6 +216,19 @@ body {
   height: auto;
 }
 
+#become-friend {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-125px) translateY(-75px);
+  z-index: -1;
+}
+
+#become-friend img {
+  width: 250px;
+  height: auto;
+}
+
 #filler {
   align-self: center;
 }
@@ -443,6 +456,11 @@ body {
 
 .form-input-closer {
   margin: 5px 0 5px 0;
+}
+
+/* NOT LOGGED INTO PROFILE*/
+.not-logged-into-profile {
+  margin: 0 2.1875em;
 }
 
 /* ADD */

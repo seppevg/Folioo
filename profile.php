@@ -27,32 +27,32 @@ $profile = User::getProfileInfo($email);
     <div id="profile">
         <?php foreach($profile as $p): ?>
             <?php if(!empty($email)):?>
-            <div class="profile-header">
-                <h3 class="profile-username"><?php echo $p['username']; ?></h3>
-                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
-            </div>
-            <div class="profile-info">
-                <div class="profile-img">
-                    <img src="./uploads/<?php echo $p['image']; ?>">
+                <div class="profile-header">
+                    <h3 class="profile-username"><?php echo $p['username']; ?></h3>
+                    <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
                 </div>
-                <div class="profile-info-extra">
-                    <p class="profile-text"><?php echo $p['education']; ?></p>
+                <div class="profile-info">
+                    <div class="profile-img">
+                        <img src="./uploads/<?php echo $p['image']; ?>">
+                    </div>
+                    <div class="profile-info-extra">
+                        <p class="profile-text"><?php echo $p['education']; ?></p>
+                    </div>
                 </div>
-            </div>
-            <div class="profile-bio">
-                <p class="profile-text"><?php echo $p['bio']; ?></p>
-            </div>
+                <div class="profile-bio">
+                    <p class="profile-text"><?php echo $p['bio']; ?></p>
+                </div>
 
-        
-            <div class="profile-edit">
-                <a href="edit_profile.php" class="main-btn">Edit profile</a>
-            </div>
+            
+                <div class="profile-edit">
+                    <a href="edit_profile.php" class="main-btn">Edit profile</a>
+                </div>
 
-            <?php endif;?>
+                <div id="no-uploads">
+                    <img src="./assets/no-posts.svg" alt="No posts yet">
+                </div>
 
-            <div id="no-uploads">
-                <img src="./assets/no-posts.svg" alt="No posts yet">
-            </div>
+            <?php endif;?> 
 
             <section class="modal modal-container ">
                 <div id="modal" class="modal-content hidden">
@@ -74,6 +74,36 @@ $profile = User::getProfileInfo($email);
                 </div>
             </section>
         <?php endforeach; ?>
+
+        <?php if(empty($email)):?>
+            <div class="profile-header">
+                <h3 class="profile-username">Join the club!</h3>
+                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+            </div>
+
+            <div class="not-logged-into-profile">
+                <h4>You don't have a profile</h4>
+                <p>
+                    You are currently not logged in to the site, to get proper access create
+                    a new user or login with an existing user.
+                </p>
+            </div>
+
+            <div id="become-friend">
+                    <img src="./assets/become-friend.svg" alt="No posts yet">
+            </div>
+
+            <div class="main-margin">                    
+                    <div class="flex">
+                        <a href="login.php" class="form-btn center">Log in</a>
+                    </div>
+
+                    <div class="flex">
+                        <a href="register.php" class="form-btn center">Register</a>
+                    </div>
+            </div>
+
+        <?php endif;?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
