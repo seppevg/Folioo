@@ -1,7 +1,7 @@
 <?php 
 
     include_once("bootstrap.php");
-    include_once("./includes/upload.inc.php");
+    Security::onlyLoggedInUsers();
 
     $email = $_SESSION['email'];
     $profile = User::getInfo($email);
@@ -19,7 +19,7 @@
             $user->setLinkedinLink($_POST['linkedin-link']);
             $user->setEmail($email);
             $user->update();
-
+            Upload::uploadProfilepicture($_FILES['image']);
             header("Location: profile.php");
             
         }
