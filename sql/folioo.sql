@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 19 apr 2022 om 15:23
+-- Gegenereerd op: 19 apr 2022 om 16:38
 -- Serverversie: 5.7.24
 -- PHP-versie: 8.0.1
 
@@ -80,28 +80,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`) VALUES
-(1, 12, 'niew', 'afsdjlk;s', 'post_18.png', '#lolol'),
-(2, 3, 'My First Project', '', 'profiledefault.jpg', '#first'),
-(3, 8, 'Marie\'s Project', '', 'profiledefault.jpg', '#logo'),
-(10, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(11, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(12, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(13, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(14, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(15, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(16, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(17, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(18, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(19, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(20, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(21, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(22, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(23, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(27, 12, 'Poster', 'I made this one time', 'post_18.png', '#rickandmorty'),
-(28, 11, 'DuckTalk', 'This is my latest logo design!', 'post_19.png', '#lab2'),
-(29, 11, 'Tester', 'Testttttt', 'post_20.jpg', '#test'),
-(30, 11, 'gg', 'gg', 'post_21.png', 'gg'),
-(31, 11, 'f', 'gg', 'post_22.png', 'd');
+(1, 1, 'DuckTalk Logo Design', 'I designed a new logo for DuckTalk this weekend, what do you think?', 'r0748140@student.thomasmore.be_post1.png', '#new, #ducktalk, #hackaton');
 
 -- --------------------------------------------------------
 
@@ -128,10 +107,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`) VALUES
-(3, 'r0748140@student.thomasmore.be', '$2y$15$Agj1ewRUlMYJwL.squ/Xfe7lfUBchj7EJ6YAF12J4QLwsHkvYfT5G', 'Seep', NULL, 'r0748140@student.thomasmore.be.jpg', NULL, NULL, NULL, NULL, NULL),
-(8, 'r0831894@student.thomasmore.be', '$2y$15$0dTt7nrSzq9J9DkOyL2mrOV1PfWz6XY2XAfCN7opFCw4Ty0LpS6r6', 'Marie', '', 'r0831894@student.thomasmore.be.jpg', 'Interactive Multimedia Design', '', '', '', ''),
-(11, 'test@thomasmore.be', '$2y$15$dN6hTlPj3HQCnNiRk3ZWfu5WsgF4lpKUQxpyckGBc1AO9DuE4u74q', 'Test Test', 'seppe.vg@live.be', 'test@thomasmore.be.png', 'Interactive Multimedia Design Thomas More Mechelen', 'I am a professional who loves to design and post stuff online toFolioo :) Follow me for more content!', '@thetestingmachine', 'www.behance.com/thetestingmachine', 'www.linkedin.com/thetestingmachine'),
-(12, 'r0831678@student.thomasmore.be', '$2y$15$agsNuWBVbiPac/ldE2ivVeT6ez80RzKwKNHLfSeIBgYy0HsvAbd86', 'gebeyens', NULL, 'profiledefault.jpg', NULL, NULL, NULL, NULL, NULL);
+(1, 'r0748140@student.thomasmore.be', '$2y$15$GhF.LyMYi8RabaOJwf4ApesYH3EqKU.gbzIww1FSuCw6yr40AhtYO', 'Seppe Vangeel', 'seppe.vg@live.be', 'r0748140@student.thomasmore.be.jpg', 'Interactive Multimedia Design', 'I love drinking beer', '@seppe_vangeel', 'www.behance.com/seppevangeel', 'www.linkedin.com/seppevangeel');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -193,13 +169,13 @@ ALTER TABLE `passwordreset`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
