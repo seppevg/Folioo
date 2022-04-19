@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 15, 2022 at 03:32 PM
--- Server version: 5.7.24
--- PHP Version: 7.4.1
+-- Gegenereerd op: 19 apr 2022 om 15:23
+-- Serverversie: 5.7.24
+-- PHP-versie: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Tabelstructuur voor tabel `comments`
 --
 
 CREATE TABLE `comments` (
@@ -38,7 +37,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `likes`
+-- Tabelstructuur voor tabel `likes`
 --
 
 CREATE TABLE `likes` (
@@ -50,7 +49,7 @@ CREATE TABLE `likes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `passwordreset`
+-- Tabelstructuur voor tabel `passwordreset`
 --
 
 CREATE TABLE `passwordreset` (
@@ -64,7 +63,7 @@ CREATE TABLE `passwordreset` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Tabelstructuur voor tabel `posts`
 --
 
 CREATE TABLE `posts` (
@@ -77,11 +76,11 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Dumping data for table `posts`
+-- Gegevens worden geëxporteerd voor tabel `posts`
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`) VALUES
-(1, 12, 'niew', 'afsdjlk;s', 'post_18.svg', '#lolol'),
+(1, 12, 'niew', 'afsdjlk;s', 'post_18.png', '#lolol'),
 (2, 3, 'My First Project', '', 'profiledefault.jpg', '#first'),
 (3, 8, 'Marie\'s Project', '', 'profiledefault.jpg', '#logo'),
 (10, 11, 'Test', '', 'profiledefault.jpg', '#test'),
@@ -98,12 +97,16 @@ INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`) VALUES
 (21, 11, 'Test', '', 'profiledefault.jpg', '#test'),
 (22, 11, 'Test', '', 'profiledefault.jpg', '#test'),
 (23, 11, 'Test', '', 'profiledefault.jpg', '#test'),
-(27, 12, 'Poster', 'I made this one time', 'post_18.png', '#rickandmorty');
+(27, 12, 'Poster', 'I made this one time', 'post_18.png', '#rickandmorty'),
+(28, 11, 'DuckTalk', 'This is my latest logo design!', 'post_19.png', '#lab2'),
+(29, 11, 'Tester', 'Testttttt', 'post_20.jpg', '#test'),
+(30, 11, 'gg', 'gg', 'post_21.png', 'gg'),
+(31, 11, 'f', 'gg', 'post_22.png', 'd');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -121,7 +124,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`) VALUES
@@ -131,69 +134,69 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `
 (12, 'r0831678@student.thomasmore.be', '$2y$15$agsNuWBVbiPac/ldE2ivVeT6ez80RzKwKNHLfSeIBgYy0HsvAbd86', 'gebeyens', NULL, 'profiledefault.jpg', NULL, NULL, NULL, NULL, NULL);
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `comments`
+-- Indexen voor tabel `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `likes`
+-- Indexen voor tabel `likes`
 --
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `passwordreset`
+-- Indexen voor tabel `passwordreset`
 --
 ALTER TABLE `passwordreset`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `posts`
+-- Indexen voor tabel `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `likes`
+-- AUTO_INCREMENT voor een tabel `likes`
 --
 ALTER TABLE `likes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `passwordreset`
+-- AUTO_INCREMENT voor een tabel `passwordreset`
 --
 ALTER TABLE `passwordreset`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;

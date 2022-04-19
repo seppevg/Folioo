@@ -4,7 +4,7 @@
     include_once("./includes/upload.inc.php");
 
     $email = $_SESSION['email'];
-    $profile = User::getProfileInfo($email);
+    $profile = User::getInfo($email);
     $id = $_GET['id'];
     //var_dump($id);
 
@@ -13,10 +13,10 @@
     if(isset($_POST['delete-user'])){      
         session_destroy();
         header("Location: register.php");
-        User::deleteProfile($email);
-        Post::deleteAllPostsUser($id);
-        Comment::deleteAllCommentsUser($id);
-        Like::deleteAllLikesUser($id);
+        User::delete($email);
+        Post::deleteAll($id);
+        Comment::deleteAll($id);
+        Like::deleteAll($id);
 
         $filename = "uploads/" . $email . "*";
         $fileinfo = glob($filename); 

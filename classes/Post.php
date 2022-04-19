@@ -1,5 +1,5 @@
 <?php
-class Post
+class Post implements iPost
 {
     private $userId;
     private $title;
@@ -94,7 +94,7 @@ class Post
         return $this->tags;
     }
 
-    public static function deleteAllPostsUser($id)
+    public static function deleteAll($id)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("DELETE FROM posts WHERE user_id=:id;");
@@ -102,7 +102,7 @@ class Post
         return $statement->execute();
     }
 
-    public static function getPosts($start)
+    public static function getAll($start)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT :start, 10;");
@@ -111,7 +111,7 @@ class Post
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getUserOfPost($userId)
+    public static function getUser($userId)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT username, image FROM users WHERE id = :userId;");
@@ -139,5 +139,15 @@ class Post
         $statement->execute();
         $postId = intval($statement->fetchColumn()) + 1;
         return $postId;
+    }
+
+    public function update()
+    {
+
+    }
+        
+    public static function delete($email) 
+    {
+
     }
 }

@@ -1,8 +1,7 @@
 <?php
-class Like
+class Like implements iProject
 {
-   
-    public static function deleteAllLikesUser($id)
+    public static function deleteAll($id)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("DELETE FROM likes WHERE user_id=:id;");

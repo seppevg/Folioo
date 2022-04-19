@@ -7,7 +7,7 @@ if( !empty($_POST) ){
         // create a new user
         $user = new User();
         $user->setEmail($_POST['email']);        
-        $user->canValidateEmail();
+        $user->validateEmail();
         $user->sendPasswordResetLink();
 
         // If the user entered a valid email he gets redirected

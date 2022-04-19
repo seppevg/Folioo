@@ -5,7 +5,7 @@ include_once("bootstrap.php");
 Security::onlyLoggedInUsers();
 
 $email = $_SESSION['email'];
-$profile = User::getProfileInfo($email);
+$profile = User::getInfo($email);
 
 if (!empty($_POST)) {
 
