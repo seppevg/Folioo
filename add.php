@@ -4,7 +4,13 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-$email = $_SESSION['email'];
+//$email = $_SESSION['email'];
+if (empty($_SESSION['email'])) {
+    $email = "";
+} else {
+    $email = $_SESSION['email'];
+}
+
 $profile = User::getInfo($email);
 
 if (!empty($_POST)) {
@@ -73,74 +79,106 @@ if (!empty($_POST)) {
 
 <body>
     <div id="add">
-        <div class="profile-header">
-            <h3 class="profile-username">Add project</h3>
-            <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
-        </div>
-
-        <!-- <?php if (isset($error)) : ?>
-            <div>
-                <p class="error"> <?php echo $error; ?></p>
+        <?php if(!empty($email)):?>
+            <div class="profile-header">
+                <h3 class="profile-username">Add project</h3>
+                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
-        <?php endif; ?> -->
 
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div>
-                <div class="profile-img-edit">
-                    <img style="cursor:pointer" id="profile-display" src="./assets/rectangle.svg" onclick="triggerClick()">
+            <!-- <?php if (isset($error)) : ?>
+                <div>
+                    <p class="error"> <?php echo $error; ?></p>
                 </div>
-                <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Add pic</label>
-                <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
-            </div>
+            <?php endif; ?> -->
 
-            <div class="input-spacing">
-                <div class="form-field">
-                    <div>
-                        <label class="form-label" for="title">Title</label>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div>
+                    <div class="profile-img-edit">
+                        <img style="cursor:pointer" id="profile-display" src="./assets/rectangle.svg" onclick="triggerClick()">
                     </div>
-                    <div class="flex">
-                        <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
-                    </div>
-                    <div>
-                        <label class="form-label" for="text">Text</label>
-                    </div>
-                    <div class="flex">
-                        <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
-                    </div>
-                    <div>
-                        <label class="form-label" for="tags">Tags</label>
-                    </div>
-                    <div class="flex">
-                        <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#optional">
+                    <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Add pic</label>
+                    <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
+                </div>
+
+                <div class="input-spacing">
+                    <div class="form-field">
+                        <div>
+                            <label class="form-label" for="title">Title</label>
+                        </div>
+                        <div class="flex">
+                            <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
+                        </div>
+                        <div>
+                            <label class="form-label" for="text">Text</label>
+                        </div>
+                        <div class="flex">
+                            <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
+                        </div>
+                        <div>
+                            <label class="form-label" for="tags">Tags</label>
+                        </div>
+                        <div class="flex">
+                            <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#optional">
+                        </div>
                     </div>
                 </div>
+
+                <div class="profile-edit">
+                    <button class="main-btn btn-add" type="submit">Inspire others</button>
+                </div>
+            </form>
+            <?php foreach ($profile as $p) : ?>
+                <section class="modal modal-container ">
+                    <div id="modal" class="modal-content hidden">
+                        <div class="modal-close">
+                            <img class="modal-icon" src="./assets/close.svg" alt="close">
+                        </div>
+                        <a href="change_password.php?id=<?php echo $p['id']; ?>">
+                            <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                            <p>Change password</p>
+                        </a>
+                        <a href="logout.php">
+                            <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                            <p>Log out</p>
+                        </a>
+                        <a href="delete_profile.php?id=<?php echo $p['id']; ?>">
+                            <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                            <p>Delete your profile</p>
+                        </a>
+                    </div>
+                </section>
+            <?php endforeach; ?>
+        <?php endif;?>
+
+        <?php if(empty($email)):?>
+            <div class="profile-header">
+                <h3 class="profile-username">Join the club!</h3>
+                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
 
-            <div class="profile-edit">
-                <button class="main-btn btn-add" type="submit">Inspire others</button>
+            <div class="not-logged-into-profile">
+                <h4>You don't have a profile</h4>
+                <p>
+                    You are currently not logged in to the site, to get proper access create
+                    a new user or login with an existing user.
+                </p>
             </div>
-        </form>
-        <?php foreach ($profile as $p) : ?>
-            <section class="modal modal-container ">
-                <div id="modal" class="modal-content hidden">
-                    <div class="modal-close">
-                        <img class="modal-icon" src="./assets/close.svg" alt="close">
+
+            <div id="become-friend">
+                    <img src="./assets/become-friend.svg" alt="No posts yet">
+            </div>
+
+            <div class="main-margin">                    
+                    <div class="flex">
+                        <a href="login.php" class="form-btn center">Log in</a>
                     </div>
-                    <a href="change_password.php?id=<?php echo $p['id']; ?>">
-                        <img class="modal-icon" src="./assets/lock.svg" alt="lock">
-                        <p>Change password</p>
-                    </a>
-                    <a href="logout.php">
-                        <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
-                        <p>Log out</p>
-                    </a>
-                    <a href="delete_profile.php?id=<?php echo $p['id']; ?>">
-                        <img class="modal-icon" src="./assets/delete.svg" alt="delete">
-                        <p>Delete your profile</p>
-                    </a>
-                </div>
-            </section>
-        <?php endforeach; ?>
+
+                    <div class="flex">
+                        <a href="register.php" class="form-btn center">Register</a>
+                    </div>
+            </div>
+
+        <?php endif;?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
