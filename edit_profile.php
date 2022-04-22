@@ -10,9 +10,7 @@
         try {        
             // create a new user
             $user = new User();
-            if (!empty($_POST['image'])) {
-                $user->setImage($_POST['image']);
-            }
+            $user->setImage($_POST['image']);
             $user->setSecondaryEmail($_POST['secondary-email']);
             $user->setEducation($_POST['education']);
             $user->setBio($_POST['bio']);

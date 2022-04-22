@@ -44,6 +44,9 @@ class Post
      */
     public function setTitle($title)
     {
+        if (empty($title)) {
+            throw new Exception("Title can't be empty 👆");
+        }
         $this->title = $title;
         return $this;
     }
@@ -63,6 +66,16 @@ class Post
      */
     public function setImage($image)
     {
+        var_dump($_FILES);
+        // if (($_FILES['image']['size'] == 0 && $_FILES['image']['error'] == 0)) {
+        //     throw new Exception("Image can't be empty 👆");
+        // }
+        // if($_FILES['image']['name'] == ""){
+        //     throw new Exception("Image can't be empty 👆");
+        // }
+        if($image == 'rectangle.svg'){
+            throw new Exception("Image can't be empty 👆");
+        }
         $this->image = $image;
         return $this;
     }
