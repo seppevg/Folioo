@@ -54,15 +54,6 @@ if (!empty($_POST)) {
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
 
-<<<<<<< HEAD
-=======
-            <?php if (isset($error)) : ?>
-                <div>
-                    <p class="error"> <?php echo $error; ?></p>
-                </div>
-            <?php endif; ?>
-
->>>>>>> 4bc45de6961cb4b01b78ce41f7fb17530bdf7680
             <form action="" method="POST" enctype="multipart/form-data">
                 <div>
                     <div class="profile-img-edit">

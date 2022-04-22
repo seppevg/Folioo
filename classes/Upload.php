@@ -58,6 +58,11 @@ class Upload {
         $email = $mainEmail['email'];
     
         if(isset($_POST['save-post'])) {
+            if(empty($imageFile['name']) || $imageFile['name'] == "rectangle.svg"){
+                throw new Exception("Image can't be empty 👆");
+                return false;
+            };
+
             $file = $imageFile;
     
             $fileName = $file['name'];
