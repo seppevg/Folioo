@@ -12,8 +12,7 @@
 
 
     if(isset($_POST['delete-user'])){      
-        session_destroy();
-        header("Location: register.php");
+
         User::delete($email);
         Post::deleteAll($id);
         Comment::deleteAll($id);
@@ -44,6 +43,9 @@
         else {
             echo "File was deleted";
         }
+
+        session_destroy();
+        header("Location: register.php");
     }
 
 
