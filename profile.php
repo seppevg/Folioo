@@ -84,8 +84,8 @@ $userProfiles = User::getByUserId($id);
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif;?>
-        <?php endforeach;?>
-        
+            <?php endforeach;?>
+
             <section class="modal modal-container ">
                 <div id="modal" class="modal-content hidden">
                     <div class="modal-close">
@@ -106,8 +106,6 @@ $userProfiles = User::getByUserId($id);
                 </div>
             </section>
         <?php endforeach; ?>
-
-
 
         <?php if(empty($email)):?>
             <div class="profile-header">
