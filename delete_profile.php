@@ -1,8 +1,9 @@
 <?php 
 
     include_once("bootstrap.php");
-    include_once("./includes/upload.inc.php");
+    //include_once("./includes/upload.inc.php");
 
+    session_start();
     $email = $_SESSION['email'];
     $profile = User::getInfo($email);
     $id = $_GET['id'];
@@ -18,6 +19,16 @@
         Comment::deleteAll($id);
         Like::deleteAll($id);
 
+        //delete pictures from posts
+        $filenamepost = "uploads/posts/" . $email . "_post" . "*";
+        $fileinfoposts = glob($filenamepost); 
+        var_dump($fileinfoposts);
+
+        foreach($fileinfoposts as $file) {
+            unlink($file);
+        }
+
+        //delete profile picture
         $filename = "uploads/" . $email . "*";
         $fileinfo = glob($filename); 
         $fileext = explode(".", $fileinfo[0]);
