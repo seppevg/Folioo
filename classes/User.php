@@ -493,7 +493,7 @@ class User implements iUser
         $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
         $statement->bindValue(':id', $id);
         $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $user = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $user;
     }
 }

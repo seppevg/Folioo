@@ -62,28 +62,7 @@ $userProfiles = User::getByUserId($id);
                 <?php endif;?>
             <?php endif;?> 
 
-            <section class="modal modal-container ">
-                <div id="modal" class="modal-content hidden">
-                    <div class="modal-close">
-                        <img class="modal-icon" src="./assets/close.svg" alt="close">
-                    </div>
-                    <a href="change_password.php?id=<?php echo $p['id']; ?>">
-                        <img class="modal-icon" src="./assets/lock.svg" alt="lock">
-                        <p>Change password</p>
-                    </a>
-                    <a href="logout.php">
-                        <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
-                        <p>Log out</p>
-                    </a>
-                    <a href="delete_profile.php?id=<?php echo $p['id']; ?>">
-                        <img class="modal-icon" src="./assets/delete.svg" alt="delete">
-                        <p>Delete your profile</p>
-                    </a>
-                </div>
-            </section>
-        <?php endforeach; ?>
-
-        <?php foreach($userProfiles as $up): ?>
+            <?php foreach($userProfiles as $up): ?>
                 <?php if(!empty($id)): ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
@@ -106,6 +85,29 @@ $userProfiles = User::getByUserId($id);
                     </div>
                 <?php endif;?>
         <?php endforeach;?>
+        
+            <section class="modal modal-container ">
+                <div id="modal" class="modal-content hidden">
+                    <div class="modal-close">
+                        <img class="modal-icon" src="./assets/close.svg" alt="close">
+                    </div>
+                    <a href="change_password.php?id=<?php echo $p['id']; ?>">
+                        <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                        <p>Change password</p>
+                    </a>
+                    <a href="logout.php">
+                        <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                        <p>Log out</p>
+                    </a>
+                    <a href="delete_profile.php?id=<?php echo $p['id']; ?>">
+                        <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                        <p>Delete your profile</p>
+                    </a>
+                </div>
+            </section>
+        <?php endforeach; ?>
+
+
 
         <?php if(empty($email)):?>
             <div class="profile-header">
