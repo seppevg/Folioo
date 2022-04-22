@@ -24,7 +24,7 @@ if ($pageCounter !== 1) {
 
 
 $loadedPosts = ($pageCounter - 1)*10;
-$posts = Post::getPosts($loadedPosts);
+$posts = Post::getAll($loadedPosts);
 
 ?>
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ $posts = Post::getPosts($loadedPosts);
         <?php else: ?>
             <div class="allPosts">
                 <?php foreach($posts as $post): ?>
-                    <?php $profile = Post::getUserOfPost($post['user_id']); ?>
+                    <?php $profile = Post::getUser($post['user_id']); ?>
                     <article class="project">
                         <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                         <div class="project-info">

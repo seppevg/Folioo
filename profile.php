@@ -11,7 +11,7 @@ if (empty($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 
-$profile = User::getProfileInfo($email);
+$profile = User::getInfo($email);
 
 ?><!DOCTYPE html>
 <html lang="en">

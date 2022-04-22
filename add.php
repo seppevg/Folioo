@@ -11,7 +11,7 @@ if (empty($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 
-$profile = User::getProfileInfo($email);
+$profile = User::getInfo($email);
 
 if (!empty($_POST)) {
 
@@ -21,40 +21,9 @@ if (!empty($_POST)) {
         $post->setTitle($_POST["title"]);
         $post->setText($_POST["text"]);
         $post->setTags($_POST["tags"]);
-
-        $file = $_FILES['image'];
-
-        $fileName = $file['name'];
-        $fileTmpName = $file['tmp_name'];
-        $fileSize = $file['size'];
-        $fileError = $file['error']; //Als er een error gebeurt moet het programma stoppen met het uploaden van de file
-        $fileType = $file['type'];
-
-
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt));
-        $allowed = array('jpg', 'jpeg', 'png', 'svg');
-
-
-        if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 1000000) {
-                    $fileNameNew = "post_" . $post->getId() . "." . $fileActualExt;
-                    $fileDestination = 'uploads/posts/' . $fileNameNew;
-                    $post->setImage($fileNameNew);
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                } else {
-                    echo "Your file is too big";
-                }
-            } else {
-                echo "There was an error uploading your file";
-            }
-        } else {
-            echo "You cannot upload a file of this type";
-        }
-
+        $imageName = Upload::uploadPostpicture($_FILES['image'], $post->getId());
+        $post->setImage($imageName);
         $post->save();
-
 
         header("Location: index.php");
     } catch (Throwable $error) {
@@ -85,6 +54,15 @@ if (!empty($_POST)) {
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
 
+<<<<<<< HEAD
+=======
+            <?php if (isset($error)) : ?>
+                <div>
+                    <p class="error"> <?php echo $error; ?></p>
+                </div>
+            <?php endif; ?>
+
+>>>>>>> 4bc45de6961cb4b01b78ce41f7fb17530bdf7680
             <form action="" method="POST" enctype="multipart/form-data">
                 <div>
                     <div class="profile-img-edit">
@@ -124,7 +102,7 @@ if (!empty($_POST)) {
                 <?php endif; ?>
 
                 <div class="profile-edit">
-                    <button class="main-btn btn-add" type="submit">Inspire others</button>
+                    <button class="main-btn btn-add" type="submit" name="save-post">Inspire others</button>
                 </div>
             </form>
             <?php foreach ($profile as $p) : ?>

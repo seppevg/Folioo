@@ -1,5 +1,5 @@
 <?php
-class User
+class User implements iUser
 {
     private $email;
     private $password;
@@ -155,7 +155,7 @@ class User
         return true;
     }
 
-    public function canValidateEmail()
+    public function validateEmail()
     {
         // this function checks if a user has entered a valid email
         if (empty($this->email)) {
@@ -306,7 +306,7 @@ class User
         return $this;
     }
 
-    public static function getProfileInfo($email)
+    public static function getInfo($email)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM users WHERE email = :email OR secondary_email = :email;");
@@ -425,7 +425,7 @@ class User
         return $statement->execute();
     }
 
-    public static function deleteProfile($email)
+    public static function delete($email)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("DELETE FROM users WHERE email = :email;");
