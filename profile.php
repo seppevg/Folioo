@@ -11,7 +11,14 @@ if (empty($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 
+if(empty($_GET['id'])) {
+    $id = "";
+} else {
+    $id = $_GET['id'];
+}
+
 $profile = User::getInfo($email);
+$userProfiles = User::getByUserId($id);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -27,32 +34,57 @@ $profile = User::getInfo($email);
     <div id="profile">
         <?php foreach($profile as $p): ?>
             <?php if(!empty($email)):?>
-                <div class="profile-header">
-                    <h3 class="profile-username"><?php echo $p['username']; ?></h3>
-                    <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
-                </div>
-                <div class="profile-info">
-                    <div class="profile-img">
-                        <img src="./uploads/<?php echo $p['image']; ?>">
+                <?php if(empty($id)): ?>
+                    <div class="profile-header">
+                        <h3 class="profile-username"><?php echo $p['username']; ?></h3>
+                        <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
                     </div>
-                    <div class="profile-info-extra">
-                        <p class="profile-text"><?php echo $p['education']; ?></p>
+                    <div class="profile-info">
+                        <div class="profile-img">
+                            <img src="./uploads/<?php echo $p['image']; ?>">
+                        </div>
+                        <div class="profile-info-extra">
+                            <p class="profile-text"><?php echo $p['education']; ?></p>
+                        </div>
                     </div>
-                </div>
-                <div class="profile-bio">
-                    <p class="profile-text"><?php echo $p['bio']; ?></p>
-                </div>
+                    <div class="profile-bio">
+                        <p class="profile-text"><?php echo $p['bio']; ?></p>
+                    </div>
 
-            
-                <div class="profile-edit">
-                    <a href="edit_profile.php" class="main-btn">Edit profile</a>
-                </div>
+                
+                    <div class="profile-edit">
+                        <a href="edit_profile.php" class="main-btn">Edit profile</a>
+                    </div>
 
-                <div id="no-uploads">
-                    <img src="./assets/no-posts.svg" alt="No posts yet">
-                </div>
-
+                    <div id="no-uploads">
+                        <img src="./assets/no-posts.svg" alt="No posts yet">
+                    </div>
+                <?php endif;?>
             <?php endif;?> 
+
+            <?php foreach($userProfiles as $up): ?>
+                <?php if(!empty($id)): ?>
+                    <div class="profile-header">
+                        <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                        <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-img">
+                            <img src="./uploads/<?php echo $up['image']; ?>">
+                        </div>
+                        <div class="profile-info-extra">
+                            <p class="profile-text"><?php echo $up['education']; ?></p>
+                        </div>
+                    </div>
+                    <div class="profile-bio">
+                        <p class="profile-text"><?php echo $up['bio']; ?></p>
+                    </div>
+
+                    <div id="no-uploads">
+                        <img src="./assets/no-posts.svg" alt="No posts yet">
+                    </div>
+                <?php endif;?>
+            <?php endforeach;?>
 
             <section class="modal modal-container ">
                 <div id="modal" class="modal-content hidden">
