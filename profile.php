@@ -57,9 +57,11 @@ $posts = Post::getAllUserPosts($id);
                         <a href="edit_profile.php" class="main-btn">Edit profile</a>
                     </div>
 
-                    <div id="no-uploads">
-                        <img src="./assets/no-posts.svg" alt="No posts yet">
-                    </div>
+                    <?php if(empty($posts)):?>
+                        <div id="no-uploads">
+                            <img src="./assets/no-posts.svg" alt="No posts yet">
+                        </div>
+                    <?php endif;?>
                 <?php endif;?>
             <?php endif;?> 
 
@@ -81,9 +83,11 @@ $posts = Post::getAllUserPosts($id);
                         <p class="profile-text"><?php echo $up['bio']; ?></p>
                     </div>
 
-                    <div id="no-uploads">
-                        <img src="./assets/no-posts.svg" alt="No posts yet">
-                    </div>
+                    <?php if(empty($posts)):?>
+                        <div id="no-uploads">
+                            <img src="./assets/no-posts.svg" alt="No posts yet">
+                        </div>
+                    <?php endif;?>
                 <?php endif;?>
 
                 <div class="allPosts">
