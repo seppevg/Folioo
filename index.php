@@ -10,6 +10,12 @@ if (empty($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 
+if(empty ($_GET)) {
+    $user_id = "";
+} else {
+    $user_id = $_GET['id'];
+}
+
 $pageCounter = 1;
 if (!empty($_GET['page'])) {
     $pageCounter = $_GET['page'];
@@ -60,7 +66,7 @@ $posts = Post::getAll($loadedPosts);
                         <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                         <div class="project-info">
                             <?php if (!empty($email)): ?>
-                                <a class="project-author" href="#">
+                                <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
                                         <img class="project-author-picture" src="./uploads/<?php echo $profile['image']; ?>" alt="profile picture">
                                         <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
                                 </a>

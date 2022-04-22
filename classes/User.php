@@ -486,4 +486,14 @@ class User implements iUser
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function getByUserId($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user;
+    }
 }
