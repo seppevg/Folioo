@@ -19,6 +19,7 @@ if(empty($_GET['id'])) {
 
 $profile = User::getInfo($email);
 $userProfiles = User::getByUserId($id);
+$posts = Post::getAllUserPosts($id);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -56,11 +57,14 @@ $userProfiles = User::getByUserId($id);
                         <a href="edit_profile.php" class="main-btn">Edit profile</a>
                     </div>
 
-                    <div id="no-uploads">
-                        <img src="./assets/no-posts.svg" alt="No posts yet">
-                    </div>
+                    <?php if(empty($posts)):?>
+                        <div id="no-uploads">
+                            <img src="./assets/no-posts.svg" alt="No posts yet">
+                        </div>
+                    <?php endif;?>
                 <?php endif;?>
             <?php endif;?> 
+            
 
             <?php foreach($userProfiles as $up): ?>
                 <?php if(!empty($id)): ?>
@@ -80,12 +84,33 @@ $userProfiles = User::getByUserId($id);
                         <p class="profile-text"><?php echo $up['bio']; ?></p>
                     </div>
 
-                    <div id="no-uploads">
-                        <img src="./assets/no-posts.svg" alt="No posts yet">
-                    </div>
+                    <?php if(empty($posts)):?>
+                        <div id="no-uploads">
+                            <img src="./assets/no-posts.svg" alt="No posts yet">
+                        </div>
+                    <?php endif;?>
+
+                    <div class="allPosts">
+                    <?php foreach($posts as $post): ?>
+                        <article class="project">
+                            <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                            <div class="project-info">
+                                    <div class="project-interactions">
+                                        <div class="project-interactions-like">
+                                            <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                            <h4>number</h4>
+                                        </div>
+                                        <div class="project-interactions-comment">
+                                            <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                                            <h4>number</h4>
+                                        </div>
+                                    </div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
                 <?php endif;?>
             <?php endforeach;?>
-
+            
             <section class="modal modal-container ">
                 <div id="modal" class="modal-content hidden">
                     <div class="modal-close">

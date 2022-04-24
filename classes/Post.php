@@ -159,4 +159,13 @@ class Post implements iPost
     {
 
     }
+
+    public static function getAllUserPosts($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id=:id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

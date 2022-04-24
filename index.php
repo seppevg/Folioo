@@ -10,12 +10,6 @@ if (empty($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 
-if(empty ($_GET)) {
-    $user_id = "";
-} else {
-    $user_id = $_GET['id'];
-}
-
 $pageCounter = 1;
 if (!empty($_GET['page'])) {
     $pageCounter = $_GET['page'];
