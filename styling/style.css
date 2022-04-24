@@ -192,9 +192,17 @@ body {
 /* INDEX (projects) */
 
 #full-logo {
-  width: 100px;
+  width: 75px;
   height: auto;
-  padding: 30px 0 0 36px;
+}
+
+#container-logo {
+  padding: 30px;
+  position: sticky;
+  width: 100%;
+  top: 0px;
+  z-index: 100;
+  background: #fefefe;
 }
 
 #home {
@@ -234,7 +242,7 @@ body {
 }
 
 .project {
-  margin: 2em;
+  margin: 0em 2em 0em 2em;
   display: flex;
   flex-direction: column;
   max-width: 350px;
@@ -242,16 +250,14 @@ body {
 
 .project-picture {
   background: #fefefe;
-  border: 2px solid var(--IMDblue);
   border-radius: 10px;
-  padding: 5em;
 }
 
 .project-info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 10px;
+  margin: 0 30px 30px 30px;
 }
 
 .project-author {
@@ -262,8 +268,8 @@ body {
 }
 
 .project-author-picture {
-  max-width: 35px;
-  max-height: 35px;
+  max-width: 30px;
+  max-height: 30px;
   border-radius: 5em;
   margin-right: 10px;
 }
@@ -302,7 +308,6 @@ body {
   margin-right: 5px;
 }
 
-
 /* PROFILE */
 #profile {
   display: flex;
@@ -322,6 +327,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .profile-header img {
@@ -476,6 +482,37 @@ body {
   margin-top: 110px;
 }
 
+/* POST DETAILS */
+.padding{
+  padding: 22.5px 35px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.post-username {
+  margin: 0;
+  margin-left: 1em;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+img.post-profile {
+  width: auto;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+.post-image img{
+  max-width: 350px;
+}
+
+.post-text{
+  font-weight: 100;
+}
+  
 
 /* REUSABLE PARTS */
 .main-btn {

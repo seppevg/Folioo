@@ -1,9 +1,11 @@
-<?php 
+<?php
 
 include_once("bootstrap.php");
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +14,9 @@ include_once("bootstrap.php");
     <link rel="stylesheet" href="./styling/style.css">
     <title>Folioo - Profile</title>
 </head>
+
 <body>
-    
+    <?php include_once("./includes/nav-bottom.inc.php"); ?>
 </body>
+
 </html>

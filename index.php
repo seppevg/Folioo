@@ -41,7 +41,7 @@ $posts = Post::getAll($loadedPosts);
 
 <body>
     <div id="home">
-        <div>
+        <div id="container-logo">
             <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
         </div>
 
@@ -56,8 +56,10 @@ $posts = Post::getAll($loadedPosts);
             <div class="allPosts">
                 <?php foreach($posts as $post): ?>
                     <?php $profile = Post::getUser($post['user_id']); ?>
-                    <article class="project">
+                    <article>
+                    <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
                         <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                    </a>
                         <div class="project-info">
                             <?php if (!empty($email)): ?>
                                 <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">

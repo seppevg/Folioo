@@ -168,4 +168,12 @@ class Post implements iPost
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public static function getPostById($id){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE id=:id");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
