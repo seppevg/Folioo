@@ -14,6 +14,9 @@ class Post implements iPost
 
     public function setText($text)
     {
+        if (empty($text)) {
+            throw new Exception("Text can't be empty 👆");
+        }
         $this->text = $text;
         return $this;
     }
@@ -66,16 +69,6 @@ class Post implements iPost
      */
     public function setImage($image)
     {
-        var_dump($_FILES);
-        // if (($_FILES['image']['size'] == 0 && $_FILES['image']['error'] == 0)) {
-        //     throw new Exception("Image can't be empty 👆");
-        // }
-        // if($_FILES['image']['name'] == ""){
-        //     throw new Exception("Image can't be empty 👆");
-        // }
-        if($image == 'rectangle.svg'){
-            throw new Exception("Image can't be empty 👆");
-        }
         $this->image = $image;
         return $this;
     }
@@ -95,6 +88,9 @@ class Post implements iPost
      */
     public function setTags($tags)
     {
+        if (empty($tags)) {
+            throw new Exception("Tags can't be empty 👆");
+        }
         $this->tags = $tags;
         return $this;
     }

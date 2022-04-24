@@ -13,6 +13,7 @@ if (empty($_SESSION['email'])) {
 
 $profile = User::getInfo($email);
 
+
 if (!empty($_POST)) {
 
     try {
@@ -24,6 +25,7 @@ if (!empty($_POST)) {
         $imageName = Upload::uploadPostpicture($_FILES['image'], $post->getId());
         $post->setImage($imageName);
         $post->save();
+
 
         header("Location: index.php");
     } catch (Throwable $error) {
@@ -48,7 +50,7 @@ if (!empty($_POST)) {
 
 <body>
     <div id="add">
-        <?php if(!empty($email)):?>
+        <?php if (!empty($email)) : ?>
             <div class="profile-header">
                 <h3 class="profile-username">Add project</h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -66,27 +68,39 @@ if (!empty($_POST)) {
                 <div class="input-spacing">
                     <div class="form-field">
                         <div>
-                            <label class="form-label" for="title">Title</label>
+                            <label class="form-label" for="title">Title*</label>
                         </div>
                         <div class="flex">
-                            <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
+                            <?php if (!empty($post)) : ?>
+                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo $post->getTitle(); ?>">
+                            <?php else : ?>
+                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
+                            <?php endif; ?>
                         </div>
                         <div>
-                            <label class="form-label" for="text">Text</label>
+                            <label class="form-label" for="text">Text*</label>
                         </div>
                         <div class="flex">
-                            <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
+                            <?php if (!empty($post)) : ?>
+                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo $post->getText(); ?>">
+                            <?php else : ?>
+                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
+                            <?php endif; ?>
                         </div>
                         <div>
-                            <label class="form-label" for="tags">Tags</label>
+                            <label class="form-label" for="tags">Tags*</label>
                         </div>
                         <div class="flex">
-                            <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#optional">
+                            <?php if (!empty($post)) : ?>
+                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo $post->getTags(); ?>">
+                            <?php else : ?>
+                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis">
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
 
-                <?php if(isset($error)): ?>
+                <?php if (isset($error)) : ?>
                     <div class="main-margin">
                         <p class="error"> <?php echo $error; ?></p>
                     </div>
@@ -117,9 +131,9 @@ if (!empty($_POST)) {
                     </div>
                 </section>
             <?php endforeach; ?>
-        <?php endif;?>
+        <?php endif; ?>
 
-        <?php if(empty($email)):?>
+        <?php if (empty($email)) : ?>
             <div class="profile-header">
                 <h3 class="profile-username">Join the club!</h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -134,20 +148,20 @@ if (!empty($_POST)) {
             </div>
 
             <div id="become-friend">
-                    <img src="./assets/become-friend.svg" alt="No posts yet">
+                <img src="./assets/become-friend.svg" alt="No posts yet">
             </div>
 
-            <div class="main-margin">                    
-                    <div class="flex">
-                        <a href="login.php" class="form-btn center">Log in</a>
-                    </div>
+            <div class="main-margin">
+                <div class="flex">
+                    <a href="login.php" class="form-btn center">Log in</a>
+                </div>
 
-                    <div class="flex">
-                        <a href="register.php" class="form-btn center">Register</a>
-                    </div>
+                <div class="flex">
+                    <a href="register.php" class="form-btn center">Register</a>
+                </div>
             </div>
 
-        <?php endif;?>
+        <?php endif; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
