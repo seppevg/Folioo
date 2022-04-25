@@ -11,9 +11,7 @@ document.querySelector(".delete-profile-popup").addEventListener("click", e => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire(
             window.location = "delete_profile.php"
-          )
         }
       })
 });

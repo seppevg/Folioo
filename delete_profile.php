@@ -9,41 +9,47 @@
     $email = $_SESSION['email'];
 
 
+    if( !empty($_POST) ){
+        try {        
+            $user = new User();
+            $user->setPassword($_POST['current-password']);
+        
+            $user->validatePassword($id);
+            User::delete($id);
+                    //delete pictures from posts
+            $filenamepost = "uploads/posts/" . $email . "_post" . "*";
+            $fileinfoposts = glob($filenamepost); 
+            var_dump($fileinfoposts);
 
-    if(isset($_POST['delete-user'])){      
+            foreach($fileinfoposts as $file) {
+                unlink($file);
+            }
 
-        User::delete($id);
-
-        //delete pictures from posts
-        $filenamepost = "uploads/posts/" . $email . "_post" . "*";
-        $fileinfoposts = glob($filenamepost); 
-        var_dump($fileinfoposts);
-
-        foreach($fileinfoposts as $file) {
-            unlink($file);
+            //delete profile picture
+            $filename = "uploads/" . $email . "*";
+            $fileinfo = glob($filename); 
+            $fileext = explode(".", $fileinfo[0]);
+            $fileactualext = $fileext[3];
+            //var_dump($fileactualext);
+        
+            $file = "uploads/" . $email . "." . $fileactualext;
+            //var_dump($file);
+        
+            if(!unlink($file)){
+                echo "File was not deleted";
+            }
+            else {
+                echo "File was deleted";
+            }
+                session_destroy();
+                header("Location: register.php");
+            }
+        catch(Throwable $error) {
+            // if any errors are thrown in the class, they can be caught here
+            $error = $error->getMessage();
         }
-
-        //delete profile picture
-        $filename = "uploads/" . $email . "*";
-        $fileinfo = glob($filename); 
-        $fileext = explode(".", $fileinfo[0]);
-        $fileactualext = $fileext[3];
-        //var_dump($fileactualext);
     
-        $file = "uploads/" . $email . "." . $fileactualext;
-        //var_dump($file);
-    
-        if(!unlink($file)){
-            echo "File was not deleted";
-        }
-        else {
-            echo "File was deleted";
-        }
-
-        session_destroy();
-        header("Location: register.php");
     }
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -70,24 +76,35 @@
                 </div>
             </div>
 
+            <form action="" method="post">
+                <div class="profile-delete-confirmation">
+                    <h4>Wait a minute!</h4>
+                    <p>We need to make sure that you're the owner of the account before we 
+                        delete it. Please enter your password.
+                    </p>
+                    
+                    <div class="form-field">
+                        <div>
+                            <label class="form-label" for="password">Password</label>
+                        </div>
+                        <div class="flex">
+                            <input name="current-password" autocomplete="off" class="form-input" type="password" placeholder="Enter password">
+                        </div>
+                    </div>
+                    <div>
+                        <?php if (isset($error)) : ?>
+                            <div>
+                                <p class="error"> <?php echo $error ?></p>
+                            </div>
+                        <?php endif; ?>
+                        <div class="profile-delete">
+                            <button class="main-btn" type="submit" name="delete-user">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+                
 
-
-        <form action="" method="POST">
-            <div class="profile-delete-confirmation">
-                <h4>Are you sure you want to delete your profile?</h4>
-                <p>By deleting your profile you will be deleting all your posts, comments and likes.
-                    You won't be able to get your profile back once it's been deleted.
-                </p>
-            </div>
-
-            <div class="profile-delete-no">
-                <a href="profile.php" class="main-btn">No, I don't want to delete my profile</a>
-            </div>
-
-            <div class="profile-delete-yes">
-                <button class="main-btn" type="submit" name="delete-user">Yes, I want to delete my profile</button>
-            </div>
-        </form>
+            </form>
         <?php endforeach; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
