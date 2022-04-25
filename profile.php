@@ -15,6 +15,9 @@ if(empty($_GET['id'])) {
     $userId = "";
 } else {
     $userId = $_GET['id'];
+    if($userId == $id){
+        header("Location: profile.php");
+    }
 }
 
 $profile = User::getInfo($id);
