@@ -27,10 +27,14 @@ $user = User::getByUserId($post[0]["user_id"]);
 <body>
     
     <div class="profile-header padding">
+        <?php foreach ($post as $p):?>
         <div class="header-content">
-            <img src="./uploads/<?php echo $user[0]['image']?>" class="post-profile" alt="Profile picture">
-            <h3 class="post-username"><?php echo $user[0]['username']; ?></h3>
+            <a class="project-author" href="profile.php?id=<?php echo $p['user_id']?>">
+                <img src="./uploads/<?php echo $user[0]['image']?>" class="post-profile" alt="Profile picture">
+                <h3 class="post-username"><?php echo $user[0]['username']; ?></h3>
+            </a>
         </div>
+        <?php endforeach; ?>
         <img class="modal-button" src="./assets/dots-menu.svg" alt="Dots menu">
     </div>
     <div class="main-margin">

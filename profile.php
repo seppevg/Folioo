@@ -115,8 +115,10 @@ $posts = Post::getAllUserPosts($id);
 
                     <div class="allPosts">
                         <?php foreach($posts as $post): ?>
-                            <article class="project">
-                                <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                            <article>
+                                <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
+                                    <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                                </a>
                                 <div class="project-info">
                                         <div class="project-interactions">
                                             <div class="project-interactions-like">
