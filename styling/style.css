@@ -433,10 +433,18 @@ body {
   padding-top: 1em;
 }
 
+.profile-delete-yes .main-btn {
+  background-color: #F04C25;
+}
+
 .profile-delete-no {
   display: flex;
   margin: 0 2.1875em;
   padding-top: 1em;
+}
+
+.profile-delete-no .main-btn {
+  background-color: #CDCEC9;
 }
 
 .profile-delete-confirmation {

@@ -64,7 +64,7 @@
     
         <div class="profile-header">
             <h3 class="profile-username">Delete profile</h3>
-            <img src="./assets/settings.svg" alt="Settings">
+            <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
         </div>
         <?php foreach($profile as $p): ?>
             <div class="profile-img profile-img-edit">                
@@ -89,7 +89,7 @@
             </div>
 
             <div class="profile-delete-yes">
-                <button class="main-btn" type="submit" name="delete-user" href="delete_profile.php?id=<?php echo $p['id']; ?>">Yes, I want to delete my profile</button>
+                <button class="main-btn" type="submit" name="delete-user">Yes, I want to delete my profile</button>
             </div>
         </form>
         <?php endforeach; ?>
