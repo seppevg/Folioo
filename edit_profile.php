@@ -9,9 +9,9 @@
 
     if( !empty($_POST) ){
         try {        
-            // create a new user
             $user = new User();
-            $user->setImage($_POST['image']);
+            $imageName = Upload::uploadPicture($_FILES['image'], 'empty');
+            $user->setImage($imageName);
             $user->setSecondaryEmail($_POST['secondary-email']);
             $user->setEducation($_POST['education']);
             $user->setBio($_POST['bio']);
@@ -20,9 +20,8 @@
             $user->setLinkedinLink($_POST['linkedin-link']);
             $user->setEmail($email);
             $user->update();
-            Upload::uploadProfilepicture($_FILES['image']);
-            header("Location: profile.php");
             
+            header("Location: profile.php");
         }
         catch(Throwable $error) {
             // if any errors are thrown in the class, they can be caught here

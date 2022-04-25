@@ -11,7 +11,7 @@
     }
     else {
         if (ctype_xdigit($selector) == false && ctype_xdigit($validator) == false) {
-            $error = "Could not validate your request bitch!";
+            $error = "Could not validate your request!";
         }
     }
 

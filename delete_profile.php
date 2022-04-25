@@ -1,7 +1,6 @@
 <?php 
 
     include_once("bootstrap.php");
-    //include_once("./includes/upload.inc.php");
 
     session_start();
     $id = $_SESSION['id'];
@@ -16,11 +15,10 @@
         
             $user->validatePassword($id);
             User::delete($id);
-                    //delete pictures from posts
+            //delete pictures from posts
             $filenamepost = "uploads/posts/" . $email . "_post" . "*";
             $fileinfoposts = glob($filenamepost); 
-            var_dump($fileinfoposts);
-
+            // var_dump($fileinfoposts);
             foreach($fileinfoposts as $file) {
                 unlink($file);
             }

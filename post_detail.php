@@ -9,7 +9,7 @@ if (empty($_GET['id'])) {
 }
 
 $post = Post::getPostById($id);
-$user = User::getByUserId($post[0]["user_id"]);
+$user = User::getInfo($post[0]["user_id"]);
 
 ?>
 <!DOCTYPE html>

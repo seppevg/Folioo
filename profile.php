@@ -21,7 +21,7 @@ if(empty($_GET['id'])) {
 }
 
 $profile = User::getInfo($id);
-$userProfiles = User::getByUserId($userId);
+$userProfiles = User::getInfo($userId);
 
 
 $posts = Post::getAllUserPosts($id);
@@ -47,7 +47,7 @@ $posts = Post::getAllUserPosts($id);
                     </div>
                     <div class="profile-info">
                         <div class="profile-img">
-                            <img src="./uploads/<?php echo $p['image']; ?>">
+                            <img src="./uploads/profiles/<?php echo $p['image']; ?>">
                         </div>
                         <div class="profile-info-extra">
                             <p class="profile-text"><?php echo $p['education']; ?></p>

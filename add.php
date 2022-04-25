@@ -15,17 +15,15 @@ $profile = User::getInfo($id);
 
 
 if (!empty($_POST)) {
-
     try {
         $post = new Post();
         $post->setUserId($profile[0]["id"]);
         $post->setTitle($_POST["title"]);
         $post->setText($_POST["text"]);
         $post->setTags($_POST["tags"]);
-        $imageName = Upload::uploadPostpicture($_FILES['image'], $post->getId());
+        $imageName = Upload::uploadPicture($_FILES['image'], $post->getId());
         $post->setImage($imageName);
         $post->save();
-
 
         header("Location: index.php");
     } catch (Throwable $error) {

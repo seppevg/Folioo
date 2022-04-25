@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 19 apr 2022 om 16:38
+-- Gegenereerd op: 25 apr 2022 om 19:55
 -- Serverversie: 5.7.24
 -- PHP-versie: 8.0.1
 
@@ -75,13 +75,6 @@ CREATE TABLE `posts` (
   `tags` text COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Gegevens worden geëxporteerd voor tabel `posts`
---
-
-INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`) VALUES
-(1, 1, 'DuckTalk Logo Design', 'I designed a new logo for DuckTalk this weekend, what do you think?', 'r0748140@student.thomasmore.be_post1.png', '#new, #ducktalk, #hackaton');
-
 -- --------------------------------------------------------
 
 --
@@ -107,7 +100,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`) VALUES
-(1, 'r0748140@student.thomasmore.be', '$2y$15$GhF.LyMYi8RabaOJwf4ApesYH3EqKU.gbzIww1FSuCw6yr40AhtYO', 'Seppe Vangeel', 'seppe.vg@live.be', 'r0748140@student.thomasmore.be.jpg', 'Interactive Multimedia Design', 'I love drinking beer', '@seppe_vangeel', 'www.behance.com/seppevangeel', 'www.linkedin.com/seppevangeel');
+(3, 'test@thomasmore.be', '$2y$15$B1BPtZQGH5IodurXFAkZyuREXP9yWQ5gAbrKX0lTBnnTufttQjitm', 'Seppe', 'seppe.vg@live.be', '3.png', 'IMD', 'I like beer', '#insta', '', '');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -169,13 +162,13 @@ ALTER TABLE `passwordreset`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

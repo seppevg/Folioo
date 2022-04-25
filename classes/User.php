@@ -414,8 +414,9 @@ class User implements iUser
     public function update()
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("UPDATE users SET secondary_email = :secondary_email, education = :education, bio = :bio, instagramlink = :instagramlink, behancelink = :behancelink, linkedinlink = :linkedinlink WHERE email = :email OR secondary_email = :email;");
+        $statement = $conn->prepare("UPDATE users SET secondary_email = :secondary_email, image = :image, education = :education, bio = :bio, instagramlink = :instagramlink, behancelink = :behancelink, linkedinlink = :linkedinlink WHERE email = :email OR secondary_email = :email;");
         $statement->bindValue(':secondary_email', $this->secondaryEmail);
+        $statement->bindValue(':image', $this->image);
         $statement->bindValue(':education', $this->education);
         $statement->bindValue(':bio', $this->bio);
         $statement->bindValue(':instagramlink', $this->instagramLink);
@@ -491,26 +492,16 @@ class User implements iUser
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function getByUserId($id)
-    {
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
-        $statement->bindValue(':id', $id);
-        $statement->execute();
-        $user = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $user;
-    }
-
     public function getId($email)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT id FROM users where email = :email");
+        $statement = $conn->prepare("SELECT id FROM users where email = :email OR secondary_email = :email;");
         $statement->bindValue(':email', $email);
         $statement->execute();
         $result = $statement->rowCount();
         $row = $statement->fetch(PDO::FETCH_ASSOC);
         if ($result <= 0) {
-            throw new Exception("You need to re-submit your reset request");
+            throw new Exception("You need to re-submit your request");
             return false;
         }else {
             return $row['id'];
