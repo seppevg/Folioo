@@ -15,7 +15,9 @@ if( !empty($_POST) ){
         
         // start a session and redirect the user
         session_start();
-        $_SESSION['email'] = $user->getEmail();
+        $email = $_SESSION['email'] = $user->getEmail();
+        $id = $_SESSION['id'] = $user->getId($email);
+        //var_dump($id);
         header("Location: index.php");
     }
     catch(Throwable $error) {

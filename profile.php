@@ -5,21 +5,21 @@ include_once("bootstrap.php");
 Security::onlyLoggedInUsers();
 
 //$email = $_SESSION['email'];
-if (empty($_SESSION['email'])) {
-    $email = "";
+if (empty($_SESSION['id'])) {
+    $id = "";
 } else {
-    $email = $_SESSION['email'];
+    $id = $_SESSION['id'];
 }
 
 if(empty($_GET['id'])) {
-    $id = "";
+    $userId = "";
 } else {
-    $id = $_GET['id'];
+    $userId = $_GET['id'];
 }
 
-$profile = User::getInfo($email);
-$userProfiles = User::getByUserId($id);
-$posts = Post::getAllUserPosts($id);
+$profile = User::getInfo($id);
+$userProfiles = User::getByUserId($userId);
+$posts = Post::getAllUserPosts($userId);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -34,8 +34,8 @@ $posts = Post::getAllUserPosts($id);
 <body>
     <div id="profile">
         <?php foreach($profile as $p): ?>
-            <?php if(!empty($email)):?>
-                <?php if(empty($id)): ?>
+            <?php if(!empty($id)):?>
+                <?php if(empty($userId)): ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $p['username']; ?></h3>
                         <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -67,7 +67,7 @@ $posts = Post::getAllUserPosts($id);
             
 
             <?php foreach($userProfiles as $up): ?>
-                <?php if(!empty($id)): ?>
+                <?php if(!empty($userId)): ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
                         <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -116,7 +116,7 @@ $posts = Post::getAllUserPosts($id);
                     <div class="modal-close">
                         <img class="modal-icon" src="./assets/close.svg" alt="close">
                     </div>
-                    <a href="change_password.php?id=<?php echo $p['id']; ?>">
+                    <a href="change_password.php">
                         <img class="modal-icon" src="./assets/lock.svg" alt="lock">
                         <p>Change password</p>
                     </a>
@@ -132,7 +132,7 @@ $posts = Post::getAllUserPosts($id);
             </section>
         <?php endforeach; ?>
 
-        <?php if(empty($email)):?>
+        <?php if(empty($id)):?>
             <div class="profile-header">
                 <h3 class="profile-username">Join the club!</h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">

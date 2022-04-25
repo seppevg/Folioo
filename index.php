@@ -4,10 +4,13 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-if (empty($_SESSION['email'])) {
-    $email = "";
+/*$id = $_SESSION['id'];
+var_dump($id);*/
+
+if (empty($_SESSION['id'])) {
+    $id = "";
 } else {
-    $email = $_SESSION['email'];
+    $id = $_SESSION['id'];
 }
 
 $pageCounter = 1;
@@ -61,7 +64,7 @@ $posts = Post::getAll($loadedPosts);
                         <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                     </a>
                         <div class="project-info">
-                            <?php if (!empty($email)): ?>
+                            <?php if (!empty($id)): ?>
                                 <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
                                         <img class="project-author-picture" src="./uploads/<?php echo $profile['image']; ?>" alt="profile picture">
                                         <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>

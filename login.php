@@ -12,7 +12,8 @@ if( !empty($_POST) ){
         
         // if user is allowed to log in -> start a session and redirect the user
         session_start();
-        $_SESSION['email'] = $user->getEmail();
+        $email = $_SESSION['email'] = $user->getEmail();
+        $id = $_SESSION['id'] = $user->getId($email);
         header("Location: index.php");
     }
     catch(Throwable $error) {

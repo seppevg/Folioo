@@ -3,8 +3,8 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-//$email = $_SESSION['email'];
-$id = $_GET['id'];
+$id = $_SESSION['id'];
+//$id = $_GET['id'];
 
 if( !empty($_POST) ){
     try {        

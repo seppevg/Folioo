@@ -306,11 +306,11 @@ class User implements iUser
         return $this;
     }
 
-    public static function getInfo($email)
+    public static function getInfo($id)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email OR secondary_email = :email;");
-        $statement->bindValue(':email', $email);
+        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id;");
+        $statement->bindValue(':id', $id);
         $statement->execute();
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $user;
@@ -495,5 +495,22 @@ class User implements iUser
         $statement->execute();
         $user = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $user;
+    }
+
+    public function getId($email)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT id FROM users where email = :email");
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $result = $statement->rowCount();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result <= 0) {
+            throw new Exception("You need to re-submit your reset request");
+            return false;
+        }else {
+            return $row['id'];
+        }
+
     }
 }

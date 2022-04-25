@@ -3,8 +3,8 @@
     include_once("bootstrap.php");
     Security::onlyLoggedInUsers();
 
-    $email = $_SESSION['email'];
-    $profile = User::getInfo($email);
+    $id = $_SESSION['id'];
+    $profile = User::getInfo($id);
 
     if( !empty($_POST) ){
         try {        
