@@ -103,14 +103,6 @@ class Post implements iPost
         return $this->tags;
     }
 
-    public static function deleteAll($id)
-    {
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("DELETE FROM posts WHERE user_id=:id;");
-        $statement->bindValue(':id', $id);
-        return $statement->execute();
-    }
-
     public static function getAll($start)
     {
         $conn = DB::getInstance();

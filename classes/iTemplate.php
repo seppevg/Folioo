@@ -3,5 +3,5 @@
     {
         public function save();
         public function update();
-        public static function delete($email);
+        public static function delete($id);
     }

@@ -4,19 +4,15 @@
     //include_once("./includes/upload.inc.php");
 
     session_start();
+    $id = $_SESSION['id'];
+    $profile = User::getInfo($id);
     $email = $_SESSION['email'];
-    $profile = User::getInfo($email);
-    $id = $_GET['id'];
-    //var_dump($id);
 
 
 
     if(isset($_POST['delete-user'])){      
 
-        User::delete($email);
-        Post::deleteAll($id);
-        Comment::deleteAll($id);
-        Like::deleteAll($id);
+        User::delete($id);
 
         //delete pictures from posts
         $filenamepost = "uploads/posts/" . $email . "_post" . "*";

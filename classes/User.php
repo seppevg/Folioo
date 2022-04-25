@@ -425,11 +425,15 @@ class User implements iUser
         return $statement->execute();
     }
 
-    public static function delete($email)
+    public static function delete($id)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("DELETE FROM users WHERE email = :email;");
-        $statement->bindValue(':email', $email);
+        $statement = $conn->prepare(
+            "DELETE FROM users WHERE id = :id; 
+            DELETE FROM posts WHERE user_id=:id;
+            DELETE FROM likes WHERE user_id=:id;
+            DELETE FROM comments WHERE user_id=:id;");
+        $statement->bindValue(':id', $id);
         return $statement->execute();
     }
 

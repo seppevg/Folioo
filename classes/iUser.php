@@ -8,6 +8,6 @@
         public function sendPasswordResetLink();
         public function resetPassword();
         public function changePassword($id);
-        public static function getInfo($email);
+        public static function getInfo($id);
         public static function getMainEmail($mail);
     }
