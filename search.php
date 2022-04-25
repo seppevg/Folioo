@@ -12,10 +12,19 @@ include_once("bootstrap.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
-    <title>Folioo - Profile</title>
+    <title>Folioo - Search</title>
 </head>
 
 <body>
+    <div id="container-logo">
+        <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
+    </div>
+
+    <form class="search">
+        <input type="text" name="search" placeholder="Search" class="inputSearch">
+        <button type="submit" name="submit-search" class="searchbtn">Search</button>
+    </form>
+
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
 </body>
 
