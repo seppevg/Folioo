@@ -5,13 +5,13 @@ include_once("bootstrap.php");
 Security::onlyLoggedInUsers();
 
 //$email = $_SESSION['email'];
-if (empty($_SESSION['email'])) {
-    $email = "";
+if (empty($_SESSION['id'])) {
+    $id = "";
 } else {
-    $email = $_SESSION['email'];
+    $id = $_SESSION['id'];
 }
 
-$profile = User::getInfo($email);
+$profile = User::getInfo($id);
 
 
 if (!empty($_POST)) {
@@ -50,7 +50,7 @@ if (!empty($_POST)) {
 
 <body>
     <div id="add">
-        <?php if (!empty($email)) : ?>
+        <?php if (!empty($id)) : ?>
             <div class="profile-header">
                 <h3 class="profile-username">Add project</h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -133,7 +133,7 @@ if (!empty($_POST)) {
             <?php endforeach; ?>
         <?php endif; ?>
 
-        <?php if (empty($email)) : ?>
+        <?php if (empty($id)) : ?>
             <div class="profile-header">
                 <h3 class="profile-username">Join the club!</h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">

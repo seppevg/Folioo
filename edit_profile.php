@@ -4,6 +4,7 @@
     Security::onlyLoggedInUsers();
 
     $id = $_SESSION['id'];
+    $email = $_SESSION['email'];
     $profile = User::getInfo($id);
 
     if( !empty($_POST) ){

@@ -357,6 +357,10 @@ body {
   color: var(--IMDblue);
 }
 
+.allUserPosts {
+  margin-top: 2em;
+}
+
 /* MODAL */
 .modal-icon {
   max-width: 27px;
