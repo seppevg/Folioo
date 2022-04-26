@@ -54,16 +54,16 @@ if( !empty($_POST) ){
 
                         <div class="form-field">
                             <div>
-                                <label class="form-label" for="username">Username</label>
+                                <label class="form-label username-label" for="username">Username</label>
                             </div>
                             <div class="flex">
                                 <input name="username" autofocus="" autocomplete="off" class="form-input" type="text" placeholder="Enter your username" id="ajax-username" oninput="checkUsername(this)">
                             </div>
                             <div>
-                                <label class="form-label" for="email">Email</label>
+                                <label class="form-label email-label" for="email">Email</label>
                             </div>
                             <div class="flex">
-                                <input name="email" autocomplete="off" class="form-input" type="email" placeholder="someone@thomasmore.be">
+                                <input name="email" autocomplete="off" class="form-input" type="email" placeholder="someone@thomasmore.be" id="ajax-email" oninput="checkEmail(this)">
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@ if( !empty($_POST) ){
                                 <label class="form-label" for="password">Password</label>
                             </div>
                             <div class="flex">
-                                <input name="password" autocomplete="off" class="form-input" type="password" placeholder="123456">
+                                <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Enter a strong password">
                             </div>
                         </div>
 

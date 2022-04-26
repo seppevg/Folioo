@@ -78,16 +78,16 @@ document.querySelector(".tags-input").addEventListener("keyup", addTag);
 
 function checkUsername(e) {
     let username = e.value;
-    let usernameLabel = document.querySelector(".form-field div label");
+    let usernameLabel = document.querySelector(".username-label");
     let usernameInput = document.querySelector("#ajax-username");
 
     let data = new FormData();
     data.append("username", username);
 
     // console.log(username);
-    for (var value of data.values()) {
-        console.log(value);
-    }
+    // for (var value of data.values()) {
+    //     console.log(value);
+    // }
 
     fetch('./ajax/check_username.php', {
         method: 'POST',
@@ -103,6 +103,35 @@ function checkUsername(e) {
                 usernameLabel.innerHTML = "Username";
                 usernameLabel.classList.remove("form-label-error");
                 usernameInput.classList.remove("form-input-error");
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function checkEmail(e) {
+    let email = e.value;
+    let emailLabel = document.querySelector(".email-label");
+    let emailInput = document.querySelector("#ajax-email");
+
+    let data = new FormData();
+    data.append("email", email);
+
+    fetch('./ajax/check_email.php', {
+        method: 'POST',
+        body: data,
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success" && data.message === "Email is already used") {
+                emailLabel.innerHTML = "Email is already used";
+                emailLabel.classList.toggle("form-label-error");
+                emailInput.classList.toggle("form-input-error");
+            } else {
+                emailLabel.innerHTML = "Email";
+                emailLabel.classList.remove("form-label-error");
+                emailInput.classList.remove("form-input-error");
             }
         })
         .catch((error) => {
