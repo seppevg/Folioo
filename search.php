@@ -25,7 +25,7 @@ if ($pageCounter !== 1) {
 
 
 $loadedPosts = ($pageCounter - 1)*10;
-$posts = Post::getAll($loadedPosts);
+//$posts = Post::getAll($loadedPosts);
 
 /*if(!empty($_POST['submit-search'])) {
     $search = $_POST['searchInput'];
@@ -35,8 +35,10 @@ $posts = Post::getAll($loadedPosts);
 
 if (isset($_GET['searchInput'])) {
     $searchResult = $_GET['searchInput'];
-    var_dump($searchResult);
-    Post::searchPosts($searchResult);
+    //var_dump($searchResult);
+    $posts = Post::searchPosts($searchResult);
+    //$posts = Post::getAll($getSearchResult);
+    var_dump($posts);
 }
 
 

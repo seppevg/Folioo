@@ -170,9 +170,8 @@ class Post implements iPost
     }
 
     public static function searchPosts($search){
-        //$keyword = "yes";
         $conn = DB::getInstance();
-        $query = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword ORDER BY title;");
+        $query = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
         $query->bindValue(':keyword', '%'.$search. '%', PDO::PARAM_STR);
         $query->execute();
         //$row = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -185,8 +184,16 @@ class Post implements iPost
             echo "There are no result matching your search";
         }*/
 
-        while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-            echo "<pre>".print_r($row, true)."</pre>";
+        while($row = $query->fetch(PDO::FETCH_OBJ)) {
+            //echo "<pre>".print_r($row, true)."</pre>";
+            //return $row['image'];
+            //echo $row->image, "<br>";
+            return $row->title;
+            return $row->image;
         }
+
+        /*if(strlen($row) < 0) {
+            throw new Exception("No posts found ");
+        }*/
     }
 }
