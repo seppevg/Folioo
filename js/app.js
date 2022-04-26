@@ -72,3 +72,40 @@ function deleteTag(ref, tag) {
 }
 
 document.querySelector(".tags-input").addEventListener("keyup", addTag);
+
+
+//AJAX FOR REGISTER.PHP
+
+function checkUsername(e) {
+    let username = e.value;
+    let usernameLabel = document.querySelector(".form-field div label");
+    let usernameInput = document.querySelector("#ajax-username");
+
+    let data = new FormData();
+    data.append("username", username);
+
+    // console.log(username);
+    for (var value of data.values()) {
+        console.log(value);
+    }
+
+    fetch('./ajax/check_username.php', {
+        method: 'POST',
+        body: data,
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success" && data.message === "Username is already used") {
+                usernameLabel.innerHTML = "Username is already used";
+                usernameLabel.classList.toggle("form-label-error");
+                usernameInput.classList.toggle("form-input-error");
+            } else {
+                usernameLabel.innerHTML = "Username";
+                usernameLabel.classList.remove("form-label-error");
+                usernameInput.classList.remove("form-input-error");
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}

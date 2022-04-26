@@ -57,7 +57,7 @@ if( !empty($_POST) ){
                                 <label class="form-label" for="username">Username</label>
                             </div>
                             <div class="flex">
-                                <input name="username" autofocus="" autocomplete="off" class="form-input" type="text" placeholder="den-David">
+                                <input name="username" autofocus="" autocomplete="off" class="form-input" type="text" placeholder="Enter your username" id="ajax-username" oninput="checkUsername(this)">
                             </div>
                             <div>
                                 <label class="form-label" for="email">Email</label>
@@ -101,7 +101,7 @@ if( !empty($_POST) ){
                 </div>
             </form>
         </div>
-
+        <script src="./js/app.js"></script>
 </body>
 
 </html>

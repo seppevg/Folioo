@@ -8,6 +8,8 @@
 :root {
   --IMDblue: #0600ff;
   --IMDgreen: #bffd00;
+  --errorRed: #F04C25;
+  --errorRedLight: #fc0b2b63;
 }
 
 * {
@@ -438,7 +440,7 @@ body {
 }
 
 .profile-delete-yes .main-btn {
-  background-color: #F04C25;
+  background-color: var(--errorRed);
 }
 
 .profile-delete-no {
@@ -553,6 +555,14 @@ img.post-profile {
   justify-content: center;
 }
 
+.form-input-error {
+  border-color: var(--errorRed);
+  background-color: var(--errorRedLight);
+}
+
+.form-label-error {
+  color: var(--errorRed);
+}
 
 /* Tags from posts */
 .tag-input .input div {
