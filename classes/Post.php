@@ -168,4 +168,25 @@ class Post implements iPost
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function searchPosts($search){
+        //$keyword = "yes";
+        $conn = DB::getInstance();
+        $query = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword ORDER BY title;");
+        $query->bindValue(':keyword', '%'.$search. '%', PDO::PARAM_STR);
+        $query->execute();
+        //$row = $query->fetchAll(PDO::FETCH_ASSOC);
+        //$result = $query->rowCount();
+
+        /*if ($result > 0) {
+                return $row['image'];
+
+        } else {
+            echo "There are no result matching your search";
+        }*/
+
+        while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            echo "<pre>".print_r($row, true)."</pre>";
+        }
+    }
 }

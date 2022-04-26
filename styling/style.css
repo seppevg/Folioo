@@ -575,7 +575,7 @@ img.post-profile {
 
 .inputSearch {
   height: 40px;
-  width: 50%;
+  width: 70%;
   background-color: #FCD7F7;
   border-style: none;
   background-image: url("./../assets/search.svg");
@@ -583,4 +583,8 @@ img.post-profile {
   background-size: 20px;
   padding-left: 40px;
   align-content: center;
+}
+
+.allPostsSearch {
+  margin-top:  2em;
 }
