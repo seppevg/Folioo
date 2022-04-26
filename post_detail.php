@@ -57,7 +57,7 @@ $user = User::getInfo($post[0]["user_id"]);
                 foreach ($tags as $tag):
             ?> 
                 <div class="tag-item">
-                    <a style="text-decoration: none; color: var(--IMDBlue);" href="#"><?php echo $tag ?></a>
+                    <a style="text-decoration: none; color: var(--IMDBlue);" href="#">#<?php echo $tag ?></a>
                 </div>
             <?php endforeach; ?>
         </div>
