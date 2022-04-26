@@ -30,7 +30,7 @@ $user = User::getInfo($post[0]["user_id"]);
         <?php foreach ($post as $p):?>
         <div class="header-content">
             <a class="project-author" href="profile.php?id=<?php echo $p['user_id']?>">
-                <img src="./uploads/<?php echo $user[0]['image']?>" class="post-profile" alt="Profile picture">
+                <img src="./uploads/profiles/<?php echo $user[0]['image']?>" class="post-profile" alt="Profile picture">
                 <h3 class="post-username"><?php echo $user[0]['username']; ?></h3>
             </a>
         </div>
@@ -50,8 +50,16 @@ $user = User::getInfo($post[0]["user_id"]);
         <div>
             <h4 class="post-text"><?php echo $post[0]['text'];?></h4>
         </div>
-        <div class="post-tags">
-            <h4><?php echo $post[0]['tags'];?></h4>
+        <div class="tag-list">
+            <?php 
+                $tagsString = $post[0]['tags']; 
+                $tags = explode(",", $tagsString);
+                foreach ($tags as $tag):
+            ?> 
+                <div class="tag-item">
+                    <a style="text-decoration: none; color: var(--IMDBlue);" href="#"><?php echo $tag ?></a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
    

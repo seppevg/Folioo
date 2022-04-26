@@ -495,7 +495,7 @@ body {
 }
 
 /* POST DETAILS */
-.padding{
+.padding {
   padding: 22.5px 35px;
 }
 
@@ -517,14 +517,14 @@ img.post-profile {
   border-radius: 50%;
 }
 
-.post-image img{
+.post-image img {
   max-width: 350px;
 }
 
-.post-text{
+.post-text {
   font-weight: 100;
 }
-  
+
 
 /* REUSABLE PARTS */
 .main-btn {
@@ -551,4 +551,50 @@ img.post-profile {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+
+/* Tags from posts */
+.tag-input .input div {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  max-width: 20px;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.tags-input {
+  padding: 0.7em;
+  border-radius: 0.4em;
+  flex: 1 1 auto;
+  margin: 5px 0 5px 0;
+  border: 2px solid #d2d2d2;
+  text-indent: 20px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.7em;
+}
+
+.tag-list .tag-item {
+  padding: 0.5em;
+  border: 2px solid var(--IMDblue);
+  color: var(--IMDblue);
+  border-radius: 5px;
+  user-select: none;
+}
+
+.tag-list .tag-item .delete-btn {
+  display: inline-block;
+  margin: 0 4px 0 2px;
+  width: 8px;
+  text-align: center;
+  color: #a7a7a7;
 }
