@@ -2,8 +2,6 @@
 
 include_once("bootstrap.php");
 
-/*$posts = new Post();
-$posts->searchPosts();*/
 
 if (empty($_SESSION['id'])) {
     $id = "";
@@ -11,26 +9,18 @@ if (empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
-/*if(!empty($_POST['submit-search'])) {
-    $search = $_POST['searchInput'];
-    $searchResult = Post::searchPosts($search);
-    var_dump($searchResult);
-}*/
 
 if (!empty($_POST['searchInput'])) {
     try {
         $searchResult = $_POST['searchInput'];
         //var_dump($searchResult);
         $posts = Post::searchPosts($searchResult);
-        //$posts = Post::getAll($getSearchResult);
         //var_dump($posts);
     }    
     catch(Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
     }
-
-
 }
 
 
@@ -55,6 +45,12 @@ if (!empty($_POST['searchInput'])) {
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
         <button type="submit" name="submit-search" class="searchbtn">Search</button>
     </form>
+    
+    <?php if(empty($posts)):?>
+        <div id="no-uploads">
+                <img src="./assets/no-uploads.svg" alt="No uploads yet">
+            </div>
+    <?php else:?>
 
     <div class="allPostsSearch">
         <?php foreach($posts as $post): ?>
@@ -84,12 +80,13 @@ if (!empty($_POST['searchInput'])) {
             </article>
         <?php endforeach; ?>
     </div>
+    <?php endif; ?>
 
     <?php if(isset($error)):?>
-                        <div>
-                            <p class="error"><?php echo $error ?></p>
-                        </div>
-                    <?php endif;?>
+        <div>
+            <p class="error"><?php echo $error ?></p>
+        </div>
+    <?php endif;?>
 
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>

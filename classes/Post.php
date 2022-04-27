@@ -180,7 +180,7 @@ class Post implements iPost
             //return $postId;
             $conn = DB::getInstance();
             $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
-            $statement->bindValue(':keyword', '%'.$search. '%', PDO::PARAM_STR);
+            $statement->bindValue(':keyword', '%'.$search. '%');
             $statement->execute();
 
             while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
