@@ -14,14 +14,26 @@ if (!empty($_POST['searchInput'])) {
     try {
         $searchResult = $_POST['searchInput'];
         //var_dump($searchResult);
+
         $posts = Post::searchPosts($searchResult);
         //var_dump($posts);
+        
+
     }    
     catch(Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
     }
 }
+
+if(isset($_GET['tag'])) {
+    $tag = $_GET['tag'];
+    $posts = Post::searchPostsTags($tag);
+} 
+else {
+    $tag = "";
+}
+
 
 
 ?><!DOCTYPE html>
@@ -45,6 +57,14 @@ if (!empty($_POST['searchInput'])) {
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
         <button type="submit" name="submit-search" class="searchbtn">Search</button>
     </form>
+
+    <?php if (!empty($_POST['searchInput'])):?>
+    <div>
+        <a href="#">All</a>
+        <a href="search.php?title=<?php echo $_POST['searchInput'];?>">Title</a>
+        <a href="search.php?tag=<?php echo $_POST['searchInput'];?>">Tag</a>
+    </div>
+    <?php endif;?>
     
     <?php if(empty($posts)):?>
         <div id="no-uploads">
@@ -90,6 +110,7 @@ if (!empty($_POST['searchInput'])) {
 
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
+
 </body>
 
 </html>
