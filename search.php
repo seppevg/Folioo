@@ -11,39 +11,30 @@ if (empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
-$pageCounter = 1;
-if (!empty($_GET['page'])) {
-    $pageCounter = $_GET['page'];
-    $pageCounter += 1;
-}
-
-if ($pageCounter !== 1) {
-    $buttonStyling = 'style="margin-left: 2em"';
-} else {
-    $buttonStyling = "";
-}
-
-
-$loadedPosts = ($pageCounter - 1)*10;
-//$posts = Post::getAll($loadedPosts);
-
 /*if(!empty($_POST['submit-search'])) {
     $search = $_POST['searchInput'];
     $searchResult = Post::searchPosts($search);
     var_dump($searchResult);
 }*/
 
-if (isset($_GET['searchInput'])) {
-    $searchResult = $_GET['searchInput'];
-    //var_dump($searchResult);
-    $posts = Post::searchPosts($searchResult);
-    //$posts = Post::getAll($getSearchResult);
-    var_dump($posts);
+if (!empty($_POST['searchInput'])) {
+    try {
+        $searchResult = $_POST['searchInput'];
+        //var_dump($searchResult);
+        $posts = Post::searchPosts($searchResult);
+        //$posts = Post::getAll($getSearchResult);
+        //var_dump($posts);
+    }    
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    }
+
+
 }
 
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -60,7 +51,7 @@ if (isset($_GET['searchInput'])) {
         <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
     </div>
 
-    <form class="search">
+    <form class="search" method="post">
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
         <button type="submit" name="submit-search" class="searchbtn">Search</button>
     </form>
@@ -93,6 +84,13 @@ if (isset($_GET['searchInput'])) {
             </article>
         <?php endforeach; ?>
     </div>
+
+    <?php if(isset($error)):?>
+                        <div>
+                            <p class="error"><?php echo $error ?></p>
+                        </div>
+                    <?php endif;?>
+
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
 </body>

@@ -171,29 +171,26 @@ class Post implements iPost
 
     public static function searchPosts($search){
         $conn = DB::getInstance();
-        $query = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
-        $query->bindValue(':keyword', '%'.$search. '%', PDO::PARAM_STR);
+        $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword;");
+        $query->bindValue(':keyword', '%'.$search. '%');
         $query->execute();
-        //$row = $query->fetchAll(PDO::FETCH_ASSOC);
-        //$result = $query->rowCount();
+        $postId = intval($query->fetchColumn());
 
-        /*if ($result > 0) {
-                return $row['image'];
+        if($postId !== 0) {            
+            //return $postId;
+            $conn = DB::getInstance();
+            $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
+            $statement->bindValue(':keyword', '%'.$search. '%', PDO::PARAM_STR);
+            $statement->execute();
 
-        } else {
-            echo "There are no result matching your search";
-        }*/
-
-        while($row = $query->fetch(PDO::FETCH_OBJ)) {
-            //echo "<pre>".print_r($row, true)."</pre>";
-            //return $row['image'];
-            //echo $row->image, "<br>";
-            return $row->title;
-            return $row->image;
+            while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                $post[] = $row;
+            }
+            return $post;
+            
         }
-
-        /*if(strlen($row) < 0) {
+        else{
             throw new Exception("No posts found ");
-        }*/
+        }
     }
 }
