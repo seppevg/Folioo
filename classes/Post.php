@@ -171,7 +171,7 @@ class Post implements iPost
 
     public static function searchPosts($search){
         $conn = DB::getInstance();
-        $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword;");
+        $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword or tags LIKE :keyword;");
         $query->bindValue(':keyword', '%'.$search. '%');
         $query->execute();
         $postId = intval($query->fetchColumn());
@@ -179,7 +179,7 @@ class Post implements iPost
         if($postId !== 0) {            
             //return $postId;
             $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
+            $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword or tags LIKE :keyword;");
             $statement->bindValue(':keyword', '%'.$search. '%');
             $statement->execute();
 
