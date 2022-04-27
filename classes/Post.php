@@ -190,7 +190,7 @@ class Post implements iPost
             
         }
         else{
-            throw new Exception("No posts found ");
+            throw new Exception("No posts found with this title or tag");
         }
     }
 }
