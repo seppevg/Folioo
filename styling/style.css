@@ -644,3 +644,51 @@ img.post-profile {
 .allPostsSearch {
   margin-top:  2em;
 }
+
+.filterSearch {
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
+}
+
+.filterSearch .filterAll {
+  background-color: var(--IMDgreen);
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.4em;
+  border: none;
+  flex: 1 1 auto;
+  padding: 0.8em;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+}
+
+.filterSearch .filterTitle {
+  background-color: var(--IMDgreen);
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.4em;
+  border: none;
+  flex: 1 1 auto;
+  padding: 0.8em;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+}
+
+.filterSearch .filterTag {
+  background-color: var(--IMDgreen);
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.4em;
+  border: none;
+  flex: 1 1 auto;
+  padding: 0.8em;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+}

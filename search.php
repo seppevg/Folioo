@@ -27,12 +27,29 @@ if (!empty($_POST['searchInput'])) {
 }
 
 if(isset($_GET['tag'])) {
-    $tag = $_GET['tag'];
-    $posts = Post::searchPostsTags($tag);
+    try {
+        $tag = $_GET['tag'];
+        $posts = Post::searchPostsByTags($tag);
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    }
+
 } 
-else {
-    $tag = "";
-}
+
+
+if(isset($_GET['title'])) {
+    try {
+        $title = $_GET['title'];
+        $posts = Post::searchPostsByTitle($title);
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    }
+
+} 
 
 
 
@@ -59,11 +76,11 @@ else {
     </form>
 
     <?php if (!empty($_POST['searchInput'])):?>
-    <div>
-        <a href="#">All</a>
-        <a href="search.php?title=<?php echo $_POST['searchInput'];?>">Title</a>
-        <a href="search.php?tag=<?php echo $_POST['searchInput'];?>">Tag</a>
-    </div>
+        <div class="filterSearch">
+            <a href="#" class="filterAll">All</a>
+            <a href="search.php?title=<?php echo $_POST['searchInput'];?>" class="filterTitle">Title</a>
+            <a href="search.php?tag=<?php echo $_POST['searchInput'];?>" class="filterTag">Tag</a>
+        </div>
     <?php endif;?>
     
     <?php if(empty($posts)):?>
