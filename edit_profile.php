@@ -56,7 +56,7 @@
             <?php foreach($profile as $p): ?>
                 <div>
                     <div class="profile-img profile-img-edit">
-                        <img style="cursor:pointer" id="profile-display" src="./uploads/<?php echo $p['image']; ?>" onclick="triggerClick()">
+                        <img style="cursor:pointer" id="profile-display" src="./uploads/profiles/<?php echo $p['image']; ?>" onclick="triggerClick()">
                     </div>
                     <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change profile picture</label>
                     <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">

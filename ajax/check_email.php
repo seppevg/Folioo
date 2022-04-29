@@ -1,26 +1,26 @@
 <?php
     require_once("../bootstrap.php");
 
-    if (!empty($_POST['username'])) {
-        $username = $_POST['username'];
+    if (!empty($_POST['email'])) {
+        $email = $_POST['email'];
 
         try {
             $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
-            $statement->bindValue(":username", $username);
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
+            $statement->bindValue(":email", $email);
             $statement->execute();
             $count = $statement->rowCount();
             if ($count > 0) {
                 // success 1
                 $result = [
                     "status" => "success",
-                    "message" => "Username is already used"
+                    "message" => "Email is already used"
                 ];
             } else {
                 // success 2
                 $result = [
                     "status" => "success",
-                    "message" => "Username is still free to use"
+                    "message" => "Email is still free to use"
                 ];
             }
         } 

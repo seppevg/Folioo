@@ -13,16 +13,15 @@ if (empty($_SESSION['id'])) {
 
 $profile = User::getInfo($id);
 
-
 if (!empty($_POST)) {
     try {
         $post = new Post();
         $post->setUserId($profile[0]["id"]);
+        $imageName = Upload::uploadPicture($_FILES['image'], $post->getId());
+        $post->setImage($imageName);
         $post->setTitle($_POST["title"]);
         $post->setText($_POST["text"]);
         $post->setTags($_POST["tags"]);
-        $imageName = Upload::uploadPicture($_FILES['image'], $post->getId());
-        $post->setImage($imageName);
         $post->save();
 
         header("Location: index.php");
@@ -69,8 +68,8 @@ if (!empty($_POST)) {
                             <label class="form-label" for="title">Title*</label>
                         </div>
                         <div class="flex">
-                            <?php if (!empty($post)) : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo $post->getTitle(); ?>">
+                            <?php if (!empty($_POST['title'])) : ?>
+                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo $_POST['title']; ?>">
                             <?php else : ?>
                                 <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
                             <?php endif; ?>
@@ -79,22 +78,39 @@ if (!empty($_POST)) {
                             <label class="form-label" for="text">Text*</label>
                         </div>
                         <div class="flex">
-                            <?php if (!empty($post)) : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo $post->getText(); ?>">
+                            <?php if (!empty($_POST['text'])) : ?>
+                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo $_POST['text']; ?>">
                             <?php else : ?>
                                 <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
                             <?php endif; ?>
                         </div>
-                        <div>
-                            <label class="form-label" for="tags">Tags*</label>
+
+                        <div class="tag-input">
+                            <div class="input">
+                                <label class="form-label" for="input-tags">Tags*</label>
+                                <div class="flex">
+                                    <img src="./assets/hashtag.svg" class="input-icon">
+                                    <input class="tags-input" type="text" placeholder="Enter tags" name="input-tags" onkeydown="if (event.keyCode == 13) event.preventDefault();">
+                                    <?php //if (!empty($post)): ?>
+                                        <input style="display: none;" value="<?php if (!empty($_POST['tags'])) { echo $_POST['tags']; } ?>" name="tags" autocomplete="off" id="input-tags" type="text">
+                                    <?php //endif; ?>
+                                </div>
+                            </div>
+                            <div class="tag-list">
+                                <?php 
+                                    if (!empty($_POST['tags'])) :
+                                        $tags = explode(",", $_POST['tags']);
+                                        foreach ($tags as $tag): 
+                                    ?>
+                                        <div class="tag-item">
+                                            <span class="delete-btn" onclick="deleteTag(this, '${tag}')">&times;</span>
+                                            <span><?php echo $tag ?></span>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                        <div class="flex">
-                            <?php if (!empty($post)) : ?>
-                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo $post->getTags(); ?>">
-                            <?php else : ?>
-                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis">
-                            <?php endif; ?>
-                        </div>
+
                     </div>
                 </div>
 

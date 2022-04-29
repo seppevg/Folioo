@@ -50,8 +50,16 @@ $user = User::getInfo($post[0]["user_id"]);
         <div>
             <h4 class="post-text"><?php echo $post[0]['text'];?></h4>
         </div>
-        <div class="post-tags">
-            <h4><?php echo $post[0]['tags'];?></h4>
+        <div class="tag-list">
+            <?php 
+                $tagsString = $post[0]['tags']; 
+                $tags = explode(",", $tagsString);
+                foreach ($tags as $tag):
+            ?> 
+                <div class="tag-item">
+                    <a style="text-decoration: none; color: var(--IMDBlue);" href="#">#<?php echo $tag ?></a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
