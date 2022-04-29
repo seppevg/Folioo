@@ -10,48 +10,22 @@ if (empty($_SESSION['id'])) {
 }
 
 
-if (!empty($_POST['searchInput'])) {
-    try {
-        $searchResult = $_POST['searchInput'];
-        //var_dump($searchResult);
+if (isset($_POST['submit-search'])) {
+    $searchResult = $_POST['searchInput'];
+    //echo $searchResult;
+    $filterType = $_POST['column'];
+    //echo $filterType;
 
+    if($filterType == "") {
         $posts = Post::searchPosts($searchResult);
-        //var_dump($posts);
-       
-
-    }    
-    catch(Throwable $error) {
-        // if any errors are thrown in the class, they can be caught here
-        $error = $error->getMessage();
+    }
+    elseif ($filterType == "Title"){
+        $posts = Post::searchPostsByTitle($searchResult);
+    }
+    elseif ($filterType == "Tag"){
+        $posts = Post::searchPostsByTags($searchResult);
     }
 }
-
-
-if(isset($_GET['tag'])) {
-    try {
-        $tag = $_GET['tag'];
-        $posts = Post::searchPostsByTags($tag);
-    }
-    catch(Throwable $error) {
-        // if any errors are thrown in the class, they can be caught here
-        $error = $error->getMessage();
-    }
-
-} 
-
-
-
-if(isset($_GET['title'])) {
-    try {
-        $title = $_GET['title'];
-        $posts = Post::searchPostsByTitle($title);
-    }
-    catch(Throwable $error) {
-        // if any errors are thrown in the class, they can be caught here
-        $error = $error->getMessage();
-    }
-
-} 
 
 
 
@@ -74,15 +48,15 @@ if(isset($_GET['title'])) {
 
     <form class="search" method="post">
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
+
+        <select name="column">
+            <option value="">Select filter</option>
+            <option value="Title">Title</option>
+            <option value="Tag">Tag</option>
+        </select>
+
         <button type="submit" name="submit-search" class="searchbtn">Search</button>
     </form>
-
-    <?php if (!empty($_POST['searchInput'])):?>
-        <div class="filterSearch">
-            <a href="search.php?title=<?php echo $_POST['searchInput'];?>" class="filterTitle">Title</a>
-            <a href="search.php?tag=<?php echo $_POST['searchInput'];?>" class="filterTag">Tag</a>
-        </div>
-    <?php endif;?>
     
     <?php if(empty($posts)):?>
         <div id="no-uploads">
@@ -125,7 +99,6 @@ if(isset($_GET['title'])) {
             <p class="error"><?php echo $error ?></p>
         </div>
     <?php endif;?>
-
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
 

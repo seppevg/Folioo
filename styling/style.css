@@ -651,16 +651,3 @@ img.post-profile {
   padding-right: 30px;
 }
 
-.filterSearch .filterTitle .filterTag {
-  background-color: var(--IMDgreen);
-  color: black;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 0.4em;
-  border: none;
-  flex: 1 1 auto;
-  padding: 0.8em;
-  cursor: pointer;
-  width: 100px;
-  height: 40px;
-}
