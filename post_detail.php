@@ -30,7 +30,7 @@ $user = User::getInfo($post[0]["user_id"]);
         <?php foreach ($post as $p):?>
         <div class="header-content">
             <a class="project-author" href="profile.php?id=<?php echo $p['user_id']?>">
-                <img src="./uploads/<?php echo $user[0]['image']?>" class="post-profile" alt="Profile picture">
+                <img src="./uploads/profiles/<?php echo $user[0]['image']?>" class="post-profile" alt="Profile picture">
                 <h3 class="post-username"><?php echo $user[0]['username']; ?></h3>
             </a>
         </div>
@@ -54,10 +54,24 @@ $user = User::getInfo($post[0]["user_id"]);
             <h4><?php echo $post[0]['tags'];?></h4>
         </div>
     </div>
-   
 
-
+    <section class="modal modal-container ">
+        <div id="modal" class="modal-content hidden">
+            <div class="modal-close">
+                <img class="modal-icon" src="./assets/close.svg" alt="close">
+            </div>
+            <a href="edit_post.php?id=<?php echo $post[0]["id"]?>">
+                <img class="modal-icon" src="./assets/edit.svg" alt="lock">
+                <p>Edit post</p>
+            </a>
+            <a href="profile.php">
+                <img class="modal-icon" src="./assets/delete.svg" alt="log out">
+                <p>Delete post</p>
+            </a>
+        </div>
+    </section>
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

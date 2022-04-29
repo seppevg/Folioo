@@ -69,7 +69,7 @@
         <?php foreach($profile as $p): ?>
             <div class="profile-img profile-img-edit">                
                 <div class="profile-img">                    
-                    <img src="./uploads/<?php echo $p['image']; ?>">
+                    <img src="./uploads/profiles/<?php echo $p['image']; ?>">
                     <h3 class="clickable-text"><?php echo $p['username']; ?></h3>
                 </div>
             </div>
