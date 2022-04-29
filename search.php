@@ -17,7 +17,7 @@ if (!empty($_POST['searchInput'])) {
 
         $posts = Post::searchPosts($searchResult);
         //var_dump($posts);
-        
+       
 
     }    
     catch(Throwable $error) {
@@ -25,6 +25,7 @@ if (!empty($_POST['searchInput'])) {
         $error = $error->getMessage();
     }
 }
+
 
 if(isset($_GET['tag'])) {
     try {
@@ -37,6 +38,7 @@ if(isset($_GET['tag'])) {
     }
 
 } 
+
 
 
 if(isset($_GET['title'])) {
@@ -77,7 +79,6 @@ if(isset($_GET['title'])) {
 
     <?php if (!empty($_POST['searchInput'])):?>
         <div class="filterSearch">
-            <a href="#" class="filterAll">All</a>
             <a href="search.php?title=<?php echo $_POST['searchInput'];?>" class="filterTitle">Title</a>
             <a href="search.php?tag=<?php echo $_POST['searchInput'];?>" class="filterTag">Tag</a>
         </div>
