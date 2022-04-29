@@ -146,7 +146,8 @@ class Post implements iPost
     {
         $newId = $_GET['id'];
         $conn = DB::getInstance();
-        $statement = $conn->prepare("UPDATE posts(user_id, title, tags, image, text) VALUES (:userId, :title, :tags, :image, :text) WHERE id = :id");
+        $statement = $conn->prepare("UPDATE posts SET user_id = :userId, title = :title, tags = :tags, image = :image, text = :text WHERE id = :id;");
+        // $statement = $conn->prepare("UPDATE posts(user_id, title, tags, image, text) VALUES (:userId, :title, :tags, :image, :text) WHERE id = :id");
         $statement->bindValue(':id', $newId);
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':title', $this->title);
