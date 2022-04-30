@@ -16,7 +16,7 @@ if( !empty($_POST) ){
         $filterType = $_POST['column'];
         //echo $filterType;
 
-        if($filterType == "") {
+        if($filterType == "All") {
             $posts = Post::search($searchResult);
         }
         elseif ($filterType == "Title"){
