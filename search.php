@@ -16,10 +16,7 @@ if( !empty($_POST) ){
         $filterType = $_POST['column'];
         //echo $filterType;
 
-        if($filterType == "All") {
-            $posts = Post::search($searchResult);
-        }
-        elseif ($filterType == "Title"){
+        if ($filterType == "Title"){
             $posts = Post::search($searchResult);
         }
         elseif ($filterType == "Tags"){
@@ -54,7 +51,6 @@ if( !empty($_POST) ){
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
 
         <select name="column">
-            <option value="All">Select filter</option>
             <option value="Title">Title</option>
             <option value="Tags">Tag</option>
         </select>
