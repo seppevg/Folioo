@@ -172,6 +172,12 @@ class Post implements iPost
     public static function search($search)
     {
         $column = $_POST['column'];
+
+        if(empty($search)){
+            throw new Exception("Search can't be empty 👆");
+            return false;
+        }
+
         $conn = DB::getInstance();
         $query = $conn->prepare("SELECT count(id) FROM posts WHERE $column LIKE :keyword;");
         $query->bindValue(':keyword', '%' . $search . '%');
@@ -192,6 +198,7 @@ class Post implements iPost
         } else {
             throw new Exception("No posts found with this title or tag");
         }
+
     }
 
     /**
