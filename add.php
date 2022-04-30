@@ -58,7 +58,7 @@ if (!empty($_POST)) {
                     <div class="profile-img-edit">
                         <img style="cursor:pointer" id="profile-display" src="./assets/rectangle.svg" onclick="triggerClick()">
                     </div>
-                    <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Add pic</label>
+                    <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Add picture</label>
                     <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
                 </div>
 
