@@ -28,9 +28,6 @@ if(!empty($_POST['submit-search'])){
     }
 }
 
-
-
-
 ?><!DOCTYPE html>
 <html lang="en">
 
