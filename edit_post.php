@@ -18,7 +18,7 @@ if (empty($_GET['id'])) {
 }
 
 $editPostId = $_GET['id'];
-$oldPost = Post::getPostById($editPostId)[0];
+$oldPost = Post::getById($editPostId)[0];
 
 if (empty($oldPost["id"])) {
     header("Location: index.php");

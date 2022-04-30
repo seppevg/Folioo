@@ -10,7 +10,7 @@ if (empty($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$posts = Post::getPostById($id);
+$posts = Post::getById($id);
 
 if (sizeof($posts) != 1) {
     header("Location: index.php");
