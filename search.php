@@ -9,23 +9,25 @@ if (empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
+if(!empty($_POST['submit-search'])){
+    if (isset($_POST['submit-search'])) {
+        $searchResult = $_POST['searchInput'];
+        //echo $searchResult;
+        $filterType = $_POST['column'];
+        //echo $filterType;
 
-if (isset($_POST['submit-search'])) {
-    $searchResult = $_POST['searchInput'];
-    //echo $searchResult;
-    $filterType = $_POST['column'];
-    //echo $filterType;
-
-    if($filterType == "") {
-        $posts = Post::searchPosts($searchResult);
-    }
-    elseif ($filterType == "Title"){
-        $posts = Post::searchPostsByTitle($searchResult);
-    }
-    elseif ($filterType == "Tag"){
-        $posts = Post::searchPostsByTags($searchResult);
+        if($filterType == "") {
+            $posts = Post::searchPosts($searchResult);
+        }
+        elseif ($filterType == "Title"){
+            $posts = Post::searchPostsByTitle($searchResult);
+        }
+        elseif ($filterType == "Tag"){
+            $posts = Post::searchPostsByTags($searchResult);
+        }
     }
 }
+
 
 
 
