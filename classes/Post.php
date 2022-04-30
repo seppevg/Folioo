@@ -151,7 +151,7 @@ class Post implements iPost
     {
     }
 
-    public static function getAllUserPosts($id)
+    public static function getAllFromUser($id)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts WHERE user_id=:id");
@@ -160,7 +160,7 @@ class Post implements iPost
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getPostById($id)
+    public static function getById($id)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts WHERE id=:id");
