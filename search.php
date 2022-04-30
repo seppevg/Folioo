@@ -9,15 +9,15 @@ if (empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
-if(!empty($_POST['submit-search'])){
-    if (isset($_POST['submit-search'])) {
+if( !empty($_POST) ){
+    try {
         $searchResult = $_POST['searchInput'];
-        //echo $searchResult;
+        //var_dump ($searchResult);
         $filterType = $_POST['column'];
         //echo $filterType;
 
         if($filterType == "") {
-            $posts = Post::searchPosts($searchResult);
+            $posts = "";
         }
         elseif ($filterType == "Title"){
             $posts = Post::searchPostsByTitle($searchResult);
@@ -25,7 +25,12 @@ if(!empty($_POST['submit-search'])){
         elseif ($filterType == "Tag"){
             $posts = Post::searchPostsByTags($searchResult);
         }
+        
     }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    }    
 }
 
 ?><!DOCTYPE html>
@@ -49,7 +54,7 @@ if(!empty($_POST['submit-search'])){
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
 
         <select name="column">
-            <option value="">Select filter</option>
+            <option value="All">Select filter</option>
             <option value="Title">Title</option>
             <option value="Tag">Tag</option>
         </select>
