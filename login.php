@@ -35,6 +35,7 @@ if( !empty($_POST) ){
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
     <title>Folioo - Log in</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 
 <body class="form-background">

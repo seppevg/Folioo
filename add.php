@@ -43,6 +43,7 @@ if (!empty($_POST)) {
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
     <title>Folioo - Add project</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 
 <body>

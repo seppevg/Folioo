@@ -13,6 +13,7 @@ header("Location: welcome.php");
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
     <title>Folioo - Log out</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 <body>
     

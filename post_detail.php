@@ -35,6 +35,7 @@ $user = User::getInfo($post["user_id"])[0];
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
     <title>Folioo - Details</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 
 <body>

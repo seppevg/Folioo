@@ -13,6 +13,7 @@ include_once("bootstrap.php");
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
     <title>Folioo - Forgot Password</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 
 <body class="form-background">
