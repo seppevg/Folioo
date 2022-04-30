@@ -17,13 +17,13 @@ if( !empty($_POST) ){
         //echo $filterType;
 
         if($filterType == "") {
-            $posts = "";
+            $posts = Post::search($searchResult);
         }
         elseif ($filterType == "Title"){
-            $posts = Post::searchPostsByTitle($searchResult);
+            $posts = Post::search($searchResult);
         }
-        elseif ($filterType == "Tag"){
-            $posts = Post::searchPostsByTags($searchResult);
+        elseif ($filterType == "Tags"){
+            $posts = Post::search($searchResult);
         }
         
     }
@@ -56,7 +56,7 @@ if( !empty($_POST) ){
         <select name="column">
             <option value="All">Select filter</option>
             <option value="Title">Title</option>
-            <option value="Tag">Tag</option>
+            <option value="Tags">Tag</option>
         </select>
 
         <button type="submit" name="submit-search" class="searchbtn">Search</button>

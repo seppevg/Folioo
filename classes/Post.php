@@ -169,10 +169,11 @@ class Post implements iPost
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function searchPosts($search)
+    public static function search($search)
     {
+        $column = $_POST['column'];
         $conn = DB::getInstance();
-        $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword or tags LIKE :keyword;");
+        $query = $conn->prepare("SELECT count(id) FROM posts WHERE $column LIKE :keyword;");
         $query->bindValue(':keyword', '%' . $search . '%');
         $query->execute();
         $postId = intval($query->fetchColumn());
@@ -180,7 +181,7 @@ class Post implements iPost
         if ($postId !== 0) {
             //return $postId;
             $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword or tags LIKE :keyword;");
+            $statement = $conn->prepare("SELECT * FROM posts WHERE $column LIKE :keyword;");
             $statement->bindValue(':keyword', '%' . $search . '%');
             $statement->execute();
 
@@ -190,54 +191,6 @@ class Post implements iPost
             return $post;
         } else {
             throw new Exception("No posts found with this title or tag");
-        }
-    }
-
-    public static function searchPostsByTitle($search)
-    {
-        $conn = DB::getInstance();
-        $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword;");
-        $query->bindValue(':keyword', '%' . $search . '%');
-        $query->execute();
-        $postId = intval($query->fetchColumn());
-
-        if ($postId !== 0) {
-            //return $postId;
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
-            $statement->bindValue(':keyword', '%' . $search . '%');
-            $statement->execute();
-
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $post[] = $row;
-            }
-            return $post;
-        } else {
-            throw new Exception("No posts found with this title");
-        }
-    }
-
-    public static function searchPostsByTags($search)
-    {
-        $conn = DB::getInstance();
-        $query = $conn->prepare("SELECT count(id) FROM posts WHERE tags LIKE :keyword;");
-        $query->bindValue(':keyword', '%' . $search . '%');
-        $query->execute();
-        $postId = intval($query->fetchColumn());
-
-        if ($postId !== 0) {
-            //return $postId;
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE tags LIKE :keyword;");
-            $statement->bindValue(':keyword', '%' . $search . '%');
-            $statement->execute();
-
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $post[] = $row;
-            }
-            return $post;
-        } else {
-            throw new Exception("No posts found with this tag");
         }
     }
 
