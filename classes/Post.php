@@ -217,7 +217,6 @@ class Post implements iPost
     public function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
 }

@@ -124,7 +124,7 @@ if (!empty($_POST)) {
                 <?php endif; ?>
 
                 <div class="profile-edit">
-                    <button class="main-btn btn-add" type="submit" name="save-post">Inspire others</button>
+                    <button class="main-btn" type="submit" name="save-post">Save Changes</button>
                 </div>
             </form>
 

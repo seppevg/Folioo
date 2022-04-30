@@ -77,20 +77,22 @@ $user = User::getInfo($post["user_id"])[0];
     <section class="modal modal-container ">
         <div id="modal" class="modal-content hidden">
             <div class="modal-close">
-                <img class="modal-icon" src="./assets/close.svg" alt="close">
+                <img class="modal-icon" src="./assets/close.svg" alt="Close">
             </div>
             <a href="edit_post.php?id=<?php echo $post["id"] ?>">
-                <img class="modal-icon" src="./assets/edit.svg" alt="lock">
+                <img class="modal-icon" src="./assets/edit.svg" alt="Edit">
                 <p>Edit post</p>
             </a>
-            <a href="profile.php">
-                <img class="modal-icon" src="./assets/delete.svg" alt="log out">
+            <a href="#" onclick="deletePost(<?php echo $post['id']; ?>)" class="delete-post-popup">
+                <img class="modal-icon" src="./assets/delete.svg" alt="Delete">
                 <p>Delete post</p>
             </a>
         </div>
     </section>
+
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
     <script src="./js/app.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
