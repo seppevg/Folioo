@@ -173,7 +173,7 @@ class Post implements iPost
     {
         $column = $_POST['column'];
 
-        if(empty($search)){
+        if (empty($search)) {
             throw new Exception("Search can't be empty 👆");
             return false;
         }
@@ -198,7 +198,6 @@ class Post implements iPost
         } else {
             throw new Exception("No posts found with this title or tag");
         }
-
     }
 
     /**

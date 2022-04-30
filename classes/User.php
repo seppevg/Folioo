@@ -181,7 +181,7 @@ class User implements iUser
         ];
         $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO users (email, password, username, image) VALUES (:email, :password, :username, 'profiledefault.svg');");
+        $statement = $conn->prepare("INSERT INTO users (email, password, username, image, followers) VALUES (:email, :password, :username, 'profiledefault.svg', 0);");
         $statement->bindValue(':email', $this->email);
         $statement->bindValue(':password', $password);
         $statement->bindValue(':username', $this->username);
@@ -232,10 +232,10 @@ class User implements iUser
         if (empty($password) || empty($passwordRepeat)) {
             throw new Exception("Password can't be empty 👆");
             return false;
-        } else if ($password != $passwordRepeat) {
+        } elseif ($password != $passwordRepeat) {
             throw new Exception("Please repeat the same password.");
             return false;
-        } else if (strlen($password) < 6) {
+        } elseif (strlen($password) < 6) {
             throw new Exception("Password must contain 6 or more characters 🔑");
         }
         $currentDate = date("U");
@@ -433,7 +433,8 @@ class User implements iUser
             "DELETE FROM users WHERE id = :id; 
             DELETE FROM posts WHERE user_id=:id;
             DELETE FROM likes WHERE user_id=:id;
-            DELETE FROM comments WHERE user_id=:id;");
+            DELETE FROM comments WHERE user_id=:id;"
+        );
         $statement->bindValue(':id', $id);
         return $statement->execute();
     }
@@ -465,10 +466,10 @@ class User implements iUser
         if (empty($password) || empty($passwordRepeat)) {
             throw new Exception("Password can't be empty 👆");
             return false;
-        } else if ($password != $passwordRepeat) {
+        } elseif ($password != $passwordRepeat) {
             throw new Exception("Please repeat the same password.");
             return false;
-        } else if (strlen($password) < 6) {
+        } elseif (strlen($password) < 6) {
             throw new Exception("Password must contain 6 or more characters 🔑");
         }
 
@@ -503,9 +504,8 @@ class User implements iUser
         if ($result <= 0) {
             throw new Exception("You need to re-submit your request");
             return false;
-        }else {
+        } else {
             return $row['id'];
         }
-
     }
 }

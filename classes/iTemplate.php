@@ -1,5 +1,5 @@
 <?php
-    interface iTemplate 
+    interface iTemplate
     {
         public function save();
         public function update();

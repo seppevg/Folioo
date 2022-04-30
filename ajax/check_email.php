@@ -23,8 +23,7 @@
                     "message" => "Email is still free to use"
                 ];
             }
-        } 
-        catch( Throwable $t ) {
+        } catch (Throwable $t) {
             // error
             $result = [
                 "status" => "error",
@@ -33,6 +32,4 @@
         }
 
         echo json_encode($result);
-
     }
-    

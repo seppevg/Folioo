@@ -157,3 +157,30 @@ function deletePost(postId) {
         }
     })
 }
+
+function changeFollowState(e, id, userId) {
+    followBtn = document.querySelector(".follow-button");
+
+    let ownId = id;
+    let watchingId = userId;
+
+    let data = new FormData();
+    data.append("id", ownId);
+    data.append("userId", watchingId);
+
+    fetch('./ajax/follow_user.php', {
+        method: 'POST',
+        body: data,
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success" && data.message === "User has been followed") {
+                followBtn.innerHTML = "Unfollow";
+            } else {
+                followBtn.innerHTML = "Follow";
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}

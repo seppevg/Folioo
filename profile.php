@@ -22,8 +22,7 @@ if(empty($_GET['id'])) {
 
 $profile = User::getInfo($id);
 $userProfiles = User::getInfo($userId);
-
-
+$checkFollowing = Followers::check($id, $userId);
 $posts = Post::getAllFromUser($id);
 
 ?><!DOCTYPE html>
@@ -100,7 +99,7 @@ $posts = Post::getAllFromUser($id);
                     </div>
                     <div class="profile-info">
                         <div class="profile-img">
-                            <img src="./uploads/<?php echo $up['image']; ?>">
+                            <img src="./uploads/profiles/<?php echo $up['image']; ?>">
                         </div>
                         <div class="profile-info-extra">
                             <p class="profile-text"><?php echo $up['education']; ?></p>
@@ -108,6 +107,10 @@ $posts = Post::getAllFromUser($id);
                     </div>
                     <div class="profile-bio">
                         <p class="profile-text"><?php echo $up['bio']; ?></p>
+                    </div>
+
+                    <div class="profile-edit">
+                        <a href="#" class="main-btn follow-button" onclick="changeFollowState(this, <?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
                     </div>
 
                     <?php if(empty($posts)):?>
@@ -136,6 +139,7 @@ $posts = Post::getAllFromUser($id);
                                 </div>
                             </article>
                         <?php endforeach; ?>
+                    </div>
             <?php endforeach;?>
             
             <section class="modal modal-container ">

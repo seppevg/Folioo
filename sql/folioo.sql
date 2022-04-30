@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 30 apr 2022 om 15:20
+-- Gegenereerd op: 30 apr 2022 om 19:52
 -- Serverversie: 5.7.24
 -- PHP-versie: 8.0.1
 
@@ -33,6 +33,26 @@ CREATE TABLE `comments` (
   `user_id` int(11) NOT NULL,
   `comment` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `follow`
+--
+
+CREATE TABLE `follow` (
+  `id` int(11) NOT NULL,
+  `follower_id` int(11) NOT NULL,
+  `following_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `follow`
+--
+
+INSERT INTO `follow` (`id`, `follower_id`, `following_id`) VALUES
+(2, 4, 1),
+(10, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -75,6 +95,13 @@ CREATE TABLE `posts` (
   `tags` text COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`) VALUES
+(17, 4, 'zuut', 'nice', '4_post-2dd04644f5fb7.png', 'test');
+
 -- --------------------------------------------------------
 
 --
@@ -92,15 +119,17 @@ CREATE TABLE `users` (
   `bio` text COLLATE utf8mb4_unicode_ci,
   `instagramlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `behancelink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `linkedinlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `linkedinlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `followers` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`) VALUES
-(1, 'test@thomasmore.be', '$2y$15$B1BPtZQGH5IodurXFAkZyuREXP9yWQ5gAbrKX0lTBnnTufttQjitm', 'Seppe', 'seppe.vg@live.be', '1.jpg', 'IMD', 'I like beer', '#insta', '', '');
+INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`, `followers`) VALUES
+(1, 'test@thomasmore.be', '$2y$15$B1BPtZQGH5IodurXFAkZyuREXP9yWQ5gAbrKX0lTBnnTufttQjitm', 'Seppe', 'seppe.vg@live.be', '1.jpg', 'IMD', 'I like beer', '#insta', '', '', 0),
+(4, 'beatrijs@thomasmore.be', '$2y$15$n2H44jet8BJpa1gACaJ/9ebJfI9w.ZGh7E4MGk4CR194zZF4JDb4u', 'Béatrijs', 'bea@gmail.com', 'profiledefault.svg', 'Much wow', 'Ik ben gewoon nen test eh', '#lifesucks', '', '', 0);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -110,6 +139,12 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `
 -- Indexen voor tabel `comments`
 --
 ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `follow`
+--
+ALTER TABLE `follow`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -147,6 +182,12 @@ ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT voor een tabel `follow`
+--
+ALTER TABLE `follow`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT voor een tabel `likes`
 --
 ALTER TABLE `likes`
@@ -162,13 +203,13 @@ ALTER TABLE `passwordreset`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

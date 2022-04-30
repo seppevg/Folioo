@@ -1,6 +1,6 @@
 <?php
     interface iUser extends iTemplate
-    {   
+    {
         public function canLogin();
         public function canRegister();
         public function validateEmail();

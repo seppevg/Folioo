@@ -1,19 +1,21 @@
 <?php
-    abstract class DB {
+    abstract class DB
+    {
         private static $conn;
 
-        private static function getConfig(){
+        private static function getConfig()
+        {
             // get config file
             return parse_ini_file(__DIR__ . "/../config/config.ini");
         }
         
 
-        public static function getInstance() {
-            if(self::$conn != null) {
+        public static function getInstance()
+        {
+            if (self::$conn != null) {
                 // Reuse connection
                 return self::$conn;
-            }
-            else {
+            } else {
                 // get the config for new connection
                 $config = self::getConfig();
                 $host = $config['db_host'];
