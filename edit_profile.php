@@ -10,8 +10,12 @@
     if( !empty($_POST) ){
         try {        
             $user = new User();
-            $imageName = Upload::uploadPicture($_FILES['image'], 'empty');
-            $user->setImage($imageName);
+            if (!empty($_FILES['image']['name'])) {
+                $imageName = Upload::uploadPicture($_FILES['image'], 'empty');
+                $user->setImage($imageName);
+            } else {
+                $user->setImage($profile[0]['image']);                
+            }
             $user->setSecondaryEmail($_POST['secondary-email']);
             $user->setEducation($_POST['education']);
             $user->setBio($_POST['bio']);
@@ -47,11 +51,6 @@
             <h3 class="profile-username">Edit profile</h3>
             <img src="./assets/burger-menu.svg" alt="Burger menu">
         </div>
-        <?php if(isset($error)): ?>
-            <div>
-                <p class="error"> <?php echo $error; ?></p>
-            </div>
-        <?php endif; ?>
         <form action="" method="POST" enctype="multipart/form-data">
             <?php foreach($profile as $p): ?>
                 <div>
@@ -59,8 +58,17 @@
                         <img style="cursor:pointer" id="profile-display" src="./uploads/profiles/<?php echo $p['image']; ?>" onclick="triggerClick()">
                     </div>
                     <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change profile picture</label>
-                    <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
+                    <?php if (!empty($p['image'])): ?>
+                        <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)" value="<?php echo $p['image']; ?>">
+                    <?php else: ?>
+                        <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
+                    <?php endif; ?>
                 </div>
+                <?php if(isset($error)): ?>
+                    <div class="main-margin">
+                        <p class="error"> <?php echo $error; ?></p>
+                    </div>
+                <?php endif; ?>
                 <div class="form-container form-container-edit-profile">
                     <div class="form-group">
                         <label class="form-label" for="secondary-email">Secondary email</label>
