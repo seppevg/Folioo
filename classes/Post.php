@@ -1,6 +1,7 @@
 <?php
 class Post implements iPost
 {
+    private $id;
     private $userId;
     private $title;
     private $text;
@@ -133,34 +134,21 @@ class Post implements iPost
         return $statement->execute();
     }
 
-    public function getId()
-    {
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT count(id) FROM posts");
-        $statement->execute();
-        $postId = intval($statement->fetchColumn()) + 1;
-        return $postId;
-    }
-
     public function update()
     {
-        $newId = $_GET['id'];
         $conn = DB::getInstance();
         $statement = $conn->prepare("UPDATE posts SET user_id = :userId, title = :title, tags = :tags, image = :image, text = :text WHERE id = :id;");
-        // $statement = $conn->prepare("UPDATE posts(user_id, title, tags, image, text) VALUES (:userId, :title, :tags, :image, :text) WHERE id = :id");
-        $statement->bindValue(':id', $newId);
+        $statement->bindValue(':id', $this->id);
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':title', $this->title);
         $statement->bindValue(':tags', $this->tags);
         $statement->bindValue(':image', $this->image);
         $statement->bindValue(':text', $this->text);
         return $statement->execute();
-
     }
-        
-    public static function delete($email) 
-    {
 
+    public static function delete($email)
+    {
     }
 
     public static function getAllUserPosts($id)
@@ -171,8 +159,9 @@ class Post implements iPost
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    public static function getPostById($id){
+
+    public static function getPostById($id)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts WHERE id=:id");
         $statement->bindValue(":id", $id);
@@ -180,78 +169,95 @@ class Post implements iPost
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function searchPosts($search){
+    public static function searchPosts($search)
+    {
         $conn = DB::getInstance();
         $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword or tags LIKE :keyword;");
-        $query->bindValue(':keyword', '%'.$search. '%');
+        $query->bindValue(':keyword', '%' . $search . '%');
         $query->execute();
         $postId = intval($query->fetchColumn());
 
-        if($postId !== 0) {            
+        if ($postId !== 0) {
             //return $postId;
             $conn = DB::getInstance();
             $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword or tags LIKE :keyword;");
-            $statement->bindValue(':keyword', '%'.$search. '%');
+            $statement->bindValue(':keyword', '%' . $search . '%');
             $statement->execute();
 
-            while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                 $post[] = $row;
             }
             return $post;
-            
-        }
-        else{
+        } else {
             throw new Exception("No posts found with this title or tag");
         }
     }
 
-    public static function searchPostsByTitle($search){
+    public static function searchPostsByTitle($search)
+    {
         $conn = DB::getInstance();
         $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword;");
-        $query->bindValue(':keyword', '%'.$search. '%');
+        $query->bindValue(':keyword', '%' . $search . '%');
         $query->execute();
         $postId = intval($query->fetchColumn());
 
-        if($postId !== 0) {            
+        if ($postId !== 0) {
             //return $postId;
             $conn = DB::getInstance();
             $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
-            $statement->bindValue(':keyword', '%'.$search. '%');
+            $statement->bindValue(':keyword', '%' . $search . '%');
             $statement->execute();
 
-            while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                 $post[] = $row;
             }
             return $post;
-            
-        }
-        else{
+        } else {
             throw new Exception("No posts found with this title");
         }
     }
 
-    public static function searchPostsByTags($search){
+    public static function searchPostsByTags($search)
+    {
         $conn = DB::getInstance();
         $query = $conn->prepare("SELECT count(id) FROM posts WHERE tags LIKE :keyword;");
-        $query->bindValue(':keyword', '%'.$search. '%');
+        $query->bindValue(':keyword', '%' . $search . '%');
         $query->execute();
         $postId = intval($query->fetchColumn());
 
-        if($postId !== 0) {            
+        if ($postId !== 0) {
             //return $postId;
             $conn = DB::getInstance();
             $statement = $conn->prepare("SELECT * FROM posts WHERE tags LIKE :keyword;");
-            $statement->bindValue(':keyword', '%'.$search. '%');
+            $statement->bindValue(':keyword', '%' . $search . '%');
             $statement->execute();
 
-            while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                 $post[] = $row;
             }
             return $post;
-            
-        }
-        else{
+        } else {
             throw new Exception("No posts found with this tag");
         }
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }

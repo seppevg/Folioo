@@ -17,7 +17,7 @@ if (!empty($_POST)) {
     try {
         $post = new Post();
         $post->setUserId($profile[0]["id"]);
-        $imageName = Upload::uploadPicture($_FILES['image'], $post->getId());
+        $imageName = Upload::uploadPicture($_FILES['image'], Upload::uid());
         $post->setImage($imageName);
         $post->setTitle($_POST["title"]);
         $post->setText($_POST["text"]);

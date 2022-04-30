@@ -1,17 +1,30 @@
 <?php
 
+
 include_once("bootstrap.php");
 
+Security::onlyLoggedInUsers();
+
 if (empty($_GET['id'])) {
-    $id = "";
-} else {
-    $id = $_GET['id'];
+    header("Location: index.php");
 }
 
-$post = Post::getPostById($id);
-$user = User::getInfo($post[0]["user_id"]);
+$id = $_GET['id'];
+$posts = Post::getPostById($id);
 
+if (sizeof($posts) != 1) {
+    header("Location: index.php");
+}
+
+$post = $posts[0];
+
+if (empty($post["id"] || empty($post["user_id"]))) {
+    header("Location: index.php");
+}
+
+$user = User::getInfo($post["user_id"])[0];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,37 +38,35 @@ $user = User::getInfo($post[0]["user_id"]);
 </head>
 
 <body>
-    
+
     <div class="profile-header padding">
-        <?php foreach ($post as $p):?>
         <div class="header-content">
-            <a class="project-author" href="profile.php?id=<?php echo $p['user_id']?>">
-                <img src="./uploads/profiles/<?php echo $user[0]['image']?>" class="post-profile" alt="Profile picture">
-                <h3 class="post-username"><?php echo $user[0]['username']; ?></h3>
+            <a class="project-author" href="profile.php?id=<?php echo $post['user_id'] ?>">
+                <img src="./uploads/profiles/<?php echo $user['image'] ?>" class="post-profile" alt="Profile picture">
+                <h3 class="post-username"><?php echo $user['username']; ?></h3>
             </a>
         </div>
-        <?php endforeach; ?>
         <img class="modal-button" src="./assets/dots-menu.svg" alt="Dots menu">
     </div>
     <div class="main-margin">
         <div>
-            <h3><?php echo $post[0]['title']; ?></h3>
+            <h3><?php echo $post['title']; ?></h3>
         </div>
         <div class="post-image">
-            <img class="project-picture" src="./uploads/posts/<?php echo $post[0]['image']; ?>" alt="Post image">
+            <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="Post image">
         </div>
         <!-- <div>
             likes en comment icoontjes
         </div> -->
         <div>
-            <h4 class="post-text"><?php echo $post[0]['text'];?></h4>
+            <h4 class="post-text"><?php echo $post['text']; ?></h4>
         </div>
         <div class="tag-list">
-            <?php 
-                $tagsString = $post[0]['tags']; 
-                $tags = explode(",", $tagsString);
-                foreach ($tags as $tag):
-            ?> 
+            <?php
+            $tagsString = $post['tags'];
+            $tags = explode(",", $tagsString);
+            foreach ($tags as $tag) :
+            ?>
                 <div class="tag-item">
                     <a style="text-decoration: none; color: var(--IMDBlue);" href="#">#<?php echo $tag ?></a>
                 </div>
@@ -68,7 +79,7 @@ $user = User::getInfo($post[0]["user_id"]);
             <div class="modal-close">
                 <img class="modal-icon" src="./assets/close.svg" alt="close">
             </div>
-            <a href="edit_post.php?id=<?php echo $post[0]["id"]?>">
+            <a href="edit_post.php?id=<?php echo $post["id"] ?>">
                 <img class="modal-icon" src="./assets/edit.svg" alt="lock">
                 <p>Edit post</p>
             </a>

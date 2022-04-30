@@ -13,27 +13,39 @@ if (empty($_SESSION['id'])) {
 
 $profile = User::getInfo($id);
 
+if (empty($_GET['id'])) {
+    header("Location: index.php");
+}
+
+$editPostId = $_GET['id'];
+$oldPost = Post::getPostById($editPostId)[0];
+
+if (empty($oldPost["id"])) {
+    header("Location: index.php");
+}
+
+
+
 if (!empty($_POST)) {
     try {
-        $newPost = new Post();
+        $newPost = new Post;
+        $newPost->setId($oldPost["id"]);
         $newPost->setUserId($profile[0]["id"]);
         $newPost->setTitle($_POST["title"]);
         $newPost->setText($_POST["text"]);
         $newPost->setTags($_POST["tags"]);
-        if($_FILES['image']['name'] != ""){
-            $imageName = Upload::uploadPicture($_FILES['image'], $newPost->getId());
+        if ($_FILES['image']['name'] != "") {
+            $imageName = Upload::uploadPicture($_FILES['image'], Upload::uid());
             $newPost->setImage($imageName);
+        } else {
+            $newPost->setImage($oldPost["image"]);
         }
-        $newPost->update();
+        $newPost->update($editPostId);
         header("Location: index.php");
     } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
     }
-
-} else {
-    $newId = $_GET['id'];
-    $oldPost = Post::getPostById($newId)[0];
 }
 
 ?>
@@ -60,7 +72,11 @@ if (!empty($_POST)) {
             <form action="" method="POST" enctype="multipart/form-data">
                 <div>
                     <div class="profile-img-edit">
-                        <img style="cursor:pointer" id="profile-display" src="./uploads/posts/<?php if(!empty($oldPost)) { echo $oldPost['image']; } else { echo $newPost->getImage;}?>" onclick="triggerClick()">
+                        <img style="cursor:pointer" id="profile-display" src="./uploads/posts/<?php if (!empty($oldPost)) {
+                                                                                                    echo $oldPost['image'];
+                                                                                                } else {
+                                                                                                    echo $newPost->getImage;
+                                                                                                } ?>" onclick="triggerClick()">
                     </div>
                     <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change pic</label>
                     <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
@@ -73,7 +89,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($oldPost)) : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo $oldPost['title'];?>">
+                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo $oldPost['title']; ?>">
                             <?php else : ?>
                                 <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
                             <?php endif; ?>
@@ -83,7 +99,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($oldPost)) : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo $oldPost['text'];?>">
+                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo $oldPost['text']; ?>">
                             <?php else : ?>
                                 <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
                             <?php endif; ?>
@@ -93,7 +109,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($oldPost)) : ?>
-                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo $oldPost['tags'];?>">
+                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo $oldPost['tags']; ?>">
                             <?php else : ?>
                                 <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis">
                             <?php endif; ?>
@@ -111,6 +127,7 @@ if (!empty($_POST)) {
                     <button class="main-btn btn-add" type="submit" name="save-post">Inspire others</button>
                 </div>
             </form>
+
             <?php foreach ($profile as $p) : ?>
                 <section class="modal modal-container ">
                     <div id="modal" class="modal-content hidden">
