@@ -151,7 +151,7 @@ class Post implements iPost
     {
     }
 
-    public static function getAllUserPosts($id)
+    public static function getAllFromUser($id)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts WHERE user_id=:id");
@@ -160,7 +160,7 @@ class Post implements iPost
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getPostById($id)
+    public static function getById($id)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts WHERE id=:id");
@@ -169,7 +169,7 @@ class Post implements iPost
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function searchPosts($search)
+    public static function search($search)
     {
         $conn = DB::getInstance();
         $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword or tags LIKE :keyword;");
@@ -193,7 +193,7 @@ class Post implements iPost
         }
     }
 
-    public static function searchPostsByTitle($search)
+    public static function searchByTitle($search)
     {
         $conn = DB::getInstance();
         $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword;");
@@ -217,7 +217,7 @@ class Post implements iPost
         }
     }
 
-    public static function searchPostsByTags($search)
+    public static function searchByTags($search)
     {
         $conn = DB::getInstance();
         $query = $conn->prepare("SELECT count(id) FROM posts WHERE tags LIKE :keyword;");
@@ -237,7 +237,7 @@ class Post implements iPost
             }
             return $post;
         } else {
-            throw new Exception("No posts found with this tag");
+            throw new Exception("No posts found with this tag 👀");
         }
     }
 

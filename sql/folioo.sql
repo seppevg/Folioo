@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 25 apr 2022 om 19:55
+-- Gegenereerd op: 30 apr 2022 om 15:20
 -- Serverversie: 5.7.24
 -- PHP-versie: 8.0.1
 
@@ -162,7 +162,7 @@ ALTER TABLE `passwordreset`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`

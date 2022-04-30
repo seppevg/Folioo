@@ -20,10 +20,10 @@ if( !empty($_POST) ){
             $posts = "";
         }
         elseif ($filterType == "Title"){
-            $posts = Post::searchPostsByTitle($searchResult);
+            $posts = Post::searchByTitle($searchResult);
         }
         elseif ($filterType == "Tag"){
-            $posts = Post::searchPostsByTags($searchResult);
+            $posts = Post::searchByTags($searchResult);
         }
         
     }

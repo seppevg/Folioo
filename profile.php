@@ -24,7 +24,7 @@ $profile = User::getInfo($id);
 $userProfiles = User::getInfo($userId);
 
 
-$posts = Post::getAllUserPosts($id);
+$posts = Post::getAllFromUser($id);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -93,7 +93,7 @@ $posts = Post::getAllUserPosts($id);
             
 
             <?php foreach($userProfiles as $up): ?>
-                <?php $posts = Post::getAllUserPosts($userId);?>
+                <?php $posts = Post::getAllFromUser($userId);?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
                         <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
