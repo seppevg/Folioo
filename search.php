@@ -13,8 +13,14 @@ if( !empty($_POST) ){
     try {
         $searchResult = $_POST['searchInput'];
         //var_dump ($searchResult);
-        $filterType = $_POST['column'];
-        //echo $filterType;
+        $posts = Post::search($searchResult);
+
+        if (empty($_POST['column'])) {
+            $filterType = "";
+        } else {
+            $filterType = $_POST['column'];
+        }        
+        //echo $filterType;            
 
         if ($filterType == "Title"){
             $posts = Post::search($searchResult);
@@ -44,24 +50,35 @@ if( !empty($_POST) ){
 </head>
 
 <body>
-    <div id="container-logo">
-        <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
-    </div>
 
     <form class="search" method="post">
+    <div class="profile-header">
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
 
-        <select name="column">
-            <option value="Title">Title</option>
-            <option value="Tags">Tag</option>
-        </select>
+        <button class="filterbtn">
+            <img class="modal-button" src="./assets/filter.svg" alt="Filter icon">
+        </button>
 
-        <button type="submit" name="submit-search" class="searchbtn">Search</button>
+        <button type="submit" name="submit-search" class="searchbtn">
+            <img src="./assets/search.svg" alt="Search icon">
+        </button>
+    </div>
+
+        <section class="modal modal-container">
+            <div id="modal" class="modal-content hidden">
+                <h3>Choose your filter</h3>
+                <form method="post">
+                    <input type="radio" value="Title" name="column"> Title <br> <br>
+                    <input type="radio" value="Tags" name="column"> Tags                    
+                </form> 
+            </div>
+        </section>
+
     </form>
     
     <?php if(empty($posts)):?>
         <div id="no-uploads">
-                <img src="./assets/no-uploads.svg" alt="No uploads yet">
+                <img src="./assets/search_empty_state.svg" alt="No uploads yet">
             </div>
     <?php else:?>
 
@@ -101,7 +118,11 @@ if( !empty($_POST) ){
         </div>
     <?php endif;?>
 
+
+
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
+
+    <script src="./js/filter.js"></script>
 
 </body>
 

@@ -612,18 +612,11 @@ img.post-profile {
 }
 /* SEARCH */
 
-.search {
-  padding-left: 30px;
-}
-
 .searchbtn {
   background-color: var(--IMDgreen);
-  color: black;
-  font-weight: 600;
   text-decoration: none;
   border-radius: 0.4em;
   border: none;
-  flex: 1 1 auto;
   padding: 0.8em;
   cursor: pointer;
   width: 100px;
@@ -637,8 +630,28 @@ img.post-profile {
   border-style: none;
   background-image: url("./../assets/search.svg");
   background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+}
+
+.filterbtn {
+  border-color: var(--IMDgreen);
+  border-radius: 0.4em;
+  padding: 0.8em;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+
+}
+
+.inputSearch {
+  margin-left: 30px;
+  height: 50px;
+  width: 65%;
+  border-color: var(--IMDgreen);
+  border-radius: 0.4em;
   background-size: 20px;
-  padding-left: 40px;
+  padding-left: 20px;
   align-content: center;
 }
 
@@ -646,8 +659,6 @@ img.post-profile {
   margin-top: 2em;
 }
 
-.filterSearch {
-  padding-left: 30px;
-  padding-top: 30px;
-  padding-right: 30px;
+.search .modal-content h3{
+  color: var(--IMDblue);
 }
