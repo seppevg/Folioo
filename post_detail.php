@@ -4,6 +4,12 @@
 include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
+if (empty($_SESSION['id'])) {
+    $currentId = "";
+} else {
+    $currentId = $_SESSION['id'];
+}
+
 
 if (empty($_GET['id'])) {
     header("Location: index.php");
@@ -23,7 +29,31 @@ if (empty($post["id"] || empty($post["user_id"]))) {
 }
 
 $user = User::getInfo($post["user_id"])[0];
+
+if(!empty($_POST)) {
+    try{
+        $userName = Comment::getByUserId($id);
+        //var_dump($userName);
+        
+        $comment = new Comment();
+        $comment->setComment($_POST['comment']);
+        $comment->setUserId($currentId);
+        $comment->setPostId($id);
+        $comment->Save();
+
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    } 
+}
+
+
 $comments = Comment::getAllCommentsPost($id);
+$profile = Comment::getUser($userName);
+
+
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -102,12 +132,27 @@ $comments = Comment::getAllCommentsPost($id);
 
     <section class="modal2 modal-container2">
         <div id="modal2" class="modal-content2 hidden">
-            <ul id="listupdates">
-                <?php foreach($comments as $c):?>
-                    <p><?php echo $c['comment']; ?></p>
-                <?php endforeach;?>
-            </ul>
+            <div class="modal-close2">
+                <img class="modal-icon2" src="./assets/close.svg" alt="close">
+            </div>
+
+            <form action="" method="post">
+                <ul id="listupdates">
+                    <?php foreach($comments as $c):?>
+                        <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
+                        <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
+                        <p><?php echo $c['comment']; ?></p>
+                    <?php endforeach;?>
+                </ul>
+
+                <input type="text" name="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
+            </form>
         </div>
+        <?php if(isset($error)):?>
+        <div>
+            <p class="error"><?php echo $error ?></p>
+        </div>
+    <?php endif;?>
     </section>
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
