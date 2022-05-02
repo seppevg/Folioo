@@ -59,6 +59,16 @@ $user = User::getInfo($post["user_id"])[0];
         <!-- <div>
             likes en comment icoontjes
         </div> -->
+        <div class="project-interactions">
+            <div class="project-interactions-like">
+                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                <h4>number</h4>
+            </div>
+            <div class="project-interactions-comment">
+                <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                <h4>number</h4>
+            </div>
+        </div>
         <div>
             <h4 class="post-text"><?php echo $post['text']; ?></h4>
         </div>
