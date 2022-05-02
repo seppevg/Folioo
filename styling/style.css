@@ -610,7 +610,8 @@ img.post-profile {
 /* SEARCH */
 
 .search {
-  padding-left: 30px;
+  padding: 30px;
+  border-bottom: 1px solid #a7a7a7;
 }
 
 .searchbtn {
@@ -623,18 +624,27 @@ img.post-profile {
   flex: 1 1 auto;
   padding: 0.8em;
   cursor: pointer;
-  width: 100px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+
+}
+
+.filterbtn {
+  border-color: var(--IMDgreen);
+  border-radius: 0.4em;
+  flex: 1 1 auto;
+  padding: 0.8em;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
 
 }
 
 .inputSearch {
   height: 40px;
   width: 70%;
-  background-color: #FCD7F7;
-  border-style: none;
-  background-image: url("./../assets/search.svg");
-  background-repeat: no-repeat;
+  border-color: var(--IMDgreen);
+  border-radius: 0.4em;
   background-size: 20px;
   padding-left: 40px;
   align-content: center;
