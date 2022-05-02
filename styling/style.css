@@ -619,19 +619,19 @@ img.post-profile {
   border: none;
   padding: 0.8em;
   cursor: pointer;
-  width: 100px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 }
 
 .inputSearch {
-  height: 40px;
-  width: 70%;
-  background-color: #fcd7f7;
-  border-style: none;
-  background-image: url("./../assets/search.svg");
-  background-repeat: no-repeat;
-  width: 50px;
+  margin-left: 30px;
   height: 50px;
+  width: 65%;
+  border-color: var(--IMDgreen);
+  border-radius: 0.4em;
+  background-size: 20px;
+  padding-left: 20px;
+  align-content: center;
 }
 
 .filterbtn {
