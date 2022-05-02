@@ -24,6 +24,17 @@ x.addEventListener("click", function () {
     modal.classList.remove("display");
 });
 
+let comment = document.querySelector(".comment-icon");
+let modal2 = document.getElementById("modal2");
+let xy = document.querySelector(".modal-close2");
+comment.addEventListener("click", function () {
+    modal2.classList.toggle("display");
+});
+
+xy.addEventListener("click", function () {
+    modal2.classList.remove("display");
+});
+
 let tags = document.querySelector("#input-tags").value
 if (tags === "") {
     // console.log("tags are empty");

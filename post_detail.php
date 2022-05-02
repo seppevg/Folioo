@@ -23,9 +23,8 @@ if (empty($post["id"] || empty($post["user_id"]))) {
 }
 
 $user = User::getInfo($post["user_id"])[0];
-?>
-
-<!DOCTYPE html>
+$comments = Comment::getAllCommentsPost($id);
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -98,6 +97,16 @@ $user = User::getInfo($post["user_id"])[0];
                 <img class="modal-icon" src="./assets/delete.svg" alt="Delete">
                 <p>Delete post</p>
             </a>
+        </div>
+    </section>
+
+    <section class="modal2 modal-container2">
+        <div id="modal2" class="modal-content2 hidden">
+            <ul id="listupdates">
+                <?php foreach($comments as $c):?>
+                    <p><?php echo $c['comment']; ?></p>
+                <?php endforeach;?>
+            </ul>
         </div>
     </section>
 
