@@ -52,6 +52,7 @@ if( !empty($_POST) ){
 <body>
 
     <form class="search" method="post">
+    <div class="profile-header">
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
 
         <button class="filterbtn">
@@ -61,6 +62,7 @@ if( !empty($_POST) ){
         <button type="submit" name="submit-search" class="searchbtn">
             <img src="./assets/search.svg" alt="Search icon">
         </button>
+    </div>
 
         <section class="modal modal-container">
             <div id="modal" class="modal-content hidden">

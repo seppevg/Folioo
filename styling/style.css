@@ -609,11 +609,6 @@ img.post-profile {
 }
 /* SEARCH */
 
-.search {
-  border-bottom: 1px solid #a7a7a7;
-  padding-bottom: 30px;
-}
-
 .searchbtn {
   background-color: var(--IMDgreen);
   text-decoration: none;
@@ -623,7 +618,6 @@ img.post-profile {
   cursor: pointer;
   width: 50px;
   height: 50px;
-  margin-left: 10px;
 }
 
 .filterbtn {
@@ -633,13 +627,13 @@ img.post-profile {
   cursor: pointer;
   width: 50px;
   height: 50px;
-  margin-left: 10px;
+
 }
 
 .inputSearch {
   margin-left: 30px;
   height: 50px;
-  width: 50%;
+  width: 65%;
   border-color: var(--IMDgreen);
   border-radius: 0.4em;
   background-size: 20px;
