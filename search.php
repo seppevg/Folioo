@@ -14,21 +14,20 @@ if( !empty($_POST) ){
         $searchResult = $_POST['searchInput'];
         //var_dump ($searchResult);
         $posts = Post::search($searchResult);
-        $filterType = $_POST['column'];
-        
-        //echo $filterType;
 
-        if(!empty($_POST['column'])) {
-            
+        if (empty($_POST['column'])) {
+            $filterType = "";
+        } else {
+            $filterType = $_POST['column'];
+        }        
+        //echo $filterType;            
 
-            if ($filterType == "Title"){
-                $posts = Post::search($searchResult);
-            }
-            elseif ($filterType == "Tags"){
-                $posts = Post::search($searchResult);
-            }
+        if ($filterType == "Title"){
+            $posts = Post::search($searchResult);
         }
-
+        elseif ($filterType == "Tags"){
+            $posts = Post::search($searchResult);
+        }
         
     }
     catch(Throwable $error) {
@@ -56,7 +55,7 @@ if( !empty($_POST) ){
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
 
         <button class="filterbtn">
-                <img class="modal-button" src="./assets/filter.svg" alt="Filter icon">
+            <img class="modal-button" src="./assets/filter.svg" alt="Filter icon">
         </button>
 
         <button type="submit" name="submit-search" class="searchbtn">
@@ -67,10 +66,8 @@ if( !empty($_POST) ){
             <div id="modal" class="modal-content hidden">
                 <h3>Choose your filter</h3>
                 <form method="post">
-
-                    <input type="radio" value="Title"  name="column"> Title
-                    <input type="radio" value="Tags"  name="column"> Tag
-                    
+                    <input type="radio" value="Title" name="column"> Title <br> <br>
+                    <input type="radio" value="Tags" name="column"> Tags                    
                 </form> 
             </div>
         </section>
