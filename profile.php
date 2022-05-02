@@ -1,21 +1,20 @@
-<?php 
+<?php
 
 include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-//$email = $_SESSION['email'];
 if (empty($_SESSION['id'])) {
     $id = "";
 } else {
     $id = $_SESSION['id'];
 }
 
-if(empty($_GET['id'])) {
+if (empty($_GET['id'])) {
     $userId = "";
 } else {
     $userId = $_GET['id'];
-    if($userId == $id){
+    if ($userId == $id) {
         header("Location: profile.php");
     }
 }
@@ -25,8 +24,10 @@ $userProfiles = User::getInfo($userId);
 $checkFollowing = Followers::check($id, $userId);
 $posts = Post::getAllFromUser($id);
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,11 +37,12 @@ $posts = Post::getAllFromUser($id);
     <title>Folioo - Profile</title>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
+
 <body>
     <div id="profile">
-        <?php foreach($profile as $p): ?>
-            <?php if(!empty($id)):?>
-                <?php if(empty($userId)): ?>
+        <?php foreach ($profile as $p) : ?>
+            <?php if (!empty($id)) : ?>
+                <?php if (empty($userId)) : ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $p['username']; ?></h3>
                         <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -57,46 +59,64 @@ $posts = Post::getAllFromUser($id);
                         <p class="profile-text"><?php echo $p['bio']; ?></p>
                     </div>
 
-                
                     <div class="profile-edit">
                         <a href="edit_profile.php" class="main-btn">Edit profile</a>
                     </div>
 
-                    <?php if(empty($posts)):?>
+                    <?php if (empty($posts)) : ?>
                         <div id="no-uploads">
                             <img src="./assets/no-posts.svg" alt="No posts yet">
                         </div>
-                    <?php endif;?>
+                    <?php endif; ?>
 
                     <div class="allUserPosts">
-                        <?php foreach($posts as $post): ?>
+                        <?php foreach ($posts as $post) : ?>
                             <article>
-                                <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
+                                <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
                                     <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                                 </a>
                                 <div class="project-info">
-                                        <div class="project-interactions">
-                                            <div class="project-interactions-like">
-                                                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                                <h4>number</h4>
-                                            </div>
-                                            <div class="project-interactions-comment">
-                                                <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                                                <h4>number</h4>
-                                            </div>
+                                    <div class="project-interactions">
+                                        <div class="project-interactions-like">
+                                            <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                            <h4>number</h4>
                                         </div>
+                                        <div class="project-interactions-comment">
+                                            <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                                            <h4>number</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </article>
                         <?php endforeach; ?>
-                <?php endif;?>
-            <?php endif;?> 
-            
+                        <section class="modal modal-container ">
+                            <div id="modal" class="modal-content hidden">
+                                <div class="modal-close">
+                                    <img class="modal-icon" src="./assets/close.svg" alt="close">
+                                </div>
+                                <a href="change_password.php">
+                                    <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                                    <p>Change password</p>
+                                </a>
+                                <a href="logout.php">
+                                    <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                                    <p>Log out</p>
+                                </a>
+                                <a href="#" class="delete-profile-popup">
+                                    <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                                    <p>Delete your profile</p>
+                                </a>
+                            </div>
+                        </section>
+                    <?php endif; ?>
+                <?php endif; ?>
 
-            <?php foreach($userProfiles as $up): ?>
-                <?php $posts = Post::getAllFromUser($userId);?>
+
+                <?php foreach ($userProfiles as $up) : ?>
+                    <?php $posts = Post::getAllFromUser($userId); ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
-                        <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+                        <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
                     <div class="profile-info">
                         <div class="profile-img">
@@ -114,75 +134,95 @@ $posts = Post::getAllFromUser($id);
                         <a href="#" class="main-btn follow-button" onclick="changeFollowState(this, <?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
                     </div>
 
-                    <?php if(empty($posts)):?>
+                    <!-- report modal -->
+                    <section class="modal modal-container ">
+                        <form action="" method="post">
+                        <div id="modal" class="modal-content hidden">
+                            <div class="modal-close">
+                                <img class="modal-icon" src="./assets/close.svg" alt="Close">
+                            </div>
+                            <h3 class="profile-username">Report this profile</h3>
+                            <p>Thank you for keeping Folioo a safe space for
+                                everyone! This profile will be flagged as inappropriate.</p>
+                            <div class="center">
+                                <img class="report" src="./assets/report.svg" alt="report">
+                            </div>
+                            <div class="flex">
+                                <input class="form-btn" type="submit" value="Report">
+                            </div>
+                        </div>
+                        </form>
+                    </section>
+
+                    <?php if (empty($posts)) : ?>
                         <div id="no-uploads">
                             <img src="./assets/no-posts.svg" alt="No posts yet">
                         </div>
-                    <?php endif;?>
+                    <?php endif; ?>
 
                     <div class="allPosts">
-                        <?php foreach($posts as $post): ?>
+                        <?php foreach ($posts as $post) : ?>
                             <article>
-                                <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
+                                <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
                                     <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                                 </a>
                                 <div class="project-info">
-                                        <div class="project-interactions">
-                                            <div class="project-interactions-like">
-                                                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                                <h4>number</h4>
-                                            </div>
-                                            <div class="project-interactions-comment">
-                                                <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                                                <h4>number</h4>
-                                            </div>
+                                    <div class="project-interactions">
+                                        <div class="project-interactions-like">
+                                            <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                            <h4>number</h4>
                                         </div>
+                                        <div class="project-interactions-comment">
+                                            <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                                            <h4>number</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </article>
                         <?php endforeach; ?>
                     </div>
-            <?php endforeach;?>
-            
-            <section class="modal modal-container ">
-                <div id="modal" class="modal-content hidden">
-                    <div class="modal-close">
-                        <img class="modal-icon" src="./assets/close.svg" alt="close">
+                <?php endforeach; ?>
+
+                <section class="modal modal-container ">
+                    <div id="modal" class="modal-content hidden">
+                        <div class="modal-close">
+                            <img class="modal-icon" src="./assets/close.svg" alt="close">
+                        </div>
+                        <a href="change_password.php">
+                            <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                            <p>Change password</p>
+                        </a>
+                        <a href="logout.php">
+                            <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                            <p>Log out</p>
+                        </a>
+                        <a href="#" class="delete-profile-popup">
+                            <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                            <p>Delete your profile</p>
+                        </a>
                     </div>
-                    <a href="change_password.php">
-                        <img class="modal-icon" src="./assets/lock.svg" alt="lock">
-                        <p>Change password</p>
-                    </a>
-                    <a href="logout.php">
-                        <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
-                        <p>Log out</p>
-                    </a>
-                    <a href="#" class="delete-profile-popup">
-                        <img class="modal-icon" src="./assets/delete.svg" alt="delete">
-                        <p>Delete your profile</p>
-                    </a>
+                </section>
+            <?php endforeach; ?>
+
+            <?php if (empty($id)) : ?>
+                <div class="profile-header">
+                    <h3 class="profile-username">Join the club!</h3>
+                    <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
                 </div>
-            </section>
-        <?php endforeach; ?>
 
-        <?php if(empty($id)):?>
-            <div class="profile-header">
-                <h3 class="profile-username">Join the club!</h3>
-                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
-            </div>
+                <div class="not-logged-into-profile">
+                    <h4>You don't have a profile</h4>
+                    <p>
+                        You are currently not logged in to the site, to get proper access create
+                        a new user or login with an existing user.
+                    </p>
+                </div>
 
-            <div class="not-logged-into-profile">
-                <h4>You don't have a profile</h4>
-                <p>
-                    You are currently not logged in to the site, to get proper access create
-                    a new user or login with an existing user.
-                </p>
-            </div>
-
-            <div id="become-friend">
+                <div id="become-friend">
                     <img src="./assets/become-friend.svg" alt="No posts yet">
-            </div>
+                </div>
 
-            <div class="main-margin">                    
+                <div class="main-margin">
                     <div class="flex">
                         <a href="login.php" class="form-btn center">Log in</a>
                     </div>
@@ -190,14 +230,15 @@ $posts = Post::getAllFromUser($id);
                     <div class="flex">
                         <a href="register.php" class="form-btn center">Register</a>
                     </div>
-            </div>
+                </div>
 
-        <?php endif;?>
+            <?php endif; ?>
 
-        <?php include_once("./includes/nav-bottom.inc.php"); ?>
-    </div>
-    <script src="./js/app.js"></script>
-    <script src="./js/delete.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <?php include_once("./includes/nav-bottom.inc.php"); ?>
+                    </div>
+                    <script src="./js/app.js"></script>
+                    <script src="./js/delete.js"></script>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

@@ -23,6 +23,18 @@ if (empty($post["id"] || empty($post["user_id"]))) {
 }
 
 $user = User::getInfo($post["user_id"])[0];
+
+//checking if the post is from the person that's logged in
+if (empty($_SESSION['id'])) {
+    $sessionId = "";
+} else {
+    $sessionId = $_SESSION['id'];
+}
+
+$userId = Post::getById($_GET['id'])[0];
+
+//reporting
+
 ?>
 
 <!DOCTYPE html>
@@ -75,21 +87,56 @@ $user = User::getInfo($post["user_id"])[0];
         </div>
     </div>
 
-    <section class="modal modal-container ">
-        <div id="modal" class="modal-content hidden">
-            <div class="modal-close">
-                <img class="modal-icon" src="./assets/close.svg" alt="Close">
+
+    <?php if ($userId["user_id"] == $sessionId) : ?>
+        <!-- edit post modal -->
+        <section class="modal modal-container ">
+            <div id="modal" class="modal-content hidden">
+                <div class="modal-close">
+                    <img class="modal-icon" src="./assets/close.svg" alt="Close">
+                </div>
+                <a href="edit_post.php?id=<?php echo $post["id"] ?>">
+                    <img class="modal-icon" src="./assets/edit.svg" alt="Edit">
+                    <p>Edit post</p>
+                </a>
+                <a href="#" onclick="deletePost(<?php echo $post['id']; ?>)" class="delete-post-popup">
+                    <img class="modal-icon" src="./assets/delete.svg" alt="Delete">
+                    <p>Delete post</p>
+                </a>
             </div>
-            <a href="edit_post.php?id=<?php echo $post["id"] ?>">
-                <img class="modal-icon" src="./assets/edit.svg" alt="Edit">
-                <p>Edit post</p>
-            </a>
-            <a href="#" onclick="deletePost(<?php echo $post['id']; ?>)" class="delete-post-popup">
-                <img class="modal-icon" src="./assets/delete.svg" alt="Delete">
-                <p>Delete post</p>
-            </a>
-        </div>
-    </section>
+        </section>
+    <?php else : ?>
+        <!-- report modal -->
+        <section class="modal modal-container ">
+            <div id="modal" class="modal-content hidden">
+                <div class="modal-close">
+                    <img class="modal-icon" src="./assets/close.svg" alt="Close">
+                </div>
+                <div id="post-report">
+                    <h3 class="profile-username">Report this post</h3>
+                    <p>Thank you for keeping Folioo a safe space for
+                        everyone! This post will be flagged as inappropriate.</p>
+                    <div class="center">
+                        <img class="report" src="./assets/report.svg" alt="report">
+                    </div>
+                    <div class="flex">
+                        <button class="form-btn" onclick="postReporting(this, <?php echo $post['id']; ?>, 'report')">Report</button>
+                    </div>
+                </div>
+                <div id="post-unreport" class="hidden">
+                    <h3 class="profile-username">This post is reported</h3>
+                    <p>If you don't think that this post should be flagged as inappropriate then you can unreport this post.</p>
+                    <div class="center">
+                        <img class="report" src="./assets/report.svg" alt="report">
+                    </div>
+                    <div class="flex">
+                        <button class="form-btn" onclick="postReporting(this, <?php echo $post['id']; ?>, 'unreport')">Stop reporting</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    <?php endif; ?>
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
     <script src="./js/app.js"></script>

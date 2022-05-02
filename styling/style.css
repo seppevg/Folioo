@@ -8,7 +8,7 @@
 :root {
   --IMDblue: #0600ff;
   --IMDgreen: #bffd00;
-  --errorRed: #F04C25;
+  --errorRed: #f04c25;
   --errorRedLight: #fc0b2b63;
 }
 
@@ -382,9 +382,8 @@ body {
 }
 
 .modal-content {
-  margin: 1em;
   width: 100%;
-  padding: 1em;
+  padding: 1.5em;
 }
 
 .modal-content a {
@@ -397,7 +396,6 @@ body {
 .modal p {
   color: black;
   font-weight: 600;
-  margin-left: 1em;
 }
 
 .modal-close {
@@ -449,7 +447,7 @@ body {
 }
 
 .profile-delete-no .main-btn {
-  background-color: #CDCEC9;
+  background-color: #cdcec9;
 }
 
 .profile-delete-confirmation {
@@ -526,6 +524,11 @@ img.post-profile {
   font-weight: 100;
 }
 
+.report {
+  width: 170px;
+  height: auto;
+  padding: 1em 1em 2em 1em;
+}
 
 /* REUSABLE PARTS */
 .main-btn {
@@ -625,13 +628,12 @@ img.post-profile {
   cursor: pointer;
   width: 100px;
   height: 40px;
-
 }
 
 .inputSearch {
   height: 40px;
   width: 70%;
-  background-color: #FCD7F7;
+  background-color: #fcd7f7;
   border-style: none;
   background-image: url("./../assets/search.svg");
   background-repeat: no-repeat;
@@ -641,7 +643,7 @@ img.post-profile {
 }
 
 .allPostsSearch {
-  margin-top:  2em;
+  margin-top: 2em;
 }
 
 .filterSearch {
@@ -649,4 +651,3 @@ img.post-profile {
   padding-top: 30px;
   padding-right: 30px;
 }
-

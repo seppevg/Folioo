@@ -4,7 +4,7 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-//$email = $_SESSION['email'];
+
 if (empty($_SESSION['id'])) {
     $id = "";
 } else {
@@ -23,8 +23,6 @@ $oldPost = Post::getById($editPostId)[0];
 if (empty($oldPost["id"])) {
     header("Location: index.php");
 }
-
-
 
 if (!empty($_POST)) {
     try {
