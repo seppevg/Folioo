@@ -298,3 +298,9 @@ function postReporting(e, id, action) {
       console.error("Error:", error);
     });
 }
+
+//AJAX COMMENT 
+document.querySelector("#btnAddComment").addEventListener("click", function(e){
+  e.preventDefault();
+  console.log("dslkjfs");
+});

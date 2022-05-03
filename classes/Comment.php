@@ -29,6 +29,9 @@ class Comment implements iProject
      */ 
     public function setComment($comment)
     {
+        if (empty($comment)) {
+            throw new Exception("Comment can't be empty 👆");
+        }
         $this->comment = $comment;
 
         return $this;

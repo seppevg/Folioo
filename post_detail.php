@@ -194,8 +194,8 @@ $comments = Comment::getAll($id);
                         foreach($currentUser as $cu):
                     ?>
                     <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
-                    <h4 class="project-author-username-comment"><?php echo $cu['username']; ?></h4>
                     <input type="text" name="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
+                    <a href="#" id="btnAddComment"><img src="./assets/add.svg" alt="Add icon"></a>
                 <?php endforeach;?>
                 </div>
 
