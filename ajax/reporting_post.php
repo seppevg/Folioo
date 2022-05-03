@@ -12,14 +12,13 @@ if (!empty($_POST['postId']) && !empty($_POST['action'])) {
         if (sizeof($post) == 1) {
             // er is exact 1 post met deze ID
             try {
-
                 if ($action == "report") {
                     Report::reportPost($id);
                     $result = [
                         "status" => "success",
                         "message" => "Post has been reported."
                     ];
-                } else if ($action == "unreport") {
+                } elseif ($action == "unreport") {
                     Report::unReportPost($id);
                     $result = [
                         "status" => "success",
