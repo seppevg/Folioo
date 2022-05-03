@@ -42,17 +42,6 @@ if (document.querySelector("#input-tags")) {
   }
 }
 
-let comment = document.querySelector(".comment-icon");
-let modal2 = document.getElementById("modal2");
-let xy = document.querySelector(".modal-close2");
-comment.addEventListener("click", function () {
-    modal2.classList.toggle("display");
-});
-
-xy.addEventListener("click", function () {
-    modal2.classList.remove("display");
-});
-
 function addTag(e) {
   e.preventDefault();
   //checks if the error key is pressed
@@ -92,6 +81,17 @@ function deleteTag(ref, tag) {
 if (document.querySelector(".tags-input")) {
   document.querySelector(".tags-input").addEventListener("keyup", addTag);
 }
+
+let comment = document.querySelector(".comment-icon");
+let modal2 = document.getElementById("modal2");
+let xy = document.querySelector(".modal-close2");
+comment.addEventListener("click", function () {
+    modal2.classList.toggle("display");
+});
+
+xy.addEventListener("click", function () {
+    modal2.classList.remove("display");
+});
 
 //AJAX FOR REGISTER.PHP
 
