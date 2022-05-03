@@ -25,10 +25,9 @@ if ($pageCounter !== 1) {
     $buttonStyling = "";
 }
 
-
 $loadedPosts = ($pageCounter - 1)*10;
 $posts = Post::getAll($loadedPosts);
-var_dump($posts);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
