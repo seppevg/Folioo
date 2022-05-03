@@ -33,6 +33,7 @@ if (empty($_SESSION['id'])) {
 
 $userId = Post::getById($_GET['id'])[0];
 
+
 //reporting
 
 if(!empty($_POST)) {
@@ -42,7 +43,7 @@ if(!empty($_POST)) {
         
         $comment = new Comment();
         $comment->setComment($_POST['comment']);
-        $comment->setUserId($userId);
+        $comment->setUserId($sessionId);
         $comment->setPostId($id);
         $comment->Save();
 
@@ -55,32 +56,7 @@ if(!empty($_POST)) {
 
 
 $comments = Comment::getAllCommentsPost($id);
-//var_dump($comments);
-$userName = Comment::getByUserId($id);
-//var_dump($userName);
-foreach($userName as $un){
-    $profiles = Comment::getUser($un['user_id']);
 
-}
-/*for ($i = 0; $i < count($profiles); $i++){
-    $profile = $profiles[$i];
-    var_dump(count($profiles));
-}*/
-
-/*$profile = $profiles[0];
-var_dump($profile);*/
-//var_dump($profiles);
-//$profile = $profiles;
-//var_dump($profiles);
-
-
-
-
-
-
-//var_dump($userName);
-
-//var_dump($profile);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -202,13 +178,12 @@ var_dump($profile);*/
             <form action="" method="post">
                 <ul id="listupdates">
                     <?php foreach($comments as $c):?>
-                        <?php $profiles = Comment::getUser($un['user_id']);
-                        foreach($profiles as $p):?>
-                            <img class="project-author-picture" src="./uploads/profiles/<?php echo $p['image']; ?>" alt="profile picture">
-                            <h4 class="project-author-username"><?php echo $p['username']; ?></h4>
+                        <?php $profile = Post::getUser($c['user_id']);?>
+                            <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
+                            <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
                         <p><?php echo $c['comment']; ?></p>
                     <?php endforeach;?>
-                    <?php endforeach;?>
+
 
                 </ul>
 

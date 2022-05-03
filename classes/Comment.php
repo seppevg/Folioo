@@ -43,24 +43,6 @@ class Comment implements iProject
         return $statement->execute();
     }
 
-    public static function getUser($userId)
-    {
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT username, image FROM users WHERE id = :userId;");
-        $statement->bindValue(':userId', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function getByUserId($id){
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT user_id FROM comments WHERE post_id = :id;");
-        $statement->bindValue(':id', $id);
-        $statement->execute();
-        $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $comments;
-    }
-
     /**
      * Get the value of userId
      */ 

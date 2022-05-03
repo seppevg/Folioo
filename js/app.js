@@ -15,16 +15,7 @@ function displayImage(e) {
   }
 }
 
-let comment = document.querySelector(".comment-icon");
-let modal2 = document.getElementById("modal2");
-let xy = document.querySelector(".modal-close2");
-comment.addEventListener("click", function () {
-    modal2.classList.toggle("display");
-});
 
-xy.addEventListener("click", function () {
-    modal2.classList.remove("display");
-});
 
 let burger = document.querySelector(".modal-button");
 let modal = document.getElementById("modal");
@@ -50,6 +41,17 @@ if (document.querySelector("#input-tags")) {
     tags = tags.split(",");
   }
 }
+
+let comment = document.querySelector(".comment-icon");
+let modal2 = document.getElementById("modal2");
+let xy = document.querySelector(".modal-close2");
+comment.addEventListener("click", function () {
+    modal2.classList.toggle("display");
+});
+
+xy.addEventListener("click", function () {
+    modal2.classList.remove("display");
+});
 
 function addTag(e) {
   e.preventDefault();
