@@ -33,11 +33,32 @@ if (empty($_SESSION['id'])) {
 
 $userId = Post::getById($_GET['id'])[0];
 
+
 //reporting
 
-?>
+if(!empty($_POST)) {
+    try{
+        
+        //var_dump($userName);
+        
+        $comment = new Comment();
+        $comment->setComment($_POST['comment']);
+        $comment->setUserId($sessionId);
+        $comment->setPostId($id);
+        $comment->Save();
 
-<!DOCTYPE html>
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    } 
+}
+
+
+$comments = Comment::getAllCommentsPost($id);
+
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -71,6 +92,16 @@ $userId = Post::getById($_GET['id'])[0];
         <!-- <div>
             likes en comment icoontjes
         </div> -->
+        <div class="project-interactions">
+            <div class="project-interactions-like">
+                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                <h4>number</h4>
+            </div>
+            <div class="project-interactions-comment">
+                <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                <h4>number</h4>
+            </div>
+        </div>
         <div>
             <h4 class="post-text"><?php echo $post['text']; ?></h4>
         </div>
@@ -137,6 +168,34 @@ $userId = Post::getById($_GET['id'])[0];
             </div>
         </section>
     <?php endif; ?>
+
+    <section class="modal2 modal-container2">
+        <div id="modal2" class="modal-content2 hidden">
+            <div class="modal-close2">
+                <img class="modal-icon2" src="./assets/close.svg" alt="close">
+            </div>
+
+            <form action="" method="post">
+                <ul id="listupdates">
+                    <?php foreach($comments as $c):?>
+                        <?php $profile = Post::getUser($c['user_id']);?>
+                            <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
+                            <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
+                        <p><?php echo $c['comment']; ?></p>
+                    <?php endforeach;?>
+
+
+                </ul>
+
+                <input type="text" name="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
+            </form>
+        </div>
+        <?php if(isset($error)):?>
+        <div>
+            <p class="error"><?php echo $error ?></p>
+        </div>
+    <?php endif;?>
+    </section>
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
     <script src="./js/app.js"></script>

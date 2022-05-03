@@ -443,6 +443,52 @@ body {
   cursor: pointer;
 }
 
+.modal-icon2 {
+  max-width: 27px;
+  max-height: 24px;
+}
+
+.modal-container2 {
+  background-color: #fefefe;
+  box-shadow: var(--IMDblue) 0px 15px 40px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 0;
+  z-index: 101;
+  border-radius: 25px 25px 0 0;
+}
+
+.modal-content2 {
+  margin: 1em;
+  width: 100%;
+  padding: 1em;
+}
+
+.modal-content2 a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modal2 p {
+  color: black;
+  font-weight: 600;
+  margin-left: 1em;
+}
+
+.modal-close2 {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.modal-button2 {
+  cursor: pointer;
+}
+
 /* EDIT PROFILE */
 .profile-img-edit img {
   margin: 2.1875em 0em 0.5em 0em;

@@ -15,6 +15,8 @@ function displayImage(e) {
   }
 }
 
+
+
 let burger = document.querySelector(".modal-button");
 let modal = document.getElementById("modal");
 let x = document.querySelector(".modal-close");
@@ -25,6 +27,7 @@ burger.addEventListener("click", function () {
 x.addEventListener("click", function () {
   modal.classList.remove("display");
 });
+
 
 let tags;
 if (document.querySelector("#input-tags")) {
@@ -78,6 +81,17 @@ function deleteTag(ref, tag) {
 if (document.querySelector(".tags-input")) {
   document.querySelector(".tags-input").addEventListener("keyup", addTag);
 }
+
+let comment = document.querySelector(".comment-icon");
+let modal2 = document.getElementById("modal2");
+let xy = document.querySelector(".modal-close2");
+comment.addEventListener("click", function () {
+    modal2.classList.toggle("display");
+});
+
+xy.addEventListener("click", function () {
+    modal2.classList.remove("display");
+});
 
 //AJAX FOR REGISTER.PHP
 
