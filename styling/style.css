@@ -315,6 +315,28 @@ body {
   color: black;
 }
 
+.comment-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.comment-box input{
+  margin-left: 10px;
+}
+
+.project-author-picture-comment {
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 5em;
+  margin-right: 5px;
+}
+
+.project-author-username-comment {
+  padding-left: 5px;
+  color: var(--IMDblue);
+}
+
 .project-interactions {
   display: flex;
   flex-direction: row;
@@ -743,4 +765,8 @@ img.post-profile {
 
 .search .modal-content h3 {
   color: var(--IMDblue);
+}
+
+#listupdates {
+  padding: 0px;
 }

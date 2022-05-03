@@ -37,10 +37,7 @@ $userId = Post::getById($_GET['id'])[0];
 //reporting
 
 if(!empty($_POST)) {
-    try{
-        
-        //var_dump($userName);
-        
+    try{        
         $comment = new Comment();
         $comment->setComment($_POST['comment']);
         $comment->setUserId($sessionId);
@@ -179,15 +176,28 @@ $comments = Comment::getAllCommentsPost($id);
                 <ul id="listupdates">
                     <?php foreach($comments as $c):?>
                         <?php $profile = Post::getUser($c['user_id']);?>
-                            <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
-                            <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
-                        <p><?php echo $c['comment']; ?></p>
+                            <div class="comment-box">
+                                <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
+                                <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
+                                <p><?php echo $c['comment']; ?></p>
+                            </div>
                     <?php endforeach;?>
 
 
                 </ul>
 
-                <input type="text" name="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
+                <div class="comment-box">
+                    <?php 
+                        $currentUser = User::getInfo($sessionId);
+                        foreach($currentUser as $cu):
+                    ?>
+                    <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
+                    <h4 class="project-author-username-comment"><?php echo $cu['username']; ?></h4>
+                    <input type="text" name="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
+                <?php endforeach;?>
+                </div>
+
+                
             </form>
         </div>
         <?php if(isset($error)):?>
