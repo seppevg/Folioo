@@ -24,6 +24,7 @@ if (empty($post["id"] || empty($post["user_id"]))) {
 
 $user = User::getInfo($post["user_id"])[0];
 
+
 //checking if the post is from the person that's logged in
 if (empty($_SESSION['id'])) {
     $sessionId = "";
@@ -34,6 +35,7 @@ if (empty($_SESSION['id'])) {
 $userId = Post::getById($_GET['id'])[0];
 
 
+$commentsCount = Comment::countComments($post['id']);
 //reporting
 
 if(!empty($_POST)) {
@@ -96,7 +98,7 @@ $comments = Comment::getAllCommentsPost($id);
             </div>
             <div class="project-interactions-comment">
                 <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                <h4>number</h4>
+                <h4><?php echo $commentsCount?></h4>
             </div>
         </div>
         <div>

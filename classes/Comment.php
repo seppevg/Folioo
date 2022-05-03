@@ -82,4 +82,14 @@ class Comment implements iProject
 
         return $this;
     }
+
+    public static function countComments($postId)
+    {
+        $conn = DB::getInstance();
+        $query = $conn->prepare("SELECT count(id) FROM comments WHERE post_id = :postId;");
+        $query->bindValue(":postId", $postId);
+        $query->execute();
+        $comments = intval($query->fetchColumn());
+        return($comments);
+    }
 }
