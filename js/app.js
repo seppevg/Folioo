@@ -15,23 +15,6 @@ function displayImage(e) {
   }
 }
 
-let burger = document.querySelector(".modal-button");
-let modal = document.getElementById("modal");
-let x = document.querySelector(".modal-close");
-burger.addEventListener("click", function () {
-  modal.classList.toggle("display");
-});
-
-x.addEventListener("click", function () {
-  modal.classList.remove("display");
-});
-
-<<<<<<< HEAD
-let tags;
-if (document.querySelector("#input-tags")) {
-  tags = document.querySelector("#input-tags").value;
-  if (tags === "") {
-=======
 let comment = document.querySelector(".comment-icon");
 let modal2 = document.getElementById("modal2");
 let xy = document.querySelector(".modal-close2");
@@ -43,9 +26,22 @@ xy.addEventListener("click", function () {
     modal2.classList.remove("display");
 });
 
-let tags = document.querySelector("#input-tags").value
-if (tags === "") {
->>>>>>> f16
+let burger = document.querySelector(".modal-button");
+let modal = document.getElementById("modal");
+let x = document.querySelector(".modal-close");
+burger.addEventListener("click", function () {
+  modal.classList.toggle("display");
+});
+
+x.addEventListener("click", function () {
+  modal.classList.remove("display");
+});
+
+
+let tags;
+if (document.querySelector("#input-tags")) {
+  tags = document.querySelector("#input-tags").value;
+  if (tags === "") {
     // console.log("tags are empty");
     tags = [];
   } else {

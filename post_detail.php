@@ -4,12 +4,6 @@
 include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
-if (empty($_SESSION['id'])) {
-    $currentId = "";
-} else {
-    $currentId = $_SESSION['id'];
-}
-
 
 if (empty($_GET['id'])) {
     header("Location: index.php");
@@ -41,8 +35,6 @@ $userId = Post::getById($_GET['id'])[0];
 
 //reporting
 
-?>
-
 if(!empty($_POST)) {
     try{
         
@@ -50,7 +42,7 @@ if(!empty($_POST)) {
         
         $comment = new Comment();
         $comment->setComment($_POST['comment']);
-        $comment->setUserId($currentId);
+        $comment->setUserId($userId);
         $comment->setPostId($id);
         $comment->Save();
 
@@ -89,9 +81,6 @@ var_dump($profile);*/
 //var_dump($userName);
 
 //var_dump($profile);
-
-
-
 
 ?><!DOCTYPE html>
 <html lang="en">
