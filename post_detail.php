@@ -29,7 +29,6 @@ if (empty($post["id"] || empty($post["user_id"]))) {
 }
 
 $user = User::getInfo($post["user_id"])[0];
-<<<<<<< HEAD
 
 //checking if the post is from the person that's logged in
 if (empty($_SESSION['id'])) {
@@ -43,8 +42,6 @@ $userId = Post::getById($_GET['id'])[0];
 //reporting
 
 ?>
-=======
->>>>>>> f16
 
 if(!empty($_POST)) {
     try{
