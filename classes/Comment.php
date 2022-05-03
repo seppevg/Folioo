@@ -49,7 +49,7 @@ class Comment implements iProject
         $statement = $conn->prepare("SELECT username, image FROM users WHERE id = :userId;");
         $statement->bindValue(':userId', $userId);
         $statement->execute();
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getByUserId($id){
@@ -57,24 +57,8 @@ class Comment implements iProject
         $statement = $conn->prepare("SELECT user_id FROM comments WHERE post_id = :id;");
         $statement->bindValue(':id', $id);
         $statement->execute();
-        $postId = intval($statement->fetchColumn());
-
-        if ($postId !== 0) {
-            
-            return $postId;
-
-            /*$conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT user_id FROM comments;");
-            $statement->execute();
-
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $comment[] = $row;
-            }
-            return $comment;*/
-        } else {
-            throw new Exception("No comments yet. Be the first one!");
-        }
-
+        $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $comments;
     }
 
     /**

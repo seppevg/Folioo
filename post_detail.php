@@ -32,7 +32,7 @@ $user = User::getInfo($post["user_id"])[0];
 
 if(!empty($_POST)) {
     try{
-        $userName = Comment::getByUserId($id);
+        
         //var_dump($userName);
         
         $comment = new Comment();
@@ -50,7 +50,33 @@ if(!empty($_POST)) {
 
 
 $comments = Comment::getAllCommentsPost($id);
-$profile = Comment::getUser($userName);
+//var_dump($comments);
+$userName = Comment::getByUserId($id);
+//var_dump($userName);
+foreach($userName as $un){
+    $profiles = Comment::getUser($un['user_id']);
+
+}
+/*for ($i = 0; $i < count($profiles); $i++){
+    $profile = $profiles[$i];
+    var_dump(count($profiles));
+}*/
+
+/*$profile = $profiles[0];
+var_dump($profile);*/
+//var_dump($profiles);
+//$profile = $profiles;
+//var_dump($profiles);
+
+
+
+
+
+
+//var_dump($userName);
+
+//var_dump($profile);
+
 
 
 
@@ -139,10 +165,14 @@ $profile = Comment::getUser($userName);
             <form action="" method="post">
                 <ul id="listupdates">
                     <?php foreach($comments as $c):?>
-                        <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
-                        <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
+                        <?php $profiles = Comment::getUser($un['user_id']);
+                        foreach($profiles as $p):?>
+                            <img class="project-author-picture" src="./uploads/profiles/<?php echo $p['image']; ?>" alt="profile picture">
+                            <h4 class="project-author-username"><?php echo $p['username']; ?></h4>
                         <p><?php echo $c['comment']; ?></p>
                     <?php endforeach;?>
+                    <?php endforeach;?>
+
                 </ul>
 
                 <input type="text" name="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
