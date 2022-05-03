@@ -199,6 +199,48 @@ function changeFollowState(e, id, userId) {
     });
 }
 
+function changeShowcaseState(postId) {
+
+  showcaseIcon = document.getElementById(`project-picture-${postId}`);
+  let clickedId = postId;
+  let showcaseState = "";
+
+  if (showcaseIcon.classList.contains("showcase-icon-active")) {
+    showcaseState = "1"
+  } else {
+    showcaseState = "0"
+  }
+
+  // console.log(clickedId);
+  // console.log(showcaseState);
+
+  let data = new FormData();
+  data.append("postId", clickedId);
+  data.append("state", showcaseState);
+
+  fetch("./ajax/showcase_post.php", {
+    method: "POST",
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (
+        data.status === "success" &&
+        data.message === "Post has been added to showcase"
+      ) {
+        console.log('Added!');
+        showcaseIcon.classList.toggle("showcase-icon-active");
+      } else {
+        console.log('Deleted!');
+        showcaseIcon.classList.remove("showcase-icon-active");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
 // AJAX REPORT
 function postReporting(e, id, action) {
   let report = document.getElementById("post-report");

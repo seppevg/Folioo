@@ -125,7 +125,7 @@ class Post implements iPost
     public function save()
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO posts(user_id, title, tags, image, text) VALUES (:userId, :title, :tags, :image, :text);");
+        $statement = $conn->prepare("INSERT INTO posts(user_id, title, tags, image, text, showcase) VALUES (:userId, :title, :tags, :image, :text, 0);");
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':title', $this->title);
         $statement->bindValue(':tags', $this->tags);
@@ -154,7 +154,7 @@ class Post implements iPost
     public static function getAllFromUser($id)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id=:id");
+        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = :id ORDER BY id DESC;");
         $statement->bindValue(":id", $id);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -241,5 +241,28 @@ class Post implements iPost
     {
         $this->id = $id;
         return $this;
+    }
+
+    public static function checkShowcaseState($postId) {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT showcase FROM posts WHERE id = :postId;");
+        $statement->bindValue(":postId", $postId);
+        $statement->execute();
+        $showcase = $statement->fetch(PDO::FETCH_ASSOC);
+        return $showcase['showcase'];
+    }
+
+    public static function addToShowcase($postId) {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET showcase = 1 WHERE id = :postId;");
+        $statement->bindValue(":postId", $postId);
+        $statement->execute();
+    }
+
+    public static function removeFromShowcase($postId) {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET showcase = 0 WHERE id = :postId;");
+        $statement->bindValue(":postId", $postId);
+        $statement->execute();
     }
 }

@@ -28,7 +28,7 @@ if ($pageCounter !== 1) {
 
 $loadedPosts = ($pageCounter - 1)*10;
 $posts = Post::getAll($loadedPosts);
-
+var_dump($posts);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,8 +88,9 @@ $posts = Post::getAll($loadedPosts);
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>
+                <?php endif; if (count($posts) > 9): ?>
+                    <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" <?php echo $buttonStyling; ?> >Next page</a>
                 <?php endif; ?>
-                <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" <?php echo $buttonStyling; ?> >Next page</a>
             </div>
             <br><br><br><br><br><br><br><br>
         <?php endif; ?>

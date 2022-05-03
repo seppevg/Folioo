@@ -245,6 +245,7 @@ body {
 
 .project {
   margin: 0em 2em 0em 2em;
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 350px;
@@ -253,6 +254,40 @@ body {
 .project-picture {
   background: #fefefe;
   border-radius: 10px;
+}
+
+.allUserPosts article {
+  position: relative;
+  max-width: 350px;
+}
+
+.allUserPosts article .project {
+  margin: 0 0 1em 0;
+}
+
+.project-picture-overlay {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 9px;
+  background-color: white;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.showcase-icon {
+  max-width: 20px;
+  fill: #A7A7A7;
+  stroke: #A7A7A7;
+}
+
+.showcase-icon-active {
+  fill: var(--IMDblue);
+  stroke: var(--IMDblue);
 }
 
 .project-info {
@@ -610,6 +645,7 @@ img.post-profile {
   text-align: center;
   color: #a7a7a7;
 }
+
 /* SEARCH */
 
 .searchbtn {
@@ -659,6 +695,6 @@ img.post-profile {
   margin-top: 2em;
 }
 
-.search .modal-content h3{
+.search .modal-content h3 {
   color: var(--IMDblue);
 }
