@@ -54,7 +54,7 @@ if(!empty($_POST)) {
 }
 
 
-$comments = Comment::getAllCommentsPost($id);
+$comments = Comment::getAll($id);
 
 
 ?><!DOCTYPE html>
@@ -181,7 +181,7 @@ $comments = Comment::getAllCommentsPost($id);
                             <div class="comment-box">
                                 <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
                                 <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
-                                <p><?php echo $c['comment']; ?></p>
+                                <p><?php echo htmlspecialchars($c['comment']); ?></p>
                             </div>
                     <?php endforeach;?>
 

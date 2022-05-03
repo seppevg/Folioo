@@ -5,7 +5,7 @@ class Comment implements iProject
     private $userId; 
     private $postId;
     
-    public static function getAllCommentsPost($id){
+    public static function getAll($id){
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM comments WHERE post_id = :id;");
         $statement->bindValue(':id', $id);
