@@ -85,12 +85,14 @@ if (document.querySelector(".tags-input")) {
 let comment = document.querySelector(".comment-icon");
 let modal2 = document.getElementById("modal2");
 let xy = document.querySelector(".modal-close2");
-comment.addEventListener("click", function () {
-    modal2.classList.toggle("display");
+comment.addEventListener("click", function (e) {
+  e.preventDefault();
+  modal2.classList.toggle("display");
 });
 
-xy.addEventListener("click", function () {
-    modal2.classList.remove("display");
+xy.addEventListener("click", function (e) {
+  e.preventDefault();
+  modal2.classList.remove("display");
 });
 
 //AJAX FOR REGISTER.PHP
@@ -302,5 +304,25 @@ function postReporting(e, id, action) {
 //AJAX COMMENT 
 document.querySelector("#btnAddComment").addEventListener("click", function(e){
   e.preventDefault();
-  console.log("dslkjfs");
+  let comment = document.querySelector("#comment").value;
+  let postid = this.dataset.postid;
+  //console.log(postid);
+
+  let data = new FormData();
+
+  data.append('comment', comment);
+  data.append('postid', postid);
+
+  fetch("./ajax/save_comment.php", {
+    method: 'POST',
+    body: data
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log('Success:', result);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 });
+

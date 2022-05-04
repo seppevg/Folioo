@@ -33,7 +33,7 @@ if (empty($_SESSION['id'])) {
 }
 
 $userId = Post::getById($_GET['id'])[0];
-
+//var_dump($userId['id']);
 
 $commentsCount = Comment::countComments($post['id']);
 //reporting
@@ -184,8 +184,6 @@ $comments = Comment::getAll($id);
                                 <p><?php echo htmlspecialchars($c['comment']); ?></p>
                             </div>
                     <?php endforeach;?>
-
-
                 </ul>
 
                 <div class="comment-box">
@@ -193,20 +191,19 @@ $comments = Comment::getAll($id);
                         $currentUser = User::getInfo($sessionId);
                         foreach($currentUser as $cu):
                     ?>
-                    <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
-                    <input type="text" name="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
-                    <a href="#" id="btnAddComment"><img src="./assets/add.svg" alt="Add icon"></a>
-                <?php endforeach;?>
-                </div>
-
-                
+                        <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
+                        <input type="text" name="comment" id="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
+                        <a href="#" id="btnAddComment" data-postid="<?php echo $userId['id']?>"><img src="./assets/add.svg" alt="Add icon"></a>
+                    <?php endforeach;?>
+                </div>                
             </form>
         </div>
+
         <?php if(isset($error)):?>
-        <div>
-            <p class="error"><?php echo $error ?></p>
-        </div>
-    <?php endif;?>
+            <div>
+                <p class="error"><?php echo $error ?></p>
+            </div>
+        <?php endif;?>
     </section>
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
