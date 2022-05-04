@@ -320,7 +320,9 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
   .then(response => response.json())
   .then(data => {
     if(data.status === "success") {
-      let p = `<p>${data.data.comment}</p>`
+      let p = `<p>${data.data.comment}</p>`;
+      document.querySelector("#listupdates").innerHTML += p;
+      document.querySelector("#comment").value = "";
     }
 
     console.log('Success:', data);
