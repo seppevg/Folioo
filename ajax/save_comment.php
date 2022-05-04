@@ -2,25 +2,28 @@
     require_once("../bootstrap.php");
 
     if(!empty($_POST)){
+        
+        session_start();
         $sessionId = $_SESSION['id'];
         $text = $_POST['comment'];
+        $postId = $_POST['postid'];
 
         try {
-            $comment = new Comment();
-            $comment->setComment($text);
-            $comment->setUserId($sessionId);
-            $comment->setPostId($_POST['postid']);
-            $comment->Save();
+            $c= new Comment();
+            $c->setComment($text);
+            $c->setUserId($sessionId);
+            $c->setPostId($postId);
+            $c->Save();
     
             $result = [
                 "status" => "success",
-                "message" => "Comment saved",
+                "message" => "Comment was saved.",
                 "data" => [
                     "comment" => htmlspecialchars($text)
                 ]
             ];
-        }
-        catch (Throwable $t) {
+
+        } catch (Throwable $t) {
             $result = [
                 "status" => "error",
                 "message" => "Something went wrong while saving your comment."

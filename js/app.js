@@ -303,14 +303,14 @@ function postReporting(e, id, action) {
 
 //AJAX COMMENT 
 document.querySelector("#btnAddComment").addEventListener("click", function(e){
-  e.preventDefault();
-  let comment = document.querySelector("#comment").value;
+
+  let text = document.querySelector("#comment").value;
   let postid = this.dataset.postid;
   //console.log(postid);
 
   let data = new FormData();
 
-  data.append('comment', comment);
+  data.append('comment', text);
   data.append('postid', postid);
 
   fetch("./ajax/save_comment.php", {
@@ -318,11 +318,17 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
     body: data
   })
   .then(response => response.json())
-  .then(result => {
-    console.log('Success:', result);
+  .then(data => {
+    if(data.status === "success") {
+      let p = `<p>${data.data.comment}</p>`
+    }
+
+    console.log('Success:', data);
   })
   .catch(error => {
     console.error('Error:', error);
   });
+
+  e.preventDefault();
 });
 
