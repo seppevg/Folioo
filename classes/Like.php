@@ -51,4 +51,14 @@ class Like implements iProject
         $statement->bindValue(':userId', $this->userId);
         return $statement->execute();
     }
+
+    public static function getLikes($postId){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT count(*) as count FROM likes WHERE post_id = :postId;");
+        $statement->bindValue(":postId", $postId);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+        
+    }
 }
