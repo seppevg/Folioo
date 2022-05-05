@@ -302,6 +302,13 @@ function postReporting(e, id, action) {
 }
 
 //AJAX COMMENT 
+document.querySelector("#comment").addEventListener("keypress", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    document.querySelector("#btnAddComment").click();
+
+  }
+})
 document.querySelector("#btnAddComment").addEventListener("click", function(e){
 
   let text = document.querySelector("#comment").value;
