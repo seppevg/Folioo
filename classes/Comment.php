@@ -39,7 +39,7 @@ class Comment implements iProject
 
     public function Save(){
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO comments(post_id, user_id, comment) VALUES (:postId, :userId, :comment);");
+        $statement = $conn->prepare("INSERT INTO comments (post_id, user_id, comment, date_created) VALUES (:postId, :userId, :comment, NOW());");
         $statement->bindValue(':postId', $this->postId);
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':comment', $this->getComment());
