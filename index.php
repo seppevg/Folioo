@@ -28,6 +28,7 @@ if ($pageCounter !== 1) {
 $loadedPosts = ($pageCounter - 1)*10;
 $posts = Post::getAll($loadedPosts);
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +60,7 @@ $posts = Post::getAll($loadedPosts);
             <div class="allPosts">
                 <?php foreach($posts as $post): ?>
                     <?php $profile = Post::getUser($post['user_id']); ?>
+                    <?php $commentsCount = Comment::countComments($post['id']);?>
                     <article>
                     <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
                         <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
@@ -76,7 +78,7 @@ $posts = Post::getAll($loadedPosts);
                                     </div>
                                     <div class="project-interactions-comment">
                                         <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                                        <h4>number</h4>
+                                        <h4><?php echo $commentsCount?></h4>
                                     </div>
                                 </div>
                             <?php endif; ?>
