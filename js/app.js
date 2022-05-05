@@ -356,3 +356,7 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
   e.preventDefault();
 });
 
+document.querySelector(".like").addEventListener("click", (e) =>{
+  //console.log("👍");
+});
+

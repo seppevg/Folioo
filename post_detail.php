@@ -93,10 +93,14 @@ $comments = Comment::getAll($id);
             likes en comment icoontjes
         </div> -->
         <div class="project-interactions">
+
             <div class="project-interactions-like">
-                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                <h4><?php echo $likes ?></h4>
+                <a href="#" class="like">                
+                    <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                    <h4><?php echo $likes ?></h4>
+                </a>
             </div>
+            
             <div class="project-interactions-comment">
                 <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
                 <h4 class="number-of-comments"><?php echo $commentsCount?></h4>

@@ -302,6 +302,7 @@ body {
   flex-direction: row;
   align-items: center;
   text-decoration: none;
+  color: black;
 }
 
 .project-author-picture {
@@ -365,6 +366,16 @@ body {
   max-width: 27px;
   max-height: 24px;
   margin-right: 5px;
+}
+
+.like {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: black;
 }
 
 /* PROFILE */
