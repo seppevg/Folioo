@@ -465,6 +465,11 @@ body {
   cursor: pointer;
 }
 
+.modal2 {
+  overflow: auto;
+  max-height: 70%;
+}
+
 .modal-icon2 {
   max-width: 27px;
   max-height: 24px;
@@ -769,4 +774,6 @@ img.post-profile {
 
 #listupdates {
   padding: 0px;
+  overflow-y: scroll;
+  max-height: 350px;
 }

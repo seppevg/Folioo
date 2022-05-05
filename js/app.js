@@ -308,7 +308,8 @@ document.querySelector("#comment").addEventListener("keypress", function(e){
     document.querySelector("#btnAddComment").click();
 
   }
-})
+});
+
 document.querySelector("#btnAddComment").addEventListener("click", function(e){
 
   let text = document.querySelector("#comment").value;
