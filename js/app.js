@@ -308,7 +308,8 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
   let postid = this.dataset.postid;
   let username = this.dataset.username;
   let image = this.dataset.image;
-  //console.log(image);
+  let number = this.dataset.number;
+  //console.log(number);
 
   let data = new FormData();
 
@@ -316,6 +317,7 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
   data.append('postid', postid);
   data.append('username', username);
   data.append('image', image);
+  data.append('number', number);
   
   fetch("./ajax/save_comment.php", {
     method: 'POST',
@@ -329,11 +331,10 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
       let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
       let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
       let div = `<div class="comment-box"> ${pImage + name + p }</div>`;
-      //let usernameStyle = document.querySelector(".project-author-username-comment");
       //console.log(usernameStyle);
-      document.querySelector("#listupdates").innerHTML += div;
 
-      //document.querySelector("#listupdates").innerHTML += name;
+      document.querySelector(".number-of-comments").innerHTML ++;
+      document.querySelector("#listupdates").innerHTML += div;
       document.querySelector("#comment").value = "";
      
     }

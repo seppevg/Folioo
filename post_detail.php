@@ -98,7 +98,7 @@ $comments = Comment::getAll($id);
             </div>
             <div class="project-interactions-comment">
                 <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                <h4><?php echo $commentsCount?></h4>
+                <h4 class="number-of-comments"><?php echo $commentsCount?></h4>
             </div>
         </div>
         <div>
@@ -196,7 +196,8 @@ $comments = Comment::getAll($id);
                         <a href="#" id="btnAddComment" 
                             data-postid="<?php echo $userId['id']?>" 
                             data-username="<?php echo  $profile['username']?>"
-                            data-image="<?php echo  $profile['image']?>">
+                            data-image="<?php echo  $profile['image']?>"
+                            data-number="<?php echo  $commentsCount?>">
                             <img src="./assets/add.svg" alt="Add icon">
                         </a>
                     <?php endforeach;?>
