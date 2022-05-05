@@ -8,6 +8,7 @@
         $text = $_POST['comment'];
         $postId = $_POST['postid'];
         $username = $_POST['username'];
+        $image = $_POST['image'];
 
         try {
             $c= new Comment();
@@ -20,6 +21,7 @@
                 "status" => "success",
                 "message" => "Comment was saved.",
                 "data" => [
+                    "image" => $image,
                     "username" => $username,
                     "comment" => htmlspecialchars($text)
                 ]
