@@ -94,5 +94,7 @@ class Comment implements iProject
         $query->execute();
         $comments = intval($query->fetchColumn());
         return($comments);
+        
+        
     }
 }
