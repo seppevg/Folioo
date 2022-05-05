@@ -7,6 +7,7 @@
         $sessionId = $_SESSION['id'];
         $text = $_POST['comment'];
         $postId = $_POST['postid'];
+        $username = $_POST['username'];
 
         try {
             $c= new Comment();
@@ -19,6 +20,7 @@
                 "status" => "success",
                 "message" => "Comment was saved.",
                 "data" => [
+                    "username" => $username,
                     "comment" => htmlspecialchars($text)
                 ]
             ];

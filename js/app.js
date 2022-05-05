@@ -306,13 +306,15 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
 
   let text = document.querySelector("#comment").value;
   let postid = this.dataset.postid;
-  //console.log(postid);
+  let username = this.dataset.username;
+  //console.log(username);
 
   let data = new FormData();
 
   data.append('comment', text);
   data.append('postid', postid);
-
+  data.append('username', username);
+  
   fetch("./ajax/save_comment.php", {
     method: 'POST',
     body: data
@@ -320,9 +322,17 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
   .then(response => response.json())
   .then(data => {
     if(data.status === "success") {
+
       let p = `<p>${data.data.comment}</p>`;
-      document.querySelector("#listupdates").innerHTML += p;
+      let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
+      let div = `<div class="comment-box"> ${name + p }</div>`;
+      //let usernameStyle = document.querySelector(".project-author-username-comment");
+      //console.log(usernameStyle);
+      document.querySelector("#listupdates").innerHTML += div;
+
+      //document.querySelector("#listupdates").innerHTML += name;
       document.querySelector("#comment").value = "";
+     
     }
 
     console.log('Success:', data);

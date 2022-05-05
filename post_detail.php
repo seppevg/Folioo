@@ -193,7 +193,12 @@ $comments = Comment::getAll($id);
                     ?>
                         <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
                         <input type="text" name="comment" id="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
-                        <a href="#" id="btnAddComment" data-postid="<?php echo $userId['id']?>"><img src="./assets/add.svg" alt="Add icon"></a>
+                        <a href="#" id="btnAddComment" 
+                            data-postid="<?php echo $userId['id']?>" 
+                            data-username="<?php echo  $profile['username']?>"
+                            data-image="<?php echo  $profile['image']?>">
+                            <img src="./assets/add.svg" alt="Add icon">
+                        </a>
                     <?php endforeach;?>
                 </div>                
             </form>
