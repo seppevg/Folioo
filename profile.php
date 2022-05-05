@@ -154,7 +154,10 @@ $posts = Post::getAllFromUser($id);
 
                     <div class="allPosts">
                         <?php foreach ($posts as $post) : ?>
-                            <?php $commentsCount = Comment::countComments($post['id']);?>
+                            <?php 
+                                $commentsCount = Comment::countComments($post['id']);
+                                $likes = Like::getLikes($post['id']);
+                            ?>
                             <article>
                                 <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
                                     <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
@@ -163,7 +166,7 @@ $posts = Post::getAllFromUser($id);
                                     <div class="project-interactions">
                                         <div class="project-interactions-like">
                                             <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                            <h4>number</h4>
+                                            <h4><?php echo $likes?></h4>
                                         </div>
                                         <div class="project-interactions-comment">
                                             <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
