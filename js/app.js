@@ -375,6 +375,7 @@ document.querySelector(".like").addEventListener("click", function(e){
       .then(data => {
         if(data.status === "success"){
           document.querySelector(".numberOfLikes").innerHTML ++;
+          document.querySelector("#like-icon").src = "./assets/heart-full.svg";
         }
         console.log("Success:", data);
       })
