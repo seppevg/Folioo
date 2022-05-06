@@ -98,7 +98,7 @@ $comments = Comment::getAll($id);
                 <div class="project-interactions-like">
                     <a href="#" class="like">                
                         <img data-post="<?php echo $userId['id']?>" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                        <h4><?php echo $likes?></h4>
+                        <h4 class="numberOfLikes"><?php echo $likes?></h4>
                     </a>
                 </div>
                 

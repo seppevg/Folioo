@@ -361,7 +361,7 @@ document.querySelector(".like").addEventListener("click", function(e){
   
 
   let post = e.target.dataset.post; 
-  console.log(post);
+  //console.log(post);
   e.preventDefault();
 
   let data = new FormData();
@@ -373,6 +373,9 @@ document.querySelector(".like").addEventListener("click", function(e){
   })
       .then(response => response.json())
       .then(data => {
+        if(data.status === "success"){
+          document.querySelector(".numberOfLikes").innerHTML ++;
+        }
         console.log("Success:", data);
       })
       .catch(error => {
