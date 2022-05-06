@@ -47,8 +47,8 @@ class Like implements iProject
     public function Save(){
         $conn = DB::getInstance();
         $statement = $conn->prepare("INSERT INTO likes (post_id, user_id) VALUES (:postId, :userId);");
-        $statement->bindValue(':postId', $this->postId);
-        $statement->bindValue(':userId', $this->userId);
+        $statement->bindValue(':postId', $this->getPostId());
+        $statement->bindValue(':userId', $this->getUserId());
         return $statement->execute();
     }
 

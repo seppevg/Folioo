@@ -17,6 +17,7 @@ if (sizeof($posts) != 1) {
 }
 
 $post = $posts[0];
+//var_dump($post);
 
 if (empty($post["id"] || empty($post["user_id"]))) {
     header("Location: index.php");
@@ -92,20 +93,21 @@ $comments = Comment::getAll($id);
         <!-- <div>
             likes en comment icoontjes
         </div> -->
-        <div class="project-interactions">
-
-            <div class="project-interactions-like">
-                <a href="#" class="like">                
-                    <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                    <h4><?php echo $likes ?></h4>
-                </a>
+        <form action="" method="post" name="like">
+            <div class="project-interactions">
+                <div class="project-interactions-like">
+                    <a href="#" class="like" data-post="1">                
+                        <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                        <h4><?php echo $likes?></h4>
+                    </a>
+                </div>
+                
+                <div class="project-interactions-comment">
+                    <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                    <h4 class="number-of-comments"><?php echo $commentsCount?></h4>
+                </div>
             </div>
-            
-            <div class="project-interactions-comment">
-                <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                <h4 class="number-of-comments"><?php echo $commentsCount?></h4>
-            </div>
-        </div>
+        </form>
         <div>
             <h4 class="post-text"><?php echo $post['text']; ?></h4>
         </div>
