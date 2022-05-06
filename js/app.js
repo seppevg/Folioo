@@ -356,3 +356,32 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
   e.preventDefault();
 });
 
+document.querySelector(".like").addEventListener("click", function(e){
+  //console.log("👍");
+  
+
+  let post = e.target.dataset.post; 
+  //console.log(post);
+  e.preventDefault();
+
+  let data = new FormData();
+  data.append("post", post);
+  
+  fetch('./ajax/save_like.php', {
+      method: 'POST', 
+      body: data
+  })
+      .then(response => response.json())
+      .then(data => {
+        if(data.status === "success"){
+          document.querySelector(".numberOfLikes").innerHTML ++;
+          document.querySelector("#like-icon").src = "./assets/heart-full.svg";
+        }
+        console.log("Success:", data);
+      })
+      .catch(error => {
+      console.error("Error:", error);
+  });
+
+});
+
