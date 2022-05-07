@@ -39,7 +39,7 @@ $userId = Post::getById($_GET['id'])[0];
 $commentsCount = Comment::countComments($post['id']);
 $likes = Like::getLikes($post['id']);
 $checkLikes = Like::liked($post['id'], $sessionId);
-//var_dump($checkLikes);
+
 //reporting
 
 if(!empty($_POST)) {
