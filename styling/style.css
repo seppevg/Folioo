@@ -365,8 +365,14 @@ body {
   width: 100%;
 }
 
-.like-icon,
+
 .comment-icon {
+  max-width: 27px;
+  max-height: 24px;
+  margin-right: 5px;
+}
+
+#like-icon {
   max-width: 27px;
   max-height: 24px;
   margin-right: 5px;

@@ -3,9 +3,8 @@
 
     if(!empty($_POST)){
 
-        $userId = $_POST['user'];
-        $postId = $_POST['post'];
-
+        $userId = $_POST['userId'];
+        $postId = $_POST['postId'];
 
         try {
             $output = "";

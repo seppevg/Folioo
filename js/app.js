@@ -216,6 +216,7 @@ function changeFollowState(e, id, userId) {
 function changeShowcaseState(postId) {
 
   showcaseIcon = document.getElementById(`project-picture-${postId}`);
+  //console.log(showcasiIcon);
   let clickedId = postId;
   let showcaseState = "";
 

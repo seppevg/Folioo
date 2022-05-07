@@ -1,14 +1,16 @@
-document.querySelector(".like").addEventListener("click", function(e){
-    //console.log("👍");
+function postLiked(e, postId, userId) {
+    console.log("👍");
   
-    let post = e.target.dataset.post; 
-    let user = e.target.dataset.user;
-  
-    e.preventDefault();
+    let postLiked = document.querySelector(`.like-icon-${postId}`);
+    let postLikedNumber = document.querySelector(`.numberOfLikes-${postId}`);
+    console.log(postLikedNumber);
+
+    let post = postId;
+    let user = userId;
   
     let data = new FormData();
-    data.append("post", post);
-    data.append("user", user);
+    data.append("postId", post);
+    data.append("userId", user);
   
     
     fetch('./ajax/save_like.php', {
@@ -21,11 +23,12 @@ document.querySelector(".like").addEventListener("click", function(e){
             data.status === "success" &&
             data.message === "Like was saved"
           ){
-            document.querySelector(".numberOfLikes").innerHTML ++;
-            document.querySelector("#like-icon").src = "./assets/heart-full.svg";
+            //postLiked;
+            postLikedNumber.innerHTML ++;
+            postLiked.src = "./assets/heart-full.svg";
           } else {
-            document.querySelector(".numberOfLikes").innerHTML --;
-            document.querySelector("#like-icon").src = "./assets/heart-empty.svg";
+            postLikedNumber.innerHTML --;
+            postLiked.src = "./assets/heart-empty.svg";
           }
           console.log("Success:", data);
         })
@@ -33,4 +36,5 @@ document.querySelector(".like").addEventListener("click", function(e){
         console.error("Error:", error);
     });
   
-  });
+  
+}

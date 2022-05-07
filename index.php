@@ -79,14 +79,14 @@ $posts = Post::getAll($loadedPosts);
                                 </a>
                                 <form action="" method="post" name="like">
                                     <div class="project-interactions">
-                                        <div class="project-interactions-like">
+                                        <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
                                             <a href="#" class="like"> 
                                                 <?php if($checkLikes == "0"):?>               
-                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                                    <h4 class="numberOfLikes"><?php echo $likes?></h4>
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
                                                 <?php elseif($checkLikes == "1"):?> 
-                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon" src="./assets/heart-full.svg" alt="heart or like icon">
-                                                    <h4 class="numberOfLikes"><?php echo $likes?></h4>
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
                                                 <?php endif;?>
                                             </a>
                                         </div>
@@ -113,6 +113,8 @@ $posts = Post::getAll($loadedPosts);
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
         <script src="./js/like.js"></script>
+
+
 
     </div>
     
