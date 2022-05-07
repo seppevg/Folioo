@@ -104,7 +104,7 @@ $comments = Comment::getAll($id);
                             <h4 class="numberOfLikes"><?php echo $likes?></h4>
                         <?php elseif($checkLikes == "1"):?> 
                             <img data-post="<?php echo $userId['id']?>" data-user="<?php echo $sessionId?>" id="like-icon" class="like-icon" src="./assets/heart-full.svg" alt="heart or like icon">
-                        <h4 class="numberOfLikes"><?php echo $likes?></h4>
+                            <h4 class="numberOfLikes"><?php echo $likes?></h4>
                         <?php endif;?>
                     </a>
                 </div>

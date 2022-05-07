@@ -8,10 +8,6 @@
 
 
         try {
-            /*$like = new Like();
-            $like->setPostId($postId);
-            $like->setUserId($userId);
-            $like->Save();*/
             $output = "";
             $conn = DB::getInstance();
             $statement = $conn->prepare("SELECT * FROM likes WHERE post_id = :postId AND user_id = :userId;");
