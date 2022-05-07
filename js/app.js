@@ -358,16 +358,16 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
 
 document.querySelector(".like").addEventListener("click", function(e){
   //console.log("👍");
-  
 
   let post = e.target.dataset.post; 
   let user = e.target.dataset.user;
-  console.log(user);
+
   e.preventDefault();
 
   let data = new FormData();
   data.append("post", post);
   data.append("user", user);
+
   
   fetch('./ajax/save_like.php', {
       method: 'POST', 

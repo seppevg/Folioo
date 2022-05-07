@@ -64,7 +64,7 @@ class Like implements iProject
         
     }
 
-    public static function check($postId, $userId)
+    public static function liked($postId, $userId)
     {
         $output = "";
         $conn = DB::getInstance();
@@ -74,10 +74,10 @@ class Like implements iProject
         $statement->execute();
         $count = $statement->rowCount();
         if ($count > 0) {
-            $output = "Unlike";
+            $output = "1";
             return $output;
         } else {
-            $output = "Like";
+            $output = "0";
             return $output;
         }
     }

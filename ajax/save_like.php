@@ -2,10 +2,10 @@
     require_once('../bootstrap.php');
 
     if(!empty($_POST)){
-        /*session_start();
-        $sessionId = $_SESSION['id'];*/
+
         $userId = $_POST['user'];
         $postId = $_POST['post'];
+
 
         try {
             /*$like = new Like();
@@ -21,6 +21,7 @@
             $count = $statement->rowCount();
 
             if ($count > 0) {
+                
                 $conn = DB::getInstance();
                 $statement = $conn->prepare("DELETE FROM likes WHERE post_id = :postId AND user_id = :userId;");
                 $statement->bindValue(":postId", $postId);
@@ -30,7 +31,8 @@
                 $result = [
                     "status" => "success",
                     "message" => "Onlike post"
-                ];
+                ];                
+
             } else {
                 $conn = DB::getInstance();
                 $statement = $conn->prepare("INSERT INTO likes (post_id, user_id) VALUES (:postId, :userId);");
