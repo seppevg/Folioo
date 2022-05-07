@@ -242,6 +242,7 @@ $posts = Post::getAllFromUser($id);
                     </div>
                     <script src="./js/app.js"></script>
                     <script src="./js/delete.js"></script>
+                    <script src="./js/like.js"></script>
                     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

@@ -1,5 +1,5 @@
 <?php
-class Like implements iProject
+class Like
 {
     private $userId; 
     private $postId;
@@ -42,15 +42,6 @@ class Like implements iProject
         $this->postId = $postId;
 
         return $this;
-    }
-
-    public function Save()
-    {
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO likes (post_id, user_id) VALUES (:postId, :userId);");
-        $statement->bindValue(':postId', $this->getPostId());
-        $statement->bindValue(':userId', $this->getUserId());
-        return $statement->execute();
     }
 
     public static function getLikes($postId)

@@ -233,6 +233,7 @@ $comments = Comment::getAll($id);
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
     <script src="./js/app.js"></script>
+    <script src="./js/like.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

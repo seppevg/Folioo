@@ -26,7 +26,7 @@
 
                 $result = [
                     "status" => "success",
-                    "message" => "Onlike post"
+                    "message" => "Unlike post"
                 ];                
 
             } else {

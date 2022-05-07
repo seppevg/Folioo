@@ -112,7 +112,7 @@ $posts = Post::getAll($loadedPosts);
         <?php endif; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
-        <script src="./js/app.js"></script>
+        <script src="./js/like.js"></script>
 
     </div>
     
