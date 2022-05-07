@@ -29,6 +29,8 @@ $loadedPosts = ($pageCounter - 1)*10;
 $posts = Post::getAll($loadedPosts);
 
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +65,7 @@ $posts = Post::getAll($loadedPosts);
                         $profile = Post::getUser($post['user_id']); 
                         $commentsCount = Comment::countComments($post['id']);
                         $likes = Like::getLikes($post['id']);
+                        $checkLikes = Like::liked($post['id'], $id);
                     ?>
                     <article>
                     <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
@@ -74,16 +77,25 @@ $posts = Post::getAll($loadedPosts);
                                     <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
                                     <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
                                 </a>
-                                <div class="project-interactions">
-                                    <div class="project-interactions-like">
-                                        <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                        <h4><?php echo $likes?></h4>
+                                <form action="" method="post" name="like">
+                                    <div class="project-interactions">
+                                        <div class="project-interactions-like">
+                                            <a href="#" class="like"> 
+                                                <?php if($checkLikes == "0"):?>               
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes"><?php echo $likes?></h4>
+                                                <?php elseif($checkLikes == "1"):?> 
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon" src="./assets/heart-full.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes"><?php echo $likes?></h4>
+                                                <?php endif;?>
+                                            </a>
+                                        </div>
+                                        <div class="project-interactions-comment">
+                                            <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                                            <h4><?php echo $commentsCount?></h4>
+                                        </div>
                                     </div>
-                                    <div class="project-interactions-comment">
-                                        <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                                        <h4><?php echo $commentsCount?></h4>
-                                    </div>
-                                </div>
+                                </form>
                             <?php endif; ?>
                         </div>
                     </article>
@@ -100,6 +112,7 @@ $posts = Post::getAll($loadedPosts);
         <?php endif; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
+        <script src="./js/app.js"></script>
 
     </div>
     

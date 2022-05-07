@@ -157,6 +157,7 @@ $posts = Post::getAllFromUser($id);
                             <?php 
                                 $commentsCount = Comment::countComments($post['id']);
                                 $likes = Like::getLikes($post['id']);
+                                $checkLikes = Like::liked($post['id'], $id);
                             ?>
                             <article>
                                 <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
@@ -165,8 +166,15 @@ $posts = Post::getAllFromUser($id);
                                 <div class="project-info">
                                     <div class="project-interactions">
                                         <div class="project-interactions-like">
-                                            <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                            <h4><?php echo $likes?></h4>
+                                        <a href="#" class="like"> 
+                                                <?php if($checkLikes == "0"):?>               
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes"><?php echo $likes?></h4>
+                                                <?php elseif($checkLikes == "1"):?> 
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon" src="./assets/heart-full.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes"><?php echo $likes?></h4>
+                                                <?php endif;?>
+                                            </a>
                                         </div>
                                         <div class="project-interactions-comment">
                                             <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
