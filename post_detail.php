@@ -197,7 +197,7 @@ $comments = Comment::getAll($id);
                                     <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
                                     <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
                                 </a>
-                                <p><?php echo htmlspecialchars($c['comment']); ?></p>
+                                <p class="posted-comment"><?php echo htmlspecialchars($c['comment']); ?></p>
                             </div>
                     <?php endforeach;?>
                 </ul>
@@ -206,26 +206,18 @@ $comments = Comment::getAll($id);
                     <?php 
                         $currentUser = User::getInfo($sessionId);
                         foreach($currentUser as $cu):
+                            //var_dump($cu);
                     ?>
                         <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
                         <input type="text" name="comment" id="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
-                        <?php if(!empty($comments)):?>
-                            <a href="#" id="btnAddComment" 
-                                data-postid="<?php echo $userId['id']?>" 
-                                data-username="<?php echo $profile['username']?>"
-                                data-image="<?php echo  $profile['image']?>"
-                                data-number="<?php echo  $commentsCount?>">
-                                <img src="./assets/add.svg" alt="Add icon">
-                            </a>
-                        <?php elseif(empty($comments)):?>
-                            <a href="#" id="btnAddComment" 
-                                data-postid="<?php echo $userId['id']?>" 
-                                data-username="<?php echo $cu['username']?>"
-                                data-image="<?php echo  $cu['image']?>"
-                                data-number="<?php echo  $commentsCount?>">
-                                <img src="./assets/add.svg" alt="Add icon">
-                            </a>
-                        <?php endif;?>
+
+                        <a href="#" id="btnAddComment" 
+                            data-postid="<?php echo $userId['id']?>" 
+                            data-username="<?php echo $cu['username']?>"
+                            data-image="<?php echo  $cu['image']?>"
+                            data-number="<?php echo  $commentsCount?>">
+                            <img src="./assets/add.svg" alt="Add icon">
+                        </a>                      
                         
                     <?php endforeach;?>
                 </div>                

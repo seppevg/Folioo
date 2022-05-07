@@ -166,7 +166,7 @@ $posts = Post::getAllFromUser($id);
                                 <div class="project-info">
                                     <div class="project-interactions">
                                         <div class="project-interactions-like">
-                                        <a href="#" class="like"> 
+                                            <a href="#" class="like"> 
                                                 <?php if($checkLikes == "0"):?>               
                                                     <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
                                                     <h4 class="numberOfLikes"><?php echo $likes?></h4>

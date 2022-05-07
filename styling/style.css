@@ -338,6 +338,10 @@ body {
   color: var(--IMDblue);
 }
 
+.posted-comment {
+  padding-left: 30px;
+}
+
 .project-interactions {
   display: flex;
   flex-direction: row;
