@@ -193,7 +193,7 @@ $comments = Comment::getAll($id);
                     <?php foreach($comments as $c):?>
                         <?php $profile = Post::getUser($c['user_id']);?>
                             <div class="comment-box">
-                                <a href="profile.php?id=<?php echo $post['user_id']?>">
+                                <a href="profile.php?id=<?php echo $profile['id']?>">
                                     <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
                                     <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
                                 </a>
