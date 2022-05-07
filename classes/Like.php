@@ -44,7 +44,8 @@ class Like implements iProject
         return $this;
     }
 
-    public function Save(){
+    public function Save()
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("INSERT INTO likes (post_id, user_id) VALUES (:postId, :userId);");
         $statement->bindValue(':postId', $this->getPostId());
@@ -52,7 +53,8 @@ class Like implements iProject
         return $statement->execute();
     }
 
-    public static function getLikes($postId){
+    public static function getLikes($postId)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT count(*) as count FROM likes WHERE post_id = :postId;");
         $statement->bindValue(":postId", $postId);
@@ -60,5 +62,23 @@ class Like implements iProject
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result['count'];
         
+    }
+
+    public static function check($postId, $userId)
+    {
+        $output = "";
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM likes WHERE post_id = :postId AND user_id = :userId;");
+        $statement->bindValue(":postId", $postId);
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
+        $count = $statement->rowCount();
+        if ($count > 0) {
+            $output = "Unlike";
+            return $output;
+        } else {
+            $output = "Like";
+            return $output;
+        }
     }
 }

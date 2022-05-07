@@ -38,6 +38,8 @@ $userId = Post::getById($_GET['id'])[0];
 
 $commentsCount = Comment::countComments($post['id']);
 $likes = Like::getLikes($post['id']);
+$checkLikes = Like::check($id, $userId['id']);
+//var_dump($checkLikes);
 //reporting
 
 if(!empty($_POST)) {
@@ -97,7 +99,7 @@ $comments = Comment::getAll($id);
             <div class="project-interactions">
                 <div class="project-interactions-like">
                     <a href="#" class="like">                
-                        <img data-post="<?php echo $userId['id']?>" id="like-icon" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                        <img data-post="<?php echo $userId['id']?>" data-user="<?php echo $sessionId?>" id="like-icon" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
                         <h4 class="numberOfLikes"><?php echo $likes?></h4>
                     </a>
                 </div>
