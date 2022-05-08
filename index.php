@@ -131,7 +131,7 @@ if(empty($_GET['feed'])){
                     <?php $following = Followers::getAll($id);?>
                         <?php if(empty($following)):?>
                             <div id="no-uploads">
-                                <img src="./assets/no-uploads.svg" alt="No uploads yet">
+                                <img src="./assets/not_following.svg" alt="Not following anyone yet">
                             </div>
                         <?php endif;?>
                     <?php 
