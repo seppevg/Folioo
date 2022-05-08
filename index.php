@@ -126,12 +126,18 @@ if(empty($_GET['feed'])){
                 <?php endif;?>
 
                 <?php if($url === "following"):?>
+                    <?php $following = Followers::getAll($id);?>
+                        <?php if(empty($following)):?>
+                            <div id="no-uploads">
+                                <img src="./assets/no-uploads.svg" alt="No uploads yet">
+                            </div>
+                        <?php endif;?>
                     <?php 
-                        $following = Followers::getAll($id); 
                         foreach($following as $f): 
                         $postsUser = Post::getAllFromUser($f['following_id']);
                         foreach($postsUser as $puser):
                     ?>
+
                         <?php   
                             $profile = Post::getUser($puser['user_id']);
                             $commentsCount = Comment::countComments($puser['id']);
