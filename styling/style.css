@@ -665,6 +665,11 @@ img.post-profile {
   padding: 1em 1em 2em 1em;
 }
 
+.add-icon {
+  margin-bottom: 15px;
+  margin-left: 5px;
+}
+
 /* REUSABLE PARTS */
 .main-btn {
   background-color: var(--IMDgreen);

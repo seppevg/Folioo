@@ -216,7 +216,7 @@ $comments = Comment::getAll($id);
                             data-username="<?php echo $cu['username']?>"
                             data-image="<?php echo  $cu['image']?>"
                             data-number="<?php echo  $commentsCount?>">
-                            <img src="./assets/add.svg" alt="Add icon">
+                            <img src="./assets/add.svg" alt="Add icon" class="add-icon">
                         </a>                      
                         
                     <?php endforeach;?>
