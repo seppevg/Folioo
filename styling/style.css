@@ -447,6 +447,10 @@ body {
   margin-top: 2em;
 }
 
+.follow-button {
+  margin-bottom: 20px;
+}
+
 /* MODAL */
 .modal-icon {
   max-width: 27px;
