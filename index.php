@@ -48,8 +48,14 @@ $posts = Post::getAll($loadedPosts);
 <body>
     <div id="home">
         <div id="container-logo">
-            <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
-            <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
+            <div class="dropdown" data-dropdown>
+                <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
+                <button class="dropdown-button" data-dropdown-button><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
+                <div class="dropdown-menu">
+                    test
+                </div>
+            </div>
+
         </div>
 
         <?php if (empty($posts)): ?>
@@ -114,6 +120,7 @@ $posts = Post::getAll($loadedPosts);
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
         <script src="./js/like.js"></script>
+        <script src="./js/dropdown.js"></script>
 
 
 
