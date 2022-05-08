@@ -130,7 +130,6 @@ if(empty($_GET['feed'])){
                         $following = Followers::getAll($id); 
                         foreach($following as $f): 
                         $postsUser = Post::getAllFromUser($f['following_id']);
-                        endforeach;
                         foreach($postsUser as $puser):
                     ?>
                         <?php   
@@ -171,7 +170,8 @@ if(empty($_GET['feed'])){
                                 <?php endif; ?>
                             </div>
                         </article>
-                    <?php endforeach; ?>
+                    <?php endforeach;?>
+                    <?php endforeach;?>
                 <?php endif;?>
             </div>
             <div class="main-margin flex">
