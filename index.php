@@ -58,17 +58,19 @@ if(empty($_GET['feed'])){
         <div id="container-logo">
             <div class="dropdown">
                 <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
-                <button class="dropdown-button"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
-                    <div class="dropdown-menu">
-                        <div>
-                            <a href="index.php?feed=chronologic">Chronologic</a>
-                            <img src="./assets/chronologic.svg" alt="Chronologic icon">
+                <?php if (!empty($id)): ?>
+                    <button class="dropdown-button"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
+                        <div class="dropdown-menu">
+                            <div>
+                                <a href="index.php?feed=chronologic">Chronologic</a>
+                                <img src="./assets/chronologic.svg" alt="Chronologic icon">
+                            </div>
+                            <div>
+                                <a href="index.php?feed=following">Following</a>
+                                <img src="./assets/following.svg" class="following-icon" alt="Following icon">
+                            </div>                    
                         </div>
-                        <div>
-                            <a href="index.php?feed=following">Following</a>
-                            <img src="./assets/following.svg" class="following-icon" alt="Following icon">
-                        </div>                    
-                    </div>
+                <?php endif;?>
             </div>
 
         </div>
