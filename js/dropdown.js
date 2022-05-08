@@ -5,4 +5,6 @@ let dropdown = document.querySelector(".dropdown-menu");
 arrow.addEventListener("click", function() {
     //console.log("👌");
     dropdown.classList.toggle("active");
+ 
 });
+

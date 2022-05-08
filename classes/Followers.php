@@ -61,4 +61,13 @@ class Followers
             return $output;
         }
     }
+
+    public static function getAll($id){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM follow WHERE follower_id = :id;");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
