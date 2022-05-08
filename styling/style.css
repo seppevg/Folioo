@@ -207,6 +207,12 @@ body {
   background: #fefefe;
 }
 
+.dropdown-icon {
+  width: 20px;
+  padding-bottom: 8px;
+  margin-left: 10px;
+}
+
 #home {
   display: flex;
   flex-direction: column;

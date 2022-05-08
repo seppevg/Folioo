@@ -49,6 +49,7 @@ $posts = Post::getAll($loadedPosts);
     <div id="home">
         <div id="container-logo">
             <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
+            <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
         </div>
 
         <?php if (empty($posts)): ?>
