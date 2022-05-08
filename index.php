@@ -48,11 +48,18 @@ $posts = Post::getAll($loadedPosts);
 <body>
     <div id="home">
         <div id="container-logo">
-            <div class="dropdown" data-dropdown>
+            <div class="dropdown">
                 <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
-                <button class="dropdown-button" data-dropdown-button><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
+                <button class="dropdown-button"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
                 <div class="dropdown-menu">
-                    test
+                    <div>
+                        <a href="#">Chronologic </a>
+                        <img src="./assets/chronologic.svg" alt="Chronologic icon">
+                    </div>
+                    <div>
+                        <a href="#">Following</a>
+                        <img src="./assets/following.svg" class="following-icon" alt="Following icon">
+                    </div>                    
                 </div>
             </div>
 

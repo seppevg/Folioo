@@ -822,16 +822,46 @@ img.post-profile {
   top: calc(100% + .25rem);
   background-color: var(--IMDgreen);
   padding: .75rem;
-  border-radius: .25rem;
+  border-radius: .30rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
   opacity: 0;
   transform: translateY(-10px);
   transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
   pointer-events: none;
+  
 }
 
 .dropdown-menu.active {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.dropdown-menu div{
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  margin: 5px 0px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+
+}
+
+.dropdown-menu img {
+  width: 20px;
+  padding-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  position: end;
+}
+
+.following-icon {
+  margin-left: 20px;
 }
