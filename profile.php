@@ -94,7 +94,7 @@ $posts = Post::getAllFromUser($id);
                                     <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
                                     <p>Log out</p>
                                 </a>
-                                <a href="#" class="delete-profile-popup">
+                                <a href="delete_profile.php" class="delete-profile-popup">
                                     <img class="modal-icon" src="./assets/delete.svg" alt="delete">
                                     <p>Delete your profile</p>
                                 </a>
