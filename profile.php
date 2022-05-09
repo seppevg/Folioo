@@ -62,9 +62,17 @@ $posts = Post::getAllFromUser($id);
                     </div>
                     <div class="profile-info-extra">
                         <p class="profile-text"><?php echo $p['education']; ?></p>
-                        <a href="<?php echo $p['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
-                        <a href="<?php echo $p['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
-                        <a href="<?php echo $p['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php if(!empty($p['behancelink'])):?>
+                            <a href="<?php echo $p['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+                        
+                        <?php if(!empty($p['instagramlink'])):?>
+                            <a href="<?php echo $p['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+
+                        <?php if(!empty($p['linkedinlink'])):?>
+                            <a href="<?php echo $p['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
                     </div>
 
                     <div class="profile-bio">
