@@ -455,7 +455,6 @@ body {
 
 .socialmedia-icons{
   width: 30px;
-  margin-left: 10px;
 }
 
 .profile-info-extra{
@@ -463,6 +462,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
 .profile-bio {
