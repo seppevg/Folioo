@@ -453,8 +453,16 @@ body {
   color: var(--IMDblue);
 }
 
+.socialmedia-icons{
+  width: 30px;
+  margin-left: 10px;
+}
+
 .profile-info-extra{
   margin: 0em 2.1875em 1em 2.1875em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .profile-bio {

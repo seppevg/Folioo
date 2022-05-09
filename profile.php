@@ -62,6 +62,9 @@ $posts = Post::getAllFromUser($id);
                     </div>
                     <div class="profile-info-extra">
                         <p class="profile-text"><?php echo $p['education']; ?></p>
+                        <a href="<?php echo $p['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <a href="<?php echo $p['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                        <a href="<?php echo $p['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
                     </div>
 
                     <div class="profile-bio">
@@ -131,11 +134,10 @@ $posts = Post::getAllFromUser($id);
                             <p class="following-number">0</p>
                             <p class="following">Followers</p>
                         </div>
-
                     </div>
                     <div class="profile-info-extra">
-                            <p class="profile-text"><?php echo $up['education']; ?></p>
-                        </div>
+                        <p class="profile-text"><?php echo $up['education']; ?></p>
+                    </div>
                     <div class="profile-bio">
                         <p class="profile-text"><?php echo $up['bio']; ?></p>
                     </div>
