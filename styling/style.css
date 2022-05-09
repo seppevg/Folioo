@@ -429,6 +429,15 @@ body {
 
 .add-moderator-btn {
   margin: 2.1875em 1.75em 1em 2.1875em;
+  background-color: var(--IMDgreen);
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 0.4em;
+  border: none;
+  padding: 0.8em;
+  cursor: pointer;
 }
 
 .profile-info {
@@ -481,8 +490,6 @@ body {
 
 .allUserPosts {
   margin-top: 2em;
-  display: grid;
-
 }
 
 .follow-button {
