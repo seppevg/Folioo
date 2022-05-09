@@ -440,7 +440,7 @@ body {
   align-items: center;
   margin-right: 20px;
   padding: 5px 10px;
-  
+
 }
 
 .following-number {
@@ -477,6 +477,8 @@ body {
 
 .allUserPosts {
   margin-top: 2em;
+  display: grid;
+
 }
 
 .follow-button {
