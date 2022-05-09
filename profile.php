@@ -145,6 +145,17 @@ $posts = Post::getAllFromUser($id);
                     </div>
                     <div class="profile-info-extra">
                         <p class="profile-text"><?php echo $up['education']; ?></p>
+                        <?php if(!empty($up['behancelink'])):?>
+                            <a href="<?php echo $up['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+                        
+                        <?php if(!empty($up['instagramlink'])):?>
+                            <a href="<?php echo $up['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+
+                        <?php if(!empty($up['linkedinlink'])):?>
+                            <a href="<?php echo $up['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
                     </div>
                     <div class="profile-bio">
                         <p class="profile-text"><?php echo $up['bio']; ?></p>
