@@ -123,10 +123,19 @@ $posts = Post::getAllFromUser($id);
                         <div class="profile-img">
                             <img src="./uploads/profiles/<?php echo $up['image']; ?>">
                         </div>
-                        <div class="profile-info-extra">
+                        <div class="profile-following">
+                            <p class="following-number">0</p>
+                            <p class="following">Following</p>
+                        </div>
+                        <div class="profile-following">
+                            <p class="following-number">0</p>
+                            <p class="following">Followers</p>
+                        </div>
+
+                    </div>
+                    <div class="profile-info-extra">
                             <p class="profile-text"><?php echo $up['education']; ?></p>
                         </div>
-                    </div>
                     <div class="profile-bio">
                         <p class="profile-text"><?php echo $up['bio']; ?></p>
                     </div>
