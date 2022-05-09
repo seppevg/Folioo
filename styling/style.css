@@ -427,6 +427,10 @@ body {
   margin: 2.1875em 1.75em 1em 2.1875em;
 }
 
+.add-moderator-btn {
+  margin: 2.1875em 1.75em 1em 2.1875em;
+}
+
 .profile-info {
   display: flex;
   flex-direction: row;

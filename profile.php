@@ -40,7 +40,8 @@ $posts = Post::getAllFromUser($id);
 
 <body>
     <div id="profile">
-        <?php foreach ($profile as $p) : ?>
+        <?php foreach ($profile as $p) :
+            $admin = $p['admin']; ?>
             <?php if (!empty($id)) : ?>
                 <?php if (empty($userId)) : ?>
                     <div class="profile-header">
@@ -125,7 +126,8 @@ $posts = Post::getAllFromUser($id);
 
 
                 <?php foreach ($userProfiles as $up) : ?>
-                    <?php $posts = Post::getAllFromUser($userId); ?>
+                    <?php $posts = Post::getAllFromUser($userId); 
+                    $profile = User::getInfo($id);?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
                         <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
@@ -133,6 +135,9 @@ $posts = Post::getAllFromUser($id);
                     <div class="profile-info">
                         <div class="profile-img">
                             <img src="./uploads/profiles/<?php echo $up['image']; ?>">
+                            <?php if(!empty($admin)):?>
+                                <button class="add-moderator-btn">Add moderator</button>
+                            <?php endif;?>
                         </div>
                         <div class="profile-following">
                             <p class="following-number">0</p>
