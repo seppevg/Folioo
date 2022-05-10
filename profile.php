@@ -24,6 +24,17 @@ $userProfiles = User::getInfo($userId);
 $checkFollowing = Followers::check($id, $userId);
 $posts = Post::getAllFromUser($id);
 
+if (!empty($_POST)) {
+    try {
+        $user = new User;
+        $user->addModerator($userId);
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    } 
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,17 +137,25 @@ $posts = Post::getAllFromUser($id);
 
 
                 <?php foreach ($userProfiles as $up) : ?>
-                    <?php $posts = Post::getAllFromUser($userId); 
-                    $profile = User::getInfo($id);?>
+                    <?php 
+                        $posts = Post::getAllFromUser($userId); 
+                        $profile = User::getInfo($id);
+                        $moderator = $up['moderator'];
+                    ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                        <?php if(!empty($moderator)):?>
+                            <p>Moderator</p>
+                        <?php endif;?>
                         <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
                     <div class="profile-info">
                         <div class="profile-img">
                             <img src="./uploads/profiles/<?php echo $up['image']; ?>">
                             <?php if(!empty($admin)):?>
-                                <button class="add-moderator-btn">Add moderator</button>
+                                <form action="" method="post">
+                                    <button class="add-moderator-btn">Add moderator</button>
+                                </form>
                             <?php endif;?>
                         </div>
                         <div class="profile-following">
@@ -251,7 +270,11 @@ $posts = Post::getAllFromUser($id);
                     </div>
                 </section>
             <?php endforeach; ?>
-
+            <?php if(isset($error)):?>
+                <div>
+                    <p class="error"><?php echo $error ?></p>
+                </div>
+            <?php endif;?>
             <?php if (empty($id)) : ?>
                 <div class="profile-header">
                     <h3 class="profile-username">Join the club!</h3>
