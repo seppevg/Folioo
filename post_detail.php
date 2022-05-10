@@ -18,6 +18,7 @@ if (sizeof($posts) != 1) {
 }
 
 $post = $posts[0];
+//var_dump($post);
 
 if (empty($post["id"] || empty($post["user_id"]))) {
     header("Location: index.php");
@@ -36,6 +37,10 @@ $userId = Post::getById($_GET['id'])[0];
 
 $commentsCount = Comment::countComments($post['id']);
 
+$likes = Like::getLikes($post['id']);
+$checkLikes = Like::liked($post['id'], $sessionId);
+
+//reporting
 if (!empty($_POST)) {
     try {
         $comment = new Comment();
@@ -88,18 +93,31 @@ $isAlreadyReported = $reported > 0;
         <div class="post-image">
             <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="Post image">
         </div>
-        <?php if ($sessionId) : ?>
+
+        <!-- <div>
+            likes en comment icoontjes
+        </div> -->
+        <form action="" method="post" name="like">
             <div class="project-interactions">
-                <div class="project-interactions-like">
-                    <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                    <h4>number</h4>
+                <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $sessionId?>);">
+                    <a href="#" class="like"> 
+                        <?php if($checkLikes == "0"):?>               
+                            <img data-post="<?php echo $post['id']?>" data-user="<?php echo $sessionId?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
+                            <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                        <?php elseif($checkLikes == "1"):?> 
+                            <img data-post="<?php echo $post['id']?>" data-user="<?php echo $sessionId?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
+                            <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                        <?php endif;?>
+                    </a>
                 </div>
+                
                 <div class="project-interactions-comment">
                     <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                    <h4 class="number-of-comments"><?php echo $commentsCount ?></h4>
+                    <h4 class="number-of-comments"><?php echo $commentsCount?></h4>
                 </div>
             </div>
-        <?php endif; ?>
+        </form>
+
         <div>
             <h4 class="post-text"><?php echo htmlspecialchars($post['text']); ?></h4>
         </div>
@@ -189,37 +207,37 @@ $isAlreadyReported = $reported > 0;
 
             <form action="" method="post">
                 <ul id="listupdates">
-                    <?php foreach ($comments as $c) : ?>
-                        <?php $profile = Post::getUser($c['user_id']); ?>
-                        <div class="comment-box">
-                            <a href="profile.php?id=<?php echo $post['user_id'] ?>">
-                                <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
-                                <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
-                            </a>
-                            <p><?php echo htmlspecialchars($c['comment']); ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                    <?php foreach($comments as $c):?>
+                        <?php $profile = Post::getUser($c['user_id']);?>
+                            <div class="comment-box">
+                                <a href="profile.php?id=<?php echo $profile['id']?>">
+                                    <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
+                                    <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
+                                </a>
+                                <p class="posted-comment"><?php echo htmlspecialchars($c['comment']); ?></p>
+                            </div>
+                    <?php endforeach;?>
                 </ul>
 
                 <div class="comment-box">
-                    <?php
-                    $currentUser = User::getInfo($sessionId);
-                    foreach ($currentUser as $cu) :
+                    <?php 
+                        $currentUser = User::getInfo($sessionId);
+                        foreach($currentUser as $cu):
+                            //var_dump($cu);
                     ?>
                         <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
                         <input type="text" name="comment" id="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
-                        <?php if (!empty($comments)) : ?>
-                            <a href="#" id="btnAddComment" data-postid="<?php echo $userId['id'] ?>" data-username="<?php echo $profile['username'] ?>" data-image="<?php echo  $profile['image'] ?>" data-number="<?php echo  $commentsCount ?>">
-                                <img src="./assets/add.svg" alt="Add icon">
-                            </a>
-                        <?php elseif (empty($comments)) : ?>
-                            <a href="#" id="btnAddComment" data-postid="<?php echo $userId['id'] ?>" data-username="<?php echo $cu['username'] ?>" data-image="<?php echo  $cu['image'] ?>" data-number="<?php echo  $commentsCount ?>">
-                                <img src="./assets/add.svg" alt="Add icon">
-                            </a>
-                        <?php endif; ?>
 
-                    <?php endforeach; ?>
-                </div>
+                        <a href="#" id="btnAddComment" 
+                            data-postid="<?php echo $userId['id']?>" 
+                            data-username="<?php echo $cu['username']?>"
+                            data-image="<?php echo  $cu['image']?>"
+                            data-number="<?php echo  $commentsCount?>">
+                            <img src="./assets/add.svg" alt="Add icon" class="add-icon">
+                        </a>                      
+                        
+                    <?php endforeach;?>
+                </div>                
             </form>
         </div>
 
@@ -232,6 +250,7 @@ $isAlreadyReported = $reported > 0;
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
     <script src="./js/app.js"></script>
+    <script src="./js/like.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

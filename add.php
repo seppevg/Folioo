@@ -139,7 +139,7 @@ if (!empty($_POST)) {
                             <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
                             <p>Log out</p>
                         </a>
-                        <a href="#" class="delete-profile-popup">
+                        <a href="delete_profile.php" class="delete-profile-popup">
                             <img class="modal-icon" src="./assets/delete.svg" alt="delete">
                             <p>Delete your profile</p>
                         </a>
@@ -181,8 +181,6 @@ if (!empty($_POST)) {
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
     <script src="./js/app.js"></script>
-    <script src="./js/delete.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

@@ -3,6 +3,11 @@
 include_once("bootstrap.php");
 
 
+Security::onlyLoggedInUsers();
+
+/*$id = $_SESSION['id'];
+var_dump($id);*/
+
 if (empty($_SESSION['id'])) {
     $id = "";
 } else {
@@ -84,25 +89,51 @@ if( !empty($_POST) ){
 
     <div class="allPostsSearch">
         <?php foreach($posts as $post): ?>
-            <?php $profile = Post::getUser($post['user_id']); ?>
+            <?php 
+                $profile = Post::getUser($post['user_id']); 
+                $commentsCount = Comment::countComments($post['id']);
+                $likes = Like::getLikes($post['id']);
+                $checkLikes = Like::liked($post['id'], $id);?>
             <article>
             <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
                 <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
             </a>
                 <div class="project-info">
-                    <?php if (empty($id)): ?>
+                    <?php if (!empty($id)): ?>
                         <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
                                 <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
                                 <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
                         </a>
                         <div class="project-interactions">
-                            <div class="project-interactions-like">
-                                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                <h4>number</h4>
+                            <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
+                                    <a href="#" class="like"> 
+                                        <?php if($checkLikes == "0"):?>               
+                                            <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                            <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                                        <?php elseif($checkLikes == "1"):?> 
+                                            <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
+                                            <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                                        <?php endif;?>
+                                    </a>
+                                </div>
+                                <div class="project-interactions-comment">
+                                    <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                                    <h4><?php echo $commentsCount?></h4>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (empty($id)): ?>
+                        <div class="project-interactions">
+                            <div class="project-interactions-like">                    
+                                <img id="like-icon" class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                <h4 class="numberOfLikes"><?php echo $likes?></h4>
                             </div>
                             <div class="project-interactions-comment">
                                 <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                                <h4>number</h4>
+                                <h4><?php echo $commentsCount?></h4>
+                            </div>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -123,6 +154,7 @@ if( !empty($_POST) ){
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
 
     <script src="./js/filter.js"></script>
+    <script src="./js/like.js"></script>
 
 </body>
 

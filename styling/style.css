@@ -207,6 +207,12 @@ body {
   background: #fefefe;
 }
 
+.dropdown-icon {
+  width: 20px;
+  padding-bottom: 8px;
+  margin-left: 10px;
+}
+
 #home {
   display: flex;
   flex-direction: column;
@@ -302,6 +308,7 @@ body {
   flex-direction: row;
   align-items: center;
   text-decoration: none;
+  color: black;
 }
 
 .project-author-picture {
@@ -315,13 +322,13 @@ body {
   color: black;
 }
 
-.comment-box{
+.comment-box {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.comment-box input{
+.comment-box input {
   margin-left: 10px;
 }
 
@@ -335,6 +342,10 @@ body {
 .project-author-username-comment {
   padding-left: 5px;
   color: var(--IMDblue);
+}
+
+.posted-comment {
+  padding-left: 30px;
 }
 
 .project-interactions {
@@ -360,11 +371,27 @@ body {
   width: 100%;
 }
 
-.like-icon,
+
 .comment-icon {
   max-width: 27px;
   max-height: 24px;
   margin-right: 5px;
+}
+
+#like-icon {
+  max-width: 27px;
+  max-height: 24px;
+  margin-right: 5px;
+}
+
+.like {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: black;
 }
 
 /* PROFILE */
@@ -389,6 +416,11 @@ body {
   align-items: center;
 }
 
+.moderator-label {
+  display: flex;
+  flex-direction: row;
+}
+
 .profile-header img {
   max-height: 25px;
 }
@@ -400,10 +432,54 @@ body {
   margin: 2.1875em 1.75em 1em 2.1875em;
 }
 
+.add-moderator-btn {
+  text-decoration: none;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.moderator-icon{
+  width: 20px;
+  padding-top: 2px;
+}
+
 .profile-info {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.profile-following {
+  border: var(--IMDgreen) solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  padding: 5px 10px;
+
+}
+
+.following-number,
+.followers-number {
+  margin: 0;
+  color: var(--IMDblue);
+}
+
+.following {
+  margin: 0;
+  color: var(--IMDblue);
+}
+
+.socialmedia-icons {
+  width: 30px;
+}
+
+.profile-info-extra {
+  margin: 0em 2.1875em 1em 2.1875em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .profile-bio {
@@ -418,6 +494,10 @@ body {
 
 .allUserPosts {
   margin-top: 2em;
+}
+
+.follow-button {
+  margin-bottom: 20px;
 }
 
 /* MODAL */
@@ -638,6 +718,11 @@ img.post-profile {
   padding: 1em 1em 2em 1em;
 }
 
+.add-icon {
+  margin-bottom: 15px;
+  margin-left: 5px;
+}
+
 /* REUSABLE PARTS */
 .main-btn {
   background-color: var(--IMDgreen);
@@ -776,4 +861,65 @@ img.post-profile {
   padding: 0px;
   overflow-y: scroll;
   max-height: 350px;
+}
+
+/*DROPDOWN*/
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + .25rem);
+  background-color: var(--IMDgreen);
+  padding: .75rem;
+  border-radius: .30rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  pointer-events: none;
+
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-menu div {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  margin: 5px 0px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+
+}
+
+.dropdown-menu img {
+  width: 20px;
+  padding-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  position: end;
+}
+
+.following-icon {
+  margin-left: 20px;
 }

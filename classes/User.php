@@ -508,4 +508,11 @@ class User implements iUser
             return $row['id'];
         }
     }
+
+    public function addModerator($id){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET moderator = 1 WHERE id = :id;");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+    }
 }

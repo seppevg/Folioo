@@ -116,7 +116,7 @@ class Post implements iPost
     public static function getUser($userId)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT username, image FROM users WHERE id = :userId;");
+        $statement = $conn->prepare("SELECT id, username, image FROM users WHERE id = :userId;");
         $statement->bindValue(':userId', $userId);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);

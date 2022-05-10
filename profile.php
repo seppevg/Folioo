@@ -29,8 +29,18 @@ $posts = Post::getAllFromUser($id);
 $reported = ReportUser::checkIfReportedByUser($id, $userId);
 $isAlreadyReported = $reported > 0;
 
+if (!empty($_POST)) {
+    try{
+        $user = new User;
+        $user->addModerator($userId);
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    } 
+}
+
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,7 +55,7 @@ $isAlreadyReported = $reported > 0;
 
 <body>
     <div id="profile">
-        <?php foreach ($profile as $p) : ?>
+        <?php foreach ($profile as $p) : $admin = $p['admin']; ?>
             <?php if (!empty($id)) : ?>
                 <?php if (empty($userId)) : ?>
                     <div class="profile-header">
@@ -56,10 +66,30 @@ $isAlreadyReported = $reported > 0;
                         <div class="profile-img">
                             <img src="./uploads/profiles/<?php echo $p['image']; ?>">
                         </div>
-                        <div class="profile-info-extra">
-                            <p class="profile-text"><?php echo $p['education']; ?></p>
+                        <div class="profile-following">
+                            <p class="following-number">0</p>
+                            <p class="following">Following</p>
+                        </div>
+                        <div class="profile-following">
+                            <p class="followers-number">0</p>
+                            <p class="following">Followers</p>
                         </div>
                     </div>
+                    <div class="profile-info-extra">
+                        <p class="profile-text"><?php echo $p['education']; ?></p>
+                        <?php if(!empty($p['behancelink'])):?>
+                            <a href="<?php echo $p['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+                        
+                        <?php if(!empty($p['instagramlink'])):?>
+                            <a href="<?php echo $p['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+
+                        <?php if(!empty($p['linkedinlink'])):?>
+                            <a href="<?php echo $p['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+                    </div>
+
                     <div class="profile-bio">
                         <p class="profile-text"><?php echo $p['bio']; ?></p>
                     </div>
@@ -116,7 +146,7 @@ $isAlreadyReported = $reported > 0;
                                     <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
                                     <p>Log out</p>
                                 </a>
-                                <a href="#" class="delete-profile-popup">
+                                <a href="delete_profile.php" class="delete-profile-popup">
                                     <img class="modal-icon" src="./assets/delete.svg" alt="delete">
                                     <p>Delete your profile</p>
                                 </a>
@@ -127,18 +157,64 @@ $isAlreadyReported = $reported > 0;
 
 
                 <?php foreach ($userProfiles as $up) : ?>
-                    <?php $posts = Post::getAllFromUser($userId); ?>
+                    <?php 
+                        $posts = Post::getAllFromUser($userId); 
+                        $profile = User::getInfo($id);
+                        $moderator = $up['moderator'];
+                    ?>
                     <div class="profile-header">
-                        <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                        <div class="moderator-label">
+                            
+                            <?php if(!empty($admin)):?>
+                                <?php if(!empty($moderator)):?>
+                                    <form action="" method="post">
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                                </form>
+                                <?php elseif(empty($moderator)):?>
+                                <form action="" method="post">
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-off.svg" alt="Moderator icon grey"></a>
+                                </form>
+                                <?php endif;?>
+                            <?php endif;?>
+
+                            <?php if(empty($admin)):?>
+                                <?php if(!empty($moderator)):?>
+                                    <form action="" method="post">
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                                </form>
+                                <?php endif;?>
+                            <?php endif;?>
+                            <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                        </div>
                         <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
                     <div class="profile-info">
                         <div class="profile-img">
                             <img src="./uploads/profiles/<?php echo $up['image']; ?>">
+
                         </div>
-                        <div class="profile-info-extra">
-                            <p class="profile-text"><?php echo $up['education']; ?></p>
+                        <div class="profile-following">
+                            <p class="following-number">0</p>
+                            <p class="following">Following</p>
                         </div>
+                        <div class="profile-following">
+                            <p class="followers-number">0</p>
+                            <p class="following">Followers</p>
+                        </div>
+                    </div>
+                    <div class="profile-info-extra">
+                        <p class="profile-text"><?php echo $up['education']; ?></p>
+                        <?php if(!empty($up['behancelink'])):?>
+                            <a href="<?php echo $up['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+                        
+                        <?php if(!empty($up['instagramlink'])):?>
+                            <a href="<?php echo $up['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
+
+                        <?php if(!empty($up['linkedinlink'])):?>
+                            <a href="<?php echo $up['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
                     </div>
                     <div class="profile-bio">
                         <p class="profile-text"><?php echo $up['bio']; ?></p>
@@ -195,16 +271,27 @@ $isAlreadyReported = $reported > 0;
 
                     <div class="allPosts">
                         <?php foreach ($posts as $post) : ?>
-                            <?php $commentsCount = Comment::countComments($post['id']); ?>
+                            <?php 
+                                $commentsCount = Comment::countComments($post['id']);
+                                $likes = Like::getLikes($post['id']);
+                                $checkLikes = Like::liked($post['id'], $id);
+                            ?>
                             <article>
                                 <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
                                     <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                                 </a>
                                 <div class="project-info">
                                     <div class="project-interactions">
-                                        <div class="project-interactions-like">
-                                            <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                            <h4>number</h4>
+                                    <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
+                                            <a href="#" class="like"> 
+                                                <?php if($checkLikes == "0"):?>               
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                                                <?php elseif($checkLikes == "1"):?> 
+                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
+                                                    <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                                                <?php endif;?>
+                                            </a>
                                         </div>
                                         <div class="project-interactions-comment">
                                             <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
@@ -230,14 +317,18 @@ $isAlreadyReported = $reported > 0;
                             <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
                             <p>Log out</p>
                         </a>
-                        <a href="#" class="delete-profile-popup">
+                        <a href="delete_profile.php" class="delete-profile-popup">
                             <img class="modal-icon" src="./assets/delete.svg" alt="delete">
                             <p>Delete your profile</p>
                         </a>
                     </div>
                 </section>
             <?php endforeach; ?>
-
+            <?php if(isset($error)):?>
+                <div>
+                    <p class="error"><?php echo $error ?></p>
+                </div>
+            <?php endif;?>
             <?php if (empty($id)) : ?>
                 <div class="profile-header">
                     <h3 class="profile-username">Join the club!</h3>
@@ -271,8 +362,7 @@ $isAlreadyReported = $reported > 0;
             <?php include_once("./includes/nav-bottom.inc.php"); ?>
                     </div>
                     <script src="./js/app.js"></script>
-                    <script src="./js/delete.js"></script>
-                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="./js/like.js"></script>
 </body>
 
 </html>
