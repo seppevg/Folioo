@@ -15,8 +15,6 @@ function displayImage(e) {
   }
 }
 
-
-
 let burger = document.querySelector(".modal-button");
 let modal = document.getElementById("modal");
 let x = document.querySelector(".modal-close");
@@ -27,7 +25,6 @@ burger.addEventListener("click", function () {
 x.addEventListener("click", function () {
   modal.classList.remove("display");
 });
-
 
 let tags;
 if (document.querySelector("#input-tags")) {
@@ -185,6 +182,7 @@ function deletePost(postId) {
   });
 }
 
+// AJAX FOLLOW
 function changeFollowState(e, id, userId) {
   followBtn = document.querySelector(".follow-button");
 
@@ -216,15 +214,14 @@ function changeFollowState(e, id, userId) {
 }
 
 function changeShowcaseState(postId) {
-
   showcaseIcon = document.getElementById(`project-picture-${postId}`);
   let clickedId = postId;
   let showcaseState = "";
 
   if (showcaseIcon.classList.contains("showcase-icon-active")) {
-    showcaseState = "1"
+    showcaseState = "1";
   } else {
-    showcaseState = "0"
+    showcaseState = "0";
   }
 
   // console.log(clickedId);
@@ -245,10 +242,10 @@ function changeShowcaseState(postId) {
         data.status === "success" &&
         data.message === "Post has been added to showcase"
       ) {
-        console.log('Added!');
+        console.log("Added!");
         showcaseIcon.classList.toggle("showcase-icon-active");
       } else {
-        console.log('Deleted!');
+        console.log("Deleted!");
         showcaseIcon.classList.remove("showcase-icon-active");
       }
     })
@@ -257,32 +254,18 @@ function changeShowcaseState(postId) {
     });
 }
 
-// AJAX REPORT
-function postReporting(e, id, action) {
+// AJAX REPORT POST
+
+function postReporting(postId, userId, action) {
   let report = document.getElementById("post-report");
   let unreport = document.getElementById("post-unreport");
 
-  let toShow;
-
-  if (action == "report") {
-    toShow = () => {
-      report.classList.add("hidden");
-      unreport.classList.remove("hidden");
-    };
-  } else if (action == "unreport") {
-    toShow = () => {
-      report.classList.remove("hidden");
-      unreport.classList.add("hidden");
-    };
-  } else {
-    return;
-  }
-
-  let postId = id;
-
   let data = new FormData();
   data.append("postId", postId);
+  data.append("userId", userId);
   data.append("action", action);
+
+  console.log(data);
 
   fetch("./ajax/reporting_post.php", {
     method: "POST",
@@ -290,10 +273,15 @@ function postReporting(e, id, action) {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.status === "success") {
-        toShow();
-      } else {
-        alert(data.message);
+      if (data.status === "success" && data.message === "Post has been reported.") {
+        report.classList.add("hidden");
+        unreport.classList.remove("hidden"); //show
+      } else if (data.status === "success" && data.message === "Post has been unreported.") {
+        report.classList.remove("hidden"); //show
+        unreport.classList.add("hidden");
+      }else{
+        //data.status === "error"
+        alert("Something went wrong reporting")
       }
     })
     .catch((error) => {
@@ -301,58 +289,91 @@ function postReporting(e, id, action) {
     });
 }
 
-//AJAX COMMENT 
-document.querySelector("#comment").addEventListener("keypress", function(e){
-  if(e.key === "Enter"){
+// AJAX REPORT USER 
+function userReporting(reportedUserId, fromUserId, action) {
+  let report = document.getElementById("user-report");
+  let unreport = document.getElementById("user-unreport");
+  console.log("ja tot hier");
+
+  let data = new FormData();
+  data.append("reportedUserId", reportedUserId);
+  data.append("fromUserId", fromUserId);
+  data.append("action", action);
+
+  console.log(data);
+
+  fetch("./ajax/reporting_user.php", {
+    method: "POST",
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success" && data.message === "User has been reported.") {
+        report.classList.add("hidden");
+        unreport.classList.remove("hidden"); //show
+      } else if (data.status === "success" && data.message === "User has been unreported.") {
+        report.classList.remove("hidden"); //show
+        unreport.classList.add("hidden");
+      }else{
+        //data.status === "error"
+        alert("Something went wrong reporting")
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+
+//AJAX COMMENT
+document.querySelector("#comment").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
     e.preventDefault();
     document.querySelector("#btnAddComment").click();
-
   }
 });
 
-document.querySelector("#btnAddComment").addEventListener("click", function(e){
+document
+  .querySelector("#btnAddComment")
+  .addEventListener("click", function (e) {
+    let text = document.querySelector("#comment").value;
+    let postid = this.dataset.postid;
+    let username = this.dataset.username;
+    let image = this.dataset.image;
+    let number = this.dataset.number;
+    //console.log(number);
 
-  let text = document.querySelector("#comment").value;
-  let postid = this.dataset.postid;
-  let username = this.dataset.username;
-  let image = this.dataset.image;
-  let number = this.dataset.number;
-  //console.log(number);
+    let data = new FormData();
 
-  let data = new FormData();
+    data.append("comment", text);
+    data.append("postid", postid);
+    data.append("username", username);
+    data.append("image", image);
+    data.append("number", number);
 
-  data.append('comment', text);
-  data.append('postid', postid);
-  data.append('username', username);
-  data.append('image', image);
-  data.append('number', number);
-  
-  fetch("./ajax/save_comment.php", {
-    method: 'POST',
-    body: data
-  })
-  .then(response => response.json())
-  .then(data => {
-    if(data.status === "success") {
+    fetch("./ajax/save_comment.php", {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          let p = `<p>${data.data.comment}</p>`;
+          let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
+          let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
+          let div = `<div class="comment-box"> ${pImage + name + p}</div>`;
+          //console.log(usernameStyle);
 
-      let p = `<p>${data.data.comment}</p>`;
-      let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
-      let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
-      let div = `<div class="comment-box"> ${pImage + name + p }</div>`;
-      //console.log(usernameStyle);
+          document.querySelector(".number-of-comments").innerHTML++;
+          document.querySelector("#listupdates").innerHTML += div;
+          document.querySelector("#comment").value = "";
+        }
 
-      document.querySelector(".number-of-comments").innerHTML ++;
-      document.querySelector("#listupdates").innerHTML += div;
-      document.querySelector("#comment").value = "";
-     
-    }
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
 
-    console.log('Success:', data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
+    e.preventDefault();
   });
-
-  e.preventDefault();
-});
-

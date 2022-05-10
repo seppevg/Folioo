@@ -265,4 +265,6 @@ class Post implements iPost
         $statement->bindValue(":postId", $postId);
         $statement->execute();
     }
+
+   
 }

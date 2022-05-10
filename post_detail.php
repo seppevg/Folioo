@@ -12,6 +12,7 @@ if (empty($_GET['id'])) {
 $id = $_GET['id'];
 $posts = Post::getById($id);
 
+
 if (sizeof($posts) != 1) {
     header("Location: index.php");
 }
@@ -24,7 +25,6 @@ if (empty($post["id"] || empty($post["user_id"]))) {
 
 $user = User::getInfo($post["user_id"])[0];
 
-
 //checking if the post is from the person that's logged in
 if (empty($_SESSION['id'])) {
     $sessionId = "";
@@ -33,31 +33,29 @@ if (empty($_SESSION['id'])) {
 }
 
 $userId = Post::getById($_GET['id'])[0];
-//var_dump($userId['id']);
 
 $commentsCount = Comment::countComments($post['id']);
-//reporting
 
-if(!empty($_POST)) {
-    try{        
+if (!empty($_POST)) {
+    try {
         $comment = new Comment();
         $comment->setComment($_POST['comment']);
         $comment->setUserId($sessionId);
         $comment->setPostId($id);
         $comment->Save();
-
-    }
-    catch(Throwable $error) {
+    } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
-    } 
+    }
 }
-
 
 $comments = Comment::getAll($id);
 
-
-?><!DOCTYPE html>
+//checks if the logged in user already reported that post
+$reported = ReportPost::checkIfReportedByUser($sessionId, $post["id"]);
+$isAlreadyReported = $reported > 0;
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -79,46 +77,50 @@ $comments = Comment::getAll($id);
                 <h3 class="post-username"><?php echo $user['username']; ?></h3>
             </a>
         </div>
-        <img class="modal-button" src="./assets/dots-menu.svg" alt="Dots menu">
+        <?php if ($sessionId) : ?>
+            <img class="modal-button" src="./assets/dots-menu.svg" alt="Dots menu">
+        <?php endif; ?>
     </div>
     <div class="main-margin">
         <div>
-            <h3><?php echo $post['title']; ?></h3>
+            <h3><?php echo htmlspecialchars($post['title']); ?></h3>
         </div>
         <div class="post-image">
             <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="Post image">
         </div>
-        <!-- <div>
-            likes en comment icoontjes
-        </div> -->
-        <div class="project-interactions">
-            <div class="project-interactions-like">
-                <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
-                <h4>number</h4>
-            </div>
-            <div class="project-interactions-comment">
-                <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                <h4 class="number-of-comments"><?php echo $commentsCount?></h4>
-            </div>
-        </div>
-        <div>
-            <h4 class="post-text"><?php echo $post['text']; ?></h4>
-        </div>
-        <div class="tag-list">
-            <?php
-            $tagsString = $post['tags'];
-            $tags = explode(",", $tagsString);
-            foreach ($tags as $tag) :
-            ?>
-                <div class="tag-item">
-                    <a style="text-decoration: none; color: var(--IMDBlue);" href="#">#<?php echo $tag ?></a>
+        <?php if ($sessionId) : ?>
+            <div class="project-interactions">
+                <div class="project-interactions-like">
+                    <img class="like-icon" src="./assets/heart-empty.svg" alt="heart or like icon">
+                    <h4>number</h4>
                 </div>
-            <?php endforeach; ?>
+                <div class="project-interactions-comment">
+                    <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                    <h4 class="number-of-comments"><?php echo $commentsCount ?></h4>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div>
+            <h4 class="post-text"><?php echo htmlspecialchars($post['text']); ?></h4>
         </div>
+        <?php if ($sessionId) : ?>
+            <div class="tag-list">
+                <?php
+                $tagsString = $post['tags'];
+                $tags = explode(",", $tagsString);
+                foreach ($tags as $tag) :
+                ?>
+                    <div class="tag-item">
+                        <a style="text-decoration: none; color: var(--IMDBlue);" href="#">#<?php echo htmlspecialchars($tag) ?></a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
 
 
     <?php if ($userId["user_id"] == $sessionId) : ?>
+        <!-- is it my post? -->
         <!-- edit post modal -->
         <section class="modal modal-container ">
             <div id="modal" class="modal-content hidden">
@@ -135,14 +137,20 @@ $comments = Comment::getAll($id);
                 </a>
             </div>
         </section>
+
     <?php else : ?>
+        <!-- it's not my post -->
         <!-- report modal -->
-        <section class="modal modal-container ">
+
+        <section class="modal modal-container" id="modal-report">
+
             <div id="modal" class="modal-content hidden">
+
                 <div class="modal-close">
                     <img class="modal-icon" src="./assets/close.svg" alt="Close">
                 </div>
-                <div id="post-report">
+
+                <div id="post-report" <?php echo ($isAlreadyReported) ? 'class="hidden"' : ''; ?>>
                     <h3 class="profile-username">Report this post</h3>
                     <p>Thank you for keeping Folioo a safe space for
                         everyone! This post will be flagged as inappropriate.</p>
@@ -150,22 +158,27 @@ $comments = Comment::getAll($id);
                         <img class="report" src="./assets/report.svg" alt="report">
                     </div>
                     <div class="flex">
-                        <button class="form-btn" onclick="postReporting(this, <?php echo $post['id']; ?>, 'report')">Report</button>
+                        <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'report')">Report</button>
                     </div>
                 </div>
-                <div id="post-unreport" class="hidden">
+
+                <div id="post-unreport" <?php echo ($isAlreadyReported) ? '' : 'class="hidden"'; ?>>
+
                     <h3 class="profile-username">This post is reported</h3>
-                    <p>If you don't think that this post should be flagged as inappropriate then you can unreport this post.</p>
+                    <p>If you don't think that this post should be flagged as inappropriate then you can unreport this post.
+                    </p>
                     <div class="center">
                         <img class="report" src="./assets/report.svg" alt="report">
                     </div>
                     <div class="flex">
-                        <button class="form-btn" onclick="postReporting(this, <?php echo $post['id']; ?>, 'unreport')">Stop reporting</button>
+                        <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'unreport')">Stop reporting</button>
                     </div>
                 </div>
 
             </div>
+
         </section>
+
     <?php endif; ?>
 
     <section class="modal2 modal-container2">
@@ -176,53 +189,45 @@ $comments = Comment::getAll($id);
 
             <form action="" method="post">
                 <ul id="listupdates">
-                    <?php foreach($comments as $c):?>
-                        <?php $profile = Post::getUser($c['user_id']);?>
-                            <div class="comment-box">
-                                <a href="profile.php?id=<?php echo $post['user_id']?>">
-                                    <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
-                                    <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
-                                </a>
-                                <p><?php echo htmlspecialchars($c['comment']); ?></p>
-                            </div>
-                    <?php endforeach;?>
+                    <?php foreach ($comments as $c) : ?>
+                        <?php $profile = Post::getUser($c['user_id']); ?>
+                        <div class="comment-box">
+                            <a href="profile.php?id=<?php echo $post['user_id'] ?>">
+                                <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
+                                <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
+                            </a>
+                            <p><?php echo htmlspecialchars($c['comment']); ?></p>
+                        </div>
+                    <?php endforeach; ?>
                 </ul>
 
                 <div class="comment-box">
-                    <?php 
-                        $currentUser = User::getInfo($sessionId);
-                        foreach($currentUser as $cu):
+                    <?php
+                    $currentUser = User::getInfo($sessionId);
+                    foreach ($currentUser as $cu) :
                     ?>
                         <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
                         <input type="text" name="comment" id="comment" autocomplete="off" class="form-input" placeholder="Leave a comment!">
-                        <?php if(!empty($comments)):?>
-                            <a href="#" id="btnAddComment" 
-                                data-postid="<?php echo $userId['id']?>" 
-                                data-username="<?php echo $profile['username']?>"
-                                data-image="<?php echo  $profile['image']?>"
-                                data-number="<?php echo  $commentsCount?>">
+                        <?php if (!empty($comments)) : ?>
+                            <a href="#" id="btnAddComment" data-postid="<?php echo $userId['id'] ?>" data-username="<?php echo $profile['username'] ?>" data-image="<?php echo  $profile['image'] ?>" data-number="<?php echo  $commentsCount ?>">
                                 <img src="./assets/add.svg" alt="Add icon">
                             </a>
-                        <?php elseif(empty($comments)):?>
-                            <a href="#" id="btnAddComment" 
-                                data-postid="<?php echo $userId['id']?>" 
-                                data-username="<?php echo $cu['username']?>"
-                                data-image="<?php echo  $cu['image']?>"
-                                data-number="<?php echo  $commentsCount?>">
+                        <?php elseif (empty($comments)) : ?>
+                            <a href="#" id="btnAddComment" data-postid="<?php echo $userId['id'] ?>" data-username="<?php echo $cu['username'] ?>" data-image="<?php echo  $cu['image'] ?>" data-number="<?php echo  $commentsCount ?>">
                                 <img src="./assets/add.svg" alt="Add icon">
                             </a>
-                        <?php endif;?>
-                        
-                    <?php endforeach;?>
-                </div>                
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
+                </div>
             </form>
         </div>
 
-        <?php if(isset($error)):?>
+        <?php if (isset($error)) : ?>
             <div>
                 <p class="error"><?php echo $error ?></p>
             </div>
-        <?php endif;?>
+        <?php endif; ?>
     </section>
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
