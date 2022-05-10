@@ -191,6 +191,89 @@ body {
   align-items: center;
 }
 
+/* DESKTOP NAV */
+@media (max-width: 1300px) {
+  nav.top-nav {
+    display: none;
+  }
+}
+
+@media (min-width: 1300px) {
+  #home #container-logo {
+    display: none;
+  }
+
+  #home {
+    margin-top: 2em;
+  }
+
+  nav.bottom-nav {
+    display: none;
+  }
+}
+
+.top-nav {
+  border-bottom: 2px solid #E5E3E3;
+  background-color: white;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-nav #container-logo {
+  padding: 0 0 0 30px;
+}
+
+.top-nav .search-nav {
+  width: 100%;
+}
+
+.top-nav .search .profile-header {
+  padding: 0;
+  border-bottom: none;
+}
+
+.top-nav .inputSearch {
+  width: 500px;
+}
+
+.top-nav .search .profile-header .filterbtn {
+  margin: 0 10px;
+}
+
+.top-nav .search .profile-header .filterbtn .modal-button {
+  height: 30px;
+}
+
+.top-nav .user-links {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-user img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 100%;
+}
+
+.user-links .add-project-nav {
+  max-width: 200px;
+  max-height: 50px;
+  margin-right: 25px;
+}
+
+.user-links .dropdown-button {
+  margin-right: 32px;
+}
+
+
 /* INDEX (projects) */
 
 #full-logo {
@@ -440,6 +523,7 @@ body {
   align-items: center;
   margin-right: 20px;
   padding: 5px 10px;
+  border-radius: 3px;
 
 }
 
@@ -663,7 +747,7 @@ body {
 }
 
 .btn-add {
-  margin-top: 110px;
+  margin-top: 2em;
 }
 
 /* POST DETAILS */
@@ -803,35 +887,30 @@ img.post-profile {
 }
 
 .inputSearch {
-  margin-left: 30px;
   height: 50px;
   width: 65%;
-  border-color: var(--IMDgreen);
+  border: 2px solid var(--IMDgreen);
   border-radius: 0.4em;
   background-size: 20px;
-  padding-left: 20px;
   align-content: center;
+  padding-left: 20px;
+  background-color: white;
+}
+
+.inputSearch:focus {
+  outline: none;
+  border: 2px solid black;
 }
 
 .filterbtn {
-  border-color: var(--IMDgreen);
+  border: 2px solid var(--IMDgreen);
   border-radius: 0.4em;
   padding: 0.8em;
   cursor: pointer;
   width: 50px;
   height: 50px;
-
-}
-
-.inputSearch {
-  margin-left: 30px;
-  height: 50px;
-  width: 65%;
-  border-color: var(--IMDgreen);
-  border-radius: 0.4em;
-  background-size: 20px;
-  padding-left: 20px;
-  align-content: center;
+  background-color: white;
+  box-shadow: none;
 }
 
 .allPostsSearch {
@@ -865,7 +944,7 @@ img.post-profile {
   left: 0;
   top: calc(100% + .25rem);
   background-color: var(--IMDgreen);
-  padding: .75rem;
+  padding: .75rem .75rem .25rem .75rem;
   border-radius: .30rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
   opacity: 0;

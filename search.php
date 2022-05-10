@@ -144,7 +144,7 @@ if( !empty($_POST) ){
     <?php endif; ?>
 
     <?php if(isset($error)):?>
-        <div>
+        <div class="main-margin">
             <p class="error"><?php echo $error ?></p>
         </div>
     <?php endif;?>
