@@ -428,10 +428,6 @@ body {
 }
 
 .add-moderator-btn {
-  margin: 2.1875em 1.75em 1em 2.1875em;
-  background-color: var(--IMDgreen);
-  color: black;
-  font-weight: 600;
   text-decoration: none;
   text-align: center;
   border-radius: 0.4em;
@@ -494,6 +490,12 @@ body {
 
 .follow-button {
   margin-bottom: 20px;
+}
+
+.moderator-label {
+  border: 2px solid var(--IMDblue);
+  color: var(--IMDblue);
+  padding: 2px;
 }
 
 /* MODAL */
