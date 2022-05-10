@@ -429,9 +429,6 @@ body {
 
 .add-moderator-btn {
   text-decoration: none;
-  text-align: center;
-  border-radius: 0.4em;
-  border: none;
   padding: 0.8em;
   cursor: pointer;
 }

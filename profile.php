@@ -144,13 +144,24 @@ if (!empty($_POST)) {
                     ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
-                        <?php if(!empty($moderator)):?>
-                            
-                        <?php endif;?>
                         <?php if(!empty($admin)):?>
+                            <?php if(!empty($moderator)):?>
+                                <form action="" method="post">
+                                <a class="add-moderator-btn"><img src="./assets/moderator-on.svg" alt="Burger menu"></a>
+                            </form>
+                            <?php elseif(empty($moderator)):?>
                             <form action="" method="post">
                                 <a class="add-moderator-btn"><img src="./assets/moderator-off.svg" alt="Burger menu"></a>
                             </form>
+                            <?php endif;?>
+                        <?php endif;?>
+
+                        <?php if(empty($admin)):?>
+                            <?php if(!empty($moderator)):?>
+                                <form action="" method="post">
+                                <a class="add-moderator-btn"><img src="./assets/moderator-on.svg" alt="Burger menu"></a>
+                            </form>
+                            <?php endif;?>
                         <?php endif;?>
                         <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
