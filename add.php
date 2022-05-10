@@ -70,7 +70,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($_POST['title'])) : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo $_POST['title']; ?>">
+                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo htmlspecialchars($_POST['title']); ?>">
                             <?php else : ?>
                                 <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
                             <?php endif; ?>
@@ -80,7 +80,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($_POST['text'])) : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo $_POST['text']; ?>">
+                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo htmlspecialchars($_POST['text']); ?>">
                             <?php else : ?>
                                 <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
                             <?php endif; ?>
@@ -93,7 +93,7 @@ if (!empty($_POST)) {
                                     <img src="./assets/hashtag.svg" class="input-icon">
                                     <input class="tags-input" type="text" placeholder="Enter tags" name="input-tags" onkeydown="if (event.keyCode == 13) event.preventDefault();">
                                     <?php //if (!empty($post)): ?>
-                                        <input style="display: none;" value="<?php if (!empty($_POST['tags'])) { echo $_POST['tags']; } ?>" name="tags" autocomplete="off" id="input-tags" type="text">
+                                        <input style="display: none;" value="<?php if (!empty($_POST['tags'])) { echo htmlspecialchars($_POST['tags']); } ?>" name="tags" autocomplete="off" id="input-tags" type="text">
                                     <?php //endif; ?>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@ if (!empty($_POST)) {
                                     ?>
                                         <div class="tag-item">
                                             <span class="delete-btn" onclick="deleteTag(this, '${tag}')">&times;</span>
-                                            <span><?php echo $tag ?></span>
+                                            <span><?php echo htmlspecialchars($tag) ?></span>
                                         </div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
