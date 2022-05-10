@@ -144,7 +144,7 @@ if (!empty($_POST)) {
                     ?>
                     <div class="profile-header">
                         <div class="moderator-label">
-                            <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                            
                             <?php if(!empty($admin)):?>
                                 <?php if(!empty($moderator)):?>
                                     <form action="" method="post">
@@ -164,6 +164,7 @@ if (!empty($_POST)) {
                                 </form>
                                 <?php endif;?>
                             <?php endif;?>
+                            <h3 class="profile-username"><?php echo $up['username']; ?></h3>
                         </div>
                         <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>

@@ -434,7 +434,7 @@ body {
 
 .add-moderator-btn {
   text-decoration: none;
-  padding: 0.8em;
+  padding-right: 5px;
   cursor: pointer;
 }
 
