@@ -322,13 +322,13 @@ body {
   color: black;
 }
 
-.comment-box{
+.comment-box {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.comment-box input{
+.comment-box input {
   margin-left: 10px;
 }
 
@@ -453,11 +453,11 @@ body {
   color: var(--IMDblue);
 }
 
-.socialmedia-icons{
+.socialmedia-icons {
   width: 30px;
 }
 
-.profile-info-extra{
+.profile-info-extra {
   margin: 0em 2.1875em 1em 2.1875em;
   display: flex;
   flex-direction: row;
@@ -857,6 +857,7 @@ img.post-profile {
 .dropdown-button {
   border: none;
   cursor: pointer;
+  background-color: white;
 }
 
 .dropdown-menu {
@@ -871,7 +872,7 @@ img.post-profile {
   transform: translateY(-10px);
   transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
   pointer-events: none;
-  
+
 }
 
 .dropdown-menu.active {
@@ -880,7 +881,7 @@ img.post-profile {
   pointer-events: auto;
 }
 
-.dropdown-menu div{
+.dropdown-menu div {
   margin-bottom: 8px;
   display: flex;
   align-items: center;

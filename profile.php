@@ -62,16 +62,14 @@ $posts = Post::getAllFromUser($id);
                     </div>
                     <div class="profile-info-extra">
                         <p class="profile-text"><?php echo htmlspecialchars($p['education']); ?></p>
-                        <?php if(!empty($p['behancelink'])):?>
-                            <a href="<?php echo htmlspecialchars($p['behancelink']); ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
-                        <?php endif;?>
-                        
                         <?php if(!empty($p['instagramlink'])):?>
-                            <a href="<?php echo htmlspecialchars($p['instagramlink']); ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                            <a href="<?php echo htmlspecialchars($p['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
                         <?php endif;?>
-
+                        <?php if(!empty($p['behancelink'])):?>
+                            <a href="<?php echo htmlspecialchars($p['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
                         <?php if(!empty($p['linkedinlink'])):?>
-                            <a href="<?php echo htmlspecialchars($p['linkedinlink']); ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                            <a href="<?php echo htmlspecialchars($p['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
                         <?php endif;?>
                     </div>
 
@@ -144,17 +142,15 @@ $posts = Post::getAllFromUser($id);
                         </div>
                     </div>
                     <div class="profile-info-extra">
-                        <p class="profile-text"><?php echo htmlspecialchars($up['education']); ?></p>
-                        <?php if(!empty($up['behancelink'])):?>
-                            <a href="<?php echo htmlspecialchars($up['behancelink']); ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
-                        <?php endif;?>
-                        
+                        <p class="profile-text"><?php echo htmlspecialchars($up['education']); ?></p>                        
                         <?php if(!empty($up['instagramlink'])):?>
-                            <a href="<?php echo htmlspecialchars($up['instagramlink']); ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                            <a href="<?php echo htmlspecialchars($up['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
                         <?php endif;?>
-
+                        <?php if(!empty($up['behancelink'])):?>
+                            <a href="<?php echo htmlspecialchars($up['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif;?>
                         <?php if(!empty($up['linkedinlink'])):?>
-                            <a href="<?php echo htmlspecialchars($up['linkedinlink']); ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                            <a href="<?php echo htmlspecialchars($up['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
                         <?php endif;?>
                     </div>
                     <div class="profile-bio">
