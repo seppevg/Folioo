@@ -185,6 +185,7 @@ function deletePost(postId) {
 
 function changeFollowState(e, id, userId) {
   followBtn = document.querySelector(".follow-button");
+  followerCount = document.querySelector(".followers-number");
 
   let ownId = id;
   let watchingId = userId;
@@ -204,8 +205,10 @@ function changeFollowState(e, id, userId) {
         data.message === "User has been followed"
       ) {
         followBtn.innerHTML = "Unfollow";
+        followerCount.innerHTML = Number(followerCount.innerHTML) + 1;
       } else {
         followBtn.innerHTML = "Follow";
+        followerCount.innerHTML = Number(followerCount.innerHTML) - 1;
       }
     })
     .catch((error) => {
@@ -301,15 +304,15 @@ function postReporting(e, id, action) {
 }
 
 //AJAX COMMENT 
-document.querySelector("#comment").addEventListener("keypress", function(e){
-  if(e.key === "Enter"){
+document.querySelector("#comment").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
     e.preventDefault();
     document.querySelector("#btnAddComment").click();
 
   }
 });
 
-document.querySelector("#btnAddComment").addEventListener("click", function(e){
+document.querySelector("#btnAddComment").addEventListener("click", function (e) {
 
   let text = document.querySelector("#comment").value;
   let postid = this.dataset.postid;
@@ -325,32 +328,32 @@ document.querySelector("#btnAddComment").addEventListener("click", function(e){
   data.append('username', username);
   data.append('image', image);
   data.append('number', number);
-  
+
   fetch("./ajax/save_comment.php", {
     method: 'POST',
     body: data
   })
-  .then(response => response.json())
-  .then(data => {
-    if(data.status === "success") {
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success") {
 
-      let p = `<p>${data.data.comment}</p>`;
-      let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
-      let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
-      let div = `<div class="comment-box"> ${pImage + name + p }</div>`;
-      //console.log(usernameStyle);
+        let p = `<p>${data.data.comment}</p>`;
+        let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
+        let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
+        let div = `<div class="comment-box"> ${pImage + name + p}</div>`;
+        //console.log(usernameStyle);
 
-      document.querySelector(".number-of-comments").innerHTML ++;
-      document.querySelector("#listupdates").innerHTML += div;
-      document.querySelector("#comment").value = "";
-     
-    }
+        document.querySelector(".number-of-comments").innerHTML++;
+        document.querySelector("#listupdates").innerHTML += div;
+        document.querySelector("#comment").value = "";
 
-    console.log('Success:', data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+      }
+
+      console.log('Success:', data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 
   e.preventDefault();
 });

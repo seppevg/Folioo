@@ -56,7 +56,7 @@ $posts = Post::getAllFromUser($id);
                             <p class="following">Following</p>
                         </div>
                         <div class="profile-following">
-                            <p class="following-number">0</p>
+                            <p class="followers-number">0</p>
                             <p class="following">Followers</p>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ $posts = Post::getAllFromUser($id);
                             <p class="following">Following</p>
                         </div>
                         <div class="profile-following">
-                            <p class="following-number">0</p>
+                            <p class="followers-number">0</p>
                             <p class="following">Followers</p>
                         </div>
                     </div>
