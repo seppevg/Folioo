@@ -143,26 +143,28 @@ if (!empty($_POST)) {
                         $moderator = $up['moderator'];
                     ?>
                     <div class="profile-header">
-                        <h3 class="profile-username"><?php echo $up['username']; ?></h3>
-                        <?php if(!empty($admin)):?>
-                            <?php if(!empty($moderator)):?>
+                        <div class="moderator-label">
+                            <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                            <?php if(!empty($admin)):?>
+                                <?php if(!empty($moderator)):?>
+                                    <form action="" method="post">
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                                </form>
+                                <?php elseif(empty($moderator)):?>
                                 <form action="" method="post">
-                                <a class="add-moderator-btn"><img src="./assets/moderator-on.svg" alt="Burger menu"></a>
-                            </form>
-                            <?php elseif(empty($moderator)):?>
-                            <form action="" method="post">
-                                <a class="add-moderator-btn"><img src="./assets/moderator-off.svg" alt="Burger menu"></a>
-                            </form>
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-off.svg" alt="Moderator icon grey"></a>
+                                </form>
+                                <?php endif;?>
                             <?php endif;?>
-                        <?php endif;?>
 
-                        <?php if(empty($admin)):?>
-                            <?php if(!empty($moderator)):?>
-                                <form action="" method="post">
-                                <a class="add-moderator-btn"><img src="./assets/moderator-on.svg" alt="Burger menu"></a>
-                            </form>
+                            <?php if(empty($admin)):?>
+                                <?php if(!empty($moderator)):?>
+                                    <form action="" method="post">
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                                </form>
+                                <?php endif;?>
                             <?php endif;?>
-                        <?php endif;?>
+                        </div>
                         <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
                     <div class="profile-info">

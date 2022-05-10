@@ -416,6 +416,11 @@ body {
   align-items: center;
 }
 
+.moderator-label {
+  display: flex;
+  flex-direction: row;
+}
+
 .profile-header img {
   max-height: 25px;
 }
@@ -431,6 +436,11 @@ body {
   text-decoration: none;
   padding: 0.8em;
   cursor: pointer;
+}
+
+.moderator-icon{
+  width: 20px;
+  padding-top: 2px;
 }
 
 .profile-info {
@@ -488,12 +498,6 @@ body {
 
 .follow-button {
   margin-bottom: 20px;
-}
-
-.moderator-label {
-  border: 2px solid var(--IMDblue);
-  color: var(--IMDblue);
-  padding: 2px;
 }
 
 /* MODAL */
