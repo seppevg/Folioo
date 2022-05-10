@@ -427,6 +427,12 @@ body {
   margin: 2.1875em 1.75em 1em 2.1875em;
 }
 
+.add-moderator-btn {
+  text-decoration: none;
+  padding: 0.8em;
+  cursor: pointer;
+}
+
 .profile-info {
   display: flex;
   flex-direction: row;
@@ -478,12 +484,16 @@ body {
 
 .allUserPosts {
   margin-top: 2em;
-  display: grid;
-
 }
 
 .follow-button {
   margin-bottom: 20px;
+}
+
+.moderator-label {
+  border: 2px solid var(--IMDblue);
+  color: var(--IMDblue);
+  padding: 2px;
 }
 
 /* MODAL */

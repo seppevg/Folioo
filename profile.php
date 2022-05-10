@@ -24,6 +24,17 @@ $userProfiles = User::getInfo($userId);
 $checkFollowing = Followers::check($id, $userId);
 $posts = Post::getAllFromUser($id);
 
+if (!empty($_POST)) {
+    try {
+        $user = new User;
+        $user->addModerator($userId);
+    }
+    catch(Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    } 
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +51,8 @@ $posts = Post::getAllFromUser($id);
 
 <body>
     <div id="profile">
-        <?php foreach ($profile as $p) : ?>
+        <?php foreach ($profile as $p) :
+            $admin = $p['admin']; ?>
             <?php if (!empty($id)) : ?>
                 <?php if (empty($userId)) : ?>
                     <div class="profile-header">
@@ -125,14 +137,38 @@ $posts = Post::getAllFromUser($id);
 
 
                 <?php foreach ($userProfiles as $up) : ?>
-                    <?php $posts = Post::getAllFromUser($userId); ?>
+                    <?php 
+                        $posts = Post::getAllFromUser($userId); 
+                        $profile = User::getInfo($id);
+                        $moderator = $up['moderator'];
+                    ?>
                     <div class="profile-header">
                         <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                        <?php if(!empty($admin)):?>
+                            <?php if(!empty($moderator)):?>
+                                <form action="" method="post">
+                                <a class="add-moderator-btn"><img src="./assets/moderator-on.svg" alt="Burger menu"></a>
+                            </form>
+                            <?php elseif(empty($moderator)):?>
+                            <form action="" method="post">
+                                <a class="add-moderator-btn"><img src="./assets/moderator-off.svg" alt="Burger menu"></a>
+                            </form>
+                            <?php endif;?>
+                        <?php endif;?>
+
+                        <?php if(empty($admin)):?>
+                            <?php if(!empty($moderator)):?>
+                                <form action="" method="post">
+                                <a class="add-moderator-btn"><img src="./assets/moderator-on.svg" alt="Burger menu"></a>
+                            </form>
+                            <?php endif;?>
+                        <?php endif;?>
                         <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
                     <div class="profile-info">
                         <div class="profile-img">
                             <img src="./uploads/profiles/<?php echo $up['image']; ?>">
+
                         </div>
                         <div class="profile-following">
                             <p class="following-number">0</p>
@@ -246,7 +282,11 @@ $posts = Post::getAllFromUser($id);
                     </div>
                 </section>
             <?php endforeach; ?>
-
+            <?php if(isset($error)):?>
+                <div>
+                    <p class="error"><?php echo $error ?></p>
+                </div>
+            <?php endif;?>
             <?php if (empty($id)) : ?>
                 <div class="profile-header">
                     <h3 class="profile-username">Join the club!</h3>
