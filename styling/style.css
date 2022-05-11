@@ -299,12 +299,10 @@ body {
 #home {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 .feed {
-  display: grid;
-  place-items: center;
+  margin: 0 auto;
 }
 
 #no-uploads {
@@ -338,11 +336,11 @@ body {
 }
 
 .project {
-  margin: 0em 2em 0em 2em;
+  margin: 0em 1em 0em 1em;
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: 350px;
+  max-width: 300px;
 }
 
 .project-picture {
@@ -357,6 +355,7 @@ body {
 
 .allUserPosts article .project {
   margin: 0 0 1em 0;
+  max-width: 350px;
 }
 
 .project-picture-overlay {

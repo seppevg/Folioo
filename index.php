@@ -4,9 +4,6 @@ include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
 
-/*$id = $_SESSION['id'];
-var_dump($id);*/
-
 if (empty($_SESSION['id'])) {
     $id = "";
 } else {
@@ -25,19 +22,14 @@ if ($pageCounter !== 1) {
     $buttonStyling = "";
 }
 
-$loadedPosts = ($pageCounter - 1)*10;
+$loadedPosts = ($pageCounter - 1)*20;
 $posts = Post::getAll($loadedPosts);
-
-
-
 
 if (empty($_GET['feed'])) {
     $url = "";
 } else {
     $url = $_GET['feed'];
 }
-
-//var_dump($url);
 
 ?>
 <!DOCTYPE html>
@@ -98,9 +90,9 @@ if (empty($_GET['feed'])) {
 
         <div class="user-links">
             <a class="main-btn add-project-nav" href="add.php">Inspire others</a>
-            <div class="nav-user">
+            <a href="profile.php" class="nav-user">
                 <img src="./uploads/profiles/1.jpg">
-            </div>
+            </a>
             <button class="dropdown-button">
                 <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
             </button>
@@ -237,16 +229,17 @@ if (empty($_GET['feed'])) {
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>
-                <?php endif; if (count($posts) > 9): ?>
+                <?php endif; if (count($posts) > 19): ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" <?php echo $buttonStyling; ?> >Next page</a>
                 <?php endif; ?>
             </div>
-            <br><br><br><br><br><br><br><br>
+            <br><br><br>
         <?php endif; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
         <script src="./js/like.js"></script>
         <script src="./js/dropdown.js"></script>
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         <script src="./js/masonry.js"></script>
 
     </div>

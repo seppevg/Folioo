@@ -107,7 +107,7 @@ class Post implements iPost
     public static function getAll($start)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT :start, 10;");
+        $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT :start, 20;");
         $statement->bindValue(':start', (int)$start, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
