@@ -237,6 +237,7 @@ if (empty($_GET['feed'])) {
         <?php endif; ?>
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
+        <script src="./js/filter.js"></script>
         <script src="./js/like.js"></script>
         <script src="./js/dropdown.js"></script>
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>

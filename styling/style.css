@@ -210,6 +210,14 @@ body {
   nav.bottom-nav {
     display: none;
   }
+
+  #home .main-btn {
+    width: 200px;
+  }
+
+  #home .main-margin {
+    margin: auto;
+  }
 }
 
 .top-nav {
@@ -305,6 +313,10 @@ body {
   margin: 0 auto;
 }
 
+#profile .feed {
+  margin: 2em auto 0 auto;
+}
+
 #no-uploads {
   position: absolute;
   top: 50%;
@@ -350,18 +362,18 @@ body {
 
 .allUserPosts article {
   position: relative;
-  max-width: 350px;
+  max-width: 300px;
 }
 
 .allUserPosts article .project {
-  margin: 0 0 1em 0;
+  margin: 0 1em 1em 1em;
   max-width: 350px;
 }
 
 .project-picture-overlay {
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 20px;
   border-radius: 9px;
   background-color: white;
   width: 42px;
@@ -387,7 +399,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 30px 30px 30px;
+  margin: 0 1em 30px 1em;
   max-width: 350px;
 }
 
@@ -567,7 +579,6 @@ body {
 .allUserPosts {
   margin-top: 2em;
   display: grid;
-
 }
 
 .follow-button {
