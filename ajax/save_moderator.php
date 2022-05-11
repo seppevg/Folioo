@@ -6,7 +6,7 @@
         $userId = $_POST['userId'];
 
         try {
-            $checkModerator = User::addModerator($userId);
+            $checkModerator = User::checkModeratorRole($userId);
 
             if ($checkModerator === 1) {
                 
@@ -36,7 +36,7 @@
         catch(Throwable $e) {
             $result = [
                 "error" => "error",
-                "message" => "Asign moderator failed"
+                "message" => "Assign moderator failed"
             ];
         }
 

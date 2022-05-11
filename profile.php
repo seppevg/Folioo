@@ -27,8 +27,6 @@ $posts = Post::getAllFromUser($id);
 $reported = ReportUser::checkIfReportedByUser($id, $userId);
 $isAlreadyReported = $reported > 0;
 
-/*$checkModerator = User::addModerator($userId);
-var_dump($checkModerator);*/
 
 ?>
 <html lang="en">

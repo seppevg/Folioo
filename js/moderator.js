@@ -1,6 +1,8 @@
 function addModerator(e, userId) {
     //console.log("👍");
   
+    let moderatorIcon = document.querySelector(".moderator-icon");
+
     let user = userId;
 
     let data = new FormData();
@@ -14,10 +16,13 @@ function addModerator(e, userId) {
         .then(response => response.json())
         .then(data => {
           if(
-            data.status === "success"
+            data.status === "success" &&
+            data.message === "Add moderator role"
           ){
-            //postLiked;
-            console.log("❤");
+            moderatorIcon.src = "./assets/moderator-on.svg";
+            //console.log("❤");
+          } else {
+            moderatorIcon.src = "./assets/moderator-off.svg";
           }
           console.log("Success:", data);
         })

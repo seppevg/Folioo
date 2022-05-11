@@ -509,7 +509,7 @@ class User implements iUser
         }
     }
 
-    public static function addModerator($id){
+    public static function checkModeratorRole($id){
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT moderator FROM users where id = :id");
         $statement->bindValue(':id', $id);
@@ -517,7 +517,7 @@ class User implements iUser
         $result = $statement->rowCount();
         $row = $statement->fetch(PDO::FETCH_ASSOC);
         if ($result <= 0) {
-            throw new Exception("You need to re-submit your request");
+            throw new Exception("No moderator found with this id");
             return false;
         } else {
             return $row['moderator'];
