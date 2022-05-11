@@ -252,10 +252,9 @@ $isAlreadyReported = $reported > 0;
                             <?php elseif(!empty($mainModerator)):?>
                                 <div id="user-report">
                                     <h3 class="profile-username">Warn this user</h3>
-                                    <p>Reason for warning this user.</p>
-                                    <input type="text">
-                                    <div class="center">
-                                        <img class="report" src="./assets/report.svg" alt="report">
+                                    <p>Reason for warning this user.</p>                                    
+                                    <div class="flex">
+                                        <input type="text" class="form-input-warning" placeholder="Warning" name="warning">
                                     </div>
                                     <div class="flex">
                                         <button class="form-btn" id="warn-btn">Warn user</button>

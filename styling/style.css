@@ -723,6 +723,14 @@ img.post-profile {
   margin-left: 5px;
 }
 
+.form-input-warning {
+  padding: 0.7em;
+  border-radius: 0.4em;
+  flex: 1 1 auto;
+  margin: 5px 0 1.2em 0;
+  border: 2px solid #d2d2d2;
+}
+
 /* REUSABLE PARTS */
 .main-btn {
   background-color: var(--IMDgreen);
