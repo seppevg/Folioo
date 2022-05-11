@@ -1,5 +1,5 @@
 function addModerator(e, userId) {
-    console.log("👍");
+    //console.log("👍");
   
     let user = userId;
 

@@ -509,10 +509,18 @@ class User implements iUser
         }
     }
 
-    public function addModerator($id){
+    public static function addModerator($id){
         $conn = DB::getInstance();
-        $statement = $conn->prepare("UPDATE users SET moderator = 1 WHERE id = :id;");
+        $statement = $conn->prepare("SELECT moderator FROM users where id = :id");
         $statement->bindValue(':id', $id);
         $statement->execute();
+        $result = $statement->rowCount();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result <= 0) {
+            throw new Exception("You need to re-submit your request");
+            return false;
+        } else {
+            return $row['moderator'];
+        }
     }
 }

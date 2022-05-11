@@ -27,16 +27,8 @@ $posts = Post::getAllFromUser($id);
 $reported = ReportUser::checkIfReportedByUser($id, $userId);
 $isAlreadyReported = $reported > 0;
 
-if (!empty($_POST)) {
-    try{
-        $user = new User;
-        $user->addModerator($userId);
-    }
-    catch(Throwable $error) {
-        // if any errors are thrown in the class, they can be caught here
-        $error = $error->getMessage();
-    } 
-}
+/*$checkModerator = User::addModerator($userId);
+var_dump($checkModerator);*/
 
 ?>
 <html lang="en">
