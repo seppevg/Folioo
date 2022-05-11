@@ -43,7 +43,9 @@ $isAlreadyReported = $reported > 0;
 
 <body>
     <div id="profile">
-        <?php foreach ($profile as $p) : $admin = $p['admin']; ?>
+        <?php foreach ($profile as $p) : 
+            $admin = $p['admin']; 
+            $mainModerator = $p['moderator']; ?>
             <?php if (!empty($id)) : ?>
                 <?php if (empty($userId)) : ?>
                     <div class="profile-header">
@@ -218,35 +220,51 @@ $isAlreadyReported = $reported > 0;
 
                             <div class="modal-close">
                                 <img class="modal-icon" src="./assets/close.svg" alt="Close">
-                            </div>
+                            </div>                            
 
-                            <div id="user-report" <?php echo ($isAlreadyReported) ? 'class="hidden"' : ''; ?>>
-                                <h3 class="profile-username">Report this user</h3>
-                                <p>Thank you for keeping Folioo a safe space for
-                                    everyone! This user will be flagged as inappropriate.</p>
-                                <div class="center">
-                                    <img class="report" src="./assets/report.svg" alt="report">
+                            <?php if(empty($mainModerator)):?>
+                                <div id="user-report" <?php echo ($isAlreadyReported) ? 'class="hidden"' : ''; ?>>
+                                    <h3 class="profile-username">Report this user</h3>
+                                    <p>Thank you for keeping Folioo a safe space for
+                                        everyone! This user will be flagged as inappropriate.</p>
+                                    <div class="center">
+                                        <img class="report" src="./assets/report.svg" alt="report">
+                                    </div>
+                                    <div class="flex">
+                                        <button class="form-btn" id="report-btn" onclick="userReporting(<?php echo $userId; ?>, <?php echo $id; ?>, 'report')">Report</button>
+                                    </div>
                                 </div>
-                                <div class="flex">
-                                    <button class="form-btn" id="report-btn" onclick="userReporting(<?php echo $userId; ?>, <?php echo $id; ?>, 'report')">Report</button>
-                                </div>
-                            </div>
 
-                            <div id="user-unreport" <?php echo ($isAlreadyReported) ? '' : 'class="hidden"'; ?>>
+                                <div id="user-unreport" <?php echo ($isAlreadyReported) ? '' : 'class="hidden"'; ?>>
 
-                                <h3 class="profile-username">This user is reported</h3>
-                                <p>If you don't think that this user should be flagged as inappropriate then you can unreport this user.
-                                </p>
-                                <div class="center">
-                                    <img class="report" src="./assets/report.svg" alt="report">
+                                    <h3 class="profile-username">This user is reported</h3>
+                                    <p>If you don't think that this user should be flagged as inappropriate then you can unreport this user.
+                                    </p>
+                                    <div class="center">
+                                        <img class="report" src="./assets/report.svg" alt="report">
+                                    </div>
+                                    
+                                    <div class="flex">
+                                        <button class="form-btn" id="report-btn" onclick="userReporting(<?php echo $userId; ?>, <?php echo $id; ?>, 'unreport')">Stop reporting</button>
+                                    </div>
                                 </div>
-                                
-                                <div class="flex">
-                                    <button class="form-btn" id="report-btn" onclick="userReporting(<?php echo $userId; ?>, <?php echo $id; ?>, 'unreport')">Stop reporting</button>
-                                </div>
-                            </div>
 
+                            <?php elseif(!empty($mainModerator)):?>
+                                <div id="user-report">
+                                    <h3 class="profile-username">Warn this user</h3>
+                                    <p>Reason for warning this user.</p>
+                                    <input type="text">
+                                    <div class="center">
+                                        <img class="report" src="./assets/report.svg" alt="report">
+                                    </div>
+                                    <div class="flex">
+                                        <button class="form-btn" id="warn-btn">Warn user</button>
+                                    </div>
+                                </div>
+                            <?php endif;?>
                         </div>
+
+
 
                     </section>
 
