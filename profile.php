@@ -19,8 +19,6 @@ if (empty($_GET['id'])) {
     }
 }
 
-
-
 $profile = User::getInfo($id);
 $userProfiles = User::getInfo($userId);
 $checkFollowing = Followers::check($id, $userId);
@@ -163,7 +161,7 @@ if (!empty($_POST)) {
                         $moderator = $up['moderator'];
                     ?>
                     <div class="profile-header">
-                        <div class="moderator-label">
+                        <div class="moderator-label" onclick="addModerator(this, <?php echo $up['id'];?>);">
                             
                             <?php if(!empty($admin)):?>
                                 <?php if(!empty($moderator)):?>
@@ -363,6 +361,7 @@ if (!empty($_POST)) {
                     </div>
                     <script src="./js/app.js"></script>
                     <script src="./js/like.js"></script>
+                    <script src="./js/moderator.js"></script>
 </body>
 
 </html>
