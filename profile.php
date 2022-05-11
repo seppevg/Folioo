@@ -151,25 +151,24 @@ $isAlreadyReported = $reported > 0;
                         $moderator = $up['moderator'];
                     ?>
                     <div class="profile-header">
-                        <div class="moderator-label" onclick="addModerator(this, <?php echo $up['id'];?>);">
-                            
-                            <?php if(!empty($admin)):?>
-                                <?php if(!empty($moderator)):?>
+                        <div class="moderator-label" >
+                            <div class="admin-change" onclick="addModerator(this, <?php echo $up['id'];?>);">
+                                <?php if(!empty($admin)):?>
+                                    <?php if(!empty($moderator)):?>
+                                        <form action="" method="post">
+                                        <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                                    </form>
+                                    <?php elseif(empty($moderator)):?>
                                     <form action="" method="post">
-                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
-                                </form>
-                                <?php elseif(empty($moderator)):?>
-                                <form action="" method="post">
-                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-off.svg" alt="Moderator icon grey"></a>
-                                </form>
+                                        <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-off.svg" alt="Moderator icon grey"></a>
+                                    </form>
+                                    <?php endif;?>
                                 <?php endif;?>
-                            <?php endif;?>
+                            </div>
 
                             <?php if(empty($admin)):?>
                                 <?php if(!empty($moderator)):?>
-                                    <form action="" method="post">
                                     <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
-                                </form>
                                 <?php endif;?>
                             <?php endif;?>
                             <h3 class="profile-username"><?php echo $up['username']; ?></h3>
