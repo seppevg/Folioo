@@ -197,8 +197,7 @@ class Post implements iPost
             } else {
                 throw new Exception("No posts found with this title or tag");
             }
-        }
-        else {
+        } else {
             $column = $_POST['column'];
 
             $conn = DB::getInstance();
@@ -221,7 +220,7 @@ class Post implements iPost
             } else {
                 throw new Exception("No posts found with this title or tag");
             }
-        }        
+        }
     }
 
     /**
@@ -243,7 +242,8 @@ class Post implements iPost
         return $this;
     }
 
-    public static function checkShowcaseState($postId) {
+    public static function checkShowcaseState($postId)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT showcase FROM posts WHERE id = :postId;");
         $statement->bindValue(":postId", $postId);
@@ -252,14 +252,16 @@ class Post implements iPost
         return $showcase['showcase'];
     }
 
-    public static function addToShowcase($postId) {
+    public static function addToShowcase($postId)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("UPDATE posts SET showcase = 1 WHERE id = :postId;");
         $statement->bindValue(":postId", $postId);
         $statement->execute();
     }
 
-    public static function removeFromShowcase($postId) {
+    public static function removeFromShowcase($postId)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("UPDATE posts SET showcase = 0 WHERE id = :postId;");
         $statement->bindValue(":postId", $postId);

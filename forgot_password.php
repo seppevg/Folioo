@@ -2,22 +2,21 @@
 
 include_once("bootstrap.php");
 
-if( !empty($_POST) ){
-    try {        
+if (!empty($_POST)) {
+    try {
         // create a new user
         $user = new User();
-        $user->setEmail($_POST['email']);        
+        $user->setEmail($_POST['email']);
         $user->validateEmail();
         $user->sendPasswordResetLink();
 
         // If the user entered a valid email he gets redirected
         header("Location: message_password.php");
-    }
-    catch(Throwable $error) {
+    } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
     }
-}	
+}
 
 ?>
 <!DOCTYPE html>
@@ -61,7 +60,7 @@ if( !empty($_POST) ){
                         </div>
                     </div>
 
-                    <?php if(isset($error)):?>
+                    <?php if (isset($error)):?>
                         <div>
                             <p class="error"> <?php echo $error ?></p>
                         </div>

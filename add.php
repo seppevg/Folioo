@@ -92,16 +92,18 @@ if (!empty($_POST)) {
                                 <div class="flex">
                                     <img src="./assets/hashtag.svg" class="input-icon">
                                     <input class="tags-input" type="text" placeholder="Enter tags" name="input-tags" onkeydown="if (event.keyCode == 13) event.preventDefault();">
-                                    <?php //if (!empty($post)): ?>
-                                        <input style="display: none;" value="<?php if (!empty($_POST['tags'])) { echo htmlspecialchars($_POST['tags']); } ?>" name="tags" autocomplete="off" id="input-tags" type="text">
-                                    <?php //endif; ?>
+                                    <?php //if (!empty($post)):?>
+                                        <input style="display: none;" value="<?php if (!empty($_POST['tags'])) {
+    echo htmlspecialchars($_POST['tags']);
+} ?>" name="tags" autocomplete="off" id="input-tags" type="text">
+                                    <?php //endif;?>
                                 </div>
                             </div>
                             <div class="tag-list">
-                                <?php 
+                                <?php
                                     if (!empty($_POST['tags'])) :
                                         $tags = explode(",", $_POST['tags']);
-                                        foreach ($tags as $tag): 
+                                        foreach ($tags as $tag):
                                     ?>
                                         <div class="tag-item">
                                             <span class="delete-btn" onclick="deleteTag(this, '${tag}')">&times;</span>

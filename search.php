@@ -14,7 +14,7 @@ if (empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
-if( !empty($_POST) ){
+if (!empty($_POST)) {
     try {
         $searchResult = $_POST['searchInput'];
         //var_dump ($searchResult);
@@ -24,21 +24,18 @@ if( !empty($_POST) ){
             $filterType = "";
         } else {
             $filterType = $_POST['column'];
-        }        
-        //echo $filterType;            
+        }
+        //echo $filterType;
 
-        if ($filterType == "Title"){
+        if ($filterType == "Title") {
+            $posts = Post::search($searchResult);
+        } elseif ($filterType == "Tags") {
             $posts = Post::search($searchResult);
         }
-        elseif ($filterType == "Tags"){
-            $posts = Post::search($searchResult);
-        }
-        
-    }
-    catch(Throwable $error) {
+    } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
-    }    
+    }
 }
 
 ?><!DOCTYPE html>
@@ -81,16 +78,16 @@ if( !empty($_POST) ){
 
     </form>
     
-    <?php if(empty($posts)):?>
+    <?php if (empty($posts)):?>
         <div id="no-uploads">
                 <img src="./assets/search_empty_state.svg" alt="No uploads yet">
             </div>
     <?php else:?>
 
     <div class="allPostsSearch">
-        <?php foreach($posts as $post): ?>
-            <?php 
-                $profile = Post::getUser($post['user_id']); 
+        <?php foreach ($posts as $post): ?>
+            <?php
+                $profile = Post::getUser($post['user_id']);
                 $commentsCount = Comment::countComments($post['id']);
                 $likes = Like::getLikes($post['id']);
                 $checkLikes = Like::liked($post['id'], $id);?>
@@ -107,10 +104,10 @@ if( !empty($_POST) ){
                         <div class="project-interactions">
                             <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
                                     <a href="#" class="like"> 
-                                        <?php if($checkLikes == "0"):?>               
+                                        <?php if ($checkLikes == "0"):?>               
                                             <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
                                             <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
-                                        <?php elseif($checkLikes == "1"):?> 
+                                        <?php elseif ($checkLikes == "1"):?> 
                                             <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
                                             <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
                                         <?php endif;?>
@@ -143,7 +140,7 @@ if( !empty($_POST) ){
     </div>
     <?php endif; ?>
 
-    <?php if(isset($error)):?>
+    <?php if (isset($error)):?>
         <div class="main-margin">
             <p class="error"><?php echo $error ?></p>
         </div>

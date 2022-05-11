@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once("bootstrap.php");
 
@@ -31,7 +31,7 @@ $posts = Post::getAll($loadedPosts);
 
 
 
-if(empty($_GET['feed'])){
+if (empty($_GET['feed'])) {
     $url = "";
 } else {
     $url = $_GET['feed'];
@@ -106,7 +106,7 @@ if(empty($_GET['feed'])){
             </button>
         </div>
     </nav>
-    
+
     <div id="home">
         <div id="container-logo">
             <div class="dropdown">
@@ -135,19 +135,19 @@ if(empty($_GET['feed'])){
                 <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-top: 72vh">Previous page</a>
             </div>
         <?php else: ?>
-            <div class="allPosts">
-            <?php if($url === "chronologic" || $url === "" ):?>
-                <?php foreach($posts as $post): ?>
-                    <?php   
-                        $profile = Post::getUser($post['user_id']); 
+            <div class="feed">
+            <?php if ($url === "chronologic" || $url === ""):?>
+                <?php foreach ($posts as $post): ?>
+                    <?php
+                        $profile = Post::getUser($post['user_id']);
                         $commentsCount = Comment::countComments($post['id']);
                         $likes = Like::getLikes($post['id']);
                         $checkLikes = Like::liked($post['id'], $id);
                     ?>
                     <article>
-                    <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
-                        <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
-                    </a>
+                        <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
+                            <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                        </a>
                         <div class="project-info">
                             <?php if (!empty($id)): ?>
                                 <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
@@ -158,10 +158,10 @@ if(empty($_GET['feed'])){
                                     <div class="project-interactions">
                                         <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
                                             <a href="#" class="like"> 
-                                                <?php if($checkLikes == "0"):?>               
+                                                <?php if ($checkLikes == "0"):?>               
                                                     <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
                                                     <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
-                                                <?php elseif($checkLikes == "1"):?> 
+                                                <?php elseif ($checkLikes == "1"):?> 
                                                     <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
                                                     <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
                                                 <?php endif;?>
@@ -179,20 +179,20 @@ if(empty($_GET['feed'])){
                 <?php endforeach; ?>
                 <?php endif;?>
 
-                <?php if($url === "following"):?>
+                <?php if ($url === "following"):?>
                     <?php $following = Followers::getAll($id);?>
-                        <?php if(empty($following)):?>
+                        <?php if (empty($following)):?>
                             <div id="no-uploads">
                                 <img src="./assets/not_following.svg" alt="Not following anyone yet">
                             </div>
                         <?php endif;?>
-                    <?php 
-                        foreach($following as $f): 
+                    <?php
+                        foreach ($following as $f):
                         $postsUser = Post::getAllFromUser($f['following_id']);
-                        foreach($postsUser as $puser):
+                        foreach ($postsUser as $puser):
                     ?>
 
-                        <?php   
+                        <?php
                             $profile = Post::getUser($puser['user_id']);
                             $commentsCount = Comment::countComments($puser['id']);
                             $likes = Like::getLikes($puser['id']);
@@ -212,10 +212,10 @@ if(empty($_GET['feed'])){
                                         <div class="project-interactions">
                                             <div class="project-interactions-like" onclick="postLiked(this, <?php echo $puser['id'];?>, <?php echo $id?>);">
                                                 <a href="#" class="like"> 
-                                                    <?php if($checkLikes == "0"):?>               
+                                                    <?php if ($checkLikes == "0"):?>               
                                                         <img data-post="<?php echo $puser['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $puser['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
                                                         <h4 class="numberOfLikes-<?php echo $puser['id']; ?>"><?php echo $likes?></h4>
-                                                    <?php elseif($checkLikes == "1"):?> 
+                                                    <?php elseif ($checkLikes == "1"):?> 
                                                         <img data-post="<?php echo $puser['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $puser['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
                                                         <h4 class="numberOfLikes-<?php echo $puser['id']; ?>"><?php echo $likes?></h4>
                                                     <?php endif;?>
@@ -247,6 +247,7 @@ if(empty($_GET['feed'])){
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
         <script src="./js/like.js"></script>
         <script src="./js/dropdown.js"></script>
+        <script src="./js/masonry.js"></script>
 
     </div>
     

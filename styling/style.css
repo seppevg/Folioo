@@ -302,6 +302,11 @@ body {
   height: 100vh;
 }
 
+.feed {
+  display: grid;
+  place-items: center;
+}
+
 #no-uploads {
   position: absolute;
   top: 50%;
@@ -384,6 +389,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin: 0 30px 30px 30px;
+  max-width: 350px;
 }
 
 .project-author {
@@ -435,7 +441,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 200px;
+  width: 125px;
 }
 
 .project-interactions-like {
