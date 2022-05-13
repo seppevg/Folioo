@@ -154,8 +154,9 @@ $isAlreadyReported = $reported > 0;
 
                 <div class="profile-header">
                     <div class="moderator-label" >
+                    
                         <div class="admin-change" onclick="addModerator(this, <?php echo $up['id'];?>);">
-                            <?php if (!empty($mainAdmin)):?>
+                            <?php if (!empty($mainAdmin)):?>               
                                 <?php if (!empty($moderator)):?>
                                     <form action="" method="post">
                                         <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
@@ -163,10 +164,18 @@ $isAlreadyReported = $reported > 0;
                                 <?php elseif (empty($moderator)):?>
                                     <form action="" method="post">
                                         <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-off.svg" alt="Moderator icon grey"></a>
-                                    </form>
+                                    </form>                                
                                 <?php endif;?>
+                                
                             <?php endif;?>
+                            
                         </div>
+                        <?php if (!empty($mainAdmin)):?>
+                            <?php if (!empty($admin)): ?>
+                                <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
+                            <?php endif;?>
+                        <?php endif;?>
+
                         <?php if (empty($mainAdmin)):?>
                             <?php if (!empty($admin)):?>
                                 <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
