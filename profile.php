@@ -44,7 +44,7 @@ $posts = Post::getAllFromUser($id);
             <?php if (!empty($id)) : ?>
                 <?php if (empty($userId)) : ?>
                     <div class="profile-header">
-                        <h3 class="profile-username"><?php echo $p['username']; ?></h3>
+                        <h3 class="profile-username"><?php echo htmlspecialchars($p['username']); ?></h3>
                         <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
                     </div>
                     <div class="profile-info">
@@ -61,22 +61,20 @@ $posts = Post::getAllFromUser($id);
                         </div>
                     </div>
                     <div class="profile-info-extra">
-                        <p class="profile-text"><?php echo $p['education']; ?></p>
-                        <?php if(!empty($p['behancelink'])):?>
-                            <a href="<?php echo $p['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <p class="profile-text"><?php echo htmlspecialchars($p['education']); ?></p>
+                        <?php if (!empty($p['instagramlink'])):?>
+                            <a href="<?php echo htmlspecialchars($p['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
                         <?php endif;?>
-                        
-                        <?php if(!empty($p['instagramlink'])):?>
-                            <a href="<?php echo $p['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                        <?php if (!empty($p['behancelink'])):?>
+                            <a href="<?php echo htmlspecialchars($p['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
                         <?php endif;?>
-
-                        <?php if(!empty($p['linkedinlink'])):?>
-                            <a href="<?php echo $p['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php if (!empty($p['linkedinlink'])):?>
+                            <a href="<?php echo htmlspecialchars($p['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
                         <?php endif;?>
                     </div>
 
                     <div class="profile-bio">
-                        <p class="profile-text"><?php echo $p['bio']; ?></p>
+                        <p class="profile-text"><?php echo htmlspecialchars($p['bio']); ?></p>
                     </div>
 
                     <div class="profile-edit">
@@ -89,9 +87,9 @@ $posts = Post::getAllFromUser($id);
                         </div>
                     <?php endif; ?>
 
-                    <div class="allUserPosts">
+                    <div class="allUserPosts feed">
                         <?php foreach ($posts as $post) : ?>
-                            <article class="main-margin">
+                            <article>
                                 <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
                                     <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                                 </a>
@@ -101,11 +99,16 @@ $posts = Post::getAllFromUser($id);
                                 </div>
                             </article>
                         <?php endforeach; ?>
-                        <section class="modal modal-container ">
+                    </div>
+                    <section class="modal modal-container ">
                             <div id="modal" class="modal-content hidden">
                                 <div class="modal-close">
                                     <img class="modal-icon" src="./assets/close.svg" alt="close">
                                 </div>
+                                <a href="showcase.php?id=<?php echo $id;?>">
+                                    <img class="modal-icon" src="./assets/showcase.svg" alt="showcase">
+                                    <p>View showcase</p>
+                                </a>
                                 <a href="change_password.php">
                                     <img class="modal-icon" src="./assets/lock.svg" alt="lock">
                                     <p>Change password</p>
@@ -120,167 +123,165 @@ $posts = Post::getAllFromUser($id);
                                 </a>
                             </div>
                         </section>
-                    <?php endif; ?>
                 <?php endif; ?>
-
-
-                <?php foreach ($userProfiles as $up) : ?>
-                    <?php $posts = Post::getAllFromUser($userId); ?>
-                    <div class="profile-header">
-                        <h3 class="profile-username"><?php echo $up['username']; ?></h3>
-                        <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
-                    </div>
-                    <div class="profile-info">
-                        <div class="profile-img">
-                            <img src="./uploads/profiles/<?php echo $up['image']; ?>">
-                        </div>
-                        <div class="profile-following">
-                            <p class="following-number">0</p>
-                            <p class="following">Following</p>
-                        </div>
-                        <div class="profile-following">
-                            <p class="followers-number">0</p>
-                            <p class="following">Followers</p>
-                        </div>
-                    </div>
-                    <div class="profile-info-extra">
-                        <p class="profile-text"><?php echo $up['education']; ?></p>
-                        <?php if(!empty($up['behancelink'])):?>
-                            <a href="<?php echo $up['behancelink']; ?>"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
-                        <?php endif;?>
-                        
-                        <?php if(!empty($up['instagramlink'])):?>
-                            <a href="<?php echo $up['instagramlink']; ?>"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
-                        <?php endif;?>
-
-                        <?php if(!empty($up['linkedinlink'])):?>
-                            <a href="<?php echo $up['linkedinlink']; ?>"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
-                        <?php endif;?>
-                    </div>
-                    <div class="profile-bio">
-                        <p class="profile-text"><?php echo $up['bio']; ?></p>
-                    </div>
-
-                    <div class="profile-edit">
-                        <a href="#" class="main-btn follow-button" onclick="changeFollowState(this, <?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
-                    </div>
-
-                    <!-- report modal -->
-                    <section class="modal modal-container ">
-                        <form action="" method="post">
-                        <div id="modal" class="modal-content hidden">
-                            <div class="modal-close">
-                                <img class="modal-icon" src="./assets/close.svg" alt="Close">
-                            </div>
-                            <h3 class="profile-username">Report this profile</h3>
-                            <p>Thank you for keeping Folioo a safe space for
-                                everyone! This profile will be flagged as inappropriate.</p>
-                            <div class="center">
-                                <img class="report" src="./assets/report.svg" alt="report">
-                            </div>
-                            <div class="flex">
-                                <input class="form-btn" type="submit" value="Report">
-                            </div>
-                        </div>
-                        </form>
-                    </section>
-
-                    <?php if (empty($posts)) : ?>
-                        <div id="no-uploads">
-                            <img src="./assets/no-posts.svg" alt="No posts yet">
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="allPosts">
-                        <?php foreach ($posts as $post) : ?>
-                            <?php 
-                                $commentsCount = Comment::countComments($post['id']);
-                                $likes = Like::getLikes($post['id']);
-                                $checkLikes = Like::liked($post['id'], $id);
-                            ?>
-                            <article>
-                                <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
-                                    <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
-                                </a>
-                                <div class="project-info">
-                                    <div class="project-interactions">
-                                    <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
-                                            <a href="#" class="like"> 
-                                                <?php if($checkLikes == "0"):?>               
-                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
-                                                    <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
-                                                <?php elseif($checkLikes == "1"):?> 
-                                                    <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
-                                                    <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
-                                                <?php endif;?>
-                                            </a>
-                                        </div>
-                                        <div class="project-interactions-comment">
-                                            <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
-                                            <h4><?php echo $commentsCount?></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endforeach; ?>
-
-                <section class="modal modal-container ">
-                    <div id="modal" class="modal-content hidden">
-                        <div class="modal-close">
-                            <img class="modal-icon" src="./assets/close.svg" alt="close">
-                        </div>
-                        <a href="change_password.php">
-                            <img class="modal-icon" src="./assets/lock.svg" alt="lock">
-                            <p>Change password</p>
-                        </a>
-                        <a href="logout.php">
-                            <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
-                            <p>Log out</p>
-                        </a>
-                        <a href="delete_profile.php" class="delete-profile-popup">
-                            <img class="modal-icon" src="./assets/delete.svg" alt="delete">
-                            <p>Delete your profile</p>
-                        </a>
-                    </div>
-                </section>
-            <?php endforeach; ?>
-
-            <?php if (empty($id)) : ?>
-                <div class="profile-header">
-                    <h3 class="profile-username">Join the club!</h3>
-                    <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
-                </div>
-
-                <div class="not-logged-into-profile">
-                    <h4>You don't have a profile</h4>
-                    <p>
-                        You are currently not logged in to the site, to get proper access create
-                        a new user or login with an existing user.
-                    </p>
-                </div>
-
-                <div id="become-friend">
-                    <img src="./assets/become-friend.svg" alt="No posts yet">
-                </div>
-
-                <div class="main-margin">
-                    <div class="flex">
-                        <a href="login.php" class="form-btn center">Log in</a>
-                    </div>
-
-                    <div class="flex">
-                        <a href="register.php" class="form-btn center">Register</a>
-                    </div>
-                </div>
-
             <?php endif; ?>
 
-            <?php include_once("./includes/nav-bottom.inc.php"); ?>
+            <?php foreach ($userProfiles as $up) : ?>
+                <?php $posts = Post::getAllFromUser($userId); ?>
+                <div class="profile-header">
+                    <h3 class="profile-username"><?php echo htmlspecialchars($up['username']); ?></h3>
+                    <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
+                </div>
+                <div class="profile-info">
+                    <div class="profile-img">
+                        <img src="./uploads/profiles/<?php echo $up['image']; ?>">
                     </div>
-                    <script src="./js/app.js"></script>
-                    <script src="./js/like.js"></script>
+                    <div class="profile-following">
+                        <p class="following-number">0</p>
+                        <p class="following">Following</p>
+                    </div>
+                    <div class="profile-following">
+                        <p class="following-number">0</p>
+                        <p class="following">Followers</p>
+                    </div>
+                </div>
+                <div class="profile-info-extra">
+                    <p class="profile-text"><?php echo htmlspecialchars($up['education']); ?></p>                        
+                    <?php if (!empty($up['instagramlink'])):?>
+                        <a href="<?php echo htmlspecialchars($up['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                    <?php endif;?>
+                    <?php if (!empty($up['behancelink'])):?>
+                        <a href="<?php echo htmlspecialchars($up['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                    <?php endif;?>
+                    <?php if (!empty($up['linkedinlink'])):?>
+                        <a href="<?php echo htmlspecialchars($up['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                    <?php endif;?>
+                </div>
+                <div class="profile-bio">
+                    <p class="profile-text"><?php echo htmlspecialchars($up['bio']); ?></p>
+                </div>
+
+                <div class="profile-edit">
+                    <a href="#" class="main-btn follow-button" onclick="changeFollowState(this, <?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
+                </div>
+
+                <!-- report modal -->
+                <section class="modal modal-container ">
+                    <form action="" method="post">
+                    <div id="modal" class="modal-content hidden">
+                        <div class="modal-close">
+                            <img class="modal-icon" src="./assets/close.svg" alt="Close">
+                        </div>
+                        <h3 class="profile-username">Report this profile</h3>
+                        <p>Thank you for keeping Folioo a safe space for
+                            everyone! This profile will be flagged as inappropriate.</p>
+                        <div class="center">
+                            <img class="report" src="./assets/report.svg" alt="report">
+                        </div>
+                        <div class="flex">
+                            <input class="form-btn" type="submit" value="Report">
+                        </div>
+                    </div>
+                    </form>
+                </section>
+
+                <?php if (empty($posts)) : ?>
+                    <div id="no-uploads">
+                        <img src="./assets/no-posts.svg" alt="No posts yet">
+                    </div>
+                <?php endif; ?>
+
+                <div class="allPosts feed">
+                    <?php foreach ($posts as $post) : ?>
+                        <?php
+                            $commentsCount = Comment::countComments($post['id']);
+                            $likes = Like::getLikes($post['id']);
+                            $checkLikes = Like::liked($post['id'], $id);
+                        ?>
+                        <article>
+                            <a href="post_detail.php?id=<?php echo $post['id']; ?>" class="project">
+                                <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                            </a>
+                            <div class="project-info">
+                                <div class="project-interactions">
+                                    <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
+                                        <a href="#" class="like"> 
+                                            <?php if ($checkLikes == "0"):?>               
+                                                <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
+                                                <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                                            <?php elseif ($checkLikes == "1"):?> 
+                                                <img data-post="<?php echo $post['id']?>" data-user="<?php echo $id?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
+                                                <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
+                                            <?php endif;?>
+                                        </a>
+                                    </div>
+                                    <div class="project-interactions-comment">
+                                        <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
+                                        <h4><?php echo $commentsCount?></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+
+            <section class="modal modal-container ">
+                <div id="modal" class="modal-content hidden">
+                    <div class="modal-close">
+                        <img class="modal-icon" src="./assets/close.svg" alt="close">
+                    </div>
+                    <a href="change_password.php">
+                        <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                        <p>Change password</p>
+                    </a>
+                    <a href="logout.php">
+                        <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                        <p>Log out</p>
+                    </a>
+                    <a href="delete_profile.php" class="delete-profile-popup">
+                        <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                        <p>Delete your profile</p>
+                    </a>
+                </div>
+            </section>
+        <?php endforeach; ?>
+
+        <?php if (empty($id)) : ?>
+            <div class="profile-header">
+                <h3 class="profile-username">Join the club!</h3>
+                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+            </div>
+
+            <div class="not-logged-into-profile">
+                <h4>You don't have a profile</h4>
+                <p>
+                    You are currently not logged in to the site, to get proper access create
+                    a new user or login with an existing user.
+                </p>
+            </div>
+
+            <div id="become-friend">
+                <img src="./assets/become-friend.svg" alt="No posts yet">
+            </div>
+
+            <div class="main-margin">
+                <div class="flex">
+                    <a href="login.php" class="form-btn center">Log in</a>
+                </div>
+
+                <div class="flex">
+                    <a href="register.php" class="form-btn center">Register</a>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php include_once("./includes/nav-bottom.inc.php"); ?>
+    </div>
+    <script src="./js/app.js"></script>
+    <script src="./js/like.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="./js/masonry.js"></script>
 </body>
 
 </html>

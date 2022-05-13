@@ -8,28 +8,26 @@
 
     if (empty($selector) || empty($validator)) {
         $error = "Could not validate your request!";
-    }
-    else {
+    } else {
         if (ctype_xdigit($selector) == false && ctype_xdigit($validator) == false) {
             $error = "Could not validate your request!";
         }
     }
 
-    if( !empty($_POST) ){
-        try {        
+    if (!empty($_POST)) {
+        try {
             // create a new user
             $user = new User();
-            $user->setPassword($_POST['password']);        
+            $user->setPassword($_POST['password']);
             $user->resetPassword();
     
             // If the user entered a valid email he gets redirected
             header("Location: login.php");
-        }
-        catch(Throwable $error) {
+        } catch (Throwable $error) {
             // if any errors are thrown in the class, they can be caught here
             $error = $error->getMessage();
         }
-    }	
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">

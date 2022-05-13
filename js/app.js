@@ -358,5 +358,26 @@ document.querySelector("#btnAddComment").addEventListener("click", function (e) 
   e.preventDefault();
 });
 
+//SHARE URL : COPY TO CLIPBOARD
+// document.getElementById("copy-to-clipboard").addEventListener("click", function () {
+//   console.log('test');
+//   let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search;
+//   console.log(url);
+// });
 
+function copyToClipboard() {
+  let copyText = document.querySelector("#copy-to-clipboard");
+  let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search;
+  console.log(url);
 
+  navigator.clipboard.writeText(url).then(function () {
+    copyText.classList.toggle("active");
+    window.getSelection().removeAllRanges();
+  }, function () {
+    alert('Sharing the URL has failed, please try again later.')
+  });
+
+  setTimeout(function () {
+    copyText.classList.remove("active");
+  }, 2500);
+}

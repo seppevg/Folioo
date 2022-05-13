@@ -71,7 +71,11 @@ if (!empty($_POST)) {
             <form action="" method="POST" enctype="multipart/form-data">
                 <div>
                     <div class="profile-img-edit">
-                        <img style="cursor:pointer" id="profile-display" src="./uploads/posts/<?php if (!empty($oldPost)) {echo $oldPost['image']; } else {echo $newPost->getImage;} ?>" onclick="triggerClick()">
+                        <img style="cursor:pointer" id="profile-display" src="./uploads/posts/<?php if (!empty($oldPost)) {
+    echo $oldPost['image'];
+} else {
+    echo $newPost->getImage;
+} ?>" onclick="triggerClick()">
                     </div>
                     <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change pic</label>
                     <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">

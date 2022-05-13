@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     include_once("bootstrap.php");
 
@@ -8,8 +8,8 @@
     $email = $_SESSION['email'];
 
 
-    if( !empty($_POST) ){
-        try {        
+    if (!empty($_POST)) {
+        try {
             $user = new User();
             $user->setPassword($_POST['current-password']);
         
@@ -17,15 +17,15 @@
             User::delete($id);
             //delete pictures from posts
             $filenamepost = "uploads/posts/" . $email . "_post" . "*";
-            $fileinfoposts = glob($filenamepost); 
+            $fileinfoposts = glob($filenamepost);
             // var_dump($fileinfoposts);
-            foreach($fileinfoposts as $file) {
+            foreach ($fileinfoposts as $file) {
                 unlink($file);
             }
 
             //delete profile picture
             $filename = "uploads/" . $email . "*";
-            $fileinfo = glob($filename); 
+            $fileinfo = glob($filename);
             $fileext = explode(".", $fileinfo[0]);
             $fileactualext = $fileext[3];
             //var_dump($fileactualext);
@@ -33,20 +33,17 @@
             $file = "uploads/" . $email . "." . $fileactualext;
             //var_dump($file);
         
-            if(!unlink($file)){
+            if (!unlink($file)) {
                 echo "File was not deleted";
-            }
-            else {
+            } else {
                 echo "File was deleted";
             }
-                session_destroy();
-                header("Location: register.php");
-            }
-        catch(Throwable $error) {
+            session_destroy();
+            header("Location: register.php");
+        } catch (Throwable $error) {
             // if any errors are thrown in the class, they can be caught here
             $error = $error->getMessage();
         }
-    
     }
 
 ?><!DOCTYPE html>
@@ -67,7 +64,7 @@
             <h3 class="profile-username">Delete profile</h3>
             <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
         </div>
-        <?php foreach($profile as $p): ?>
+        <?php foreach ($profile as $p): ?>
             <div class="profile-img profile-img-edit">                
                 <div class="profile-img">                    
                     <img src="./uploads/profiles/<?php echo $p['image']; ?>">

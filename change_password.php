@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once("bootstrap.php");
 
 Security::onlyLoggedInUsers();
@@ -6,8 +6,8 @@ Security::onlyLoggedInUsers();
 $id = $_SESSION['id'];
 //$id = $_GET['id'];
 
-if( !empty($_POST) ){
-    try {        
+if (!empty($_POST)) {
+    try {
         $user = new User();
         $user->setPassword($_POST['current-password']);
         
@@ -15,16 +15,14 @@ if( !empty($_POST) ){
         $user->changePassword($id);
 
         header("Location: login.php");
-    }
-    catch(Throwable $error) {
+    } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
     }
+}
 
-}	
 
-
-	
+    
 ?><!DOCTYPE html>
 <html lang="en">
 
