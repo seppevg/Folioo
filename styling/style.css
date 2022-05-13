@@ -197,6 +197,8 @@ body {
   nav.top-nav {
     display: none;
   }
+
+
 }
 
 @media (min-width: 1300px) {
@@ -219,6 +221,39 @@ body {
   #home .main-margin {
     margin: auto;
   }
+}
+
+#desktop-filter.display {
+  position: absolute;
+  background-color: white;
+  width: 18%;
+  height: 150px;
+  border: 2px solid var(--IMDgreen);
+  box-shadow: none;
+  margin-left: 510px;
+  top: calc(100% + .25rem);
+  padding: .75rem .75rem .25rem .75rem;
+  border-radius: .30rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+  transform: translateY(-10px);
+  transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  pointer-events: none;
+
+  
+}
+
+#desktop-filter #modal {
+  position: relative;
+}
+
+#desktop-filter.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#filter-option{
+  top: calc(100% + .25rem);
 }
 
 .top-nav {
