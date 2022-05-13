@@ -31,6 +31,11 @@ if (empty($_GET['feed'])) {
     $url = $_GET['feed'];
 }
 
+$hasWarning = Warning::getWarningNumber($id);
+//var_dump($hasWarning);
+$warningMessage = Warning::getWarningMessage($id);
+//var_dump($warningMessage);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,9 +125,12 @@ if (empty($_GET['feed'])) {
         </div>
 
         <?php if(!empty($hasWarning)):?>
-            <input type='hidden' id='alert' name='alert' value="1">
-        <?php elseif(empty($hasWarning)):?>
-            <input type='hidden' id='alert' name='alert' value="0">
+            <div class="error">
+                <?php foreach($warningMessage as $message):?>
+                    <h3 >You have the following warning!</h3>
+                    <p><?php echo $message['text'];?></p>
+                <?php endforeach;?>
+            </div>
         <?php endif;?>
 
         <?php if (empty($posts)): ?>

@@ -1,4 +1,5 @@
 window.onload = function () {
+  console.log("❤");
   var variable = document.getElementById("alert").value;
   console.log(variable);
   if (variable == "1") {

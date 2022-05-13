@@ -78,4 +78,14 @@ class Warning {
             return $row['warning'];
         }
     }
+
+    public static function getWarningMessage($userId) 
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM warnuser where user_id = :userId;");
+        $statement->bindValue(':userId', $userId);
+        $statement->execute();
+        $warning = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $warning;
+    }
 }
