@@ -49,10 +49,10 @@ $isAlreadyReported = $reported > 0;
                 <div class="profile-header">
                     <div class="moderator-label" >
                     <?php if (!empty($admin)):?>
-                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
-                        <?php elseif(!empty($mainModerator)):?>                            
-                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
-                        <?php endif;?>
+                        <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
+                    <?php elseif(!empty($mainModerator)):?>                            
+                        <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                    <?php endif;?>
                         <h3 class="profile-username"><?php echo htmlspecialchars($p['username']); ?></h3>
                     </div>
                     <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
@@ -145,7 +145,9 @@ $isAlreadyReported = $reported > 0;
                 <?php
                     $posts = Post::getAllFromUser($userId);
                     $moderator = $up['moderator'];
-                    $admin = $p['admin'];
+                    $admin = $up['admin'];
+
+                    $mainAdmin = $p['admin'];
                     $mainModerator = $p['moderator'];
                 ?>
                 <?php endforeach;?>
@@ -153,7 +155,7 @@ $isAlreadyReported = $reported > 0;
                 <div class="profile-header">
                     <div class="moderator-label" >
                         <div class="admin-change" onclick="addModerator(this, <?php echo $up['id'];?>);">
-                            <?php if (!empty($admin)):?>
+                            <?php if (!empty($mainAdmin)):?>
                                 <?php if (!empty($moderator)):?>
                                     <form action="" method="post">
                                         <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
@@ -165,8 +167,10 @@ $isAlreadyReported = $reported > 0;
                                 <?php endif;?>
                             <?php endif;?>
                         </div>
-                        <?php if (empty($admin)):?>
-                            <?php if (!empty($moderator)):?>
+                        <?php if (empty($mainAdmin)):?>
+                            <?php if (!empty($admin)):?>
+                                <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
+                            <?php elseif (!empty($moderator)):?>
                                 <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
                             <?php endif;?>
                         <?php endif;?>
