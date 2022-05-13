@@ -28,6 +28,8 @@ if ($pageCounter !== 1) {
 $loadedPosts = ($pageCounter - 1)*10;
 $posts = Post::getAll($loadedPosts);
 
+/*$hasWarning = Warning::getWarningNumber($id);
+var_dump($hasWarning);*/
 
 
 
@@ -74,6 +76,12 @@ if(empty($_GET['feed'])){
             </div>
 
         </div>
+
+        <?php if(!empty($hasWarning)):?>
+            <input type='hidden' id='alert' name='alert' value="1">
+        <?php elseif(empty($hasWarning)):?>
+            <input type='hidden' id='alert' name='alert' value="0">
+        <?php endif;?>
 
         <?php if (empty($posts)): ?>
             <div id="no-uploads">
@@ -195,6 +203,8 @@ if(empty($_GET['feed'])){
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
         <script src="./js/like.js"></script>
         <script src="./js/dropdown.js"></script>
+        <script src="./js/warning.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
