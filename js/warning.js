@@ -4,6 +4,7 @@ document.querySelector("#warning-btn").addEventListener("click", function(e){
 
 function removeWarning(e, userId) {
   console.log("👍");
+  let warningField = document.querySelector("#warning-message-user");
 
   let user = userId;
   console.log(user);
@@ -23,6 +24,9 @@ function removeWarning(e, userId) {
       ) {
         
         console.log("❤");
+        warningField.innerHTML = "";
+        warningField.classList.remove("error");
+        
       }
       console.log("Success:", data);
     })

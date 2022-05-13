@@ -49,7 +49,7 @@ class Warning {
 
     public function Save(){
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO warnuser (user_id, text) VALUES (:userId, :text);");
+        $statement = $conn->prepare("INSERT INTO warnuser (user_id, text, active) VALUES (:userId, :text, 1);");
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':text', $this->getText());
         return $statement->execute();
@@ -87,21 +87,5 @@ class Warning {
         $statement->execute();
         $warning = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $warning;
-    }
-
-    public function removeWarning($id)
-    {
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("UPDATE users SET warning = 0 WHERE id = :id;");
-        $statement->bindValue(':id', $id);
-        $statement->execute();
-    }
-
-    public function removeActiveLabel($id)
-    {
-        $conn = DB::getInstance();
-        $statement = $conn->prepare("UPDATE warnuser SET active = 0 WHERE user_id = :id;");
-        $statement->bindValue(':id', $id);
-        $statement->execute();
     }
 }
