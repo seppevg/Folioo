@@ -42,8 +42,7 @@ $profile = User::getInfo($userId);
                     </p>
                     
                     <div class="form-field">
-                        <div class="flex">
-                            
+                        <div class="flex">                            
                             <textarea name="warning-reason" cols="20" rows="5" class="form-input"></textarea>
                         </div>
                     </div>
