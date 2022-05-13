@@ -162,6 +162,7 @@ body {
   background: #fefefe;
   position: absolute;
   width: 100%;
+  height: 100px;
   bottom: 0px;
   z-index: 100;
 }
@@ -191,6 +192,97 @@ body {
   align-items: center;
 }
 
+/* DESKTOP NAV */
+@media (max-width: 1300px) {
+  nav.top-nav {
+    display: none;
+  }
+}
+
+@media (min-width: 1300px) {
+  #home #container-logo {
+    display: none;
+  }
+
+  #home {
+    margin-top: 2em;
+  }
+
+  nav.bottom-nav {
+    display: none;
+  }
+
+  #home .main-btn {
+    width: 200px;
+  }
+
+  #home .main-margin {
+    margin: auto;
+  }
+}
+
+.top-nav {
+  border-bottom: 2px solid #E5E3E3;
+  background-color: white;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-nav #container-logo {
+  padding: 0 0 0 30px;
+}
+
+.top-nav .search-nav {
+  width: 100%;
+}
+
+.top-nav .search .profile-header {
+  padding: 0;
+  border-bottom: none;
+}
+
+.top-nav .inputSearch {
+  width: 500px;
+}
+
+.top-nav .search .profile-header .filterbtn {
+  margin: 0 10px;
+}
+
+.top-nav .search .profile-header .filterbtn .modal-button {
+  height: 30px;
+}
+
+.top-nav .user-links {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-user img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 100%;
+}
+
+.user-links .add-project-nav {
+  max-width: 200px;
+  max-height: 50px;
+  margin-right: 25px;
+}
+
+.user-links .dropdown-button {
+  margin-right: 32px;
+}
+
+
 /* INDEX (projects) */
 
 #full-logo {
@@ -216,7 +308,14 @@ body {
 #home {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+}
+
+.feed {
+  margin: 0 auto;
+}
+
+#profile .feed {
+  margin: 2em auto 0 auto;
 }
 
 #no-uploads {
@@ -250,11 +349,11 @@ body {
 }
 
 .project {
-  margin: 0em 2em 0em 2em;
+  margin: 0em 1em 0em 1em;
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: 350px;
+  max-width: 300px;
 }
 
 .project-picture {
@@ -264,17 +363,23 @@ body {
 
 .allUserPosts article {
   position: relative;
-  max-width: 350px;
+  max-width: 175px;
+}
+
+.allPosts article {
+  position: relative;
+  max-width: 175px;
 }
 
 .allUserPosts article .project {
-  margin: 0 0 1em 0;
+  margin: 0 1em 1em 1em;
+  max-width: 350px;
 }
 
 .project-picture-overlay {
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 20px;
   border-radius: 9px;
   background-color: white;
   width: 42px;
@@ -300,7 +405,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 30px 30px 30px;
+  margin: 0 1em 30px 1em;
+  max-width: 350px;
 }
 
 .project-author {
@@ -352,7 +458,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 200px;
+  width: 125px;
 }
 
 .project-interactions-like {
@@ -438,7 +544,7 @@ body {
   cursor: pointer;
 }
 
-.moderator-icon{
+.moderator-icon {
   width: 20px;
   padding-top: 2px;
 }
@@ -456,6 +562,7 @@ body {
   align-items: center;
   margin-right: 20px;
   padding: 5px 10px;
+  border-radius: 3px;
 
 }
 
@@ -494,6 +601,7 @@ body {
 
 .allUserPosts {
   margin-top: 2em;
+  display: grid;
 }
 
 .follow-button {
@@ -504,6 +612,7 @@ body {
 .modal-icon {
   max-width: 27px;
   max-height: 24px;
+  margin-right: 0.5em;
 }
 
 .modal-container {
@@ -678,7 +787,7 @@ body {
 }
 
 .btn-add {
-  margin-top: 110px;
+  margin-top: 2em;
 }
 
 /* POST DETAILS */
@@ -827,35 +936,30 @@ img.post-profile {
 }
 
 .inputSearch {
-  margin-left: 30px;
   height: 50px;
   width: 65%;
-  border-color: var(--IMDgreen);
+  border: 2px solid var(--IMDgreen);
   border-radius: 0.4em;
   background-size: 20px;
-  padding-left: 20px;
   align-content: center;
+  padding-left: 20px;
+  background-color: white;
+}
+
+.inputSearch:focus {
+  outline: none;
+  border: 2px solid black;
 }
 
 .filterbtn {
-  border-color: var(--IMDgreen);
+  border: 2px solid var(--IMDgreen);
   border-radius: 0.4em;
   padding: 0.8em;
   cursor: pointer;
   width: 50px;
   height: 50px;
-
-}
-
-.inputSearch {
-  margin-left: 30px;
-  height: 50px;
-  width: 65%;
-  border-color: var(--IMDgreen);
-  border-radius: 0.4em;
-  background-size: 20px;
-  padding-left: 20px;
-  align-content: center;
+  background-color: white;
+  box-shadow: none;
 }
 
 .allPostsSearch {
@@ -881,6 +985,7 @@ img.post-profile {
 .dropdown-button {
   border: none;
   cursor: pointer;
+  background-color: white;
 }
 
 .dropdown-menu {
@@ -888,7 +993,7 @@ img.post-profile {
   left: 0;
   top: calc(100% + .25rem);
   background-color: var(--IMDgreen);
-  padding: .75rem;
+  padding: .75rem .75rem .25rem .75rem;
   border-radius: .30rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
   opacity: 0;
@@ -931,4 +1036,49 @@ img.post-profile {
 
 .following-icon {
   margin-left: 20px;
+}
+
+.share-buttons {
+  margin: 2.1875em 1.75em 1em 0em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.share-buttons .share-mail {
+  margin-bottom: 0.5em;
+}
+
+
+.share-buttons .share-url {
+  position: relative;
+}
+
+.share-buttons .share-url::before {
+  content: 'Copied URL';
+  position: absolute;
+  top: -40px;
+  right: 0;
+  border-radius: 10px;
+  background: var(--IMDblue);
+  padding: 0.5em 1em;
+  color: white;
+  display: none;
+}
+
+.share-buttons .share-url::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background: var(--IMDblue);
+  transform: rotate(45deg);
+  display: none;
+}
+
+.share-buttons .share-url.active::before,
+.share-buttons .share-url.active::after {
+  display: block;
 }

@@ -283,7 +283,7 @@ function postReporting(postId, userId, action) {
       } else if (data.status === "success" && data.message === "Post has been unreported.") {
         report.classList.remove("hidden"); //show
         unreport.classList.add("hidden");
-      }else{
+      } else {
         //data.status === "error"
         alert("Something went wrong reporting")
       }
@@ -298,7 +298,7 @@ function userReporting(reportedUserId, fromUserId, action) {
   let report = document.getElementById("user-report");
   let unreport = document.getElementById("user-unreport");
   console.log("ja tot hier");
-  
+
   let data = new FormData();
   data.append("reportedUserId", reportedUserId);
   data.append("fromUserId", fromUserId);
@@ -318,7 +318,7 @@ function userReporting(reportedUserId, fromUserId, action) {
       } else if (data.status === "success" && data.message === "User has been unreported.") {
         report.classList.remove("hidden"); //show
         unreport.classList.add("hidden");
-      }else{
+      } else {
         //data.status === "error"
         alert("Something went wrong reporting")
       }
@@ -337,46 +337,69 @@ document.querySelector("#comment").addEventListener("keypress", function (e) {
   }
 });
 
-document.querySelector('#btnAddComment').addEventListener("click", function(e){
-    let text = document.querySelector("#comment").value;
-    let postid = this.dataset.postid;
-    let username = this.dataset.username;
-    let image = this.dataset.image;
-    let number = this.dataset.number;
-    //console.log(number);
+document.querySelector('#btnAddComment').addEventListener("click", function (e) {
+  let text = document.querySelector("#comment").value;
+  let postid = this.dataset.postid;
+  let username = this.dataset.username;
+  let image = this.dataset.image;
+  let number = this.dataset.number;
+  //console.log(number);
 
-    let data = new FormData();
+  let data = new FormData();
 
-    data.append("comment", text);
-    data.append("postid", postid);
-    data.append("username", username);
-    data.append("image", image);
-    data.append("number", number);
+  data.append("comment", text);
+  data.append("postid", postid);
+  data.append("username", username);
+  data.append("image", image);
+  data.append("number", number);
 
-    fetch("./ajax/save_comment.php", {
-      method: "POST",
-      body: data,
+  fetch("./ajax/save_comment.php", {
+    method: "POST",
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success") {
+        let p = `<p>${data.data.comment}</p>`;
+        let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
+        let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
+        let div = `<div class="comment-box"> ${pImage + name + p}</div>`;
+        //console.log(usernameStyle);
+
+        document.querySelector(".number-of-comments").innerHTML++;
+        document.querySelector("#listupdates").innerHTML += div;
+        document.querySelector("#comment").value = "";
+      }
+
+      console.log("Success:", data);
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "success") {
-          let p = `<p>${data.data.comment}</p>`;
-          let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
-          let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
-          let div = `<div class="comment-box"> ${pImage + name + p}</div>`;
-          //console.log(usernameStyle);
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 
-          document.querySelector(".number-of-comments").innerHTML++;
-          document.querySelector("#listupdates").innerHTML += div;
-          document.querySelector("#comment").value = "";
-        }
+  e.preventDefault();
+});
 
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+//SHARE URL : COPY TO CLIPBOARD
+// document.getElementById("copy-to-clipboard").addEventListener("click", function () {
+//   console.log('test');
+//   let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search;
+//   console.log(url);
+// });
 
-    e.preventDefault();
+function copyToClipboard() {
+  let copyText = document.querySelector("#copy-to-clipboard");
+  let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search;
+  console.log(url);
+
+  navigator.clipboard.writeText(url).then(function () {
+    copyText.classList.toggle("active");
+    window.getSelection().removeAllRanges();
+  }, function () {
+    alert('Sharing the URL has failed, please try again later.')
   });
 
+  setTimeout(function () {
+    copyText.classList.remove("active");
+  }, 2500);
+}

@@ -1,12 +1,12 @@
 <?php
 class Like
 {
-    private $userId; 
+    private $userId;
     private $postId;
 
     /**
      * Get the value of userId
-     */ 
+     */
     public function getUserId()
     {
         return $this->userId;
@@ -16,7 +16,7 @@ class Like
      * Set the value of userId
      *
      * @return  self
-     */ 
+     */
     public function setUserId($userId)
     {
         $this->userId = $userId;
@@ -26,7 +26,7 @@ class Like
 
     /**
      * Get the value of postId
-     */ 
+     */
     public function getPostId()
     {
         return $this->postId;
@@ -36,7 +36,7 @@ class Like
      * Set the value of postId
      *
      * @return  self
-     */ 
+     */
     public function setPostId($postId)
     {
         $this->postId = $postId;
@@ -52,7 +52,6 @@ class Like
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result['count'];
-        
     }
 
     public static function liked($postId, $userId)
