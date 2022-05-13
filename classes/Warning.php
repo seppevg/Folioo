@@ -46,4 +46,12 @@ class Warning {
 
         return $this;
     }
+
+    public function Save(){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("INSERT INTO warnuser (user_id, text) VALUES (:userId, :text);");
+        $statement->bindValue(':userId', $this->userId);
+        $statement->bindValue(':text', $this->getText());
+        return $statement->execute();
+    }
 }
