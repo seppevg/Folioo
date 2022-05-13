@@ -50,7 +50,8 @@ $isAlreadyReported = $reported > 0;
                     <div class="moderator-label" >
                     <?php if (!empty($admin)):?>
                             <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
-
+                        <?php elseif(!empty($mainModerator)):?>                            
+                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
                         <?php endif;?>
                         <h3 class="profile-username"><?php echo htmlspecialchars($p['username']); ?></h3>
                     </div>
