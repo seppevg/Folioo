@@ -9,12 +9,17 @@ if (empty($_GET['id'])) {
 
 $profile = User::getInfo($userId);
 
+$number = Warning::getWarningNumber($userId);
+var_dump($number);
+
 if(!empty($_POST)) {
     try {
         $warning = new Warning();
         $warning->setText($_POST['warning-reason']);
         $warning->setUserId($userId);
         $warning->Save();
+        $warning->updateWarning($userId);
+        header("Location: index.php");
     } catch (Throwable $error) {
         $error = $error->getMessage();
     }
