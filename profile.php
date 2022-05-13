@@ -250,16 +250,14 @@ $isAlreadyReported = $reported > 0;
                                 </div>
 
                             <?php elseif(!empty($mainModerator)):?>
-                                <div id="user-report">
-                                    <h3 class="profile-username">Warn this user</h3>
-                                    <p>Reason for warning this user.</p>                                    
-                                    <div class="flex">
-                                        <input type="text" class="form-input-warning" placeholder="Warning" name="warning">
-                                    </div>
-                                    <div class="flex">
-                                        <button class="form-btn" id="warn-btn">Warn user</button>
-                                    </div>
-                                </div>
+                                <a href="warn_user.php">                                    
+                                    <img class="modal-icon" src="./assets/warn.svg" alt="log out">
+                                    <p>Warn user</p>
+                                </a>
+                                <a href="#">
+                                    <img class="modal-icon" src="./assets/ban.svg" alt="lock">
+                                    <p>Ban user</p>
+                                </a>
                             <?php endif;?>
                         </div>
 
