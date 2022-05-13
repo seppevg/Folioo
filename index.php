@@ -29,10 +29,15 @@ if (empty($_GET['feed'])) {
     $url = $_GET['feed'];
 }
 
-$hasWarning = Warning::getWarningNumber($id);
-//var_dump($hasWarning);
-$warningMessage = Warning::getWarningMessage($id);
-//var_dump($warningMessage);
+try {
+    $hasWarning = Warning::getWarningNumber($id);
+    //var_dump($hasWarning);
+    $warningMessage = Warning::getWarningMessage($id);
+    //var_dump($warningMessage);
+} catch (Throwable $error) {
+    $error = $error->getMessage();
+}
+
 
 if (!empty($_POST)) {
     try {
