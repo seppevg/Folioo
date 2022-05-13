@@ -110,10 +110,12 @@ if (!empty($_POST)) {
                 
                 <div id="modal" class="modal-content hidden">
                     <h3>Choose your filter</h3>
-                    <form method="post">
-                        <input type="radio" value="Title" name="column" id="filter-option"> Title <br> <br>
-                        <input type="radio" value="Tags" name="column" id="filter-option"> Tags                  
-                    </form> 
+                    <div class="filter-options hidden">
+                        <form method="post">
+                            <input type="radio" value="Title" name="column" id="filter-option"> Title <br> <br>
+                            <input type="radio" value="Tags" name="column" id="filter-option"> Tags                  
+                        </form> 
+                    </div>
                 </div>
       
             </section>
