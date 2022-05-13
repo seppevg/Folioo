@@ -36,6 +36,30 @@ $hasWarning = Warning::getWarningNumber($id);
 $warningMessage = Warning::getWarningMessage($id);
 //var_dump($warningMessage);
 
+if (!empty($_POST)) {
+    try {
+        $searchResult = $_POST['searchInput'];
+        //var_dump ($searchResult);
+        $posts = Post::search($searchResult);
+
+        if (empty($_POST['column'])) {
+            $filterType = "";
+        } else {
+            $filterType = $_POST['column'];
+        }
+        //echo $filterType;
+
+        if ($filterType == "Title") {
+            $posts = Post::search($searchResult);
+        } elseif ($filterType == "Tags") {
+            $posts = Post::search($searchResult);
+        }
+    } catch (Throwable $error) {
+        // if any errors are thrown in the class, they can be caught here
+        $error = $error->getMessage();
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,6 +168,11 @@ $warningMessage = Warning::getWarningMessage($id);
                 <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-top: 72vh">Previous page</a>
             </div>
         <?php else: ?>
+            <?php if (isset($error)):?>
+                <div>
+                    <p class="error"><?php echo $error ?></p>
+                </div>
+            <?php endif;?>
             <div class="feed">
             <?php if ($url === "chronologic" || $url === ""):?>
                 <?php foreach ($posts as $post): ?>
@@ -243,11 +272,6 @@ $warningMessage = Warning::getWarningMessage($id);
                     <?php endforeach;?>
                 <?php endif;?>
             </div>
-            <?php if (isset($error)):?>
-                <div>
-                    <p class="error"><?php echo $error ?></p>
-                </div>
-            <?php endif;?>
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>
