@@ -81,7 +81,9 @@ if (!empty($_POST)) {
         <div id="container-logo">
             <div class="dropdown">
                 <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
-                <button class="dropdown-button dropdown-filter-desktop"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
+                <?php if (!empty($id)): ?>
+                    <button class="dropdown-button dropdown-filter-desktop"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
+                <?php endif; ?>
                 <div class="dropdown-menu dropdown-menu-desktop">
                     <div>
                         <a href="index.php?feed=chronologic">Chronologic</a>
@@ -126,11 +128,51 @@ if (!empty($_POST)) {
         <div class="user-links">
             <a class="main-btn add-project-nav" href="add.php">Inspire others</a>
             <a href="profile.php" class="nav-user">
-                <img src="./uploads/profiles/1.jpg">
+                <?php if(isset($id)): ?>
+                    <?php $userImage = User::getInfo($id); ?>
+                    <?php foreach ($userImage as $uI): ?>
+                        <img src="./uploads/profiles/<?php echo $uI['image']; ?>">
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </a>
-            <button class="dropdown-button dropdown-button-profile">
-                <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
-            </button>
+
+            <?php if(!empty($id)): ?>
+                <button class="dropdown-button dropdown-button-profile1">
+                    <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
+                </button>
+                <div class="dropdown-menu-profile1 hidden">
+                    <a href="showcase.php?id=<?php echo $id;?>">
+                        <img class="modal-icon" src="./assets/showcase.svg" alt="showcase">
+                        <p>View showcase</p>
+                    </a>
+                    <a href="change_password.php">
+                        <img class="modal-icon" src="./assets/lock.svg" alt="lock">
+                        <p>Change password</p>
+                    </a>
+                    <a href="logout.php">
+                        <img class="modal-icon" src="./assets/log-out.svg" alt="log out">
+                        <p>Log out</p>
+                    </a>
+                    <a href="delete_profile.php" class="delete-profile-popup">
+                        <img class="modal-icon" src="./assets/delete.svg" alt="delete">
+                        <p>Delete your profile</p>
+                    </a>
+                </div>
+            <?php else: ?>
+                <button class="dropdown-button dropdown-button-profile2">
+                    <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
+                </button>
+                <div class="dropdown-menu-profile2 hidden">
+                    <a href="login.php">
+                        <img class="modal-icon" src="./assets/following.svg" alt="showcase">
+                        <p>Log in</p>
+                    </a>
+                    <a href="register.php">
+                        <img class="modal-icon" src="./assets/edit.svg" alt="lock">
+                        <p>Register</p>
+                    </a>
+                </div>
+            <?php endif; ?>
         </div>
     </nav>
 
@@ -175,7 +217,7 @@ if (!empty($_POST)) {
             </div>
         <?php else: ?>
             <?php if (isset($error)):?>
-                <div>
+                <div class="main-margin">
                     <p class="error"><?php echo $error ?></p>
                 </div>
             <?php endif;?>
@@ -243,9 +285,9 @@ if (!empty($_POST)) {
                             $checkLikes = Like::liked($puser['id'], $id);
                         ?>
                         <article>
-                        <a href="post_detail.php?id=<?php echo $puser['id'];?>" class="project">
-                            <img class="project-picture" src="./uploads/posts/<?php echo $puser['image']; ?>" alt="project image">
-                        </a>
+                            <a href="post_detail.php?id=<?php echo $puser['id'];?>" class="project">
+                                <img class="project-picture" src="./uploads/posts/<?php echo $puser['image']; ?>" alt="project image">
+                            </a>
                             <div class="project-info">
                                 <?php if (!empty($id)): ?>
                                     <a class="project-author" href="profile.php?id=<?php echo $puser['user_id']?>">
@@ -294,8 +336,6 @@ if (!empty($_POST)) {
         <script src="./js/dropdown.js"></script>
         <script src="./js/warning.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         <script src="./js/masonry.js"></script>
 
