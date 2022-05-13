@@ -50,8 +50,8 @@ if (empty($_GET['feed'])) {
         <div id="container-logo">
             <div class="dropdown">
                 <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
-                <button class="dropdown-button"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
-                <div class="dropdown-menu">
+                <button class="dropdown-button dropdown-filter-desktop"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
+                <div class="dropdown-menu dropdown-menu-desktop">
                     <div>
                         <a href="index.php?feed=chronologic">Chronologic</a>
                         <img src="./assets/chronologic.svg" alt="Chronologic icon">
@@ -93,7 +93,7 @@ if (empty($_GET['feed'])) {
             <a href="profile.php" class="nav-user">
                 <img src="./uploads/profiles/1.jpg">
             </a>
-            <button class="dropdown-button">
+            <button class="dropdown-button dropdown-button-profile">
                 <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
             </button>
         </div>
@@ -104,8 +104,8 @@ if (empty($_GET['feed'])) {
             <div class="dropdown">
                 <img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo">
                 <?php if (!empty($id)): ?>
-                    <button class="dropdown-button"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
-                        <div class="dropdown-menu">
+                    <button class="dropdown-button dropdown-filter-mobile"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
+                        <div class="dropdown-menu dropdown-menu-mobile">
                             <div>
                                 <a href="index.php?feed=chronologic">Chronologic</a>
                                 <img src="./assets/chronologic.svg" alt="Chronologic icon">

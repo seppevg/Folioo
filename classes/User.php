@@ -181,7 +181,7 @@ class User implements iUser
         ];
         $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO users (email, password, username, image, followers) VALUES (:email, :password, :username, 'profiledefault.svg', 0);");
+        $statement = $conn->prepare("INSERT INTO users (email, password, username, image, followers, admin, moderator) VALUES (:email, :password, :username, 'profiledefault.svg', 0, 0, 0);");
         $statement->bindValue(':email', $this->email);
         $statement->bindValue(':password', $password);
         $statement->bindValue(':username', $this->username);
