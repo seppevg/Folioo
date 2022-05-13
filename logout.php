@@ -1,6 +1,4 @@
-<?php
-//include_once("../bootstrap.php");
-session_start();
+<?php session_start();
 session_destroy();
 header("Location: welcome.php");
     

@@ -1,12 +1,10 @@
-<?php
+<?php session_start();
 
     include_once("bootstrap.php");
 
-    session_start();
     $id = $_SESSION['id'];
     $profile = User::getInfo($id);
     $email = $_SESSION['email'];
-
 
     if (!empty($_POST)) {
         try {

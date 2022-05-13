@@ -1,8 +1,6 @@
-<?php
+<?php session_start();
 
 include_once("bootstrap.php");
-
-Security::onlyLoggedInUsers();
 
 if (empty($_GET['id'])) {
     header("Location: welcome.php");

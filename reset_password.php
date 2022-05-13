@@ -2,7 +2,6 @@
 
     include_once("bootstrap.php");
 
-
     $selector = $_GET["selector"];
     $validator = $_GET["validator"];
 

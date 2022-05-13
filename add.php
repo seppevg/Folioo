@@ -1,8 +1,6 @@
-<?php
+<?php session_start();
 
 include_once("bootstrap.php");
-
-Security::onlyLoggedInUsers();
 
 //$email = $_SESSION['email'];
 if (empty($_SESSION['id'])) {
