@@ -134,11 +134,13 @@ $isAlreadyReported = $reported > 0;
             <?php endforeach; ?>
         <?php elseif (!empty($userId)): ?>
             <?php foreach ($userProfiles as $up) : ?>
+                <?php foreach ($profile as $p) :?>
                 <?php
                     $posts = Post::getAllFromUser($userId);
                     $moderator = $up['moderator'];
-                    $admin = $up['admin'];
+                    $admin = $p['admin'];
                 ?>
+                <?php endforeach;?>
 
                 <div class="profile-header">
                     <div class="moderator-label" >
