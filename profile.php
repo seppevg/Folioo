@@ -249,13 +249,13 @@ $isAlreadyReported = $reported > 0;
                                     </div>
                                 </div>
 
-                            <?php elseif(!empty($mainModerator)):?>
-                                <a href="warn_user.php">                                    
-                                    <img class="modal-icon" src="./assets/warn.svg" alt="log out">
+                            <?php elseif(!empty($mainModerator)):?>                                
+                                <a href="warn_user.php?id=<?php echo $up['id']; ?>">                                    
+                                    <img class="modal-icon" src="./assets/warn.svg" alt="warn icon">
                                     <p>Warn user</p>
                                 </a>
                                 <a href="#">
-                                    <img class="modal-icon" src="./assets/ban.svg" alt="lock">
+                                    <img class="modal-icon" src="./assets/ban.svg" alt="ban icon">
                                     <p>Ban user</p>
                                 </a>
                             <?php endif;?>
