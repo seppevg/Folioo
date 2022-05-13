@@ -82,10 +82,26 @@ class Warning {
     public static function getWarningMessage($userId) 
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM warnuser where user_id = :userId;");
+        $statement = $conn->prepare("SELECT * FROM warnuser where user_id = :userId AND active = 1;");
         $statement->bindValue(':userId', $userId);
         $statement->execute();
         $warning = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $warning;
+    }
+
+    public function removeWarning($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET warning = 0 WHERE id = :id;");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+    }
+
+    public function removeActiveLabel($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE warnuser SET active = 0 WHERE user_id = :id;");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
     }
 }

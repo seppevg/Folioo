@@ -36,6 +36,16 @@ $hasWarning = Warning::getWarningNumber($id);
 $warningMessage = Warning::getWarningMessage($id);
 //var_dump($warningMessage);
 
+if(!empty($_POST)){
+    try {
+        $warning = new Warning();
+        $warning->removeWarning($id);
+        $warning->removeActiveLabel($id);
+    } catch (Throwable $error) {
+        $error = $error->getMessage();
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,11 +135,14 @@ $warningMessage = Warning::getWarningMessage($id);
         </div>
 
         <?php if(!empty($hasWarning)):?>
-            <div class="error">
-                <?php foreach($warningMessage as $message):?>
-                    <h3 >You have the following warning!</h3>
-                    <p><?php echo $message['text'];?></p>
-                <?php endforeach;?>
+            <div class="error" >
+                <form action="" method="post">
+                    <?php foreach($warningMessage as $message):?>
+                        <h3 >You have received the following warning!</h3>
+                        <p><?php echo $message['text'];?></p>
+                        <button id="warning-btn" class="main-btn" onclick="removeWarning(this, <?php echo $id?>);">I understand</button>
+                    <?php endforeach;?> 
+                </form>               
             </div>
         <?php endif;?>
 
@@ -240,6 +253,11 @@ $warningMessage = Warning::getWarningMessage($id);
                     <?php endforeach;?>
                 <?php endif;?>
             </div>
+            <?php if (isset($error)):?>
+                <div>
+                    <p class="error"><?php echo $error ?></p>
+                </div>
+            <?php endif;?>
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>

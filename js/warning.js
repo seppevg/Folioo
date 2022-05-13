@@ -1,19 +1,34 @@
-window.onload = function () {
-  console.log("❤");
-  var variable = document.getElementById("alert").value;
-  console.log(variable);
-  if (variable == "1") {
-    Swal.fire({
-      icon: 'error',
-      title: 'Warning',
-      text: 'A moderator has send you a warning. Click confirm button to see your warning',
-      confirmButtonText: "Show warning",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location = `warn_user.php`;
+document.querySelector("#warning-btn").addEventListener("click", function(e){
+  e.preventDefault();
+});
+
+function removeWarning(e, userId) {
+  console.log("👍");
+
+  let user = userId;
+  console.log(user);
+
+  let data = new FormData();
+  data.append("userId", user);
+
+
+  fetch('./ajax/confirm_warning.php', {
+    method: 'POST',
+    body: data
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (
+        data.status === "success"
+      ) {
+        
+        console.log("❤");
       }
+      console.log("Success:", data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
     });
-  }
 }
 
 
