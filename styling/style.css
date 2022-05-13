@@ -522,6 +522,11 @@ body {
   align-items: center;
 }
 
+.moderator-label {
+  display: flex;
+  flex-direction: row;
+}
+
 .profile-header img {
   max-height: 25px;
 }
@@ -531,6 +536,17 @@ body {
   height: 100px;
   border-radius: 10px;
   margin: 2.1875em 1.75em 1em 2.1875em;
+}
+
+.add-moderator-btn {
+  text-decoration: none;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.moderator-icon {
+  width: 20px;
+  padding-top: 2px;
 }
 
 .profile-info {
@@ -814,6 +830,15 @@ img.post-profile {
 .add-icon {
   margin-bottom: 15px;
   margin-left: 5px;
+  width: 25px;
+}
+
+.form-input-warning {
+  padding: 0.7em;
+  border-radius: 0.4em;
+  flex: 1 1 auto;
+  margin: 5px 0 1.2em 0;
+  border: 2px solid #d2d2d2;
 }
 
 /* REUSABLE PARTS */

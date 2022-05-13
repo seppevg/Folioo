@@ -508,4 +508,19 @@ class User implements iUser
             return $row['id'];
         }
     }
+
+    public static function checkModeratorRole($id){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT moderator FROM users where id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $result = $statement->rowCount();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result <= 0) {
+            throw new Exception("No moderator found with this id");
+            return false;
+        } else {
+            return $row['moderator'];
+        }
+    }
 }
