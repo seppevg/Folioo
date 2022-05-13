@@ -2,10 +2,11 @@
 class Comment implements iProject
 {
     private $comment;
-    private $userId; 
+    private $userId;
     private $postId;
     
-    public static function getAll($id){
+    public static function getAll($id)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM comments WHERE post_id = :id;");
         $statement->bindValue(':id', $id);
@@ -16,7 +17,7 @@ class Comment implements iProject
 
     /**
      * Get the value of comment
-     */ 
+     */
     public function getComment()
     {
         return $this->comment;
@@ -26,7 +27,7 @@ class Comment implements iProject
      * Set the value of comment
      *
      * @return  self
-     */ 
+     */
     public function setComment($comment)
     {
         if (empty($comment)) {
@@ -37,7 +38,8 @@ class Comment implements iProject
         return $this;
     }
 
-    public function Save(){
+    public function Save()
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("INSERT INTO comments (post_id, user_id, comment, date_created) VALUES (:postId, :userId, :comment, NOW());");
         $statement->bindValue(':postId', $this->postId);
@@ -48,7 +50,7 @@ class Comment implements iProject
 
     /**
      * Get the value of userId
-     */ 
+     */
     public function getUserId()
     {
         return $this->userId;
@@ -58,7 +60,7 @@ class Comment implements iProject
      * Set the value of userId
      *
      * @return  self
-     */ 
+     */
     public function setUserId($userId)
     {
         $this->userId = $userId;
@@ -68,7 +70,7 @@ class Comment implements iProject
 
     /**
      * Get the value of postId
-     */ 
+     */
     public function getPostId()
     {
         return $this->postId;
@@ -78,7 +80,7 @@ class Comment implements iProject
      * Set the value of postId
      *
      * @return  self
-     */ 
+     */
     public function setPostId($postId)
     {
         $this->postId = $postId;
@@ -94,7 +96,5 @@ class Comment implements iProject
         $query->execute();
         $comments = intval($query->fetchColumn());
         return($comments);
-        
-        
     }
 }

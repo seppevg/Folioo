@@ -1,10 +1,4 @@
-<?php
-//include_once("../bootstrap.php");
-session_start();
-session_destroy();
-header("Location: welcome.php");
-    
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,10 +6,17 @@ header("Location: welcome.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
-    <title>Folioo - Log out</title>
+    <title>Folioo - Warn User</title>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 <body>
+    <div id="profile">
     
+        <div class="profile-header">
+            <h3 class="profile-username">Warn user</h3>
+        </div>
+
+        <?php include_once("./includes/nav-bottom.inc.php"); ?>
+    </div>
 </body>
 </html>

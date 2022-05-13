@@ -1,8 +1,7 @@
 <?php
     require_once("../bootstrap.php");
 
-    if(!empty($_POST)){
-        
+    if (!empty($_POST)) {
         session_start();
         $sessionId = $_SESSION['id'];
         $text = $_POST['comment'];
@@ -28,7 +27,6 @@
                     "comment" => htmlspecialchars($text)
                 ]
             ];
-
         } catch (Throwable $t) {
             $result = [
                 "status" => "error",
@@ -37,5 +35,4 @@
         }
 
         echo json_encode($result);
-
     }
