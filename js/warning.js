@@ -1,7 +1,3 @@
-document.querySelector("#warning-btn").addEventListener("click", function(e){
-  e.preventDefault();
-});
-
 function removeWarning(e, userId) {
   console.log("👍");
   let warningField = document.querySelector("#warning-message-user");
