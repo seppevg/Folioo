@@ -500,6 +500,22 @@ body {
   color: black;
 }
 
+.warning-error {
+  color: black;
+  border: 0.5em solid #fc0b2c;
+  border-radius: 0.4em;
+  padding: 0.8em 0.6em;
+  margin: 1em;
+}
+
+.warning-title {
+  color: #fc0b2c;
+}
+
+#warning-btn {
+  background-color: var(--errorRed);
+}
+
 /* PROFILE */
 #profile {
   display: flex;

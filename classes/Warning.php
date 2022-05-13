@@ -49,7 +49,7 @@ class Warning {
 
     public function Save(){
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO warnuser (user_id, text) VALUES (:userId, :text);");
+        $statement = $conn->prepare("INSERT INTO warnuser (user_id, text, active) VALUES (:userId, :text, 1);");
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':text', $this->getText());
         return $statement->execute();
@@ -77,5 +77,15 @@ class Warning {
         } else {
             return $row['warning'];
         }
+    }
+
+    public static function getWarningMessage($userId) 
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM warnuser where user_id = :userId AND active = 1;");
+        $statement->bindValue(':userId', $userId);
+        $statement->execute();
+        $warning = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $warning;
     }
 }

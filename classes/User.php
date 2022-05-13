@@ -433,7 +433,8 @@ class User implements iUser
             "DELETE FROM users WHERE id = :id; 
             DELETE FROM posts WHERE user_id=:id;
             DELETE FROM likes WHERE user_id=:id;
-            DELETE FROM comments WHERE user_id=:id;"
+            DELETE FROM comments WHERE user_id=:id;
+            DELETE FROM warnuser WHERE user_id =:id;"
         );
         $statement->bindValue(':id', $id);
         return $statement->execute();

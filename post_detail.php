@@ -20,11 +20,13 @@ if (sizeof($posts) != 1) {
 $post = $posts[0];
 //var_dump($post);
 
+
 if (empty($post["id"] || empty($post["user_id"]))) {
     header("Location: index.php");
 }
 
 $user = User::getInfo($post["user_id"])[0];
+
 
 //checking if the post is from the person that's logged in
 if (empty($_SESSION['id'])) {
@@ -34,6 +36,7 @@ if (empty($_SESSION['id'])) {
 }
 
 $userId = Post::getById($_GET['id'])[0];
+
 
 $commentsCount = Comment::countComments($post['id']);
 
@@ -82,7 +85,7 @@ $isAlreadyReported = $reported > 0;
                 <h3 class="post-username"><?php echo $user['username']; ?></h3>
             </a>
         </div>
-        <?php if ($sessionId) : ?>
+        <?php if ($sessionId) :?>
             <img class="modal-button" src="./assets/dots-menu.svg" alt="Dots menu">
         <?php endif; ?>
     </div>
@@ -168,30 +171,43 @@ $isAlreadyReported = $reported > 0;
                     <img class="modal-icon" src="./assets/close.svg" alt="Close">
                 </div>
 
-                <div id="post-report" <?php echo ($isAlreadyReported) ? 'class="hidden"' : ''; ?>>
-                    <h3 class="profile-username">Report this post</h3>
-                    <p>Thank you for keeping Folioo a safe space for
-                        everyone! This post will be flagged as inappropriate.</p>
-                    <div class="center">
-                        <img class="report" src="./assets/report.svg" alt="report">
-                    </div>
-                    <div class="flex">
-                        <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'report')">Report</button>
-                    </div>
-                </div>
+                <?php $currentUser = User::getInfo($sessionId);?>
+                <?php foreach($currentUser as $cu):
+                    $moderator = $cu['moderator'];
+                ?>  
+                <?php endforeach;?>
 
-                <div id="post-unreport" <?php echo ($isAlreadyReported) ? '' : 'class="hidden"'; ?>>
+                <?php if(!empty($moderator)):?>
+                    <a href="#" onclick="deletePost(<?php echo $post['id']; ?>)" class="delete-post-popup">
+                        <img class="modal-icon" src="./assets/delete.svg" alt="Delete">
+                        <p>Delete post</p>
+                    </a>
+                <?php elseif(empty($moderator)):?>
+                    <div id="post-report" <?php echo ($isAlreadyReported) ? 'class="hidden"' : ''; ?>>
+                        <h3 class="profile-username">Report this post</h3>
+                        <p>Thank you for keeping Folioo a safe space for
+                            everyone! This post will be flagged as inappropriate.</p>
+                        <div class="center">
+                            <img class="report" src="./assets/report.svg" alt="report">
+                        </div>
+                        <div class="flex">
+                            <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'report')">Report</button>
+                        </div>
+                    </div>
 
-                    <h3 class="profile-username">This post is reported</h3>
-                    <p>If you don't think that this post should be flagged as inappropriate then you can unreport this post.
-                    </p>
-                    <div class="center">
-                        <img class="report" src="./assets/report.svg" alt="report">
+                    <div id="post-unreport" <?php echo ($isAlreadyReported) ? '' : 'class="hidden"'; ?>>
+
+                        <h3 class="profile-username">This post is reported</h3>
+                        <p>If you don't think that this post should be flagged as inappropriate then you can unreport this post.
+                        </p>
+                        <div class="center">
+                            <img class="report" src="./assets/report.svg" alt="report">
+                        </div>
+                        <div class="flex">
+                            <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'unreport')">Stop reporting</button>
+                        </div>
                     </div>
-                    <div class="flex">
-                        <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'unreport')">Stop reporting</button>
-                    </div>
-                </div>
+                <?php endif;?>
 
             </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 11 mei 2022 om 15:37
+-- Gegenereerd op: 13 mei 2022 om 17:30
 -- Serverversie: 10.4.22-MariaDB
 -- PHP-versie: 8.1.2
 
@@ -42,7 +42,8 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `post_id`, `user_id`, `comment`, `date_created`) VALUES
 (121, 25, 7, 'Test comment!!!!!!!!!!!!!!!', '2022-05-05 15:59:57'),
 (122, 27, 1, 'test', '2022-05-06 18:24:05'),
-(123, 23, 7, 'test', '2022-05-11 15:08:52');
+(123, 23, 7, 'test', '2022-05-11 15:08:52'),
+(125, 27, 7, 'Test', '2022-05-13 09:37:42');
 
 -- --------------------------------------------------------
 
@@ -173,17 +174,31 @@ CREATE TABLE `users` (
   `linkedinlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `followers` int(11) NOT NULL,
   `admin` int(11) NOT NULL,
-  `moderator` int(11) NOT NULL
+  `moderator` int(11) NOT NULL,
+  `warning` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`, `followers`, `admin`, `moderator`) VALUES
-(1, 'test@thomasmore.be', '$2y$15$B1BPtZQGH5IodurXFAkZyuREXP9yWQ5gAbrKX0lTBnnTufttQjitm', 'Seppe', 'seppe.vg@live.be', '1.jpg', 'IMD', 'I like beer', '#insta', '', '', 0, 0, 0),
-(4, 'beatrijs@thomasmore.be', '$2y$15$n2H44jet8BJpa1gACaJ/9ebJfI9w.ZGh7E4MGk4CR194zZF4JDb4u', 'Béatrijs', 'bea@gmail.com', 'profiledefault.svg', 'Much wow', 'Ik ben gewoon nen test eh', '#lifesucks', '', '', 0, 0, 0),
-(7, 'r0831894@student.thomasmore.be', '$2y$15$y2PO5xUbhY/Giz/526xAVuWUPExzdOLkPWRJmUHASdY3aLzNdvvl2', 'Marie Serroyen', '', '7.jpg', '', '', '', '', '', 0, 1, 0);
+INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`, `followers`, `admin`, `moderator`, `warning`) VALUES
+(1, 'test@thomasmore.be', '$2y$15$B1BPtZQGH5IodurXFAkZyuREXP9yWQ5gAbrKX0lTBnnTufttQjitm', 'Seppe', 'seppe.vg@live.be', '1.jpg', 'IMD', 'I like beer', '#insta', '', '', 0, 1, 0, 0),
+(4, 'beatrijs@thomasmore.be', '$2y$15$n2H44jet8BJpa1gACaJ/9ebJfI9w.ZGh7E4MGk4CR194zZF4JDb4u', 'Béatrijs', 'bea@gmail.com', 'profiledefault.svg', 'Much wow', 'Ik ben gewoon nen test eh', '#lifesucks', '', '', 0, 0, 0, 0),
+(7, 'r0831894@student.thomasmore.be', '$2y$15$y2PO5xUbhY/Giz/526xAVuWUPExzdOLkPWRJmUHASdY3aLzNdvvl2', 'Marie Serroyen', '', '7.jpg', '', '', '', '', '', 0, 1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `warnuser`
+--
+
+CREATE TABLE `warnuser` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `text` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `active` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -238,6 +253,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `warnuser`
+--
+ALTER TABLE `warnuser`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
@@ -245,19 +266,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT voor een tabel `follow`
 --
 ALTER TABLE `follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT voor een tabel `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT voor een tabel `passwordreset`
@@ -269,25 +290,31 @@ ALTER TABLE `passwordreset`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT voor een tabel `reportpost`
 --
 ALTER TABLE `reportpost`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT voor een tabel `reportuser`
 --
 ALTER TABLE `reportuser`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT voor een tabel `warnuser`
+--
+ALTER TABLE `warnuser`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

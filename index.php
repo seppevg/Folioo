@@ -31,6 +31,11 @@ if (empty($_GET['feed'])) {
     $url = $_GET['feed'];
 }
 
+$hasWarning = Warning::getWarningNumber($id);
+//var_dump($hasWarning);
+$warningMessage = Warning::getWarningMessage($id);
+//var_dump($warningMessage);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,9 +125,15 @@ if (empty($_GET['feed'])) {
         </div>
 
         <?php if(!empty($hasWarning)):?>
-            <input type='hidden' id='alert' name='alert' value="1">
-        <?php elseif(empty($hasWarning)):?>
-            <input type='hidden' id='alert' name='alert' value="0">
+            <div class="warning-error" id="warning-message-user">
+                <form action="" method="post">
+                    <?php foreach($warningMessage as $message):?>
+                        <h3 class="warning-title">You have received the following warning!</h3>
+                        <p><?php echo $message['text'];?></p>
+                        <button id="warning-btn" class="main-btn" onclick="removeWarning(this, <?php echo $id?>);">I understand</button>
+                    <?php endforeach;?> 
+                </form>               
+            </div>
         <?php endif;?>
 
         <?php if (empty($posts)): ?>
@@ -232,6 +243,11 @@ if (empty($_GET['feed'])) {
                     <?php endforeach;?>
                 <?php endif;?>
             </div>
+            <?php if (isset($error)):?>
+                <div>
+                    <p class="error"><?php echo $error ?></p>
+                </div>
+            <?php endif;?>
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>

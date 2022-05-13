@@ -9,8 +9,8 @@ if (empty($_GET['id'])) {
 
 $profile = User::getInfo($userId);
 
-$number = Warning::getWarningNumber($userId);
-var_dump($number);
+/*$number = Warning::getWarningNumber($userId);
+var_dump($number);*/
 
 if(!empty($_POST)) {
     try {
