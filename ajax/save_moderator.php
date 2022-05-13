@@ -8,7 +8,7 @@
         try {
             $checkModerator = User::checkModeratorRole($userId);
 
-            if ($checkModerator === 1) {
+            if ($checkModerator > 0) {
                 
                 $conn = DB::getInstance();
                 $statement = $conn->prepare("UPDATE users SET moderator = 0 WHERE id = :userId;");

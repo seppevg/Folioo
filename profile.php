@@ -47,7 +47,13 @@ $isAlreadyReported = $reported > 0;
                 ?>
 
                 <div class="profile-header">
-                    <h3 class="profile-username"><?php echo htmlspecialchars($p['username']); ?></h3>
+                    <div class="moderator-label" >
+                    <?php if (!empty($admin)):?>
+                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
+
+                        <?php endif;?>
+                        <h3 class="profile-username"><?php echo htmlspecialchars($p['username']); ?></h3>
+                    </div>
                     <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
                 </div>
                 <div class="profile-info">
