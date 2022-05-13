@@ -246,15 +246,12 @@ if (empty($_GET['feed'])) {
         <script src="./js/filter.js"></script>
         <script src="./js/like.js"></script>
         <script src="./js/dropdown.js"></script>
-<<<<<<< HEAD
         <script src="./js/warning.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-=======
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         <script src="./js/masonry.js"></script>
->>>>>>> ff69354d89f8e00aa6edfcd9d0e6a87a8f121e62
 
     </div>
     
