@@ -275,7 +275,7 @@ function postReporting(postId, userId, action) {
     method: "POST",
     body: data,
   })
-    .then((response) => response.json())
+    .then((response) => response.json()) //json wordt hier geparsed
     .then((data) => {
       if (data.status === "success" && data.message === "Post has been reported.") {
         report.classList.add("hidden");
