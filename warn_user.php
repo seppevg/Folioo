@@ -9,6 +9,17 @@ if (empty($_GET['id'])) {
 
 $profile = User::getInfo($userId);
 
+if(!empty($_POST)) {
+    try {
+        $warning = new Warning();
+        $warning->setText($_POST['warning-reason']);
+        $warning->setUserId($userId);
+        $warning->Save();
+    } catch (Throwable $error) {
+        $error = $error->getMessage();
+    }
+}
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
