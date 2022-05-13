@@ -25,7 +25,7 @@ function removeWarning(e, userId) {
         
         console.log("❤");
         warningField.innerHTML = "";
-        warningField.classList.remove("error");
+        warningField.classList.remove("warning-error");
         
       }
       console.log("Success:", data);

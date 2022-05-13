@@ -125,10 +125,10 @@ $warningMessage = Warning::getWarningMessage($id);
         </div>
 
         <?php if(!empty($hasWarning)):?>
-            <div class="error" id="warning-message-user">
+            <div class="warning-error" id="warning-message-user">
                 <form action="" method="post">
                     <?php foreach($warningMessage as $message):?>
-                        <h3>You have received the following warning!</h3>
+                        <h3 class="warning-title">You have received the following warning!</h3>
                         <p><?php echo $message['text'];?></p>
                         <button id="warning-btn" class="main-btn" onclick="removeWarning(this, <?php echo $id?>);">I understand</button>
                     <?php endforeach;?> 
