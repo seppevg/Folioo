@@ -267,4 +267,13 @@ class Post implements iPost
         $statement->bindValue(":postId", $postId);
         $statement->execute();
     }
+
+    public static function getAllShowcased($userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = :userId AND showcase = 1 ORDER BY id DESC;");
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
