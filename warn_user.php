@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+include_once("bootstrap.php");
+
+if (empty($_GET['id'])) {
+    $userId = "";
+} else {
+    $userId = $_GET['id'];
+}
+
+$profile = User::getInfo($userId);
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +25,6 @@
     
         <div class="profile-header">
             <h3 class="profile-username">Warn User</h3>
-            <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
         </div>
         <?php foreach($profile as $p): ?>
             <div class="profile-img profile-img-edit">                
@@ -26,17 +36,15 @@
 
             <form action="" method="post">
                 <div class="profile-delete-confirmation">
-                    <h4>Wait a minute!</h4>
-                    <p>We need to make sure that you're the owner of the account before we 
-                        delete it. Please enter your password.
+                    <h4>Reason for warning this user?</h4>
+                    <p>Gives us your reason for warning this user so we can let them know what to 
+                        change about their behaviour.
                     </p>
                     
                     <div class="form-field">
-                        <div>
-                            <label class="form-label" for="password">Password</label>
-                        </div>
                         <div class="flex">
-                            <input name="current-password" autocomplete="off" class="form-input" type="password" placeholder="Enter password">
+                            
+                            <textarea name="warning-reason" cols="20" rows="5" class="form-input"></textarea>
                         </div>
                     </div>
                     <div>
@@ -46,7 +54,7 @@
                             </div>
                         <?php endif; ?>
                         <div class="profile-delete">
-                            <button class="main-btn" type="submit" name="delete-user">Confirm</button>
+                            <button class="main-btn" type="submit" name="warn-user">Send warning</button>
                         </div>
                     </div>
                 </div>
