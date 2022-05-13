@@ -42,7 +42,6 @@ try {
 if (!empty($_POST)) {
     try {
         $searchResult = $_POST['searchInput'];
-        //var_dump ($searchResult);
         $posts = Post::search($searchResult);
 
         if (empty($_POST['column'])) {
@@ -50,12 +49,11 @@ if (!empty($_POST)) {
         } else {
             $filterType = $_POST['column'];
         }
-        //echo $filterType;
 
         if ($filterType == "Title") {
             $posts = Post::search($searchResult);
         } elseif ($filterType == "Tags") {
-            $posts = Post::search($searchResult);
+            $posts = Post::searchTags($searchResult);
         }
     } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
@@ -109,14 +107,18 @@ if (!empty($_POST)) {
                 </button>
             </div>
 
-            <section class="modal modal-container">
+            <section class="modal modal-container" id="desktop-filter">
+                
                 <div id="modal" class="modal-content hidden">
                     <h3>Choose your filter</h3>
-                    <form method="post">
-                        <input type="radio" value="Title" name="column"> Title <br> <br>
-                        <input type="radio" value="Tags" name="column"> Tags                    
-                    </form> 
+                    <div class="filter-options hidden">
+                        <form method="post">
+                            <input type="radio" value="Title" name="column" checked="checked"> Title <br> <br>
+                            <input type="radio" value="Tags" name="column"> Tags                  
+                        </form> 
+                    </div>
                 </div>
+      
             </section>
         </form>
 

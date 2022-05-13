@@ -24,7 +24,7 @@ if (!empty($_POST)) {
         if ($filterType == "Title") {
             $posts = Post::search($searchResult);
         } elseif ($filterType == "Tags") {
-            $posts = Post::search($searchResult);
+            $posts = Post::searchTags($searchResult);
         }
     } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
@@ -64,7 +64,7 @@ if (!empty($_POST)) {
             <div id="modal" class="modal-content hidden">
                 <h3>Choose your filter</h3>
                 <form method="post">
-                    <input type="radio" value="Title" name="column"> Title <br> <br>
+                    <input type="radio" value="Title" name="column" checked="checked"> Title <br> <br>
                     <input type="radio" value="Tags" name="column"> Tags                    
                 </form> 
             </div>
