@@ -1,4 +1,4 @@
-<?php 
+<?php
     include_once("bootstrap.php");
 
     if ($_GET['postId']) {

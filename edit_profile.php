@@ -75,7 +75,7 @@ if (!empty($_POST)) {
                     <div class="form-group">
                         <label class="form-label" for="secondary-email">Secondary email</label>
                         <?php if (!empty($p['secondary_email'])) : ?>
-                            <input name="secondary-email" autofocus="" autocomplete="off" class="form-input" type="email" placeholder="Secondary email" value="<?php echo $p['secondary_email']; ?>">
+                            <input name="secondary-email" autofocus="" autocomplete="off" class="form-input" type="email" placeholder="Secondary email" value="<?php echo htmlspecialchars($p['secondary_email']); ?>">
                         <?php else : ?>
                             <input name="secondary-email" autofocus="" autocomplete="off" class="form-input" type="email" placeholder="Secondary email">
                         <?php endif; ?>
@@ -83,7 +83,7 @@ if (!empty($_POST)) {
                     <div class="form-group">
                         <label class="form-label" for="education">Education</label>
                         <?php if (!empty($p['education'])) : ?>
-                            <input name="education" autocomplete="off" class="form-input" type="text" placeholder="Education" value="<?php echo $p['education']; ?>">
+                            <input name="education" autocomplete="off" class="form-input" type="text" placeholder="Education" value="<?php echo htmlspecialchars($p['education']); ?>">
                         <?php else : ?>
                             <input name="education" autocomplete="off" class="form-input" type="text" placeholder="Education">
                         <?php endif; ?>
@@ -91,7 +91,7 @@ if (!empty($_POST)) {
                     <div class="form-group">
                         <label class="form-label" for="bio">Bio</label>
                         <?php if (!empty($p['bio'])) : ?>
-                            <textarea style="resize: none;" rows="3" name="bio" autocomplete="off" class="form-input" type="text" placeholder="Bio"><?php echo $p['bio']; ?></textarea>
+                            <textarea style="resize: none;" rows="3" name="bio" autocomplete="off" class="form-input" type="text" placeholder="Bio"><?php echo htmlspecialchars($p['bio']); ?></textarea>
                         <?php else : ?>
                             <textarea style="resize: none;" rows="3" name="bio" autocomplete="off" class="form-input" type="text" placeholder="Bio"></textarea>
                         <?php endif; ?>
@@ -99,17 +99,17 @@ if (!empty($_POST)) {
                     <div class="form-group">
                         <label class="form-label" for="instagram-link">Social Links</label>
                         <?php if (!empty($p['instagramlink'])) : ?>
-                            <input name="instagram-link" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Instagram" value="<?php echo $p['instagramlink']; ?>">
+                            <input name="instagram-link" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Instagram" value="<?php echo htmlspecialchars($p['instagramlink']); ?>">
                         <?php else : ?>
                             <input name="instagram-link" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Instagram">
                         <?php endif; ?>
                         <?php if (!empty($p['behancelink'])) : ?>
-                            <input name="behance-link" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Behance" value="<?php echo $p['behancelink']; ?>">
+                            <input name="behance-link" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Behance" value="<?php echo htmlspecialchars($p['behancelink']); ?>">
                         <?php else : ?>
                             <input name="behance-link" autocomplete="off" class="form-input form-input-closer" type="text" placeholder="Behance">
                         <?php endif; ?>
                         <?php if (!empty($p['linkedinlink'])) : ?>
-                            <input name="linkedin-link" autocomplete="off" class="form-input" type="text" placeholder="LinkedIn" value="<?php echo $p['linkedinlink']; ?>">
+                            <input name="linkedin-link" autocomplete="off" class="form-input" type="text" placeholder="LinkedIn" value="<?php echo htmlspecialchars($p['linkedinlink']); ?>">
                         <?php else : ?>
                             <input name="linkedin-link" autocomplete="off" class="form-input" type="text" placeholder="LinkedIn">
                         <?php endif; ?>

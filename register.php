@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 include_once("bootstrap.php");
 
-if( !empty($_POST) ){
-    try {        
+if (!empty($_POST)) {
+    try {
         // create a new user
         $user = new User();
         $user->setEmail($_POST['email']);
@@ -19,13 +19,11 @@ if( !empty($_POST) ){
         $id = $_SESSION['id'] = $user->getId($email);
         //var_dump($id);
         header("Location: index.php");
-    }
-    catch(Throwable $error) {
+    } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
     }
-
-}	
+}
 
 
 ?><!DOCTYPE html>
@@ -85,7 +83,7 @@ if( !empty($_POST) ){
                     </div>
 
                     <div>                    
-                        <?php if(isset($error)): ?>
+                        <?php if (isset($error)): ?>
                             <div>
                                 <p class="error"> <?php echo $error; ?></p>
                             </div>

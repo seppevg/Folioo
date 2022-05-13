@@ -101,10 +101,10 @@ $isAlreadyReported = $reported > 0;
             <div class="project-interactions">
                 <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $sessionId?>);">
                     <a href="#" class="like"> 
-                        <?php if($checkLikes == "0"):?>               
+                        <?php if ($checkLikes == "0"):?>               
                             <img data-post="<?php echo $post['id']?>" data-user="<?php echo $sessionId?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-empty.svg" alt="heart or like icon">
                             <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
-                        <?php elseif($checkLikes == "1"):?> 
+                        <?php elseif ($checkLikes == "1"):?> 
                             <img data-post="<?php echo $post['id']?>" data-user="<?php echo $sessionId?>" id="like-icon" class="like-icon-<?php echo $post['id']; ?>" src="./assets/heart-full.svg" alt="heart or like icon">
                             <h4 class="numberOfLikes-<?php echo $post['id']; ?>"><?php echo $likes?></h4>
                         <?php endif;?>
@@ -207,7 +207,7 @@ $isAlreadyReported = $reported > 0;
 
             <form action="" method="post">
                 <ul id="listupdates">
-                    <?php foreach($comments as $c):?>
+                    <?php foreach ($comments as $c):?>
                         <?php $profile = Post::getUser($c['user_id']);?>
                             <div class="comment-box">
                                 <a href="profile.php?id=<?php echo $profile['id']?>">
@@ -220,9 +220,9 @@ $isAlreadyReported = $reported > 0;
                 </ul>
 
                 <div class="comment-box">
-                    <?php 
+                    <?php
                         $currentUser = User::getInfo($sessionId);
-                        foreach($currentUser as $cu):
+                        foreach ($currentUser as $cu):
                             //var_dump($cu);
                     ?>
                         <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $cu['image']; ?>" alt="profile picture">
@@ -241,7 +241,7 @@ $isAlreadyReported = $reported > 0;
             </form>
         </div>
 
-        <?php if (isset($error)) : ?>
+        <?php if (isset($error)):?>
             <div>
                 <p class="error"><?php echo $error ?></p>
             </div>
