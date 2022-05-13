@@ -721,6 +721,7 @@ img.post-profile {
 .add-icon {
   margin-bottom: 15px;
   margin-left: 5px;
+  width: 25px;
 }
 
 .form-input-warning {
