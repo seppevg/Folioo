@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Gegenereerd op: 13 mei 2022 om 17:30
--- Serverversie: 10.4.22-MariaDB
--- PHP-versie: 8.1.2
+-- Host: localhost:3306
+-- Generation Time: May 14, 2022 at 11:46 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -36,7 +37,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `comments`
+-- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `user_id`, `comment`, `date_created`) VALUES
@@ -48,7 +49,7 @@ INSERT INTO `comments` (`id`, `post_id`, `user_id`, `comment`, `date_created`) V
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `follow`
+-- Table structure for table `follow`
 --
 
 CREATE TABLE `follow` (
@@ -58,7 +59,7 @@ CREATE TABLE `follow` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `follow`
+-- Dumping data for table `follow`
 --
 
 INSERT INTO `follow` (`id`, `follower_id`, `following_id`) VALUES
@@ -68,7 +69,7 @@ INSERT INTO `follow` (`id`, `follower_id`, `following_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `likes`
+-- Table structure for table `likes`
 --
 
 CREATE TABLE `likes` (
@@ -78,7 +79,7 @@ CREATE TABLE `likes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `likes`
+-- Dumping data for table `likes`
 --
 
 INSERT INTO `likes` (`id`, `post_id`, `user_id`) VALUES
@@ -88,7 +89,7 @@ INSERT INTO `likes` (`id`, `post_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `passwordreset`
+-- Table structure for table `passwordreset`
 --
 
 CREATE TABLE `passwordreset` (
@@ -102,21 +103,21 @@ CREATE TABLE `passwordreset` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `posts`
+-- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `text` text COLLATE utf8mb4_unicode_520_ci,
   `image` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `tags` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `showcase` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `posts`
+-- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`, `showcase`) VALUES
@@ -131,12 +132,12 @@ INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`, `showcas
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `reportpost`
+-- Table structure for table `reportpost`
 --
 
 CREATE TABLE `reportpost` (
   `id` int(10) UNSIGNED NOT NULL,
-  `reported_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `reported_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -144,12 +145,12 @@ CREATE TABLE `reportpost` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `reportuser`
+-- Table structure for table `reportuser`
 --
 
 CREATE TABLE `reportuser` (
   `id` int(10) UNSIGNED NOT NULL,
-  `reported_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `reported_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `reported_user_id` int(11) NOT NULL,
   `from_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -157,7 +158,7 @@ CREATE TABLE `reportuser` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -168,29 +169,32 @@ CREATE TABLE `users` (
   `secondary_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `education` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bio` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bio` text COLLATE utf8mb4_unicode_ci,
   `instagramlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `behancelink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `linkedinlink` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `followers` int(11) NOT NULL,
   `admin` int(11) NOT NULL,
   `moderator` int(11) NOT NULL,
-  `warning` int(11) NOT NULL
+  `warning` int(11) NOT NULL,
+  `banned` datetime DEFAULT NULL,
+  `following` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`, `followers`, `admin`, `moderator`, `warning`) VALUES
-(1, 'test@thomasmore.be', '$2y$15$B1BPtZQGH5IodurXFAkZyuREXP9yWQ5gAbrKX0lTBnnTufttQjitm', 'Seppe', 'seppe.vg@live.be', '1.jpg', 'IMD', 'I like beer', '#insta', '', '', 0, 1, 0, 0),
-(4, 'beatrijs@thomasmore.be', '$2y$15$n2H44jet8BJpa1gACaJ/9ebJfI9w.ZGh7E4MGk4CR194zZF4JDb4u', 'Béatrijs', 'bea@gmail.com', 'profiledefault.svg', 'Much wow', 'Ik ben gewoon nen test eh', '#lifesucks', '', '', 0, 0, 0, 0),
-(7, 'r0831894@student.thomasmore.be', '$2y$15$y2PO5xUbhY/Giz/526xAVuWUPExzdOLkPWRJmUHASdY3aLzNdvvl2', 'Marie Serroyen', '', '7.jpg', '', '', '', '', '', 0, 1, 1, 0);
+INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`, `followers`, `admin`, `moderator`, `warning`, `banned`, `following`) VALUES
+(1, 'test@thomasmore.be', '$2y$15$B1BPtZQGH5IodurXFAkZyuREXP9yWQ5gAbrKX0lTBnnTufttQjitm', 'Seppe', 'seppe.vg@live.be', '1.jpg', 'IMD', 'I like beer', '#insta', '', '', 0, 1, 0, 0, NULL, 0),
+(4, 'beatrijs@thomasmore.be', '$2y$15$n2H44jet8BJpa1gACaJ/9ebJfI9w.ZGh7E4MGk4CR194zZF4JDb4u', 'Béatrijs', 'bea@gmail.com', 'profiledefault.svg', 'Much wow', 'Ik ben gewoon nen test eh', '#lifesucks', '', '', 0, 0, 0, 0, NULL, 0),
+(7, 'r0831894@student.thomasmore.be', '$2y$15$y2PO5xUbhY/Giz/526xAVuWUPExzdOLkPWRJmUHASdY3aLzNdvvl2', 'Marie Serroyen', '', '7.jpg', '', '', '', '', '', 0, 1, 1, 0, NULL, 0),
+(8, 'r0831678@student.thomasmore.be', '$2y$15$Eqn9hQkkTuhEi5AMBbiLk.thBCC7qH3cg3MsYgVAgnKB35Wd8pHly', 'gbeyens', NULL, 'profiledefault.svg', NULL, NULL, NULL, NULL, NULL, 0, 0, 1, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `warnuser`
+-- Table structure for table `warnuser`
 --
 
 CREATE TABLE `warnuser` (
@@ -201,120 +205,120 @@ CREATE TABLE `warnuser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `follow`
+-- Indexes for table `follow`
 --
 ALTER TABLE `follow`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `likes`
+-- Indexes for table `likes`
 --
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `passwordreset`
+-- Indexes for table `passwordreset`
 --
 ALTER TABLE `passwordreset`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexen voor tabel `posts`
+-- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `reportpost`
+-- Indexes for table `reportpost`
 --
 ALTER TABLE `reportpost`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `reportuser`
+-- Indexes for table `reportuser`
 --
 ALTER TABLE `reportuser`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `warnuser`
+-- Indexes for table `warnuser`
 --
 ALTER TABLE `warnuser`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
--- AUTO_INCREMENT voor een tabel `follow`
+-- AUTO_INCREMENT for table `follow`
 --
 ALTER TABLE `follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT voor een tabel `likes`
+-- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT voor een tabel `passwordreset`
+-- AUTO_INCREMENT for table `passwordreset`
 --
 ALTER TABLE `passwordreset`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `posts`
+-- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT voor een tabel `reportpost`
+-- AUTO_INCREMENT for table `reportpost`
 --
 ALTER TABLE `reportpost`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `reportuser`
+-- AUTO_INCREMENT for table `reportuser`
 --
 ALTER TABLE `reportuser`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT voor een tabel `warnuser`
+-- AUTO_INCREMENT for table `warnuser`
 --
 ALTER TABLE `warnuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
