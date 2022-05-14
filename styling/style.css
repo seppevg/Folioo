@@ -81,6 +81,10 @@ body {
   margin: 0 auto;
 }
 
+.slogan {
+  display: none;
+}
+
 .form-title {
   font-family: BlaakBold_PERSONAL, serif;
   color: var(--IMDblue);
