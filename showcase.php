@@ -22,6 +22,7 @@ $posts = Post::getAllShowcased($id);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
+    <link rel="stylesheet" href="./styling/desktop.css">
     <title>Folioo - Showcase</title>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>

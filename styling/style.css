@@ -192,37 +192,6 @@ body {
   align-items: center;
 }
 
-/* DESKTOP NAV */
-@media (max-width: 1300px) {
-  nav.top-nav {
-    display: none;
-  }
-
-
-}
-
-@media (min-width: 1300px) {
-  #home #container-logo {
-    display: none;
-  }
-
-  #home {
-    margin-top: 2em;
-  }
-
-  nav.bottom-nav {
-    display: none;
-  }
-
-  #home .main-btn {
-    width: 200px;
-  }
-
-  #home .main-margin {
-    margin: auto;
-  }
-}
-
 #desktop-filter.display {
   position: absolute;
   background-color: white;
@@ -240,8 +209,7 @@ body {
 
 }
 
-.dropdown-menu-profile1,
-.dropdown-menu-profile2 {
+.dropdown-menu-profile {
   position: absolute;
   width: 20%;
   background-color: white;
@@ -255,16 +223,14 @@ body {
   transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
-.dropdown-menu-profile1 a,
-.dropdown-menu-profile2 a {
+.dropdown-menu-profile a {
   display: flex;
   flex-direction: row;
   align-items: center;
   text-decoration: none;
 }
 
-.dropdown-menu-profile1 a p,
-.dropdown-menu-profile2 a p {
+.dropdown-menu-profile a p {
   color: black;
   font-weight: 600;
 }
@@ -330,6 +296,19 @@ body {
   margin-right: 32px;
 }
 
+.login-nav-btn,
+.register-nav-btn {
+  max-width: 120px;
+  height: 50px;
+  margin: 0 1em;
+  padding-top: 0.9em !important;
+}
+
+.login-nav-btn {
+  color: var(--IMDblue) !important;
+  background: white !important;
+  border: 2px solid var(--IMDblue) !important;
+}
 
 /* INDEX (projects) */
 

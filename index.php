@@ -72,6 +72,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
+    <link rel="stylesheet" href="./styling/desktop.css">
     <title>Folioo</title>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
@@ -126,21 +127,18 @@ if (!empty($_POST)) {
         </form>
 
         <div class="user-links">
-            <a class="main-btn add-project-nav" href="add.php">Inspire others</a>
-            <a href="profile.php" class="nav-user">
-                <?php if(isset($id)): ?>
-                    <?php $userImage = User::getInfo($id); ?>
-                    <?php foreach ($userImage as $uI): ?>
-                        <img src="./uploads/profiles/<?php echo $uI['image']; ?>">
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </a>
-
             <?php if(!empty($id)): ?>
-                <button class="dropdown-button dropdown-button-profile1">
+                <a class="main-btn add-project-nav" href="add.php">Inspire others</a>
+                <a href="profile.php" class="nav-user">
+                        <?php $userImage = User::getInfo($id); ?>
+                        <?php foreach ($userImage as $uI): ?>
+                            <img src="./uploads/profiles/<?php echo $uI['image']; ?>">
+                        <?php endforeach; ?>
+                </a>
+                <button class="dropdown-button dropdown-button-profile">
                     <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
                 </button>
-                <div class="dropdown-menu-profile1 hidden">
+                <div class="dropdown-menu-profile hidden">
                     <a href="showcase.php?id=<?php echo $id;?>">
                         <img class="modal-icon" src="./assets/showcase.svg" alt="showcase">
                         <p>View showcase</p>
@@ -159,19 +157,8 @@ if (!empty($_POST)) {
                     </a>
                 </div>
             <?php else: ?>
-                <button class="dropdown-button dropdown-button-profile2">
-                    <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
-                </button>
-                <div class="dropdown-menu-profile2 hidden">
-                    <a href="login.php">
-                        <img class="modal-icon" src="./assets/following.svg" alt="showcase">
-                        <p>Log in</p>
-                    </a>
-                    <a href="register.php">
-                        <img class="modal-icon" src="./assets/edit.svg" alt="lock">
-                        <p>Register</p>
-                    </a>
-                </div>
+                <a class="main-btn login-nav-btn" href="login.php">Log in</a>
+                <a class="main-btn register-nav-btn" href="register.php">Register</a>
             <?php endif; ?>
         </div>
     </nav>

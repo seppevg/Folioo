@@ -15,22 +15,16 @@
             $count = $statement->rowCount();
 
             if ($count > 0) {
-                $conn = DB::getInstance();
-                $statement = $conn->prepare("DELETE FROM follow WHERE follower_id = :followerId AND following_id = :followingId;");
-                $statement->bindValue(":followerId", $id);
-                $statement->bindValue(":followingId", $userId);
-                $statement->execute();
+                Followers::unfollow($id, $userId);
+                // Followers::remove($userId);
 
                 $result = [
                     "status" => "success",
                     "message" => "User has been unfollowed"
                 ];
             } else {
-                $conn = DB::getInstance();
-                $statement = $conn->prepare("INSERT INTO follow (follower_id, following_id) VALUES (:followerId, :followingId);");
-                $statement->bindValue(":followerId", $id);
-                $statement->bindValue(":followingId", $userId);
-                $statement->execute();
+                Followers::follow($id, $userId);
+                // Followers::add($userId);
 
                 $result = [
                     "status" => "success",

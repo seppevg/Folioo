@@ -1,0 +1,30 @@
+/* DESKTOP */
+
+/* Navigatie */
+@media (max-width: 1300px) {
+    nav.top-nav {
+        display: none;
+    }
+}
+
+@media (min-width: 1300px) {
+    #home #container-logo {
+        display: none;
+    }
+
+    #home {
+        margin-top: 2em;
+    }
+
+    nav.bottom-nav {
+        display: none;
+    }
+
+    #home .main-btn {
+        width: 200px;
+    }
+
+    #home .main-margin {
+        margin: auto;
+    }
+}

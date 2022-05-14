@@ -31,13 +31,14 @@ $isAlreadyReported = $reported > 0;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styling/normalize.css">
     <link rel="stylesheet" href="./styling/style.css">
+    <link rel="stylesheet" href="./styling/desktop.css">
     <title>Folioo - Profile</title>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 
 <body>
     <div id="profile">
-        <?php if (!empty($id) && empty($userId)): ?>
+        <?php if (!empty($id)): ?>
             <?php foreach ($profile as $p) :
                 $posts = Post::getAllFromUser($id);
                 $admin = $p['admin'];
@@ -60,11 +61,11 @@ $isAlreadyReported = $reported > 0;
                         <img src="./uploads/profiles/<?php echo $p['image']; ?>">
                     </div>
                     <div class="profile-following">
-                        <p class="following-number">0</p>
+                        <p class="following-number"><?php echo $p['following']; ?></p>
                         <p class="following">Following</p>
                     </div>
                     <div class="profile-following">
-                        <p class="followers-number">0</p>
+                        <p class="followers-number"><?php echo $p['followers']; ?></p>
                         <p class="following">Followers</p>
                     </div>
                 </div>
@@ -189,14 +190,6 @@ $isAlreadyReported = $reported > 0;
                 <div class="profile-info">
                     <div class="profile-img">
                         <img src="./uploads/profiles/<?php echo $up['image']; ?>">
-                    </div>
-                    <div class="profile-following">
-                        <p class="following-number">0</p>
-                        <p class="following">Following</p>
-                    </div>
-                    <div class="profile-following">
-                        <p class="followers-number">0</p>
-                        <p class="following">Followers</p>
                     </div>
                 </div>
 

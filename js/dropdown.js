@@ -10,14 +10,8 @@ arrowDesktop.addEventListener("click", function () {
     dropdownDesktop.classList.toggle("active");
 });
 
-let arrowProfileDesktop1 = document.querySelector(".dropdown-button-profile1");
-let dropdownProfileDesktop1 = document.querySelector(".dropdown-menu-profile1");
-arrowProfileDesktop1.addEventListener("click", function () {
-    dropdownProfileDesktop1.classList.toggle("hidden");
-});
-
-let arrowProfileDesktop2 = document.querySelector(".dropdown-button-profile2");
-let dropdownProfileDesktop2 = document.querySelector(".dropdown-menu-profile2");
-arrowProfileDesktop2.addEventListener("click", function () {
-    dropdownProfileDesktop2.classList.toggle("hidden");
+let arrowProfileDesktop = document.querySelector(".dropdown-button-profile");
+let dropdownProfileDesktop = document.querySelector(".dropdown-menu-profile");
+arrowProfileDesktop.addEventListener("click", function () {
+    dropdownProfileDesktop.classList.toggle("hidden");
 });
