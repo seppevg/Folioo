@@ -34,6 +34,8 @@ if (empty($_SESSION['id'])) {
 
 $userId = Post::getById($_GET['id'])[0];
 
+$idUser = $userId["user_id"];
+
 
 $commentsCount = Comment::countComments($post['id']);
 
@@ -59,6 +61,8 @@ $comments = Comment::getAll($id);
 //checks if the logged in user already reported that post
 $reported = ReportPost::checkIfReportedByUser($sessionId, $post["id"]);
 $isAlreadyReported = $reported > 0;
+
+$isBanned = User::isBanned($idUser);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,9 +99,7 @@ $isAlreadyReported = $reported > 0;
             <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="Post image">
         </div>
 
-        <!-- <div>
-            likes en comment icoontjes
-        </div> -->
+        <?php if(!empty($sessionId) && !$isBanned): ?>
         <form action="" method="post" name="like">
             <div class="project-interactions">
                 <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $sessionId?>);">
@@ -118,6 +120,7 @@ $isAlreadyReported = $reported > 0;
                 </div>
             </div>
         </form>
+        <?php endif; ?>
 
         <div>
             <h4 class="post-text"><?php echo htmlspecialchars($post['text']); ?></h4>

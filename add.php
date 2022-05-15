@@ -29,6 +29,10 @@ if (!empty($_POST)) {
     }
 }
 
+$isBanned = User::isBanned($id);
+if($isBanned){
+    header("Location: index.php");
+}
 
 ?>
 <!DOCTYPE html>

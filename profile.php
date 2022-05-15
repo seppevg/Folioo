@@ -21,6 +21,10 @@ $checkFollowing = Followers::check($id, $userId);
 $reported = ReportUser::checkIfReportedByUser($id, $userId);
 $isAlreadyReported = $reported > 0;
 
+$isBanned = User::isBanned($userId);
+
+$iAmBanned = User::isBanned($id);
+
 
 ?>
 <html lang="en">
@@ -40,6 +44,7 @@ $isAlreadyReported = $reported > 0;
     <div id="profile">
 
         <?php if (!empty($userId)) : ?>
+           
             <?php foreach ($userProfiles as $up) : ?>
                 <?php foreach ($profile as $p) : ?>
                     <?php
@@ -83,7 +88,7 @@ $isAlreadyReported = $reported > 0;
                                 <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
                             <?php endif; ?>
                         <?php endif; ?>
-                        <h3 class="profile-username"><?php echo $up['username']; ?></h3>
+                        <h3 class="profile-username" <?php if($isBanned){echo "style='color:red'";}?>><?php echo $up['username']; if($isBanned){ echo " [BANNED]"; }?></h3>
                     </div>
                     <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                 </div>
@@ -155,10 +160,17 @@ $isAlreadyReported = $reported > 0;
                                 <img class="modal-icon" src="./assets/warn.svg" alt="Warn icon">
                                 <p>Warn user</p>
                             </a>
-                            <a href="#">
+                            <?php if($isBanned == false):?>
+                            <a href="ban_user.php?id=<?php echo $up['id']; ?>">
                                 <img class="modal-icon" src="./assets/ban.svg" alt="Ban icon">
                                 <p>Ban user</p>
-                            </a>
+                            </a>    
+                            <?php else:?>
+                                <a href="unban_user.php?id=<?php echo $up['id']; ?>">
+                                <img class="modal-icon" src="./assets/ban.svg" alt="Ban icon">
+                                <p>Stop banning user</p>
+                            </a>    
+                            <?php endif?>
                         <?php endif; ?>
                     </div>
                 </section>
@@ -213,7 +225,7 @@ $isAlreadyReported = $reported > 0;
                         <?php elseif (!empty($mainModerator)) : ?>
                             <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
                         <?php endif; ?>
-                        <h3 class="profile-username"><?php echo htmlspecialchars($p['username']); ?></h3>
+                        <h3 class="profile-username" <?php if($iAmBanned){echo "style='color:red'";}?>><?php echo htmlspecialchars($p['username']); if($iAmBanned){ echo " [BANNED]"; } ?></h3>
                     </div>
                     <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
                 </div>
