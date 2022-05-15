@@ -1,4 +1,5 @@
 <?php
+
 class User implements iUser
 {
     private $email;
@@ -510,7 +511,8 @@ class User implements iUser
         }
     }
 
-    public static function checkModeratorRole($id){
+    public static function checkModeratorRole($id)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT moderator FROM users where id = :id");
         $statement->bindValue(':id', $id);
@@ -522,6 +524,56 @@ class User implements iUser
             return false;
         } else {
             return $row['moderator'];
+        }
+    }
+
+
+
+    public static function ban($id)
+    {
+        $Date = date('Y-m-d');
+        $bannedUntil = date('Y-m-d', strtotime($Date . ' + 3 days'));
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET banned = :banned where id = :id");
+        $statement->bindValue(':banned', $bannedUntil);
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+    }
+
+
+    public static function unBan($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET banned = null where id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+
+    }
+
+    public static function isBanned($id)
+    {
+        if (!empty($id)) {
+            $conn = DB::getInstance();
+            $statement = $conn->prepare("SELECT banned FROM users WHERE id = :id");
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            if (is_null($result["banned"])) {
+                return false;
+            } else {
+                if (strtotime(date('Y-m-d')) < strtotime($result["banned"])) {
+                    //check if now is earlier than the time in db
+                    //if yes, return true (you're still banned)
+                    return true;
+                } else {
+                    //if no, set banned as null
+                    //return false (you're 3 days are up)
+                    $statement = $conn->prepare("UPDATE users SET banned = null WHERE id = :id");
+                    $statement->bindValue(':id', $id);
+                    $statement->execute();
+                    return false;
+                }
+            }
         }
     }
 }

@@ -62,6 +62,9 @@ if (!empty($_POST)) {
     }
 }
 
+
+$isBanned = User::isBanned($id);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,8 +130,10 @@ if (!empty($_POST)) {
         </form>
 
         <div class="user-links">
-            <?php if(!empty($id)): ?>
+            <?php if(!empty($id)):?>
+                <?php if(!$isBanned): ?>
                 <a class="main-btn add-project-nav" href="add.php">Inspire others</a>
+                <?php endif; ?>
                 <a href="profile.php" class="nav-user">
                         <?php $userImage = User::getInfo($id); ?>
                         <?php foreach ($userImage as $uI): ?>
@@ -222,7 +227,7 @@ if (!empty($_POST)) {
                             <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
                         </a>
                         <div class="project-info">
-                            <?php if (!empty($id)): ?>
+                            <?php if (!empty($id) && !$isBanned): ?>
                                 <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
                                     <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
                                     <h4 class="project-author-username"><?php echo htmlspecialchars($profile['username']); ?></h4>
