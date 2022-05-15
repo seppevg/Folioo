@@ -1,5 +1,13 @@
 /* DESKTOP */
 
+:root {
+    --IMDpink: #FCD7F7;
+    --IMDblue: #0600ff;
+    --IMDgreen: #bffd00;
+    --errorRed: #f04c25;
+    --errorRedLight: #fc0b2b63;
+}
+
 /* Welcome */
 @media (min-width: 700px) {
     .logo-row {
@@ -23,6 +31,10 @@
         font-size: 2em;
     }
 
+    .form {
+        margin: 0 4em;
+    }
+
     .form-background {
         height: 100vh;
         position: relative;
@@ -40,6 +52,14 @@
 
     .welcomeIcon {
         margin-top: 7em;
+    }
+
+    #filler {
+        margin-bottom: 45vh;
+    }
+
+    #filler img {
+        width: 250px !important;
     }
 }
 
@@ -71,5 +91,64 @@
 
     #home .main-margin {
         margin: auto;
+    }
+}
+
+
+/* Profile */
+@media (min-width: 700px) {
+    .feed article {
+        max-width: 250px;
+    }
+}
+
+@media (min-width: 1300px) {
+    #profile {
+        position: relative;
+    }
+
+    .desktop-background {
+        background: var(--IMDpink);
+        display: block;
+        width: 100vw;
+        height: 200px;
+    }
+
+    .profile-container {
+        position: absolute;
+        top: 10vh;
+        left: 15vh;
+        background-color: white;
+        border: 2px solid var(--IMDblue);
+        border-radius: 10px;
+        width: max-content;
+        height: min-content;
+    }
+
+    .profile-container .profile-header {
+        border-bottom: none;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .profile-container .profile-header .modal-button {
+        display: none;
+    }
+
+    .profile-info .profile-img img {
+        margin-top: 0;
+    }
+
+    .profile-edit .main-btn {
+        margin-bottom: 2em;
+    }
+
+    .feed article {
+        max-width: 350px;
+    }
+
+    #profile .feed {
+        position: absolute;
+        top: 30vh;
     }
 }

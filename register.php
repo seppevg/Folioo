@@ -44,6 +44,7 @@ if (!empty($_POST)) {
     
         <div class="logo-row">
             <img src="./assets/folioo-white.svg" alt="Foolio Logo" class="logo">
+            <h2 class="slogan">Inspire and get inspired</h2>
         </div>
 
         <div class="form-container">

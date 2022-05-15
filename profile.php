@@ -12,6 +12,9 @@ if (empty($_GET['id'])) {
     $userId = "";
 } else {
     $userId = $_GET['id'];
+    if ($id == $userId) {
+        $userId = '';
+    }
 }
 
 $profile = User::getInfo($id);
@@ -41,6 +44,8 @@ $iAmBanned = User::isBanned($id);
 </head>
 
 <body>
+    <?php include_once("./includes/nav-top.inc.php"); ?>
+
     <div id="profile">
 
         <?php if (!empty($userId)) : ?>
@@ -57,67 +62,69 @@ $iAmBanned = User::isBanned($id);
                     ?>
                 <?php endforeach; ?>
 
-                <div class="profile-header">
-                    <div class="moderator-label">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="moderator-label">
 
-                        <div class="admin-change" onclick="addModerator(this, <?php echo $up['id']; ?>);">
-                            <?php if (!empty($mainAdmin)) : ?>
-                                <?php if (!empty($moderator)) : ?>
-                                    <form action="" method="post">
-                                        <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
-                                    </form>
-                                <?php elseif (empty($moderator)) : ?>
-                                    <form action="" method="post">
-                                        <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-off.svg" alt="Moderator icon grey"></a>
-                                    </form>
+                            <div class="admin-change" onclick="addModerator(this, <?php echo $up['id']; ?>);">
+                                <?php if (!empty($mainAdmin)) : ?>
+                                    <?php if (!empty($moderator)) : ?>
+                                        <form action="" method="post">
+                                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                                        </form>
+                                    <?php elseif (empty($moderator)) : ?>
+                                        <form action="" method="post">
+                                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-off.svg" alt="Moderator icon grey"></a>
+                                        </form>
+                                    <?php endif; ?>
+
                                 <?php endif; ?>
 
+                            </div>
+                            <?php if (!empty($mainAdmin)) : ?>
+                                <?php if (!empty($admin)) : ?>
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
+                                <?php endif; ?>
                             <?php endif; ?>
 
+                            <?php if (empty($mainAdmin)) : ?>
+                                <?php if (!empty($admin)) : ?>
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
+                                <?php elseif (!empty($moderator)) : ?>
+                                    <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <h3 class="profile-username" <?php if($isBanned){echo "style='color:red'";}?>><?php echo $up['username']; if($isBanned){ echo " [BANNED]"; }?></h3>
                         </div>
-                        <?php if (!empty($mainAdmin)) : ?>
-                            <?php if (!empty($admin)) : ?>
-                                <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (empty($mainAdmin)) : ?>
-                            <?php if (!empty($admin)) : ?>
-                                <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
-                            <?php elseif (!empty($moderator)) : ?>
-                                <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                        <h3 class="profile-username" <?php if($isBanned){echo "style='color:red'";}?>><?php echo $up['username']; if($isBanned){ echo " [BANNED]"; }?></h3>
+                        <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
-                    <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
-                </div>
 
-                <div class="profile-info">
-                    <div class="profile-img">
-                        <img src="./uploads/profiles/<?php echo $up['image']; ?>">
+                    <div class="profile-info">
+                        <div class="profile-img">
+                            <img src="./uploads/profiles/<?php echo $up['image']; ?>">
+                        </div>
                     </div>
-                </div>
 
-                <div class="profile-info-extra">
-                    <p class="profile-text"><?php echo htmlspecialchars($up['education']); ?></p>
-                    <?php if (!empty($up['instagramlink'])) : ?>
-                        <a href="<?php echo htmlspecialchars($up['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
-                    <?php endif; ?>
-                    <?php if (!empty($up['behancelink'])) : ?>
-                        <a href="<?php echo htmlspecialchars($up['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
-                    <?php endif; ?>
-                    <?php if (!empty($up['linkedinlink'])) : ?>
-                        <a href="<?php echo htmlspecialchars($up['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
-                    <?php endif; ?>
-                </div>
+                    <div class="profile-info-extra">
+                        <p class="profile-text"><?php echo htmlspecialchars($up['education']); ?></p>
+                        <?php if (!empty($up['instagramlink'])) : ?>
+                            <a href="<?php echo htmlspecialchars($up['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
+                        <?php endif; ?>
+                        <?php if (!empty($up['behancelink'])) : ?>
+                            <a href="<?php echo htmlspecialchars($up['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif; ?>
+                        <?php if (!empty($up['linkedinlink'])) : ?>
+                            <a href="<?php echo htmlspecialchars($up['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php endif; ?>
+                    </div>
 
-                <div class="profile-bio">
-                    <p class="profile-text"><?php echo htmlspecialchars($up['bio']); ?></p>
-                </div>
+                    <div class="profile-bio">
+                        <p class="profile-text"><?php echo htmlspecialchars($up['bio']); ?></p>
+                    </div>
 
-                <div class="profile-edit">
-                    <a href="#" class="main-btn follow-button" onclick="changeFollowState(this, <?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
+                    <div class="profile-edit">
+                        <a href="#" class="main-btn follow-button" onclick="changeFollowState(this, <?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
+                    </div>
                 </div>
 
                 <?php if (empty($posts)) : ?>
@@ -217,50 +224,52 @@ $iAmBanned = User::isBanned($id);
                 $admin = $p['admin'];
                 $mainModerator = $p['moderator'];
             ?>
-
-                <div class="profile-header">
-                    <div class="moderator-label">
-                        <?php if (!empty($admin)) : ?>
-                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
-                        <?php elseif (!empty($mainModerator)) : ?>
-                            <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                <div class="desktop-background"></div>
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="moderator-label">
+                            <?php if (!empty($admin)) : ?>
+                                <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/green-crown.svg" alt="Moderator icon blue"></a>
+                            <?php elseif (!empty($mainModerator)) : ?>
+                                <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
+                            <?php endif; ?>
+                            <h3 class="profile-username" <?php if($iAmBanned){echo "style='color:red'";}?>><?php echo htmlspecialchars($p['username']); if($iAmBanned){ echo " [BANNED]"; } ?></h3>
+                        </div>
+                        <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-img">
+                            <img src="./uploads/profiles/<?php echo $p['image']; ?>">
+                        </div>
+                        <div class="profile-following">
+                            <p class="following-number"><?php echo $p['following']; ?></p>
+                            <p class="following">Following</p>
+                        </div>
+                        <div class="profile-following">
+                            <p class="followers-number"><?php echo $p['followers']; ?></p>
+                            <p class="following">Followers</p>
+                        </div>
+                    </div>
+                    <div class="profile-info-extra">
+                        <p class="profile-text"><?php echo htmlspecialchars($p['education']); ?></p>
+                        <?php if (!empty($p['instagramlink'])) : ?>
+                            <a href="<?php echo htmlspecialchars($p['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
                         <?php endif; ?>
-                        <h3 class="profile-username" <?php if($iAmBanned){echo "style='color:red'";}?>><?php echo htmlspecialchars($p['username']); if($iAmBanned){ echo " [BANNED]"; } ?></h3>
+                        <?php if (!empty($p['behancelink'])) : ?>
+                            <a href="<?php echo htmlspecialchars($p['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
+                        <?php endif; ?>
+                        <?php if (!empty($p['linkedinlink'])) : ?>
+                            <a href="<?php echo htmlspecialchars($p['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
+                        <?php endif; ?>
                     </div>
-                    <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
-                </div>
-                <div class="profile-info">
-                    <div class="profile-img">
-                        <img src="./uploads/profiles/<?php echo $p['image']; ?>">
-                    </div>
-                    <div class="profile-following">
-                        <p class="following-number"><?php echo $p['following']; ?></p>
-                        <p class="following">Following</p>
-                    </div>
-                    <div class="profile-following">
-                        <p class="followers-number"><?php echo $p['followers']; ?></p>
-                        <p class="following">Followers</p>
-                    </div>
-                </div>
-                <div class="profile-info-extra">
-                    <p class="profile-text"><?php echo htmlspecialchars($p['education']); ?></p>
-                    <?php if (!empty($p['instagramlink'])) : ?>
-                        <a href="<?php echo htmlspecialchars($p['instagramlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" alt="Instagram icon" class="socialmedia-icons"></a>
-                    <?php endif; ?>
-                    <?php if (!empty($p['behancelink'])) : ?>
-                        <a href="<?php echo htmlspecialchars($p['behancelink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/behance.svg" alt="Behance icon" class="socialmedia-icons"></a>
-                    <?php endif; ?>
-                    <?php if (!empty($p['linkedinlink'])) : ?>
-                        <a href="<?php echo htmlspecialchars($p['linkedinlink']); ?>" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" alt="LinkdIn icon" class="socialmedia-icons"></a>
-                    <?php endif; ?>
-                </div>
 
-                <div class="profile-bio">
-                    <p class="profile-text"><?php echo htmlspecialchars($p['bio']); ?></p>
-                </div>
+                    <div class="profile-bio">
+                        <p class="profile-text"><?php echo htmlspecialchars($p['bio']); ?></p>
+                    </div>
 
-                <div class="profile-edit">
-                    <a href="edit_profile.php" class="main-btn">Edit profile</a>
+                    <div class="profile-edit">
+                        <a href="edit_profile.php" class="main-btn">Edit profile</a>
+                    </div>
                 </div>
 
                 <?php if (empty($posts)) : ?>
@@ -362,12 +371,15 @@ $iAmBanned = User::isBanned($id);
     </div>
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
 
+    <script src="./js/filter.js"></script>
     <script src="./js/like.js"></script>
+    <script src="./js/dropdown.js"></script>
+    <script src="./js/warning.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="./js/masonry.js"></script>
     <script src="./js/moderator.js"></script>
     <script src="./js/app.js"></script>
-
 </body>
 
 </html>

@@ -8,6 +8,7 @@
 :root {
   --IMDblue: #0600ff;
   --IMDgreen: #bffd00;
+  --IMDpink: #FCD7F7;
   --errorRed: #f04c25;
   --errorRedLight: #fc0b2b63;
 }
@@ -257,23 +258,27 @@ body {
 
 .top-nav .search-nav {
   width: 100%;
+  margin-bottom: 0;
 }
 
-.top-nav .search .profile-header {
+.top-nav .search .search-top-nav {
   padding: 0;
-  border-bottom: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .top-nav .inputSearch {
   width: 500px;
 }
 
-.top-nav .search .profile-header .filterbtn {
+.top-nav .search .search-top-nav .filterbtn {
   margin: 0 10px;
 }
 
-.top-nav .search .profile-header .filterbtn .modal-button {
-  height: 30px;
+.search-top-nav img {
+  max-height: 25px;
 }
 
 .top-nav .user-links {
@@ -1128,4 +1133,8 @@ img.post-profile {
 .share-buttons .share-url.active::before,
 .share-buttons .share-url.active::after {
   display: block;
+}
+
+.desktop-background {
+  display: none;
 }
