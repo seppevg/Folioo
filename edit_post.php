@@ -86,7 +86,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($oldPost)) : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo $oldPost['title']; ?>">
+                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo htmlspecialchars($oldPost['title']); ?>">
                             <?php else : ?>
                                 <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
                             <?php endif; ?>
@@ -96,7 +96,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($oldPost)) : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo $oldPost['text']; ?>">
+                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo htmlspecialchars($oldPost['text']); ?>">
                             <?php else : ?>
                                 <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
                             <?php endif; ?>
@@ -106,7 +106,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="flex">
                             <?php if (!empty($oldPost)) : ?>
-                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo $oldPost['tags']; ?>">
+                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo htmlspecialchars($oldPost['tags']); ?>">
                             <?php else : ?>
                                 <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis">
                             <?php endif; ?>

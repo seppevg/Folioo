@@ -67,7 +67,7 @@
             <div class="profile-img profile-img-edit">                
                 <div class="profile-img">                    
                     <img src="./uploads/profiles/<?php echo $p['image']; ?>">
-                    <h3 class="clickable-text"><?php echo $p['username']; ?></h3>
+                    <h3 class="clickable-text"><?php echo htmlspecialchars($p['username']); ?></h3>
                 </div>
             </div>
 

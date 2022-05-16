@@ -108,7 +108,7 @@ $isBanned = User::isBanned($id);
                 <form action="" method="post">
                     <?php foreach($warningMessage as $message):?>
                         <h3 class="warning-title">You have received the following warning!</h3>
-                        <p><?php echo $message['text'];?></p>
+                        <p><?php echo htmlspecialchars($message['text']);?></p>
                         <button id="warning-btn" class="main-btn" onclick="removeWarning(this, <?php echo $id?>);">I understand</button>
                     <?php endforeach;?> 
                 </form>               
@@ -199,7 +199,7 @@ $isBanned = User::isBanned($id);
                                 <?php if (!empty($id)): ?>
                                     <a class="project-author" href="profile.php?id=<?php echo $puser['user_id']?>">
                                         <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
-                                        <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
+                                        <h4 class="project-author-username"><?php echo htmlspecialchars($profile['username']); ?></h4>
                                     </a>
                                     <form action="" method="post" name="like">
                                         <div class="project-interactions">

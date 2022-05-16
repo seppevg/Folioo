@@ -83,7 +83,7 @@ $isBanned = User::isBanned($idUser);
         <div class="header-content">
             <a class="project-author" href="profile.php?id=<?php echo $post['user_id'] ?>">
                 <img src="./uploads/profiles/<?php echo $user['image'] ?>" class="post-profile" alt="Profile picture">
-                <h3 class="post-username"><?php echo $user['username']; ?></h3>
+                <h3 class="post-username"><?php echo htmlspecialchars($user['username']); ?></h3>
             </a>
         </div>
 
@@ -233,7 +233,7 @@ $isBanned = User::isBanned($idUser);
                             <div class="comment-box">
                                 <a href="profile.php?id=<?php echo $profile['id']?>">
                                     <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
-                                    <h4 class="project-author-username-comment"><?php echo $profile['username']; ?></h4>
+                                    <h4 class="project-author-username-comment"><?php echo htmlspecialchars($profile['username']); ?></h4>
                                 </a>
                                 <p class="posted-comment"><?php echo htmlspecialchars($c['comment']); ?></p>
                             </div>
