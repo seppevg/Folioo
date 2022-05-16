@@ -31,6 +31,7 @@ if (!empty($_POST)) {
     }
 }
 
+$isBanned = User::isBanned($id);
 
 ?>
 <!DOCTYPE html>
@@ -48,15 +49,17 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+<?php include_once("./includes/nav-top.inc.php"); ?>
     <div id="profile">
         <div class="profile-header">
             <h3 class="profile-username">Edit profile</h3>
-            <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+            <img class="modal-button" id="modal_btn_ep" src="./assets/burger-menu.svg" alt="Burger menu">
         </div>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-container-edit-profile">
+        <form action="" method="POST" enctype="multipart/form-data" class="web-flex">
             <?php foreach ($profile as $p) : ?>
-                <div>
-                    <div class="profile-img profile-img-edit">
+                <div class="uploadzone-container">
+                    <div class="profile-img profile-img-edit uploadzone-web">
                         <img style="cursor:pointer" id="profile-display" src="./uploads/profiles/<?php echo $p['image']; ?>" onclick="triggerClick()">
                     </div>
                     <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change profile picture</label>
@@ -65,13 +68,14 @@ if (!empty($_POST)) {
                     <?php else : ?>
                         <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
                     <?php endif; ?>
-                </div>
+                
                 <?php if (isset($error)) : ?>
                     <div class="main-margin">
                         <p class="error"> <?php echo $error; ?></p>
                     </div>
                 <?php endif; ?>
-                <div class="form-container form-container-edit-profile">
+                </div>
+                <div>
                     <div class="form-group">
                         <label class="form-label" for="secondary-email">Secondary email</label>
                         <?php if (!empty($p['secondary_email'])) : ?>
@@ -115,10 +119,11 @@ if (!empty($_POST)) {
                         <?php endif; ?>
                     </div>
                     <button class="main-btn" type="submit" name="save-user">Update profile</button>
-                </div>
+                    </div>
+        </div>
                 <section class="modal modal-container ">
-                    <div id="modal" class="modal-content hidden">
-                        <div class="modal-close">
+                    <div id="modal_ep" class="modal-content hidden">
+                        <div class="modal-close" id="modal_close_ep">
                             <img class="modal-icon" src="./assets/close.svg" alt="close">
                         </div>
                         <a href="change_password.php">
@@ -142,6 +147,8 @@ if (!empty($_POST)) {
     </div>
 
     <script src="./js/app.js"></script>
+    <script src="./js/filter.js"></script>
+    <script src="./js/dropdown.js"></script>
 
 </body>
 

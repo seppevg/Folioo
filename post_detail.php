@@ -79,17 +79,21 @@ $isBanned = User::isBanned($idUser);
 </head>
 
 <body>
-
-    <div class="profile-header padding">
+    <div class="profile-header profile-header-pd padding">
         <div class="header-content">
             <a class="project-author" href="profile.php?id=<?php echo $post['user_id'] ?>">
                 <img src="./uploads/profiles/<?php echo $user['image'] ?>" class="post-profile" alt="Profile picture">
                 <h3 class="post-username"><?php echo $user['username']; ?></h3>
             </a>
         </div>
-        <?php if ($sessionId) :?>
-            <img class="modal-button" src="./assets/dots-menu.svg" alt="Dots menu">
+
+        
+        <?php if ($userId["user_id"] == $sessionId) :?>
+            <img class="modal-button" id="modal_btn_pdown" src="./assets/dots-menu.svg" alt="Dots menu">
+        <?php else: ?>
+            <img class="modal-button" id="modal_btn_pd" src="./assets/dots-menu.svg" alt="Dots menu">
         <?php endif; ?>
+        
     </div>
     <div class="main-margin">
         <div>
@@ -145,8 +149,8 @@ $isBanned = User::isBanned($idUser);
         <!-- is it my post? -->
         <!-- edit post modal -->
         <section class="modal modal-container ">
-            <div id="modal" class="modal-content hidden">
-                <div class="modal-close">
+            <div id="modal_pdown" class="modal-content hidden">
+                <div class="modal-close" id="modal_pdown">
                     <img class="modal-icon" src="./assets/close.svg" alt="Close">
                 </div>
                 <a href="edit_post.php?id=<?php echo $post["id"] ?>">
@@ -166,9 +170,9 @@ $isBanned = User::isBanned($idUser);
 
         <section class="modal modal-container" id="modal-report">
 
-            <div id="modal" class="modal-content hidden">
+            <div id="modal_pd" class="modal-content hidden">
 
-                <div class="modal-close">
+                <div class="modal-close" id="modal_close_pd">
                     <img class="modal-icon" src="./assets/close.svg" alt="Close">
                 </div>
 

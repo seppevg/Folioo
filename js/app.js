@@ -15,16 +15,85 @@ function displayImage(e) {
   }
 }
 
-let burger = document.querySelector(".modal-button");
-let modal = document.getElementById("modal");
-let x = document.querySelector(".modal-close");
-burger.addEventListener("click", function () {
-  modal.classList.toggle("display");
-});
 
-x.addEventListener("click", function () {
-  modal.classList.remove("display");
-});
+let bgr = document.querySelector("#dots-modal");
+if(bgr !== null){
+  let modal1 = document.getElementById("modaldots");
+  let xx = document.querySelector(".modal-close");
+  bgr.addEventListener("click", function () {
+    modal1.classList.toggle("display");
+  });
+
+  xx.addEventListener("click", function () {
+    modal1.classList.remove("display");
+  });
+}
+
+let burgercheck = document.querySelector("#burgercheck");
+if(burgercheck !== null){
+  let modalburger = document.getElementById("modalburger");
+  let xclose = document.querySelector("#xclose");
+  burgercheck.addEventListener("click", function () {
+    modalburger.classList.toggle("display");
+  });
+
+  xclose.addEventListener("click", function () {
+    modalburger.classList.remove("display");
+  });
+}
+
+let modal_btn_ep = document.querySelector("#modal_btn_ep");
+if(modal_btn_ep !== null){
+  let modal_ep = document.getElementById("modal_ep");
+  let modal_close_ep = document.querySelector("#modal_close_ep");
+  modal_btn_ep.addEventListener("click", function () {
+    modal_ep.classList.toggle("display");
+  });
+
+  modal_close_ep.addEventListener("click", function () {
+    modal_ep.classList.remove("display");
+  });
+}
+
+let modal_btn_add = document.querySelector("#modal_btn_add");
+if(modal_btn_add !== null){
+  let modal_add = document.getElementById("modal_add");
+  let modal_close_add = document.querySelector("#modal_close_add");
+  modal_btn_add.addEventListener("click", function () {
+    modal_add.classList.toggle("display");
+  });
+
+  modal_close_add.addEventListener("click", function () {
+    modal_add.classList.remove("display");
+  });
+}
+
+let modal_btn_pd = document.querySelector("#modal_btn_pd");
+if(modal_btn_pd !== null){
+  let modal_pd = document.getElementById("modal_pd");
+  let modal_close_pd = document.querySelector("#modal_close_pd");
+  modal_btn_pd.addEventListener("click", function () {
+    modal_pd.classList.toggle("display");
+  });
+
+  modal_close_pd.addEventListener("click", function () {
+    modal_pd.classList.remove("display");
+  });
+}
+
+let modal_btn_pdown = document.querySelector("#modal_btn_pdown");
+if(modal_btn_pdown !== null){
+  let modal_pdown = document.getElementById("modal_pdown");
+  let modal_close_pdown = document.querySelector("#modal_close_pdown");
+  modal_btn_pdown.addEventListener("click", function () {
+    modal_pdown.classList.toggle("display");
+  });
+
+  modal_close_pdown.addEventListener("click", function () {
+    modal_pdown.classList.remove("display");
+  });
+}
+
 
 let tags;
 if (document.querySelector("#input-tags")) {
@@ -82,15 +151,19 @@ if (document.querySelector(".tags-input")) {
 let comment = document.querySelector(".comment-icon");
 let modal2 = document.getElementById("modal2");
 let xy = document.querySelector(".modal-close2");
+if (comment !== null) {
 comment.addEventListener("click", function (e) {
   e.preventDefault();
   modal2.classList.toggle("display");
 });
+}
 
-xy.addEventListener("click", function (e) {
-  e.preventDefault();
-  modal2.classList.remove("display");
-});
+if (xy !== null) {
+  xy.addEventListener("click", function (e) {
+    e.preventDefault();
+    modal2.classList.remove("display");
+  });
+}
 
 //AJAX FOR REGISTER.PHP
 
@@ -277,15 +350,21 @@ function postReporting(postId, userId, action) {
   })
     .then((response) => response.json()) //json wordt hier geparsed
     .then((data) => {
-      if (data.status === "success" && data.message === "Post has been reported.") {
+      if (
+        data.status === "success" &&
+        data.message === "Post has been reported."
+      ) {
         report.classList.add("hidden");
         unreport.classList.remove("hidden"); //show
-      } else if (data.status === "success" && data.message === "Post has been unreported.") {
+      } else if (
+        data.status === "success" &&
+        data.message === "Post has been unreported."
+      ) {
         report.classList.remove("hidden"); //show
         unreport.classList.add("hidden");
       } else {
         //data.status === "error"
-        alert("Something went wrong reporting")
+        alert("Something went wrong reporting");
       }
     })
     .catch((error) => {
@@ -293,7 +372,7 @@ function postReporting(postId, userId, action) {
     });
 }
 
-// AJAX REPORT USER 
+// AJAX REPORT USER
 function userReporting(reportedUserId, fromUserId, action) {
   let report = document.getElementById("user-report");
   let unreport = document.getElementById("user-unreport");
@@ -312,15 +391,21 @@ function userReporting(reportedUserId, fromUserId, action) {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.status === "success" && data.message === "User has been reported.") {
+      if (
+        data.status === "success" &&
+        data.message === "User has been reported."
+      ) {
         report.classList.add("hidden");
         unreport.classList.remove("hidden"); //show
-      } else if (data.status === "success" && data.message === "User has been unreported.") {
+      } else if (
+        data.status === "success" &&
+        data.message === "User has been unreported."
+      ) {
         report.classList.remove("hidden"); //show
         unreport.classList.add("hidden");
       } else {
         //data.status === "error"
-        alert("Something went wrong reporting")
+        alert("Something went wrong reporting");
       }
     })
     .catch((error) => {
@@ -328,8 +413,9 @@ function userReporting(reportedUserId, fromUserId, action) {
     });
 }
 
-
 //AJAX COMMENT
+let commentcheck = document.querySelector("#comment")
+if(commentcheck !== null){
 document.querySelector("#comment").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -337,48 +423,57 @@ document.querySelector("#comment").addEventListener("keypress", function (e) {
   }
 });
 
-document.querySelector('#btnAddComment').addEventListener("click", function (e) {
-  let text = document.querySelector("#comment").value;
-  let postid = this.dataset.postid;
-  let username = this.dataset.username;
-  let image = this.dataset.image;
-  let number = this.dataset.number;
-  //console.log(number);
+}
 
-  let data = new FormData();
+let btnaddcommentcheck = document.querySelector("#btnAddComment")
 
-  data.append("comment", text);
-  data.append("postid", postid);
-  data.append("username", username);
-  data.append("image", image);
-  data.append("number", number);
+if(btnaddcommentcheck !== null){
+  document.querySelector("#btnAddComment").addEventListener("click", function (e) {
+    let text = document.querySelector("#comment").value;
+    let postid = this.dataset.postid;
+    let username = this.dataset.username;
+    let image = this.dataset.image;
+    let number = this.dataset.number;
+    //console.log(number);
 
-  fetch("./ajax/save_comment.php", {
-    method: "POST",
-    body: data,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.status === "success") {
-        let p = `<p>${data.data.comment}</p>`;
-        let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
-        let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
-        let div = `<div class="comment-box"> ${pImage + name + p}</div>`;
-        //console.log(usernameStyle);
+    let data = new FormData();
 
-        document.querySelector(".number-of-comments").innerHTML++;
-        document.querySelector("#listupdates").innerHTML += div;
-        document.querySelector("#comment").value = "";
-      }
+    data.append("comment", text);
+    data.append("postid", postid);
+    data.append("username", username);
+    data.append("image", image);
+    data.append("number", number);
 
-      console.log("Success:", data);
+    fetch("./ajax/save_comment.php", {
+      method: "POST",
+      body: data,
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          let p = `<p>${data.data.comment}</p>`;
+          let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
+          let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
+          let div = `<div class="comment-box"> ${pImage + name + p}</div>`;
+          //console.log(usernameStyle);
 
-  e.preventDefault();
-});
+          document.querySelector(".number-of-comments").innerHTML++;
+          document.querySelector("#listupdates").innerHTML += div;
+          document.querySelector("#comment").value = "";
+        }
+
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    e.preventDefault();
+  });
+}
+
+
+
 
 //SHARE URL : COPY TO CLIPBOARD
 // document.getElementById("copy-to-clipboard").addEventListener("click", function () {
@@ -389,15 +484,24 @@ document.querySelector('#btnAddComment').addEventListener("click", function (e) 
 
 function copyToClipboard() {
   let copyText = document.querySelector("#copy-to-clipboard");
-  let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search;
+  let url =
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    "/" +
+    window.location.pathname +
+    window.location.search;
   console.log(url);
 
-  navigator.clipboard.writeText(url).then(function () {
-    copyText.classList.toggle("active");
-    window.getSelection().removeAllRanges();
-  }, function () {
-    alert('Sharing the URL has failed, please try again later.')
-  });
+  navigator.clipboard.writeText(url).then(
+    function () {
+      copyText.classList.toggle("active");
+      window.getSelection().removeAllRanges();
+    },
+    function () {
+      alert("Sharing the URL has failed, please try again later.");
+    }
+  );
 
   setTimeout(function () {
     copyText.classList.remove("active");

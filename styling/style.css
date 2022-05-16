@@ -840,6 +840,14 @@ body {
   margin-top: 2em;
 }
 
+#profile-display{
+  width: 220px;
+}
+
+.inspire{
+  margin-top: 1em;
+}
+
 /* POST DETAILS */
 .padding {
   padding: 22.5px 35px;

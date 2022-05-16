@@ -30,7 +30,7 @@ if (!empty($_POST)) {
 }
 
 $isBanned = User::isBanned($id);
-if($isBanned){
+if ($isBanned) {
     header("Location: index.php");
 }
 
@@ -50,90 +50,96 @@ if($isBanned){
 </head>
 
 <body>
+    <?php include_once("./includes/nav-top.inc.php"); ?>
     <div id="add">
         <?php if (!empty($id)) : ?>
             <div class="profile-header">
                 <h3 class="profile-username">Add project</h3>
-                <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+                <img class="modal-button" id="modal_btn_add" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
-
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div>
-                    <div class="profile-img-edit">
-                        <img style="cursor:pointer" id="profile-display" src="./assets/rectangle.svg" onclick="triggerClick()">
+            <div class="form-container form-container-add">
+                <form action="" method="POST" enctype="multipart/form-data" class="web-flex">
+                    <div>
+                        <div class="profile-img-edit">
+                            <img style="cursor:pointer" id="profile-display" src="./assets/rectangle.svg" onclick="triggerClick()">
+                        </div>
+                        <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Add picture</label>
+                        <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
                     </div>
-                    <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Add picture</label>
-                    <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
-                </div>
 
-                <div class="input-spacing">
-                    <div class="form-field">
-                        <div>
-                            <label class="form-label" for="title">Title*</label>
-                        </div>
-                        <div class="flex">
-                            <?php if (!empty($_POST['title'])) : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo htmlspecialchars($_POST['title']); ?>">
-                            <?php else : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <label class="form-label" for="text">Text*</label>
-                        </div>
-                        <div class="flex">
-                            <?php if (!empty($_POST['text'])) : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo htmlspecialchars($_POST['text']); ?>">
-                            <?php else : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="tag-input">
-                            <div class="input">
-                                <label class="form-label" for="input-tags">Tags*</label>
-                                <div class="flex">
-                                    <img src="./assets/hashtag.svg" class="input-icon">
-                                    <input class="tags-input" type="text" placeholder="Enter tags" name="input-tags" onkeydown="if (event.keyCode == 13) event.preventDefault();">
-                                    <?php //if (!empty($post)):?>
-                                        <input style="display: none;" value="<?php if (!empty($_POST['tags'])) {
-    echo htmlspecialchars($_POST['tags']);
-} ?>" name="tags" autocomplete="off" id="input-tags" type="text">
-                                    <?php //endif;?>
+                    <div class="margin-top-web">
+                        <div class="input-spacing">
+                            <div class="form-field">
+                                <div>
+                                    <label class="form-label" for="title">Title*</label>
                                 </div>
-                            </div>
-                            <div class="tag-list">
-                                <?php
-                                    if (!empty($_POST['tags'])) :
-                                        $tags = explode(",", $_POST['tags']);
-                                        foreach ($tags as $tag):
-                                    ?>
-                                        <div class="tag-item">
-                                            <span class="delete-btn" onclick="deleteTag(this, '${tag}')">&times;</span>
-                                            <span><?php echo htmlspecialchars($tag) ?></span>
+                                <div class="flex">
+                                    <?php if (!empty($_POST['title'])) : ?>
+                                        <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo htmlspecialchars($_POST['title']); ?>">
+                                    <?php else : ?>
+                                        <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
+                                    <?php endif; ?>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="text">Text*</label>
+                                </div>
+                                <div class="flex">
+                                    <?php if (!empty($_POST['text'])) : ?>
+                                        <textarea style="resize: none;" rows="3" name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo htmlspecialchars($_POST['text']); ?>"></textarea>
+                                    <?php else : ?>
+                                        <textarea style="resize: none;" rows="3" name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)"></textarea>
+                                    <?php endif; ?>
+
+                                </div>
+
+                                <div class="tag-input">
+                                    <div class="input">
+                                        <label class="form-label" for="input-tags">Tags*</label>
+                                        <div class="flex">
+                                            <img src="./assets/hashtag.svg" class="input-icon">
+                                            <input class="tags-input" type="text" placeholder="Enter tags" name="input-tags" onkeydown="if (event.keyCode == 13) event.preventDefault();">
+                                            <?php //if (!empty($post)):
+                                            ?>
+                                            <input style="display: none;" value="<?php if (!empty($_POST['tags'])) {
+                                                                                        echo htmlspecialchars($_POST['tags']);
+                                                                                    } ?>" name="tags" autocomplete="off" id="input-tags" type="text">
+                                            <?php //endif;
+                                            ?>
                                         </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
+                                    </div>
+                                    <div class="tag-list">
+                                        <?php
+                                        if (!empty($_POST['tags'])) : $tags = explode(",", $_POST['tags']);
+                                            foreach ($tags as $tag) :
+                                        ?>
+                                                <div class="tag-item">
+                                                    <span class="delete-btn" onclick="deleteTag(this, '${tag}')">&times;</span>
+                                                    <span><?php echo htmlspecialchars($tag) ?></span>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
-                    </div>
-                </div>
+                        <?php if (isset($error)) : ?>
+                            <div class="main-margin">
+                                <p class="error"> <?php echo $error; ?></p>
+                            </div>
+                        <?php endif; ?>
 
-                <?php if (isset($error)) : ?>
-                    <div class="main-margin">
-                        <p class="error"> <?php echo $error; ?></p>
+                        <div class="profile-edit">
+                            <button class="main-btn inspire" type="submit" name="save-post">Inspire others</button>
+                        </div>
                     </div>
-                <?php endif; ?>
-
-                <div class="profile-edit">
-                    <button class="main-btn btn-add" type="submit" name="save-post">Inspire others</button>
-                </div>
-            </form>
+                </form>
+            </div>
             <?php foreach ($profile as $p) : ?>
                 <section class="modal modal-container ">
-                    <div id="modal" class="modal-content hidden">
-                        <div class="modal-close">
+                    <div id="modal_add" class="modal-content hidden">
+                        <div class="modal-close" id="modal_close_add">
                             <img class="modal-icon" src="./assets/close.svg" alt="close">
                         </div>
                         <a href="change_password.php">
@@ -186,6 +192,8 @@ if($isBanned){
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
     <script src="./js/app.js"></script>
+    <script src="./js/filter.js"></script>
+    <script src="./js/dropdown.js"></script>
 
 </body>
 

@@ -96,7 +96,7 @@ $iAmBanned = User::isBanned($id);
                             <?php endif; ?>
                             <h3 class="profile-username" <?php if($isBanned){echo "style='color:red'";}?>><?php echo $up['username']; if($isBanned){ echo " [BANNED]"; }?></h3>
                         </div>
-                        <img class="modal-button" src="./assets/dots-menu.svg" alt="Burger menu">
+                        <img class="modal-button" id="dots-modal" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
 
                     <div class="profile-info">
@@ -135,7 +135,7 @@ $iAmBanned = User::isBanned($id);
 
                 <!-- report modal -->
                 <section class="modal modal-container" id="modal-report">
-                    <div id="modal" class="modal-content hidden">
+                    <div id="modaldots" class="modal-content hidden">
                         <div class="modal-close">
                             <img class="modal-icon" src="./assets/close.svg" alt="Close">
                         </div>
@@ -235,7 +235,7 @@ $iAmBanned = User::isBanned($id);
                             <?php endif; ?>
                             <h3 class="profile-username" <?php if($iAmBanned){echo "style='color:red'";}?>><?php echo htmlspecialchars($p['username']); if($iAmBanned){ echo " [BANNED]"; } ?></h3>
                         </div>
-                        <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
+                        <img class="modal-button" id="burgercheck" src="./assets/burger-menu.svg" alt="Burger menu">
                     </div>
                     <div class="profile-info">
                         <div class="profile-img">
@@ -310,8 +310,8 @@ $iAmBanned = User::isBanned($id);
                 </div>
 
                 <section class="modal modal-container ">
-                    <div id="modal" class="modal-content hidden">
-                        <div class="modal-close">
+                    <div id="modalburger" class="modal-content hidden">
+                        <div class="modal-close" id="xclose">
                             <img class="modal-icon" src="./assets/close.svg" alt="close">
                         </div>
                         <a href="showcase.php?id=<?php echo $id; ?>">
