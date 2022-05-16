@@ -8,7 +8,7 @@
 :root {
   --IMDblue: #0600ff;
   --IMDgreen: #bffd00;
-  --IMDpink: #FCD7F7;
+  --IMDpink: #fcd7f7;
   --errorRed: #f04c25;
   --errorRedLight: #fc0b2b63;
 }
@@ -205,13 +205,12 @@ body {
   border: 2px solid var(--IMDgreen);
   box-shadow: none;
   margin-left: 510px;
-  top: calc(100% + .25rem);
-  padding: .75rem .75rem .25rem .75rem;
-  border-radius: .30rem;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+  top: calc(100% + 0.25rem);
+  padding: 0.75rem 0.75rem 0.25rem 0.75rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-10px);
   transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
-
 }
 
 .dropdown-menu-profile {
@@ -219,11 +218,11 @@ body {
   width: 20%;
   background-color: white;
   border: 2px solid var(--IMDblue);
-  top: calc(100% + .25rem);
+  top: calc(100% + 0.25rem);
   right: 2em;
-  padding: .75rem .75rem .25rem 1.5rem;
-  border-radius: .30rem;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+  padding: 0.75rem 0.75rem 0.25rem 1.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-10px);
   transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
@@ -241,7 +240,7 @@ body {
 }
 
 .top-nav {
-  border-bottom: 2px solid #E5E3E3;
+  border-bottom: 2px solid #e5e3e3;
   background-color: white;
   height: 80px;
   display: flex;
@@ -428,8 +427,8 @@ body {
 
 .showcase-icon {
   max-width: 20px;
-  fill: #A7A7A7;
-  stroke: #A7A7A7;
+  fill: #a7a7a7;
+  stroke: #a7a7a7;
 }
 
 .showcase-icon-active {
@@ -512,7 +511,6 @@ body {
   align-items: center;
   width: 100%;
 }
-
 
 .comment-icon {
   max-width: 27px;
@@ -615,7 +613,6 @@ body {
   margin-right: 20px;
   padding: 5px 10px;
   border-radius: 3px;
-
 }
 
 .following-number,
@@ -631,6 +628,7 @@ body {
 
 .socialmedia-icons {
   width: 30px;
+  margin-left: 1em;
 }
 
 .profile-info-extra {
@@ -1043,16 +1041,15 @@ img.post-profile {
 .dropdown-menu {
   position: absolute;
   left: 0;
-  top: calc(100% + .25rem);
+  top: calc(100% + 0.25rem);
   background-color: var(--IMDgreen);
-  padding: .75rem .75rem .25rem .75rem;
-  border-radius: .30rem;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+  padding: 0.75rem 0.75rem 0.25rem 0.75rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   opacity: 0;
   transform: translateY(-10px);
   transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
   pointer-events: none;
-
 }
 
 .dropdown-menu.active {
@@ -1065,7 +1062,6 @@ img.post-profile {
   margin-bottom: 8px;
   display: flex;
   align-items: center;
-
 }
 
 .dropdown-menu a {
@@ -1075,7 +1071,6 @@ img.post-profile {
   display: flex;
   justify-content: space-between;
   padding-right: 10px;
-
 }
 
 .dropdown-menu img {
@@ -1101,13 +1096,12 @@ img.post-profile {
   margin-bottom: 0.5em;
 }
 
-
 .share-buttons .share-url {
   position: relative;
 }
 
 .share-buttons .share-url::before {
-  content: 'Copied URL';
+  content: "Copied URL";
   position: absolute;
   top: -40px;
   right: 0;
@@ -1119,7 +1113,7 @@ img.post-profile {
 }
 
 .share-buttons .share-url::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -12px;
   right: 10px;

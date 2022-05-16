@@ -61,7 +61,7 @@ $iAmBanned = User::isBanned($id);
                     $mainModerator = $p['moderator'];
                     ?>
                 <?php endforeach; ?>
-
+                <div class="desktop-background"></div>
                 <div class="profile-container">
                     <div class="profile-header">
                         <div class="moderator-label">

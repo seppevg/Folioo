@@ -117,11 +117,11 @@
     .profile-container {
         position: absolute;
         top: 10vh;
-        left: 15vh;
+        align-self: center;
         background-color: white;
         border: 2px solid var(--IMDblue);
         border-radius: 10px;
-        width: max-content;
+        width: 500px;
         height: min-content;
     }
 
@@ -149,6 +149,15 @@
 
     #profile .feed {
         position: absolute;
-        top: 30vh;
+        top: 40vh;
+    }
+
+    #no-uploads{
+        top:70%;
+        left: 53%;
+    }
+
+    #no-uploads img{
+        width: 180px;
     }
 }
