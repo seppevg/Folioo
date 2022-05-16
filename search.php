@@ -94,7 +94,7 @@ if (!empty($_POST)) {
                     <?php if (!empty($id)): ?>
                         <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
                                 <img class="project-author-picture" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
-                                <h4 class="project-author-username"><?php echo $profile['username']; ?></h4>
+                                <h4 class="project-author-username"><?php echo htmlspecialchars($profile['username']); ?></h4>
                         </a>
                         <div class="project-interactions">
                             <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $id?>);">
