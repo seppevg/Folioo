@@ -117,7 +117,7 @@ $isBanned = User::isBanned($id);
 
         <?php if ($url === "following"):?>
             <?php $following = Followers::getAll($id);?>
-                <?php if (empty($following)):?>
+                <?php if (empty($following) && (!empty($posts))):?>
                     <div id="no-uploads-index">
                         <img src="./assets/not_following.svg" alt="Not following anyone yet">
                     </div>
