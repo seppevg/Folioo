@@ -79,6 +79,8 @@ $isBanned = User::isBanned($idUser);
 </head>
 
 <body>
+    <?php include_once("./includes/nav-top.inc.php"); ?>
+
     <div class="profile-header profile-header-pd padding">
         <div class="header-content">
             <a class="project-author" href="profile.php?id=<?php echo $post['user_id'] ?>">
@@ -137,7 +139,7 @@ $isBanned = User::isBanned($idUser);
                 foreach ($tags as $tag) :
                 ?>
                     <div class="tag-item">
-                        <a style="text-decoration: none; color: var(--IMDBlue);" href="#">#<?php echo htmlspecialchars($tag) ?></a>
+                        <a style="text-decoration: none; color: var(--IMDBlue);" href="index.php?searchInput=<?php echo htmlspecialchars($tag) ?>&filter=Tags">#<?php echo htmlspecialchars($tag) ?></a>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -270,6 +272,8 @@ $isBanned = User::isBanned($idUser);
     </section>
 
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
+    <script src="./js/filter.js"></script>
+    <script src="./js/dropdown.js"></script>
     <script src="./js/app.js"></script>
     <script src="./js/like.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

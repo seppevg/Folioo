@@ -40,15 +40,15 @@ if (!empty($id)) {
     }
 }
 
-if (!empty($_POST)) {
+if (!empty($_GET)) {
     try {
-        $searchResult = $_POST['searchInput'];
+        $searchResult = $_GET['searchInput'];
         $posts = Post::search($searchResult);
 
-        if (empty($_POST['column'])) {
+        if (empty($_GET['filter'])) {
             $filterType = "";
         } else {
-            $filterType = $_POST['column'];
+            $filterType = $_GET['filter'];
         }
 
         if ($filterType == "Title") {

@@ -21,7 +21,7 @@
     .logo-row .logo {
         width: 450px;
         margin: 0;
-    } 
+    }
 
     .slogan {
         display: block;
@@ -61,7 +61,7 @@
     #filler img {
         width: 250px !important;
     }
-    
+
 }
 
 
@@ -153,20 +153,20 @@
         top: 40vh;
     }
 
-    #no-uploads{
-        top:70%;
+    #no-uploads {
+        top: 70%;
         left: 53%;
     }
 
-    #no-uploads img{
+    #no-uploads img {
         width: 180px;
     }
 
     /* Add & edit profile*/
 
-    .form-container-add{
+    .form-container-add {
         margin-left: 19%;
-        height:0;
+        height: 0;
         width: 800px;
         height: 600px;
     }
@@ -174,59 +174,57 @@
     #add {
         margin-bottom: 0;
     }
-    
-    .form-input{
+
+    .form-input {
         width: 400px;
     }
 
-    .margin-top-web{
+    .margin-top-web {
         margin-top: 35px;
     }
 
-    #profile-display{
+    #profile-display {
         width: 500px;
         height: 500px;
         margin-top: 0;
     }
-    
-    .profile-img-edit img{
+
+    .profile-img-edit img {
         max-width: 500px;
         max-height: 700px;
     }
 
-    .clickable-text{
+    .clickable-text {
         display: none;
     }
 
-    .web-flex{
+    .web-flex {
         display: flex;
     }
 
-    .profile-header{
+    .profile-header {
         display: none;
     }
 
-    .uploadzone-web img{
+    .uploadzone-web img {
         height: 300px;
         width: 300px;
-    } 
+    }
 
-    .uploadzone-container{
+    .uploadzone-container {
         width: 500px;
         margin-right: 1em;
     }
 
-    .form-container-edit-profile{
+    .form-container-edit-profile {
         align-self: center;
     }
 
-    
+
     /*post-detail*/
-    .profile-header-pd{
-        width: 500px; 
+    .profile-header-pd {
+        width: 500px;
         /* dit werkt niet */
     }
 
 }
-
-
