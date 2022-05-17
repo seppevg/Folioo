@@ -576,4 +576,20 @@ class User implements iUser
             }
         }
     }
+
+    public static function makeModerator($userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET moderator = 1 WHERE id = :userId;");
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
+    }
+
+    public static function removeModerator($userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET moderator = 0 WHERE id = :userId;");
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
+    }
 }
