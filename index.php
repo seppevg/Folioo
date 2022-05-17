@@ -15,7 +15,7 @@ if (!empty($_GET['page'])) {
 }
 
 if ($pageCounter !== 1) {
-    $buttonStyling = 'style="margin-left: 2em"';
+    $buttonStyling = 'margin-left: 2em;';
 } else {
     $buttonStyling = "";
 }
@@ -128,6 +128,9 @@ $isBanned = User::isBanned($id);
             <div id="no-uploads-index">
                 <img src="./assets/no-uploads.svg" alt="No uploads yet">
             </div>
+            <div class="main-margin flex">
+                <a class="main-btn no-posts-btn" href="index.php?page=<?php echo $pageCounter-2; ?>">Previous page</a>
+            </div>
         <?php else: ?>
             <?php if (isset($error)):?>
                 <div class="main-margin">
@@ -182,7 +185,7 @@ $isBanned = User::isBanned($id);
                     <?php $following = Followers::getAll($id);?>
                     <?php
                         foreach ($following as $f):
-                        $postsUser = Post::getAllFromUser($f['following_id']);
+                        $postsUser = Post::getAllFromUser($f['following_id'], $loadedPosts);
                         foreach ($postsUser as $puser):
                     ?>
 
@@ -230,13 +233,9 @@ $isBanned = User::isBanned($id);
             </div>
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
-                    <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>
-                <?php 
-                    endif; 
-                    if (count($posts) > 19): 
-                ?>
-                    <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" <?php echo $buttonStyling; ?> >Next page</a>
+                    <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em; margin-bottom: 5em;">Previous page</a>
                 <?php endif; ?>
+                <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" style="margin-bottom: 5em; <?php echo $buttonStyling; ?>">Next page</a>
             </div>
             <br><br><br>
         <?php endif; ?>

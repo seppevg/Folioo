@@ -118,8 +118,7 @@
     }
 
     .profile-container {
-        position: absolute;
-        top: 10vh;
+        margin: -10vh 0 1em 0;
         align-self: center;
         background-color: white;
         border: 2px solid var(--IMDblue);
@@ -150,10 +149,8 @@
         max-width: 350px;
     }
 
-    #profile .feed {
-        position: absolute;
-        top: 40vh;
-        margin-top: 0;
+    #profile {
+        height: min-content;
     }
 
     #no-uploads {
@@ -163,6 +160,11 @@
 
     #no-uploads img {
         width: 180px;
+    }
+
+    #profile .main-margin .main-btn {
+        max-width: 200px;
+        margin: auto;
     }
 
     /* Add & edit profile*/
@@ -216,6 +218,10 @@
         align-self: center;
     }
 
+    .no-posts-btn {
+        bottom: 5vh;
+        margin: 0;
+    }
 
     /*post-detail*/
     #post-details .main-margin {
@@ -306,4 +312,23 @@
     #btnAddComment .add-icon {
         margin-bottom: 0;
     }
+}
+
+/* Showcase */
+@media (min-width: 1300px) {
+    .showcase-username {
+        margin: 0;
+        font-size: 20px;
+        color: var(--IMDblue);
+        width: max-content;
+    }
+
+    .profile-img-showcase {
+        margin-top: 2.1875em;
+    }
+
+    .socials {
+        max-width: 150px;
+    }
+
 }
