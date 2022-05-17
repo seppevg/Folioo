@@ -180,10 +180,10 @@ if (!empty($_POST)) {
 
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
-    <script src="./js/app.js"></script>
+    <script src="./js/modal.js"></script>
     <script src="./js/delete.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

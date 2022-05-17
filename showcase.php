@@ -115,6 +115,7 @@ $posts = Post::getAllShowcased($id);
     </div>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="./js/masonry.js"></script>
+    <script src="./js/modal.js"></script>
     <script src="./js/app.js"></script>
 </body>
 

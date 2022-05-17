@@ -128,9 +128,6 @@ $isBanned = User::isBanned($id);
             <div id="no-uploads-index">
                 <img src="./assets/no-uploads.svg" alt="No uploads yet">
             </div>
-            <div class="main-margin flex">
-                <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-top: 72vh">Previous page</a>
-            </div>
         <?php else: ?>
             <?php if (isset($error)):?>
                 <div class="main-margin">
@@ -234,7 +231,10 @@ $isBanned = User::isBanned($id);
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>
-                <?php endif; if (count($posts) > 19): ?>
+                <?php 
+                    endif; 
+                    if (count($posts) > 19): 
+                ?>
                     <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" <?php echo $buttonStyling; ?> >Next page</a>
                 <?php endif; ?>
             </div>
@@ -249,7 +249,7 @@ $isBanned = User::isBanned($id);
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         <script src="./js/masonry.js"></script>
-
+        <script src="./js/modal.js"></script>
     </div>
     
 </body>

@@ -9,6 +9,7 @@
   --IMDblue: #0600ff;
   --IMDgreen: #bffd00;
   --IMDpink: #fcd7f7;
+  --IMDlightGrey: #e5e3e3;
   --errorRed: #f04c25;
   --errorRedLight: #fc0b2b63;
 }
@@ -507,6 +508,11 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 125px;
+  margin-top: 1em;
+}
+
+.project-interactions h4 {
+  margin: 0;
 }
 
 .project-interactions-like {
@@ -728,15 +734,13 @@ body {
 }
 
 .modal-container2 {
-  background-color: #fefefe;
-  box-shadow: var(--IMDblue) 0px 15px 40px;
+  border-radius: 20px 20px 0 0;
   width: 100%;
   display: flex;
   align-items: flex-end;
-  position: absolute;
-  bottom: 0;
-  z-index: 101;
-  border-radius: 25px 25px 0 0;
+  margin-bottom: 100px;
+  margin-top: 1.5em;
+  background: var(--IMDlightGrey);
 }
 
 .modal-content2 {
@@ -1161,4 +1165,8 @@ img.post-profile {
   display: flex;
   justify-content: center;
   margin: 0.5em 0 1em 0;
+}
+
+.hide-on-mobile {
+  display: none;
 }

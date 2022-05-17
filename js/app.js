@@ -15,86 +15,6 @@ function displayImage(e) {
   }
 }
 
-
-let bgr = document.querySelector("#dots-modal");
-if(bgr !== null){
-  let modal1 = document.getElementById("modaldots");
-  let xx = document.querySelector(".modal-close");
-  bgr.addEventListener("click", function () {
-    modal1.classList.toggle("display");
-  });
-
-  xx.addEventListener("click", function () {
-    modal1.classList.remove("display");
-  });
-}
-
-let burgercheck = document.querySelector("#burgercheck");
-if(burgercheck !== null){
-  let modalburger = document.getElementById("modalburger");
-  let xclose = document.querySelector("#xclose");
-  burgercheck.addEventListener("click", function () {
-    modalburger.classList.toggle("display");
-  });
-
-  xclose.addEventListener("click", function () {
-    modalburger.classList.remove("display");
-  });
-}
-
-let modal_btn_ep = document.querySelector("#modal_btn_ep");
-if(modal_btn_ep !== null){
-  let modal_ep = document.getElementById("modal_ep");
-  let modal_close_ep = document.querySelector("#modal_close_ep");
-  modal_btn_ep.addEventListener("click", function () {
-    modal_ep.classList.toggle("display");
-  });
-
-  modal_close_ep.addEventListener("click", function () {
-    modal_ep.classList.remove("display");
-  });
-}
-
-let modal_btn_add = document.querySelector("#modal_btn_add");
-if(modal_btn_add !== null){
-  let modal_add = document.getElementById("modal_add");
-  let modal_close_add = document.querySelector("#modal_close_add");
-  modal_btn_add.addEventListener("click", function () {
-    modal_add.classList.toggle("display");
-  });
-
-  modal_close_add.addEventListener("click", function () {
-    modal_add.classList.remove("display");
-  });
-}
-
-let modal_btn_pd = document.querySelector("#modal_btn_pd");
-if(modal_btn_pd !== null){
-  let modal_pd = document.getElementById("modal_pd");
-  let modal_close_pd = document.querySelector("#modal_close_pd");
-  modal_btn_pd.addEventListener("click", function () {
-    modal_pd.classList.toggle("display");
-  });
-
-  modal_close_pd.addEventListener("click", function () {
-    modal_pd.classList.remove("display");
-  });
-}
-
-let modal_btn_pdown = document.querySelector("#modal_btn_pdown");
-if(modal_btn_pdown !== null){
-  let modal_pdown = document.getElementById("modal_pdown");
-  let modal_close_pdown = document.querySelector("#modal_close_pdown");
-  modal_btn_pdown.addEventListener("click", function () {
-    modal_pdown.classList.toggle("display");
-  });
-
-  modal_close_pdown.addEventListener("click", function () {
-    modal_pdown.classList.remove("display");
-  });
-}
-
-
 let tags;
 if (document.querySelector("#input-tags")) {
   tags = document.querySelector("#input-tags").value;
@@ -152,10 +72,10 @@ let comment = document.querySelector(".comment-icon");
 let modal2 = document.getElementById("modal2");
 let xy = document.querySelector(".modal-close2");
 if (comment !== null) {
-comment.addEventListener("click", function (e) {
-  e.preventDefault();
-  modal2.classList.toggle("display");
-});
+  comment.addEventListener("click", function (e) {
+    e.preventDefault();
+    modal2.classList.toggle("display");
+  });
 }
 
 if (xy !== null) {
@@ -415,19 +335,19 @@ function userReporting(reportedUserId, fromUserId, action) {
 
 //AJAX COMMENT
 let commentcheck = document.querySelector("#comment")
-if(commentcheck !== null){
-document.querySelector("#comment").addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    document.querySelector("#btnAddComment").click();
-  }
-});
+if (commentcheck !== null) {
+  document.querySelector("#comment").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      document.querySelector("#btnAddComment").click();
+    }
+  });
 
 }
 
 let btnaddcommentcheck = document.querySelector("#btnAddComment")
 
-if(btnaddcommentcheck !== null){
+if (btnaddcommentcheck !== null) {
   document.querySelector("#btnAddComment").addEventListener("click", function (e) {
     let text = document.querySelector("#comment").value;
     let postid = this.dataset.postid;
@@ -472,15 +392,6 @@ if(btnaddcommentcheck !== null){
   });
 }
 
-
-
-
-//SHARE URL : COPY TO CLIPBOARD
-// document.getElementById("copy-to-clipboard").addEventListener("click", function () {
-//   console.log('test');
-//   let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search;
-//   console.log(url);
-// });
 
 function copyToClipboard() {
   let copyText = document.querySelector("#copy-to-clipboard");

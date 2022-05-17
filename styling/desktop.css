@@ -4,6 +4,7 @@
     --IMDpink: #FCD7F7;
     --IMDblue: #0600ff;
     --IMDgreen: #bffd00;
+    --IMDlightGrey: #e5e3e3;
     --errorRed: #f04c25;
     --errorRedLight: #fc0b2b63;
 }
@@ -217,9 +218,92 @@
 
 
     /*post-detail*/
-    .profile-header-pd {
-        width: 500px;
-        /* dit werkt niet */
+    #post-details .main-margin {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 2em;
     }
 
+    #post-details .post-image img {
+        max-width: 500px;
+    }
+
+    .hide-on-mobile {
+        display: flex;
+        width: 30vw;
+        border-bottom: none;
+    }
+
+    .hide-on-desktop {
+        display: none;
+    }
+
+    .profile-sidebar-info {
+        display: flex;
+        flex-direction: column;
+        padding: 0 35px;
+    }
+
+    .profile-sidebar-info form {
+        margin-top: 0;
+    }
+
+    .profile-sidebar-info .tag-list {
+        margin-bottom: 35px;
+    }
+
+    .project-title-desktop {
+        padding: 0 35px;
+        margin-top: 0;
+    }
+
+    .profile-sidebar-container {
+        margin-left: 1em;
+    }
+
+    .profile-sidebar {
+        border: 2px solid var(--IMDlightGrey);
+        border-radius: 25px 25px 0 0;
+        max-width: 30vw;
+        height: fit-content;
+        position: relative;
+    }
+
+    .profile-sidebar .post-text {
+        max-width: 30vw;
+    }
+
+    #post-details .project-interactions h4 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #post-details .project-interactions {
+        margin-top: 0;
+    }
+
+    #post-details .main-margin section {
+        display: block;
+    }
+
+    .modal-container2 {
+        max-width: 30vw;
+        margin-top: 0;
+        border-radius: 0 0 25px 25px;
+    }
+
+    .modal-content2 {
+        padding: 0;
+        margin: 35px;
+        width: auto;
+    }
+
+    #comment {
+        margin: 0;
+    }
+
+    #btnAddComment .add-icon {
+        margin-bottom: 0;
+    }
 }

@@ -147,10 +147,10 @@ $isBanned = User::isBanned($id);
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
 
-    <script src="./js/app.js"></script>
     <script src="./js/filter.js"></script>
     <script src="./js/dropdown.js"></script>
-
+    <script src="./js/modal.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

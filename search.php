@@ -141,10 +141,8 @@ if (!empty($_GET)) {
         </div>
     <?php endif;?>
 
-
-
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
-
+    <script src="./js/modal.js"></script>
     <script src="./js/filter.js"></script>
     <script src="./js/like.js"></script>
 
