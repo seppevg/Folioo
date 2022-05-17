@@ -115,8 +115,17 @@ $isBanned = User::isBanned($id);
             </div>
         <?php endif;?>
 
+        <?php if ($url === "following"):?>
+            <?php $following = Followers::getAll($id);?>
+                <?php if (empty($following) && (!empty($posts))):?>
+                    <div id="no-uploads-index">
+                        <img src="./assets/not_following.svg" alt="Not following anyone yet">
+                    </div>
+                <?php endif;?>
+        <?php endif;?>
+
         <?php if (empty($posts)): ?>
-            <div id="no-uploads">
+            <div id="no-uploads-index">
                 <img src="./assets/no-uploads.svg" alt="No uploads yet">
             </div>
             <div class="main-margin flex">
@@ -128,7 +137,7 @@ $isBanned = User::isBanned($id);
                     <p class="error"><?php echo $error ?></p>
                 </div>
             <?php endif;?>
-            <div class="feed">
+            <div class="feed">            
             <?php if ($url === "chronologic" || $url === ""):?>
                 <?php foreach ($posts as $post): ?>
                     <?php
@@ -174,11 +183,6 @@ $isBanned = User::isBanned($id);
 
                 <?php if ($url === "following"):?>
                     <?php $following = Followers::getAll($id);?>
-                        <?php if (empty($following)):?>
-                            <div id="no-uploads">
-                                <img src="./assets/not_following.svg" alt="Not following anyone yet">
-                            </div>
-                        <?php endif;?>
                     <?php
                         foreach ($following as $f):
                         $postsUser = Post::getAllFromUser($f['following_id']);
