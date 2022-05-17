@@ -210,7 +210,7 @@ $isBanned = User::isBanned($idUser);
         <!-- edit post modal -->
         <section class="modal modal-container ">
             <div id="modal_pdown" class="modal-content hidden">
-                <div class="modal-close" id="modal_pdown">
+                <div class="modal-close" id="modal_close_pdown">
                     <img class="modal-icon" src="./assets/close.svg" alt="Close">
                 </div>
                 <a href="edit_post.php?id=<?php echo $post["id"] ?>">
@@ -229,6 +229,67 @@ $isBanned = User::isBanned($idUser);
         <section class="modal modal-container" id="modal-report">
             <div id="modal_pd" class="modal-content hidden">
                 <div class="modal-close" id="modal_close_pd">
+                    <img class="modal-icon" src="./assets/close.svg" alt="Close">
+                </div>
+                <?php $currentUser = User::getInfo($sessionId);?>
+                <?php foreach($currentUser as $cu):
+                    $moderator = $cu['moderator'];
+                ?>  
+                <?php endforeach;?>
+                <?php if(!empty($moderator)):?>
+                    <a href="#" onclick="deletePost(<?php echo $post['id']; ?>)" class="delete-post-popup">
+                        <img class="modal-icon" src="./assets/delete.svg" alt="Delete">
+                        <p>Delete post</p>
+                    </a>
+                <?php elseif(empty($moderator)):?>
+                    <div id="post-report" <?php echo ($isAlreadyReported) ? 'class="hidden"' : ''; ?>>
+                        <h3 class="profile-username">Report this post</h3>
+                        <p>Thank you for keeping Folioo a safe space for
+                            everyone! This post will be flagged as inappropriate.</p>
+                        <div class="center">
+                            <img class="report" src="./assets/report.svg" alt="report">
+                        </div>
+                        <div class="flex">
+                            <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'report')">Report</button>
+                        </div>
+                    </div>
+                    <div id="post-unreport" <?php echo ($isAlreadyReported) ? '' : 'class="hidden"'; ?>>
+                        <h3 class="profile-username">This post is reported</h3>
+                        <p>If you don't think that this post should be flagged as inappropriate then you can unreport this post.
+                        </p>
+                        <div class="center">
+                            <img class="report" src="./assets/report.svg" alt="report">
+                        </div>
+                        <div class="flex">
+                            <button class="form-btn" id="report-btn" onclick="postReporting(<?php echo $post['id']; ?>, <?php echo $sessionId; ?>, 'unreport')">Stop reporting</button>
+                        </div>
+                    </div>
+                <?php endif;?>
+            </div>
+        </section>
+    <?php endif; ?>
+
+    <?php if ($userId["user_id"] == $sessionId) : ?>
+        <!-- is it my post? -->
+        <!-- edit post modal -->
+        <section class="modal modal-container modal-container-desktop hidden">
+            <div id="modal_report_post1" class="modal-content">
+                <a href="edit_post.php?id=<?php echo $post["id"] ?>">
+                    <img class="modal-icon" src="./assets/edit.svg" alt="Edit">
+                    <p>Edit post</p>
+                </a>
+                <a href="#" onclick="deletePost(<?php echo $post['id']; ?>)" class="delete-post-popup">
+                    <img class="modal-icon" src="./assets/delete.svg" alt="Delete">
+                    <p>Delete post</p>
+                </a>
+            </div>
+        </section>
+    <?php else : ?>
+        <!-- it's not my post -->
+        <!-- report modal -->
+        <section class="modal modal-container" id="modal-report">
+            <div id="modal_report_post2" class="modal-content hidden">
+                <div class="modal-close" id="modal_close_report_post2">
                     <img class="modal-icon" src="./assets/close.svg" alt="Close">
                 </div>
                 <?php $currentUser = User::getInfo($sessionId);?>

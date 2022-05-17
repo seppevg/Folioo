@@ -211,7 +211,7 @@ body {
   border-radius: 0.3rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-10px);
-  transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .dropdown-menu-profile {
@@ -225,7 +225,7 @@ body {
   border-radius: 0.3rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-10px);
-  transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .dropdown-menu-profile a {
@@ -873,6 +873,10 @@ body {
 }
 
 /* POST DETAILS */
+#post-details .modal-container-desktop {
+  display: none;
+}
+
 .padding {
   padding: 22.5px 35px;
 }

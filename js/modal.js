@@ -76,3 +76,32 @@ if (modal_btn_pdown !== null) {
         modal_pdown.classList.remove("display");
     });
 }
+
+
+let modal_btn_report_post1 = document.querySelector("#modal_btn_report_post1");
+if (modal_btn_report_post1 !== null) {
+    let modal_container_desktop = document.querySelector(".modal-container-desktop");
+    let modal_report_post1 = document.getElementById("modal_report_post1");
+    modal_btn_report_post1.addEventListener("click", function () {
+        modal_report_post1.classList.toggle("display");
+        if (modal_container_desktop.style.display == 'block') {
+            modal_container_desktop.style.display = 'none'
+        } else {
+            modal_container_desktop.style.display = 'block'
+        }
+    });
+}
+
+
+let modal_btn_report_post2 = document.querySelector("#modal_btn_report_post2");
+if (modal_btn_report_post2 !== null) {
+    let modal_report_post2 = document.getElementById("modal_report_post2");
+    let modal_close_report_post2 = document.querySelector("#modal_close_report_post2");
+    modal_btn_report_post2.addEventListener("click", function () {
+        modal_report_post2.classList.toggle("display");
+    });
+
+    modal_close_report_post2.addEventListener("click", function () {
+        modal_report_post2.classList.remove("display");
+    });
+}
