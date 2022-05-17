@@ -40,7 +40,7 @@ if (!empty($id)) {
     }
 }
 
-if (!empty($_GET)) {
+if (!empty($_GET['searchInput'])) {
     try {
         $searchResult = $_GET['searchInput'];
         $posts = Post::search($searchResult);
@@ -116,7 +116,7 @@ $isBanned = User::isBanned($id);
         <?php endif;?>
 
         <?php if (empty($posts)): ?>
-            <div id="no-uploads">
+            <div id="no-uploads-index">
                 <img src="./assets/no-uploads.svg" alt="No uploads yet">
             </div>
             <div class="main-margin flex">
