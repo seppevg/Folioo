@@ -24,7 +24,7 @@ class Upload
 
             if (in_array($fileActualExt, $allowed)) {
                 if ($fileError === 0) {
-                    if ($fileSize < 1000000) {
+                    if ($fileSize < 5000000) {
                         //different naming and destination according to what the image will be used for
                         if (isset($_POST['save-user'])) {
                             $fileNameNew = $id . "." . $fileActualExt;

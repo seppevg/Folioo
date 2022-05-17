@@ -242,7 +242,7 @@ body {
 .top-nav {
   border-bottom: 2px solid #e5e3e3;
   background-color: white;
-  height: 80px;
+  height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -840,11 +840,11 @@ body {
   margin-top: 2em;
 }
 
-#profile-display{
+#profile-display {
   width: 220px;
 }
 
-.inspire{
+.inspire {
   margin-top: 1em;
 }
 
@@ -1139,4 +1139,13 @@ img.post-profile {
 
 .desktop-background {
   display: none;
+}
+
+.specifications {
+  font-size: 0.75em;
+  color: var(--IMDblue);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin: 0.5em 0 1em 0;
 }

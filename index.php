@@ -40,7 +40,7 @@ if (!empty($id)) {
     }
 }
 
-if (!empty($_GET)) {
+if (!empty($_GET['searchInput'])) {
     try {
         $searchResult = $_GET['searchInput'];
         $posts = Post::search($searchResult);

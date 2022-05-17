@@ -64,6 +64,7 @@ if ($isBanned) {
                             <img style="cursor:pointer" id="profile-display" src="./assets/rectangle.svg" onclick="triggerClick()">
                         </div>
                         <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Add picture</label>
+                        <em class="specifications">  (Allowed extensions: jpg, jpeg, png, svg. File-size: max. 5 MB.)</em>
                         <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
                     </div>
 
@@ -75,19 +76,19 @@ if ($isBanned) {
                                 </div>
                                 <div class="flex">
                                     <?php if (!empty($_POST['title'])) : ?>
-                                        <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo htmlspecialchars($_POST['title']); ?>">
+                                        <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Title of my project" value="<?php echo htmlspecialchars($_POST['title']); ?>">
                                     <?php else : ?>
-                                        <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
+                                        <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Title of my project">
                                     <?php endif; ?>
                                 </div>
                                 <div>
-                                    <label class="form-label" for="text">Text*</label>
+                                    <label class="form-label" for="text">Description*</label>
                                 </div>
                                 <div class="flex">
                                     <?php if (!empty($_POST['text'])) : ?>
-                                        <textarea style="resize: none;" rows="3" name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo htmlspecialchars($_POST['text']); ?>"></textarea>
+                                        <textarea style="resize: none;" rows="3" name="text" autocomplete="off" class="form-input" type="text" placeholder="Enter a description for your project" value="<?php echo htmlspecialchars($_POST['text']); ?>"></textarea>
                                     <?php else : ?>
-                                        <textarea style="resize: none;" rows="3" name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)"></textarea>
+                                        <textarea style="resize: none;" rows="3" name="text" autocomplete="off" class="form-input" type="text" placeholder="Enter a description for your project"></textarea>
                                     <?php endif; ?>
 
                                 </div>
@@ -97,7 +98,7 @@ if ($isBanned) {
                                         <label class="form-label" for="input-tags">Tags*</label>
                                         <div class="flex">
                                             <img src="./assets/hashtag.svg" class="input-icon">
-                                            <input class="tags-input" type="text" placeholder="Enter tags" name="input-tags" onkeydown="if (event.keyCode == 13) event.preventDefault();">
+                                            <input class="tags-input" type="text" placeholder="Tags (press enter after each tag)" name="input-tags" onkeydown="if (event.keyCode == 13) event.preventDefault();">
                                             <?php //if (!empty($post)):
                                             ?>
                                             <input style="display: none;" value="<?php if (!empty($_POST['tags'])) {
@@ -131,7 +132,7 @@ if ($isBanned) {
                         <?php endif; ?>
 
                         <div class="profile-edit">
-                            <button class="main-btn inspire" type="submit" name="save-post">Inspire others</button>
+                            <button class="main-btn inspire" type="submit" name="save-post">Share project</button>
                         </div>
                     </div>
                 </form>
