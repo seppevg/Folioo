@@ -176,6 +176,19 @@
         margin: auto;
     }
 
+    #dots-modal{
+        display: block;
+    }
+
+    .modal-container {
+        position: fixed;
+        bottom: 0;
+    }
+
+    #burgercheck{
+        display: block;
+    }
+
     /* Add & edit profile*/
 
     .form-container-add {
