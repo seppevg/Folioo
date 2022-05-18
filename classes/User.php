@@ -182,7 +182,7 @@ class User implements iUser
         ];
         $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO users (email, password, username, image, followers, admin, moderator) VALUES (:email, :password, :username, 'profiledefault.svg', 0, 0, 0);");
+        $statement = $conn->prepare("INSERT INTO users (email, password, username, image, followers, following, admin, moderator, warning) VALUES (:email, :password, :username, 'profiledefault.svg', 0, 0, 0, 0, 0);");
         $statement->bindValue(':email', $this->email);
         $statement->bindValue(':password', $password);
         $statement->bindValue(':username', $this->username);
@@ -575,5 +575,21 @@ class User implements iUser
                 }
             }
         }
+    }
+
+    public static function makeModerator($userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET moderator = 1 WHERE id = :userId;");
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
+    }
+
+    public static function removeModerator($userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET moderator = 0 WHERE id = :userId;");
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
     }
 }

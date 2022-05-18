@@ -9,6 +9,7 @@
   --IMDblue: #0600ff;
   --IMDgreen: #bffd00;
   --IMDpink: #fcd7f7;
+  --IMDlightGrey: #e5e3e3;
   --errorRed: #f04c25;
   --errorRedLight: #fc0b2b63;
 }
@@ -210,7 +211,7 @@ body {
   border-radius: 0.3rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-10px);
-  transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .dropdown-menu-profile {
@@ -224,7 +225,7 @@ body {
   border-radius: 0.3rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-10px);
-  transform: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .dropdown-menu-profile a {
@@ -242,7 +243,7 @@ body {
 .top-nav {
   border-bottom: 2px solid #e5e3e3;
   background-color: white;
-  height: 80px;
+  height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -361,7 +362,27 @@ body {
   z-index: -1;
 }
 
+.no-posts-btn {
+  position: absolute;
+  bottom: 15vh;
+  left: 50vw;
+  transform: translateX(-50%);
+}
+
+#no-uploads-index {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-125px) translateY(-75px);
+  z-index: -1;
+}
+
 #no-uploads img {
+  width: 250px;
+  height: auto;
+}
+
+#no-uploads-index img {
   width: 250px;
   height: auto;
 }
@@ -494,6 +515,11 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 125px;
+  margin-top: 1em;
+}
+
+.project-interactions h4 {
+  margin: 0;
 }
 
 .project-interactions-like {
@@ -715,15 +741,13 @@ body {
 }
 
 .modal-container2 {
-  background-color: #fefefe;
-  box-shadow: var(--IMDblue) 0px 15px 40px;
+  border-radius: 20px 20px 0 0;
   width: 100%;
   display: flex;
   align-items: flex-end;
-  position: absolute;
-  bottom: 0;
-  z-index: 101;
-  border-radius: 25px 25px 0 0;
+  margin-bottom: 100px;
+  margin-top: 1.5em;
+  background: var(--IMDlightGrey);
 }
 
 .modal-content2 {
@@ -840,15 +864,19 @@ body {
   margin-top: 2em;
 }
 
-#profile-display{
+#profile-display {
   width: 220px;
 }
 
-.inspire{
+.inspire {
   margin-top: 1em;
 }
 
 /* POST DETAILS */
+#post-details .modal-container-desktop {
+  display: none;
+}
+
 .padding {
   padding: 22.5px 35px;
 }
@@ -1138,6 +1166,19 @@ img.post-profile {
 }
 
 .desktop-background {
+  display: none;
+}
+
+.specifications {
+  font-size: 0.75em;
+  color: var(--IMDblue);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin: 0.5em 0 1em 0;
+}
+
+.hide-on-mobile {
   display: none;
 }
 

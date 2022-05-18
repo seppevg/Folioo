@@ -8,23 +8,16 @@
         try {
             $checkModerator = User::checkModeratorRole($userId);
 
-            if ($checkModerator > 0) {
-                
-                $conn = DB::getInstance();
-                $statement = $conn->prepare("UPDATE users SET moderator = 0 WHERE id = :userId;");
-                $statement->bindValue(":userId", $userId);
-                $statement->execute();
+            if ($checkModerator > 0) {                
+                User::removeModerator($userId);
 
                 $result = [
                     "status" => "success",
                     "message" => "Remove moderator role"
                 ];                
 
-            } else {
-                $conn = DB::getInstance();
-                $statement = $conn->prepare("UPDATE users SET moderator = 1 WHERE id = :userId;");
-                $statement->bindValue(":userId", $userId);
-                $statement->execute();
+            } else {                
+                User::makeModerator($userId);
 
                 $result = [
                     "status" => "success",

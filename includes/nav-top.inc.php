@@ -2,7 +2,7 @@
         <div id="container-logo">
             <div class="dropdown">
                 <a href="index.php"><img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo"></a>
-                <?php if (!empty($id)): ?>
+                <?php if (!empty($_SESSION['id'])): ?>
                     <button class="dropdown-button dropdown-filter-desktop"><img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow"></button>
                 <?php endif; ?>
                 <div class="dropdown-menu dropdown-menu-desktop">
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <form class="search search-nav" method="post">
+        <form class="search search-nav" method="get">
             <div class="search-top-nav">
                 <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
 
@@ -26,7 +26,7 @@
                     <img class="modal-button" src="./assets/filter.svg" alt="Filter icon">
                 </button>
 
-                <button type="submit" name="submit-search" class="searchbtn">
+                <button type="submit" class="searchbtn">
                     <img src="./assets/search.svg" alt="Search icon">
                 </button>
             </div>
@@ -36,9 +36,9 @@
                 <div id="modal" class="modal-content hidden">
                     <h3>Choose your filter</h3>
                     <div class="filter-options hidden">
-                        <form method="post">
-                            <input type="radio" value="Title" name="column" checked="checked"> Title <br> <br>
-                            <input type="radio" value="Tags" name="column"> Tags                  
+                        <form method="get">
+                            <input type="radio" value="Title" name="filter" checked="checked"> Title <br> <br>
+                            <input type="radio" value="Tags" name="filter"> Tags                  
                         </form> 
                     </div>
                 </div>
@@ -47,12 +47,12 @@
         </form>
 
         <div class="user-links">
-            <?php if(!empty($id)):?>
+            <?php if(!empty($_SESSION['id'])):?>
                 <?php if(!$isBanned): ?>
                 <a class="main-btn add-project-nav" href="add.php">Share your project!</a>
                 <?php endif; ?>
                 <a href="profile.php" class="nav-user">
-                        <?php $userImage = User::getInfo($id); ?>
+                        <?php $userImage = User::getInfo($_SESSION['id']); ?>
                         <?php foreach ($userImage as $uI): ?>
                             <img src="./uploads/profiles/<?php echo $uI['image']; ?>">
                         <?php endforeach; ?>
@@ -61,7 +61,7 @@
                     <img class="dropdown-icon" src="./assets/dropdown.svg" alt="Dropdown arrow">
                 </button>
                 <div class="dropdown-menu-profile hidden">
-                    <a href="showcase.php?id=<?php echo $id;?>">
+                    <a href="showcase.php?id=<?php echo $_SESSION['id'];?>">
                         <img class="modal-icon" src="./assets/showcase.svg" alt="showcase">
                         <p>View showcase</p>
                     </a>

@@ -8,16 +8,16 @@ if (empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
-if (!empty($_POST)) {
+if (!empty($_GET)) {
     try {
-        $searchResult = $_POST['searchInput'];
+        $searchResult = $_GET['searchInput'];
         //var_dump ($searchResult);
         $posts = Post::search($searchResult);
 
-        if (empty($_POST['column'])) {
+        if (empty($_GET['filter'])) {
             $filterType = "";
         } else {
-            $filterType = $_POST['column'];
+            $filterType = $_GET['filter'];
         }
         //echo $filterType;
 
@@ -48,7 +48,7 @@ if (!empty($_POST)) {
 
 <body>
 
-    <form class="search" method="post">
+    <form class="search" method="get">
     <div class="profile-header">
         <input type="text" name="searchInput" placeholder="Search" class="inputSearch">
 
@@ -56,7 +56,7 @@ if (!empty($_POST)) {
             <img class="modal-button" src="./assets/filter.svg" alt="Filter icon">
         </button>
 
-        <button type="submit" name="submit-search" class="searchbtn">
+        <button type="submit" class="searchbtn">
             <img src="./assets/search.svg" alt="Search icon">
         </button>
     </div>
@@ -64,9 +64,9 @@ if (!empty($_POST)) {
         <section class="modal modal-container">
             <div id="modal" class="modal-content hidden">
                 <h3>Choose your filter</h3>
-                <form method="post">
-                    <input type="radio" value="Title" name="column" checked="checked"> Title <br> <br>
-                    <input type="radio" value="Tags" name="column"> Tags                    
+                <form method="get">
+                    <input type="radio" value="Title" name="filter" checked="checked"> Title <br> <br>
+                    <input type="radio" value="Tags" name="filter"> Tags                    
                 </form> 
             </div>
         </section>
@@ -141,10 +141,8 @@ if (!empty($_POST)) {
         </div>
     <?php endif;?>
 
-
-
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
-
+    <script src="./js/modal.js"></script>
     <script src="./js/filter.js"></script>
     <script src="./js/like.js"></script>
 

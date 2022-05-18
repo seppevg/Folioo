@@ -4,6 +4,7 @@
     --IMDpink: #FCD7F7;
     --IMDblue: #0600ff;
     --IMDgreen: #bffd00;
+    --IMDlightGrey: #e5e3e3;
     --errorRed: #f04c25;
     --errorRedLight: #fc0b2b63;
 }
@@ -21,7 +22,7 @@
     .logo-row .logo {
         width: 450px;
         margin: 0;
-    } 
+    }
 
     .slogan {
         display: block;
@@ -61,7 +62,7 @@
     #filler img {
         width: 250px !important;
     }
-    
+
 }
 
 
@@ -115,6 +116,7 @@
 @media (min-width: 1300px) {
     #profile {
         position: relative;
+        height: 90vh;
     }
 
     .desktop-background {
@@ -125,8 +127,7 @@
     }
 
     .profile-container {
-        position: absolute;
-        top: 10vh;
+        margin: -10vh 0 1em 0;
         align-self: center;
         background-color: white;
         border: 2px solid var(--IMDblue);
@@ -157,83 +158,187 @@
         max-width: 350px;
     }
 
-    #profile .feed {
-        position: absolute;
-        top: 40vh;
+    #profile {
+        height: min-content;
     }
 
-    #no-uploads{
-        top:70%;
+    #no-uploads {
+        top: 70%;
         left: 53%;
     }
 
-    #no-uploads img{
+    #no-uploads img {
         width: 180px;
+    }
+
+    #profile .main-margin .main-btn {
+        max-width: 200px;
+        margin: auto;
     }
 
     /* Add & edit profile*/
 
-    .form-container-add{
-        margin-left: 19%;
-        height:0;
-        width: 800px;
-        height: 600px;
+    .form-container-add {
+        width: 100%;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
     }
 
     #add {
         margin-bottom: 0;
     }
-    
-    .form-input{
+
+    .form-input {
         width: 400px;
     }
 
-    .margin-top-web{
-        margin-top: 35px;
-    }
-
-    #profile-display{
+    #profile-display {
         width: 500px;
-        height: 500px;
+        height: 100%;
         margin-top: 0;
     }
-    
-    .profile-img-edit img{
+
+    .profile-img-edit img {
         max-width: 500px;
         max-height: 700px;
     }
 
-    .clickable-text{
-        display: none;
-    }
-
-    .web-flex{
+    .web-flex {
         display: flex;
     }
 
-    .profile-header{
+    .web-flex:first-child {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-header {
         display: none;
     }
 
-    .uploadzone-web img{
-        height: 300px;
-        width: 300px;
-    } 
-
-    .uploadzone-container{
+    .uploadzone-container {
         width: 500px;
         margin-right: 1em;
     }
 
-    .form-container-edit-profile{
+    .form-container-edit-profile {
         align-self: center;
     }
 
-    
+    .no-posts-btn {
+        bottom: 5vh;
+        margin: 0;
+    }
+
     /*post-detail*/
-    .profile-header-pd{
-        width: 500px; 
-        /* dit werkt niet */
+    #post-details .main-margin {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 2em;
+    }
+
+    #post-details .post-image img {
+        max-width: 500px;
+    }
+
+    .hide-on-mobile {
+        display: flex;
+        width: 30vw;
+        border-bottom: none;
+    }
+
+    .hide-on-desktop {
+        display: none;
+    }
+
+    .profile-sidebar-info {
+        display: flex;
+        flex-direction: column;
+        padding: 0 35px;
+    }
+
+    .profile-sidebar-info form {
+        margin-top: 0;
+    }
+
+    .profile-sidebar-info .tag-list {
+        margin-bottom: 35px;
+    }
+
+    .project-title-desktop {
+        padding: 0 35px;
+        margin-top: 0;
+    }
+
+    .profile-sidebar-container {
+        margin-left: 1em;
+    }
+
+    .profile-sidebar {
+        border: 2px solid var(--IMDlightGrey);
+        border-radius: 25px 25px 0 0;
+        max-width: 30vw;
+        height: fit-content;
+        position: relative;
+    }
+
+    .profile-sidebar .post-text {
+        max-width: 30vw;
+    }
+
+    #post-details .project-interactions h4 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #post-details .project-interactions {
+        margin-top: 0;
+    }
+
+    #post-details .main-margin section {
+        display: block;
+    }
+
+    .modal-container2 {
+        max-width: 30vw;
+        margin-top: 0;
+        border-radius: 0 0 25px 25px;
+    }
+
+    .modal-content2 {
+        padding: 0;
+        margin: 35px;
+        width: auto;
+    }
+
+    #comment {
+        margin: 0;
+    }
+
+    #btnAddComment .add-icon {
+        margin-bottom: 0;
+    }
+
+    #post-details .modal-container-desktop {
+        position: absolute;
+        top: 23vh;
+        right: 10vw;
+        width: 15%;
+        height: max-content;
+        background-color: white;
+        border: 2px solid var(--IMDblue);
+        border-radius: 0.3rem;
+        padding: 0.75rem 0.75rem 0.25rem 1.5rem;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+        transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+    }
+
+    #post-details .modal-container-desktop .modal-content {
+        margin: 0;
+        padding: 0;
     }
 
     /* Naughty list */
@@ -249,4 +354,21 @@
 
 }
 
+/* Showcase */
+@media (min-width: 1300px) {
+    .showcase-username {
+        margin: 0;
+        font-size: 20px;
+        color: var(--IMDblue);
+        width: max-content;
+    }
 
+    .profile-img-showcase {
+        margin-top: 2.1875em;
+    }
+
+    .socials {
+        max-width: 150px;
+    }
+
+}

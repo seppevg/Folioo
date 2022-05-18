@@ -151,11 +151,12 @@ class Post implements iPost
     {
     }
 
-    public static function getAllFromUser($id)
+    public static function getAllFromUser($id, $start)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = :id ORDER BY showcase DESC, id DESC;");
+        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = :id ORDER BY showcase DESC, id DESC LIMIT :start, 10;");
         $statement->bindValue(":id", $id);
+        $statement->bindValue(':start', (int)$start, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }

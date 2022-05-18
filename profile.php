@@ -28,6 +28,19 @@ $isBanned = User::isBanned($userId);
 
 $iAmBanned = User::isBanned($id);
 
+$pageCounter = 1;
+if (!empty($_GET['page'])) {
+    $pageCounter = $_GET['page'];
+    $pageCounter += 1;
+}
+
+if ($pageCounter !== 1) {
+    $buttonStyling = 'style="margin-left: 2em"';
+} else {
+    $buttonStyling = "";
+}
+
+$loadedPosts = ($pageCounter - 1)*10;
 
 ?>
 <html lang="en">
@@ -49,11 +62,10 @@ $iAmBanned = User::isBanned($id);
     <div id="profile">
 
         <?php if (!empty($userId)) : ?>
-           
             <?php foreach ($userProfiles as $up) : ?>
                 <?php foreach ($profile as $p) : ?>
                     <?php
-                    $posts = Post::getAllFromUser($userId);
+                    $posts = Post::getAllFromUser($userId, $loadedPosts);
                     $moderator = $up['moderator'];
                     $admin = $up['admin'];
 
@@ -224,7 +236,7 @@ $iAmBanned = User::isBanned($id);
 
         <?php elseif (!empty($id)) : ?>
             <?php foreach ($profile as $p) :
-                $posts = Post::getAllFromUser($id);
+                $posts = Post::getAllFromUser($id, $loadedPosts);
                 $admin = $p['admin'];
                 $mainModerator = $p['moderator'];
             ?>
@@ -313,6 +325,21 @@ $iAmBanned = User::isBanned($id);
                     <?php endforeach; ?>
                 </div>
 
+                <div class="main-margin flex">
+                    <?php if ($pageCounter !== 1): ?>
+                        <?php if (count($posts) > 9): ?> 
+                            <a class="main-btn" href="profile.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em;">Previous page</a>
+                        <?php else: ?>
+                            <a class="main-btn" href="profile.php?page=<?php echo $pageCounter-2; ?>">Previous page</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if (count($posts) > 9): ?>                
+                        <a class="main-btn" href="profile.php?page=<?php echo $pageCounter; ?>" <?php echo $buttonStyling; ?> >Next page</a>
+                    <?php endif; ?>
+                </div>
+
+                <br>
+
                 <section class="modal modal-container ">
                     <div id="modalburger" class="modal-content hidden">
                         <div class="modal-close" id="xclose">
@@ -383,6 +410,7 @@ $iAmBanned = User::isBanned($id);
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="./js/masonry.js"></script>
     <script src="./js/moderator.js"></script>
+    <script src="./js/modal.js"></script>
     <script src="./js/app.js"></script>
 </body>
 
