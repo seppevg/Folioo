@@ -178,6 +178,10 @@ $iAmBanned = User::isBanned($id);
                                 <p>Stop banning user</p>
                             </a>    
                             <?php endif?>
+                            <a href="the_naughty_list.php">
+                                <img class="modal-icon" src="./assets/list.svg" alt="List icon">
+                                <p>The naughty list</p>
+                            </a>
                         <?php endif; ?>
                     </div>
                 </section>
