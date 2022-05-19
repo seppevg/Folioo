@@ -255,7 +255,8 @@
         margin-top: 0;
     }
 
-    .profile-sidebar-info .tag-list {
+    .profile-sidebar-info .tag-list,
+    .profile-sidebar-info .color-list {
         margin-bottom: 35px;
     }
 
@@ -270,7 +271,7 @@
 
     .profile-sidebar {
         border: 2px solid var(--IMDlightGrey);
-        border-radius: 25px 25px 0 0;
+        border-radius: 10px 10px 0 0;
         max-width: 30vw;
         height: fit-content;
         position: relative;
@@ -296,7 +297,7 @@
     .modal-container2 {
         max-width: 30vw;
         margin-top: 0;
-        border-radius: 0 0 25px 25px;
+        border-radius: 0 0 10px 10px;
     }
 
     .modal-content2 {

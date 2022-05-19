@@ -159,6 +159,19 @@ $isBanned = User::isBanned($idUser);
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
+                    <div class="color-list">
+                        <?php
+                        $imagePath = "./uploads/posts/" . $post['image'];
+                        $extractor = new ColorExtractor();
+                        $extractor->setImage($imagePath)->setTotalColors(5)->setGranularity(10);
+                        $palette = $extractor->extractPalette();
+                        foreach ($palette as $color) :
+                        ?>
+                            <div class="color-item">
+                                <a style="background-color: #<?php echo htmlspecialchars($color) ?>; color: #<?php echo htmlspecialchars($color) ?>;" href="index.php?searchInput=<?php echo htmlspecialchars($color) ?>&filter=Tags">oo</a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>  
         
