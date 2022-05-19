@@ -102,6 +102,15 @@
     .feed article {
         max-width: 250px;
     }
+
+    .tnl-container{
+        background-color: var(--IMDpink);
+        padding: 2em;
+        border-radius: 10px;
+        width: 500px;
+        height: auto;
+        margin: 2em auto 0 auto;
+    }
 }
 
 @media (min-width: 1300px) {
@@ -165,6 +174,19 @@
     #profile .main-margin .main-btn {
         max-width: 200px;
         margin: auto;
+    }
+
+    #dots-modal{
+        display: block;
+    }
+
+    .modal-container {
+        position: fixed;
+        bottom: 0;
+    }
+
+    #burgercheck{
+        display: block;
     }
 
     /* Add & edit profile*/
@@ -332,6 +354,17 @@
         margin: 0;
         padding: 0;
     }
+
+    /* Naughty list */
+
+    #naughty-title{
+        display: block;
+        text-align: center;
+    }
+
+    
+
+
 
 }
 

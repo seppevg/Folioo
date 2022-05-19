@@ -12,7 +12,7 @@ $profile = User::getInfo($userId);
 /*$number = Warning::getWarningNumber($userId);
 var_dump($number);*/
 
-if(!empty($_POST)) {
+if (!empty($_POST)) {
     try {
         $warning = new Warning();
         $warning->setText($_POST['warning-reason']);
@@ -25,8 +25,12 @@ if(!empty($_POST)) {
     }
 }
 
-?><!DOCTYPE html>
+
+
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,15 +41,16 @@ if(!empty($_POST)) {
     <title>Folioo - Warn User</title>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
+
 <body>
     <div id="profile">
-    
+
         <div class="profile-header">
             <h3 class="profile-username">Warn User</h3>
         </div>
-        <?php foreach($profile as $p): ?>
-            <div class="profile-img profile-img-edit">                
-                <div class="profile-img">                    
+        <?php foreach ($profile as $p) : ?>
+            <div class="profile-img profile-img-edit">
+                <div class="profile-img">
                     <img src="./uploads/profiles/<?php echo $p['image']; ?>">
                     <h3 class="clickable-text"><?php echo htmlspecialchars($p['username']); ?></h3>
                 </div>
@@ -54,12 +59,12 @@ if(!empty($_POST)) {
             <form action="" method="post">
                 <div class="profile-delete-confirmation">
                     <h4>Reason for warning this user?</h4>
-                    <p>Gives us your reason for warning this user so we can let them know what to 
+                    <p>Gives us your reason for warning this user so we can let them know what to
                         change about their behaviour.
                     </p>
-                    
+
                     <div class="form-field">
-                        <div class="flex">                            
+                        <div class="flex">
                             <textarea name="warning-reason" cols="20" rows="5" class="form-input"></textarea>
                         </div>
                     </div>
@@ -74,7 +79,7 @@ if(!empty($_POST)) {
                         </div>
                     </div>
                 </div>
-                
+
 
             </form>
         <?php endforeach; ?>
@@ -82,4 +87,5 @@ if(!empty($_POST)) {
         <?php include_once("./includes/nav-bottom.inc.php"); ?>
     </div>
 </body>
+
 </html>

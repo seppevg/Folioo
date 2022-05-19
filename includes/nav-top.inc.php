@@ -49,7 +49,7 @@
         <div class="user-links">
             <?php if(!empty($_SESSION['id'])):?>
                 <?php if(!$isBanned): ?>
-                <a class="main-btn add-project-nav" href="add.php">Share project</a>
+                <a class="main-btn add-project-nav" href="add.php">Share your project!</a>
                 <?php endif; ?>
                 <a href="profile.php" class="nav-user">
                         <?php $userImage = User::getInfo($_SESSION['id']); ?>

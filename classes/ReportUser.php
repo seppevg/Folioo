@@ -73,4 +73,12 @@ class ReportUser
         $count = $statement->rowCount();
         return $count;
     }
+
+    public function naughtyUsers(){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT u.username, count(*) AS count FROM reportuser rp JOIN users u ON rp.reported_user_id = u.id Group by u.username ORDER BY count DESC;");
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

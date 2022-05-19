@@ -1201,3 +1201,8 @@ img.post-profile {
 .hide-on-mobile {
   display: none;
 }
+
+/* Naughty list */
+.tnl-container{
+  margin: 1em 20% 0 20%;
+}

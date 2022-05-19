@@ -73,4 +73,13 @@ class ReportPost
         $count = $statement->rowCount();
         return $count;
     }
+
+    public function naughtyPosts(){
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT p.title, count(*) AS count FROM reportpost rp JOIN posts p ON rp.post_id = p.id Group by p.title ORDER BY count DESC;");
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    } 
+
 }
