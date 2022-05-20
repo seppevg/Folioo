@@ -60,7 +60,7 @@ if (!empty($_POST)) {
                             <label class="form-label" for="password">Password</label>
                         </div>
                         <div class="flex">
-                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="123456">
+                            <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Enter your password">
                         </div>
                     </div>
                 </div>
