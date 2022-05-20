@@ -65,7 +65,7 @@ $isBanned = User::isBanned($id);
                     <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change profile picture</label>
                     <em class="specifications">  (Allowed extensions: jpg, jpeg, png, svg. File-size: max. 5 MB. Format: rectangle)</em>
                     <?php if (!empty($p['image'])) : ?>
-                        <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)" value="<?php echo $p['image']; ?>">
+                        <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)" value="<?php echo htmlspecialchars($p['image']); ?>">
                     <?php else : ?>
                         <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
                     <?php endif; ?>

@@ -125,7 +125,7 @@ $isBanned = User::isBanned($id);
                 <img src="./assets/no-uploads.svg" alt="No uploads yet">
             </div>
             <div class="main-margin flex">
-                <a class="main-btn no-posts-btn" href="index.php?page=<?php echo $pageCounter-2; ?>">Previous page</a>
+                <a class="main-btn no-posts-btn" href="index.php?page=<?php echo htmlspecialchars($pageCounter-2); ?>">Previous page</a>
             </div>
         <?php else: ?>
             <?php if (isset($error)):?>
@@ -229,9 +229,9 @@ $isBanned = User::isBanned($id);
             </div>
             <div class="main-margin flex">
                 <?php if ($pageCounter !== 1): ?>
-                    <a class="main-btn" href="index.php?page=<?php echo $pageCounter-2; ?>" style="margin-right: 2em; margin-bottom: 5em;">Previous page</a>
+                    <a class="main-btn" href="index.php?page=<?php echo htmlspecialchars($pageCounter-2); ?>" style="margin-right: 2em; margin-bottom: 5em;">Previous page</a>
                 <?php endif; ?>
-                <a class="main-btn" href="index.php?page=<?php echo $pageCounter; ?>" style="margin-bottom: 5em; <?php echo $buttonStyling; ?>">Next page</a>
+                <a class="main-btn" href="index.php?page=<?php echo htmlspecialchars($pageCounter); ?>" style="margin-bottom: 5em; <?php echo $buttonStyling; ?>">Next page</a>
             </div>
             <br><br><br>
         <?php endif; ?>

@@ -51,7 +51,7 @@ if (!$moderator) {
             <h3>Naughty users:</h3>
             <ol type="1">
                 <?php foreach ($naughtyUsersArray as $naughtyUser) : ?>
-                    <li><strong><?php echo $naughtyUser["username"] ?></strong> times reported: <strong><?php echo $naughtyUser["count"] ?></strong></li>
+                    <li><strong><?php echo htmlspecialchars($naughtyUser["username"]) ?></strong> times reported: <strong><?php echo htmlspecialchars($naughtyUser["count"]) ?></strong></li>
                 <?php endforeach; ?>
             </ol>
         </div>
@@ -60,7 +60,7 @@ if (!$moderator) {
             <h3>Naughty posts:</h3>
             <ol type="1">
                 <?php foreach ($naughtyPostsArray as $naughtyPost) : ?>
-                    <li><strong><?php echo $naughtyPost["title"] ?></strong> times reported: <strong><?php echo $naughtyPost["count"] ?></strong></li>
+                    <li><strong><?php echo htmlspecialchars($naughtyPost["title"]) ?></strong> times reported: <strong><?php echo htmlspecialchars($naughtyPost["count"]) ?></strong></li>
                 <?php endforeach; ?>
             </ol>
         </div>
