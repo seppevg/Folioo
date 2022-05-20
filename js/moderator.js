@@ -1,12 +1,15 @@
-function addModerator(e, userId) {
+function addModerator(e, userId, moderator) {
   //console.log("👍");
 
   let moderatorIcon = document.querySelector(".moderator-icon");
 
   let user = userId;
+  let isModerator = moderator;
+  //console.log(isModerator);
 
   let data = new FormData();
   data.append("userId", user);
+  data.append("moderator", isModerator);
 
 
   fetch('./ajax/save_moderator.php', {

@@ -4,34 +4,40 @@
     if(!empty($_POST)){
 
         $userId = $_POST['userId'];
+        $moderator = $_POST['moderator'];
 
-        try {
-            $checkModerator = User::checkModeratorRole($userId);
+        if(!empty($moderator)) {
 
-            if ($checkModerator > 0) {                
-                User::removeModerator($userId);
-
+            try {
+                $checkModerator = User::checkModeratorRole($userId);
+    
+                if ($checkModerator > 0) {                
+                    User::removeModerator($userId);
+    
+                    $result = [
+                        "status" => "success",
+                        "message" => "Remove moderator role"
+                    ];                
+    
+                } else {                
+                    User::makeModerator($userId);
+    
+                    $result = [
+                        "status" => "success",
+                        "message" => "Add moderator role"
+                    ];
+                }           
+    
+            }
+            catch(Throwable $e) {
                 $result = [
-                    "status" => "success",
-                    "message" => "Remove moderator role"
-                ];                
-
-            } else {                
-                User::makeModerator($userId);
-
-                $result = [
-                    "status" => "success",
-                    "message" => "Add moderator role"
+                    "error" => "error",
+                    "message" => "Assign moderator failed"
                 ];
-            }           
-
-        }
-        catch(Throwable $e) {
-            $result = [
-                "error" => "error",
-                "message" => "Assign moderator failed"
-            ];
+            }
+    
+            echo json_encode($result);
         }
 
-        echo json_encode($result);
+        
     }
