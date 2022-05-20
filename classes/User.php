@@ -592,4 +592,20 @@ class User implements iUser
         $statement->bindValue(":userId", $userId);
         $statement->execute();
     }
+
+    public static function checkEmailAvailability ($email) {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email OR secondary_email = :email");
+        $statement->bindValue(":email", $email);
+        $statement->execute();
+        return $count = $statement->rowCount();
+    }
+
+    public static function checkUsernameAvailability ($username) {
+        $conn = DB::getInstance();
+            $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
+            $statement->bindValue(":username", $username);
+            $statement->execute();
+            return $count = $statement->rowCount();
+    }
 }

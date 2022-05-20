@@ -5,11 +5,7 @@
         $email = $_POST['email'];
 
         try {
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
-            $statement->bindValue(":email", $email);
-            $statement->execute();
-            $count = $statement->rowCount();
+            $count = User::checkEmailAvailability ($email);
             if ($count > 0) {
                 // success 1
                 $result = [

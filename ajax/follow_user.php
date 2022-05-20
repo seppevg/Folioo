@@ -6,17 +6,10 @@
         $userId = $_POST['userId'];
 
         try {
-            $output = "";
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM follow WHERE follower_id = :followerId AND following_id = :followingId;");
-            $statement->bindValue(":followerId", $id);
-            $statement->bindValue(":followingId", $userId);
-            $statement->execute();
-            $count = $statement->rowCount();
+            $output = Followers::check($id, $userId);
 
-            if ($count > 0) {
+            if ($output == 'Follow') {
                 Followers::unfollow($id, $userId);
-                // Followers::remove($userId);
 
                 $result = [
                     "status" => "success",
@@ -24,7 +17,6 @@
                 ];
             } else {
                 Followers::follow($id, $userId);
-                // Followers::add($userId);
 
                 $result = [
                     "status" => "success",

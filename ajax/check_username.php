@@ -5,11 +5,7 @@
         $username = $_POST['username'];
 
         try {
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM users WHERE username = :username");
-            $statement->bindValue(":username", $username);
-            $statement->execute();
-            $count = $statement->rowCount();
+            $count = User::checkUsernameAvailability ($username);
             if ($count > 0) {
                 // success 1
                 $result = [
