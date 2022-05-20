@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 17 mei 2022 om 09:57
+-- Gegenereerd op: 20 mei 2022 om 13:30
 -- Serverversie: 5.7.24
 -- PHP-versie: 8.0.1
 
@@ -35,6 +35,26 @@ CREATE TABLE `comments` (
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `comments`
+--
+
+INSERT INTO `comments` (`id`, `post_id`, `user_id`, `comment`, `date_created`) VALUES
+(1, 24, 2, 'heyooo', '2022-05-17 14:38:25'),
+(2, 24, 2, 'dees', '2022-05-17 14:38:28'),
+(3, 24, 2, 'is', '2022-05-17 14:38:29'),
+(4, 24, 2, 'een', '2022-05-17 14:38:30'),
+(5, 24, 2, 'test', '2022-05-17 14:38:32'),
+(6, 24, 1, 'h', '2022-05-17 15:53:43'),
+(7, 24, 1, 'hh', '2022-05-17 15:53:43'),
+(8, 24, 1, 'h', '2022-05-17 15:53:43'),
+(9, 24, 1, 'h', '2022-05-17 15:53:43'),
+(10, 24, 1, 'h', '2022-05-17 15:53:43'),
+(11, 24, 1, 'h', '2022-05-17 15:53:44'),
+(12, 24, 1, 'h', '2022-05-17 15:53:44'),
+(13, 24, 1, 'h', '2022-05-17 15:53:44'),
+(14, 24, 1, 'h', '2022-05-17 15:53:44');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +67,13 @@ CREATE TABLE `follow` (
   `following_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `follow`
+--
+
+INSERT INTO `follow` (`id`, `follower_id`, `following_id`) VALUES
+(1, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +85,20 @@ CREATE TABLE `likes` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `likes`
+--
+
+INSERT INTO `likes` (`id`, `post_id`, `user_id`) VALUES
+(2, 22, 2),
+(3, 23, 2),
+(4, 24, 2),
+(5, 24, 1),
+(6, 6, 1),
+(7, 26, 1),
+(16, 31, 1),
+(17, 33, 1);
 
 -- --------------------------------------------------------
 
@@ -85,9 +126,20 @@ CREATE TABLE `posts` (
   `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `text` text COLLATE utf8mb4_unicode_520_ci,
   `image` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `tags` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `tags` text COLLATE utf8mb4_unicode_520_ci,
+  `colors` text COLLATE utf8mb4_unicode_520_ci,
   `showcase` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`, `colors`, `showcase`) VALUES
+(33, 1, 'L\'oie', 'stickers ', '1_post-b67a100389310.jpg', 'nice,     interface dev,     stickers', '000000, FFFFCC, FF3333, FFCC99, CC9933', 0),
+(34, 1, 'firoun', 'bookcover', '1_post-c1b74c9cc2f2c.jpg', 'design, book, wow', 'CC6666, 993333, CCCCCC, CC9999, CC9966', 0),
+(35, 1, 'Moscow', 'INN', '1_post-988d86f47a109.jpg', 'moscow, book, wow, nice, design', 'FFFFFF, CCCCCC, CC6666, 339999, FFCC33', 0),
+(36, 1, 'Uber Red User', 'design for cover', '1_post-5b964992e3132.jpg', 'cover, red, bold, design', 'FFCCCC, CC3333, CCCCCC, CC3300, 000000', 0);
 
 -- --------------------------------------------------------
 
@@ -101,6 +153,13 @@ CREATE TABLE `reportpost` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `reportpost`
+--
+
+INSERT INTO `reportpost` (`id`, `reported_at`, `post_id`, `user_id`) VALUES
+(3, '2022-05-17 22:10:06', 26, 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +199,14 @@ CREATE TABLE `users` (
   `banned` datetime DEFAULT NULL,
   `following` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `username`, `secondary_email`, `image`, `education`, `bio`, `instagramlink`, `behancelink`, `linkedinlink`, `followers`, `admin`, `moderator`, `warning`, `banned`, `following`) VALUES
+(1, 'seppe.vangeel@student.thomasmore.be', '$2y$15$U1mq7UBC70E0VKwzyNhq3ee8vUNNiWnXx7IurCNhW6wxYuJ4JsgXK', 'Seep', 'seppe.vg@live.be', '1.jpg', 'Interactive Multimedia Design', 'I like php', '#instagram', '#behance', '#linkedin', 0, 0, 0, 0, NULL, 1),
+(2, 'tester@thomasmore.be', '$2y$15$72YN1rxRIov0bmitz.5TR.8Oxop8IjRvLsfrNzY//SQHnRSl7lMmq', 'tester', NULL, 'profiledefault.svg', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -220,19 +287,19 @@ ALTER TABLE `warnuser`
 -- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT voor een tabel `follow`
 --
 ALTER TABLE `follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT voor een tabel `passwordreset`
@@ -244,13 +311,13 @@ ALTER TABLE `passwordreset`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT voor een tabel `reportpost`
 --
 ALTER TABLE `reportpost`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `reportuser`
@@ -262,7 +329,7 @@ ALTER TABLE `reportuser`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `warnuser`

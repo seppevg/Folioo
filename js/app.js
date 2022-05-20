@@ -22,9 +22,9 @@ if (document.querySelector("#input-tags")) {
     // console.log("tags are empty");
     tags = [];
   } else {
-    console.log("tags zijn:" + tags);
     //Convert string from input field to array separated by commas
     tags = tags.split(",");
+    console.log("tags zijn:" + tags);
   }
 }
 
@@ -46,11 +46,11 @@ function addTag(e) {
   let tagItem = document.createElement("div");
   tagItem.classList.add("tag-item");
   tagItem.innerHTML = `
-        <span class="delete-btn" onclick="deleteTag(this, '${tag}')">
-        &times;
-        </span>
-        <span>#${tag}</span>
-    `;
+    <span class="delete-btn" onclick="deleteTag(this, '${tag}')">
+    &times;
+    </span>
+    <span>#${tag}</span>
+  `;
   document.querySelector(".tag-input .tag-list").appendChild(tagItem);
   document.querySelector("#input-tags").value = tags;
   e.target.value = "";
@@ -77,7 +77,6 @@ if (comment !== null) {
     modal2.classList.toggle("display");
   });
 }
-
 if (xy !== null) {
   xy.addEventListener("click", function (e) {
     e.preventDefault();

@@ -42,8 +42,7 @@ if (!empty($id)) {
 
 if (!empty($_GET['searchInput'])) {
     try {
-        $searchResult = $_GET['searchInput'];
-        $posts = Post::search($searchResult);
+        $searchRequest = $_GET['searchInput'];
 
         if (empty($_GET['filter'])) {
             $filterType = "";
@@ -51,11 +50,8 @@ if (!empty($_GET['searchInput'])) {
             $filterType = $_GET['filter'];
         }
 
-        if ($filterType == "Title") {
-            $posts = Post::search($searchResult);
-        } elseif ($filterType == "Tags") {
-            $posts = Post::searchTags($searchResult);
-        }
+        $posts = Post::search($searchRequest, $filterType);
+
     } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();

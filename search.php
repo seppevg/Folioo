@@ -8,24 +8,18 @@ if (empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
-if (!empty($_GET)) {
+if (!empty($_GET['searchInput'])) {
     try {
-        $searchResult = $_GET['searchInput'];
-        //var_dump ($searchResult);
-        $posts = Post::search($searchResult);
+        $searchRequest = $_GET['searchInput'];
 
         if (empty($_GET['filter'])) {
             $filterType = "";
         } else {
             $filterType = $_GET['filter'];
         }
-        //echo $filterType;
 
-        if ($filterType == "Title") {
-            $posts = Post::search($searchResult);
-        } elseif ($filterType == "Tags") {
-            $posts = Post::searchTags($searchResult);
-        }
+        $posts = Post::search($searchRequest, $filterType);
+
     } catch (Throwable $error) {
         // if any errors are thrown in the class, they can be caught here
         $error = $error->getMessage();
@@ -86,10 +80,10 @@ if (!empty($_GET)) {
                 $commentsCount = Comment::countComments($post['id']);
                 $likes = Like::getLikes($post['id']);
                 $checkLikes = Like::liked($post['id'], $id);?>
-            <article>
-            <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
-                <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
-            </a>
+            <article class="center-posts">
+                <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
+                    <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                </a>
                 <div class="project-info">
                     <?php if (!empty($id)): ?>
                         <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
@@ -141,11 +135,12 @@ if (!empty($_GET)) {
         </div>
     <?php endif;?>
 
+    <br><br><br><br><br><br>
+
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
     <script src="./js/modal.js"></script>
     <script src="./js/filter.js"></script>
     <script src="./js/like.js"></script>
-
 </body>
 
 </html>

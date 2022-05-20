@@ -19,7 +19,20 @@ if (!empty($_POST)) {
         $post->setImage($imageName);
         $post->setTitle($_POST["title"]);
         $post->setText($_POST["text"]);
-        $post->setTags($_POST["tags"]);
+
+        //Set all tags in ordered string
+        $tagArray = preg_split ("/\,/", $_POST["tags"]);
+        $tagList = implode(', ', $tagArray);
+        $post->setTags($tagList);
+
+        //Set 5 must-used colors in ordered string
+        $imagePath = "./uploads/posts/" . $imageName;
+        $extractor = new ColorExtractor();
+        $extractor->setImage($imagePath)->setTotalColors(5)->setGranularity(10);
+        $palette = $extractor->extractPalette();
+        $colorPalette = implode(", ", $palette);
+        $post->setColors($colorPalette);
+
         $post->save();
 
         header("Location: index.php");

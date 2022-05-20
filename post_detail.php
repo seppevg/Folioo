@@ -63,6 +63,7 @@ $reported = ReportPost::checkIfReportedByUser($sessionId, $post["id"]);
 $isAlreadyReported = $reported > 0;
 
 $isBanned = User::isBanned($idUser);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -150,7 +151,7 @@ $isBanned = User::isBanned($idUser);
                         <div class="tag-list">
                             <?php
                             $tagsString = $post['tags'];
-                            $tags = explode(",", $tagsString);
+                            $tags = explode(", ", $tagsString);
                             foreach ($tags as $tag) :
                             ?>
                                 <div class="tag-item">
@@ -160,15 +161,12 @@ $isBanned = User::isBanned($idUser);
                         </div>
                     <?php endif; ?>
                     <div class="color-list">
-                        <?php
-                        $imagePath = "./uploads/posts/" . $post['image'];
-                        $extractor = new ColorExtractor();
-                        $extractor->setImage($imagePath)->setTotalColors(5)->setGranularity(10);
-                        $palette = $extractor->extractPalette();
-                        foreach ($palette as $color) :
-                        ?>
+                        <?php 
+                            $colorPalette = $post['colors'];
+                            $palette = explode(", ", $colorPalette);
+                            foreach ($palette as $color) : ?>
                             <div class="color-item">
-                                <a style="background-color: #<?php echo htmlspecialchars($color) ?>; color: #<?php echo htmlspecialchars($color) ?>;" href="index.php?searchInput=<?php echo htmlspecialchars($color) ?>&filter=Tags">oo</a>
+                                <a style="background-color: #<?php echo htmlspecialchars($color) ?>; color: #<?php echo htmlspecialchars($color) ?>;" href="index.php?searchInput=<?php echo htmlspecialchars($color) ?>&filter=Color">oo</a>
                             </div>
                         <?php endforeach; ?>
                     </div>

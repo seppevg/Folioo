@@ -7,6 +7,7 @@ class Post implements iPost
     private $text;
     private $image;
     private $tags;
+    private $colors;
 
     public function getText()
     {
@@ -104,6 +105,25 @@ class Post implements iPost
         return $this->tags;
     }
 
+    /**
+     * Set the value of colors
+     *
+     * @return  self
+     */
+    public function setColors($colors)
+    {
+        $this->colors = $colors;
+        return $this;
+    }
+
+    /**
+     * Get the value of colors
+     */
+    public function getColors()
+    {
+        return $this->colors;
+    }
+
     public static function getAll($start)
     {
         $conn = DB::getInstance();
@@ -125,25 +145,27 @@ class Post implements iPost
     public function save()
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO posts(user_id, title, tags, image, text, showcase) VALUES (:userId, :title, :tags, :image, :text, 0);");
+        $statement = $conn->prepare("INSERT INTO posts(user_id, title, text, image, tags, colors, showcase) VALUES (:userId, :title, :text, :image, :tags, :colors, 0);");
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':title', $this->title);
-        $statement->bindValue(':tags', $this->tags);
-        $statement->bindValue(':image', $this->image);
         $statement->bindValue(':text', $this->text);
+        $statement->bindValue(':image', $this->image);
+        $statement->bindValue(':tags', $this->tags);
+        $statement->bindValue(':colors', $this->colors);
         return $statement->execute();
     }
 
     public function update()
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("UPDATE posts SET user_id = :userId, title = :title, tags = :tags, image = :image, text = :text WHERE id = :id;");
+        $statement = $conn->prepare("UPDATE posts SET user_id = :userId, title = :title, tags = :tags, image = :image, text = :text, colors = :colors WHERE id = :id;");
         $statement->bindValue(':id', $this->id);
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':title', $this->title);
         $statement->bindValue(':tags', $this->tags);
         $statement->bindValue(':image', $this->image);
         $statement->bindValue(':text', $this->text);
+        $statement->bindValue(':colors', $this->colors);
         return $statement->execute();
     }
 
@@ -170,27 +192,26 @@ class Post implements iPost
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function search($search)
+    public static function search($searchRequest, $searchType)
     {
-        if (empty($search)) {
+        if (empty($searchRequest)) {
             throw new Exception("Search can't be empty 👆");
             return false;
         }
 
-        if (empty($column)) {
+        if (empty($searchType)) {
             $conn = DB::getInstance();
-            $query = $conn->prepare("SELECT count(id) FROM posts WHERE title LIKE :keyword;");
-            $query->bindValue(':keyword', '%' . $search . '%');
+            $query = $conn->prepare("SELECT count(id) FROM posts WHERE title OR tags LIKE :keyword;");
+            $query->bindValue(':keyword', '%' . $searchRequest . '%');
             $query->execute();
             $postId = intval($query->fetchColumn());
     
             if ($postId !== 0) {
                 //return $postId;
                 $conn = DB::getInstance();
-                $statement = $conn->prepare("SELECT * FROM posts WHERE title LIKE :keyword;");
-                $statement->bindValue(':keyword', '%' . $search . '%');
+                $statement = $conn->prepare("SELECT * FROM posts WHERE title OR tags LIKE :keyword ORDER BY id DESC;");
+                $statement->bindValue(':keyword', '%' . $searchRequest . '%');
                 $statement->execute();
-    
                 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                     $post[] = $row;
                 }
@@ -198,85 +219,69 @@ class Post implements iPost
             } else {
                 throw new Exception("No posts found with this title or tag");
             }
-        } else {
-            $column = $_POST['column'];
-
+        } elseif ($searchType == "Title") {
             $conn = DB::getInstance();
-            $query = $conn->prepare("SELECT count(id) FROM posts WHERE $column LIKE :keyword;");
-            $query->bindValue(':keyword', '%' . $search . '%');
+            $query = $conn->prepare("SELECT count(id) FROM posts WHERE Title LIKE :keyword;");
+            $query->bindValue(':keyword', '%' . $searchRequest . '%');
             $query->execute();
             $postId = intval($query->fetchColumn());
     
             if ($postId !== 0) {
                 //return $postId;
                 $conn = DB::getInstance();
-                $statement = $conn->prepare("SELECT * FROM posts WHERE $column LIKE :keyword;");
-                $statement->bindValue(':keyword', '%' . $search . '%');
+                $statement = $conn->prepare("SELECT * FROM posts WHERE Title LIKE :keyword ORDER BY id DESC;");
+                $statement->bindValue(':keyword', '%' . $searchRequest . '%');
                 $statement->execute();
-    
                 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                     $post[] = $row;
                 }
                 return $post;
             } else {
-                throw new Exception("No posts found with this title or tag");
+                throw new Exception("No posts found with this title");
             }
-        }
-    }
-
-    public static function searchTags($search)
-    {
-        if (empty($search)) {
-            throw new Exception("Search can't be empty 👆");
-            return false;
-        }
-
-        if (empty($column)) {
+        } elseif ($searchType == "Tags") {
             $conn = DB::getInstance();
-            $query = $conn->prepare("SELECT count(id) FROM posts WHERE tags LIKE :keyword;");
-            $query->bindValue(':keyword', '%' . $search . '%');
+            $query = $conn->prepare("SELECT count(id) FROM posts WHERE Tags LIKE :keyword;");
+            $query->bindValue(':keyword', '%' . $searchRequest . '%');
             $query->execute();
             $postId = intval($query->fetchColumn());
     
             if ($postId !== 0) {
                 //return $postId;
                 $conn = DB::getInstance();
-                $statement = $conn->prepare("SELECT * FROM posts WHERE tags LIKE :keyword;");
-                $statement->bindValue(':keyword', '%' . $search . '%');
+                $statement = $conn->prepare("SELECT * FROM posts WHERE Tags LIKE :keyword ORDER BY id DESC;");
+                $statement->bindValue(':keyword', '%' . $searchRequest . '%');
                 $statement->execute();
-    
                 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                     $post[] = $row;
                 }
                 return $post;
             } else {
-                throw new Exception("No posts found with this title or tag");
+                throw new Exception("No posts found with this tag");
             }
-        } else {
-            $column = $_POST['column'];
-
+        } elseif ($searchType == "Color") {
             $conn = DB::getInstance();
-            $query = $conn->prepare("SELECT count(id) FROM posts WHERE $column LIKE :keyword;");
-            $query->bindValue(':keyword', '%' . $search . '%');
+            $query = $conn->prepare("SELECT count(id) FROM posts WHERE Colors LIKE :keyword;");
+            $query->bindValue(':keyword', '%' . $searchRequest . '%');
             $query->execute();
             $postId = intval($query->fetchColumn());
     
             if ($postId !== 0) {
                 //return $postId;
                 $conn = DB::getInstance();
-                $statement = $conn->prepare("SELECT * FROM posts WHERE $column LIKE :keyword;");
-                $statement->bindValue(':keyword', '%' . $search . '%');
+                $statement = $conn->prepare("SELECT * FROM posts WHERE Colors LIKE :keyword ORDER BY id DESC;");
+                $statement->bindValue(':keyword', '%' . $searchRequest . '%');
                 $statement->execute();
-    
                 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                     $post[] = $row;
                 }
                 return $post;
             } else {
-                throw new Exception("No posts found with this title or tag");
+                throw new Exception("No posts found with this color");
             }
         }
     }
+
     /**
      * Get the value of id
      */

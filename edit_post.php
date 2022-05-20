@@ -28,12 +28,28 @@ if (!empty($_POST)) {
         $newPost->setUserId($profile[0]["id"]);
         $newPost->setTitle($_POST["title"]);
         $newPost->setText($_POST["text"]);
-        $newPost->setTags($_POST["tags"]);
+
+        $tagArray = preg_split ("/\,/", $_POST["tags"]);
+        $tagList = implode(', ', $tagArray);
+        $newPost->setTags($tagList);        
+
         if ($_FILES['image']['name'] != "") {
             $imageName = Upload::uploadPicture($_FILES['image'], Upload::uid());
             $newPost->setImage($imageName);
+            $imagePath = "./uploads/posts/" . $imageName;
+            $extractor = new ColorExtractor();
+            $extractor->setImage($imagePath)->setTotalColors(5)->setGranularity(10);
+            $palette = $extractor->extractPalette();
+            $colorPalette = implode(", ", $palette);
+            $newPost->setColors($colorPalette);
         } else {
             $newPost->setImage($oldPost["image"]);
+            $imagePath = "./uploads/posts/" . $oldPost["image"];
+            $extractor = new ColorExtractor();
+            $extractor->setImage($imagePath)->setTotalColors(5)->setGranularity(10);
+            $palette = $extractor->extractPalette();
+            $colorPalette = implode(", ", $palette);
+            $newPost->setColors($colorPalette);
         }
         $newPost->update($editPostId);
         header("Location: index.php");
