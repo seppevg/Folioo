@@ -88,4 +88,13 @@ class Warning {
         $warning = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $warning;
     }
+
+    public static function removeWarning($userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET warning = 0 WHERE id = :userId;
+        UPDATE warnuser SET active = 0 WHERE user_id = :userId");
+        $statement->bindValue(':userId', $userId);
+        $statement->execute();
+    }
 }

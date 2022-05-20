@@ -10,11 +10,7 @@
 
             if ($checkWarning > 0) {
                 
-                $conn = DB::getInstance();
-                $statement = $conn->prepare("UPDATE users SET warning = 0 WHERE id = :userId;
-                UPDATE warnuser SET active = 0 WHERE user_id = :userId");
-                $statement->bindValue(':userId', $userId);
-                $statement->execute();
+                Warning::removeWarning($userId);
 
                 $result = [
                     "status" => "success",

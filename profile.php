@@ -78,7 +78,7 @@ $loadedPosts = ($pageCounter - 1)*10;
                     <div class="profile-header">
                         <div class="moderator-label">
 
-                            <div class="admin-change" onclick="addModerator(this, <?php echo $up['id']; ?>);">
+                            <div class="admin-change" onclick="addModerator(this, <?php echo $up['id']; ?>, <?php echo $p['admin']; ?> );">
                                 <?php if (!empty($mainAdmin)) : ?>
                                     <?php if (!empty($moderator)) : ?>
                                         <form action="" method="post">
