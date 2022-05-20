@@ -4,9 +4,9 @@
     if(!empty($_POST)){
 
         $userId = $_POST['userId'];
-        $moderator = $_POST['moderator'];
+        $admin = $_POST['admin'];
 
-        if(!empty($moderator)) {
+        if(!empty($admin)) {
 
             try {
                 $checkModerator = User::checkModeratorRole($userId);
