@@ -665,6 +665,10 @@ body {
   justify-content: space-between;
 }
 
+.profile-bio .profile-text {
+  line-height: 1.5;
+}
+
 .profile-bio {
   margin: 0em 2.1875em 1em 2.1875em;
 }

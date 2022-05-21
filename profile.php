@@ -131,7 +131,7 @@ $loadedPosts = ($pageCounter - 1)*10;
                     </div>
 
                     <div class="profile-bio">
-                        <p class="profile-text"><?php echo htmlspecialchars($up['bio']); ?></p>
+                        <p class="profile-text"><?php echo nl2br(htmlspecialchars($up['bio'])); ?></p>
                     </div>
 
                     <div class="profile-edit">
@@ -280,7 +280,7 @@ $loadedPosts = ($pageCounter - 1)*10;
                     </div>
 
                     <div class="profile-bio">
-                        <p class="profile-text"><?php echo htmlspecialchars($p['bio']); ?></p>
+                        <p class="profile-text"><?php echo nl2br(htmlspecialchars($p['bio'])); ?></p>
                     </div>
 
                     <div class="profile-edit">
