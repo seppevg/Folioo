@@ -135,7 +135,7 @@ $loadedPosts = ($pageCounter - 1)*10;
                     </div>
 
                     <div class="profile-edit">
-                        <a href="#" class="main-btn follow-button" onclick="changeFollowState(this, <?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
+                        <a href="#" id="follow-button" class="main-btn follow-button" onclick="changeFollowState(<?php echo $id; ?>, <?php echo $userId; ?>)"><?php echo $checkFollowing ?></a>
                     </div>
                 </div>
 

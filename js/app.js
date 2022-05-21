@@ -175,9 +175,9 @@ function deletePost(postId) {
 }
 
 // AJAX FOLLOW
-function changeFollowState(e, id, userId) {
-  followBtn = document.querySelector(".follow-button");
-  followerCount = document.querySelector(".followers-number");
+function changeFollowState(id, userId) {
+  followBtn = document.getElementById("follow-button");
+  // console.log(followBtn);
 
   let ownId = id;
   let watchingId = userId;
@@ -185,6 +185,10 @@ function changeFollowState(e, id, userId) {
   let data = new FormData();
   data.append("id", ownId);
   data.append("userId", watchingId);
+
+  // for (var value of data.values()) {
+  //   console.log(value);
+  // }
 
   fetch("./ajax/follow_user.php", {
     method: "POST",
@@ -196,11 +200,11 @@ function changeFollowState(e, id, userId) {
         data.status === "success" &&
         data.message === "User has been followed"
       ) {
+        // console.log("Followed!");
         followBtn.innerHTML = "Unfollow";
-        followerCount.innerHTML = Number(followerCount.innerHTML) + 1;
       } else {
+        // console.log("Unfollowed!");
         followBtn.innerHTML = "Follow";
-        followerCount.innerHTML = Number(followerCount.innerHTML) - 1;
       }
     })
     .catch((error) => {

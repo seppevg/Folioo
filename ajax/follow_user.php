@@ -2,13 +2,15 @@
     require_once("../bootstrap.php");
 
     if (!empty($_POST['id']) || !empty($_POST['userId'])) {
+        
         $id = $_POST['id'];
         $userId = $_POST['userId'];
 
         try {
             $output = Followers::check($id, $userId);
+            // var_dump($output);
 
-            if ($output == 'Follow') {
+            if ($output == "Unfollow") {
                 Followers::unfollow($id, $userId);
 
                 $result = [
