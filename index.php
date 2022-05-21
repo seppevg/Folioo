@@ -143,9 +143,15 @@ $isBanned = User::isBanned($id);
                         $checkLikes = Like::liked($post['id'], $id);
                     ?>
                     <article>
-                        <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
-                            <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
-                        </a>
+                        <?php if (!empty($id) && !$isBanned): ?>
+                            <a href="post_detail.php?id=<?php echo $post['id'];?>" class="project">
+                                <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                            </a>
+                        <?php else: ?>
+                            <div class="project">
+                                <img class="project-picture" src="./uploads/posts/<?php echo $post['image']; ?>" alt="project image">
+                            </div>
+                        <?php endif; ?>
                         <div class="project-info">
                             <?php if (!empty($id) && !$isBanned): ?>
                                 <a class="project-author" href="profile.php?id=<?php echo $post['user_id']?>">
