@@ -357,7 +357,6 @@ if (btnaddcommentcheck !== null) {
     let username = this.dataset.username;
     let image = this.dataset.image;
     let number = this.dataset.number;
-    let commentid = this.dataset.commentid;
     //console.log(number);
 
     let data = new FormData();
@@ -367,7 +366,6 @@ if (btnaddcommentcheck !== null) {
     data.append("username", username);
     data.append("image", image);
     data.append("number", number);
-    data.append("commentid", commentid);
 
     fetch("./ajax/save_comment.php", {
       method: "POST",
@@ -376,13 +374,11 @@ if (btnaddcommentcheck !== null) {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
+          let p = `<p>${data.data.comment}</p>`;
           let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
           let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
-          let icon = `<a href="delete_comment.php?id=${data.data.commentid}&postId=${data.data.postid}">
-                        <p class="posted-comment">${data.data.comment}</p>
-                        <img class="modal-icon" id="delete-icon" src="./assets/delete.svg" alt="Delete icon">
-                    </a>`;
-          let div = `<div class="comment-box"> ${pImage + name + icon}</div>`;
+          let icon = `<img class="modal-icon" id="delete-icon" src="./assets/delete.svg" alt="Delete icon">`;
+          let div = `<div class="comment-box"> ${pImage + name + p + icon}</div>`;
           //console.log(usernameStyle);
 
           document.querySelector(".number-of-comments").innerHTML++;
