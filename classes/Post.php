@@ -335,4 +335,13 @@ class Post implements iPost
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function views($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET views = views + 1 WHERE id = :id;");
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        
+    }
 }

@@ -9,6 +9,15 @@ if (empty($_GET['id'])) {
 $id = $_GET['id'];
 $posts = Post::getById($id);
 
+/*$MAC = exec('getmac');
+$MAC = strtok($MAC, ' ');
+echo "MAC address of Server is: $MAC";*/
+
+$pageRefresh = isset($_SERVER['HTTP_CACHE_CONTROL']);
+if(!$pageRefresh){
+    $views = Post::views($id);
+}
+
 
 if (sizeof($posts) != 1) {
     header("Location: index.php");
@@ -45,6 +54,7 @@ $checkLikes = Like::liked($post['id'], $sessionId);
 //reporting
 if (!empty($_POST)) {
     try {
+        
         $comment = new Comment();
         $comment->setComment($_POST['comment']);
         $comment->setUserId($sessionId);
@@ -55,6 +65,9 @@ if (!empty($_POST)) {
         $error = $error->getMessage();
     }
 }
+/*if (empty($_POST)){
+    $views = Post::views($id);
+}*/
 
 $comments = Comment::getAll($id);
 
@@ -63,6 +76,7 @@ $reported = ReportPost::checkIfReportedByUser($sessionId, $post["id"]);
 $isAlreadyReported = $reported > 0;
 
 $isBanned = User::isBanned($idUser);
+
 
 ?>
 <!DOCTYPE html>
