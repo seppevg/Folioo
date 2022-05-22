@@ -9,6 +9,7 @@
         $username = $_POST['username'];
         $image = $_POST['image'];
         $number = $_POST['number'];
+        $commentId = $_POST['commentid'];
 
         try {
             $c= new Comment();
@@ -24,7 +25,9 @@
                     "number" => $number,
                     "image" => $image,
                     "username" => $username,
-                    "comment" => htmlspecialchars($text)
+                    "comment" => htmlspecialchars($text),
+                    "commentid" => $commentId,
+                    "postid" => $postId
                 ]
             ];
         } catch (Throwable $t) {

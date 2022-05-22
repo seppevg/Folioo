@@ -209,7 +209,8 @@ $isBanned = User::isBanned($idUser);
                                     data-postid="<?php echo $userId['id']?>" 
                                     data-username="<?php echo $cu['username']?>"
                                     data-image="<?php echo  $cu['image']?>"
-                                    data-number="<?php echo  $commentsCount?>">
+                                    data-number="<?php echo  $commentsCount?>"
+                                    data-commentid="<?php echo  $c['id']?>">
                                     <img src="./assets/send.svg" alt="Add icon" class="add-icon">
                                 </a>                                        
                             <?php endforeach;?>
