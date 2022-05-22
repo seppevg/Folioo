@@ -64,7 +64,8 @@ class ReportPost
         return $statement->execute();
     }
 
-    public static function checkIfReportedByUser($userId, $postId) {
+    public static function checkIfReportedByUser($userId, $postId)
+    {
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT id FROM reportpost WHERE post_id = :postId AND user_id = :userId;");
         $statement->bindValue(":userId", $userId);
@@ -74,12 +75,12 @@ class ReportPost
         return $count;
     }
 
-    public function naughtyPosts(){
+    public function naughtyPosts()
+    {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT p.title, count(*) AS count FROM reportpost rp JOIN posts p ON rp.post_id = p.id Group by p.title ORDER BY count DESC;");
+        $statement = $conn->prepare("SELECT p.title, p.id, p.archived, count(*) AS count FROM reportpost rp JOIN posts p ON rp.post_id = p.id Group by p.title, p.id, p.archived ORDER BY count DESC;");
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-    } 
-
+    }
 }

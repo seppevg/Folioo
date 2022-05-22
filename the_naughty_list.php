@@ -13,7 +13,6 @@ $naughtyUsersArray = $naughtyUsersInstance->naughtyUsers();
 
 $naughtyPostsInstance = new ReportPost;
 $naughtyPostsArray = $naughtyPostsInstance->naughtyPosts();
-
 $profile = User::getInfo($id);
 
 $moderator = $profile[0]["moderator"];
@@ -51,7 +50,12 @@ if (!$moderator) {
             <h3>Naughty users:</h3>
             <ol type="1">
                 <?php foreach ($naughtyUsersArray as $naughtyUser) : ?>
-                    <li><strong><?php echo htmlspecialchars($naughtyUser["username"]) ?></strong> times reported: <strong><?php echo htmlspecialchars($naughtyUser["count"]) ?></strong></li>
+                    <?php if(!$naughtyUser["archived"]): ?>
+                    <li id="naughty_user_<?php echo $naughtyUser["id"] ?>" onclick="archiveUser(this)" data-user-id="<?php echo $naughtyUser["id"] ?>">
+                        <strong><?php echo htmlspecialchars($naughtyUser["username"]) ?></strong> times reported: <strong><?php echo htmlspecialchars($naughtyUser["count"]) ?></strong>
+                        <img onclick="" style="width: 12px;" src="./assets/close.svg" alt="close">
+                    </li>
+                    <?php endif ?>
                 <?php endforeach; ?>
             </ol>
         </div>
@@ -60,7 +64,12 @@ if (!$moderator) {
             <h3>Naughty posts:</h3>
             <ol type="1">
                 <?php foreach ($naughtyPostsArray as $naughtyPost) : ?>
-                    <li><strong><?php echo htmlspecialchars($naughtyPost["title"]) ?></strong> times reported: <strong><?php echo htmlspecialchars($naughtyPost["count"]) ?></strong></li>
+                    <?php if(!$naughtyPost["archived"]): ?>
+                        <li id="naughty_post_<?php echo $naughtyPost["id"] ?>" onclick="archivePost(this)" data-post-id="<?php echo $naughtyPost["id"] ?>">
+                            <strong><?php echo htmlspecialchars($naughtyPost["title"]) ?></strong> times reported: <strong><?php echo htmlspecialchars($naughtyPost["count"]) ?></strong>
+                            <img onclick="" style="width: 12px;" src="./assets/close.svg" alt="close">
+                        </li>
+                    <?php endif ?>
                 <?php endforeach; ?>
             </ol>
         </div>
@@ -70,6 +79,7 @@ if (!$moderator) {
     <?php include_once("./includes/nav-bottom.inc.php"); ?>
     <script src="./js/filter.js"></script>
     <script src="./js/dropdown.js"></script>
+    <script src="./js/naughty.js"></script>
 </body>
 
 </html>

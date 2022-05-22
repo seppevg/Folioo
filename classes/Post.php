@@ -335,4 +335,11 @@ class Post implements iPost
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function archivePost($postId) {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET archived = 1 WHERE id = :postId;");
+        $statement->bindValue(":postId" , $postId);
+        return $statement->execute();
+    }
 }

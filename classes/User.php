@@ -611,4 +611,11 @@ class User implements iUser
             $statement->execute();
             return $count = $statement->rowCount();
     }
+
+    public static function archiveUser($userId) {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("UPDATE users SET archived = 1 WHERE id = :id;");
+        $statement->bindValue(":id" , $userId);
+        return $statement->execute();
+    }
 }
