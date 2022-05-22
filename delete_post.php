@@ -16,7 +16,8 @@
 
         //delete post from database
         $conn = DB::getInstance();
-        $statement = $conn->prepare("DELETE FROM posts WHERE id = :id;");
+        $statement = $conn->prepare("DELETE FROM posts WHERE id = :id;
+        DELETE FROM views WHERE post_id = :id;");
         $statement->bindValue(':id', $postId);
         $result = $statement->execute();
 

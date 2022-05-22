@@ -45,8 +45,7 @@ class Views
     }
 
     public static function view($id, $userId)
-    {
-        
+    {        
         $conn = DB::getInstance();
         $statement = $conn->prepare("SELECT * FROM views WHERE post_id = :postId AND user_id = :userId;");
         $statement->bindValue(":postId", $id);
@@ -57,8 +56,7 @@ class Views
             return false;
         } else {
             $conn = DB::getInstance();
-            $statement = $conn->prepare("INSERT INTO views (post_id, user_id) VALUES (:postId, :userId);
-            UPDATE posts SET views = views + 1 WHERE id = :postId;");
+            $statement = $conn->prepare("INSERT INTO views (post_id, user_id) VALUES (:postId, :userId);");
             $statement->bindValue(":postId", $id);
             $statement->bindValue(":userId", $userId);
             $statement->execute();
@@ -66,18 +64,13 @@ class Views
         }
     }
 
-    public static function getAll($id)
+    public static function getAll($postId)
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("SELECT views FROM posts where id = :id");
-        $statement->bindValue(':id', $id);
+        $statement = $conn->prepare("SELECT count(*) as count FROM views WHERE post_id = :postId;");
+        $statement->bindValue(":postId", $postId);
         $statement->execute();
-        $result = $statement->rowCount();
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-        if ($result <= 0) {
-            return 0;
-        } else {
-            return $row['views'];
-        }
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
     }
 }

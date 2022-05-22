@@ -2,10 +2,17 @@
 -- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
+<<<<<<< HEAD
 -- Host: localhost:3306
 -- Generation Time: May 22, 2022 at 04:01 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
+=======
+-- Host: 127.0.0.1
+-- Gegenereerd op: 22 mei 2022 om 15:25
+-- Serverversie: 10.4.22-MariaDB
+-- PHP-versie: 8.1.2
+>>>>>>> 9486f7cd6bd605decef65e9931d6bb7cfc9373b8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -128,23 +135,37 @@ CREATE TABLE `posts` (
   `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `text` text COLLATE utf8mb4_unicode_520_ci,
   `image` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+<<<<<<< HEAD
   `tags` text COLLATE utf8mb4_unicode_520_ci,
   `colors` text COLLATE utf8mb4_unicode_520_ci,
   `showcase` int(1) NOT NULL,
   `views` int(11) NOT NULL,
   `archived` tinyint(1) NOT NULL DEFAULT '0'
+=======
+  `tags` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `colors` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `showcase` int(1) NOT NULL
+>>>>>>> 9486f7cd6bd605decef65e9931d6bb7cfc9373b8
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
+<<<<<<< HEAD
 INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`, `colors`, `showcase`, `views`, `archived`) VALUES
 (33, 1, 'L\'oie', 'stickers ', '1_post-b67a100389310.jpg', 'nice,     interface dev,     stickers', '000000, FFFFCC, FF3333, FFCC99, CC9933', 0, 1, 0),
 (34, 1, 'firoun', 'bookcover', '1_post-c1b74c9cc2f2c.jpg', 'design, book, wow', 'CC6666, 993333, CCCCCC, CC9999, CC9966', 0, 1, 0),
 (35, 1, 'Moscow', 'INN', '1_post-988d86f47a109.jpg', 'moscow, book, wow, nice, design', 'FFFFFF, CCCCCC, CC6666, 339999, FFCC33', 0, 1, 0),
 (36, 1, 'Uber Red User', 'design for cover', '1_post-5b964992e3132.jpg', 'cover, red, bold, design', 'FFCCCC, CC3333, CCCCCC, CC3300, 000000', 0, 2, 0),
 (39, 20, 'zeazeza', '\"r\"\"é', '20_post-fbcc552626fcb.png', 'r\"ér', '333333, 99CCFF, 6699FF, FFFFFF, 666666', 0, 1, 0);
+=======
+INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`, `colors`, `showcase`) VALUES
+(33, 1, 'L\'oie', 'stickers ', '1_post-b67a100389310.jpg', 'nice,     interface dev,     stickers', '000000, FFFFCC, FF3333, FFCC99, CC9933', 0),
+(34, 1, 'firoun', 'bookcover', '1_post-c1b74c9cc2f2c.jpg', 'design, book, wow', 'CC6666, 993333, CCCCCC, CC9999, CC9966', 0),
+(35, 1, 'Moscow', 'INN', '1_post-988d86f47a109.jpg', 'moscow, book, wow, nice, design', 'FFFFFF, CCCCCC, CC6666, 339999, FFCC33', 0),
+(36, 1, 'Uber Red User', 'design for cover', '1_post-5b964992e3132.jpg', 'cover, red, bold, design', 'FFCCCC, CC3333, CCCCCC, CC3300, 000000', 0);
+>>>>>>> 9486f7cd6bd605decef65e9931d6bb7cfc9373b8
 
 -- --------------------------------------------------------
 
@@ -238,6 +259,7 @@ CREATE TABLE `views` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `views`
 --
 
@@ -248,6 +270,13 @@ INSERT INTO `views` (`id`, `post_id`, `user_id`) VALUES
 (48, 34, 20),
 (49, 39, 20),
 (50, 33, 20);
+=======
+-- Gegevens worden geëxporteerd voor tabel `views`
+--
+
+INSERT INTO `views` (`id`, `post_id`, `user_id`) VALUES
+(45, 36, 3);
+>>>>>>> 9486f7cd6bd605decef65e9931d6bb7cfc9373b8
 
 -- --------------------------------------------------------
 
@@ -376,13 +405,21 @@ ALTER TABLE `reportuser`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+>>>>>>> 9486f7cd6bd605decef65e9931d6bb7cfc9373b8
 
 --
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+>>>>>>> 9486f7cd6bd605decef65e9931d6bb7cfc9373b8
 
 --
 -- AUTO_INCREMENT for table `warnuser`
