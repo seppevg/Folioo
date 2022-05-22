@@ -157,9 +157,15 @@ $isBanned = User::isBanned($idUser);
                                     <h4 class="number-of-comments"><?php echo $commentsCount?></h4>
                                 </div>                                
                             </div>
-                            <div class="project-interactions-views">
-                                <h4 class="views"><?php echo $views;?> Views</h4>
-                            </div>                            
+                            <?php if ($userId["user_id"] == $sessionId) : ?>
+                                <div class="project-interactions-views">
+                                    <?php if($views == 1):?>
+                                        <h4 class="views"><?php echo $views;?> view</h4>
+                                    <?php elseif($views > 1):?>
+                                        <h4 class="views"><?php echo $views;?> views</h4>
+                                    <?php endif;?>
+                                </div>
+                            <?php endif;?>                            
                         </form>
                     <?php endif; ?>
                     <div>
