@@ -65,4 +65,19 @@ class Views
             
         }
     }
+
+    public static function getAll($id)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("SELECT views FROM posts where id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $result = $statement->rowCount();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result <= 0) {
+            return 0;
+        } else {
+            return $row['views'];
+        }
+    }
 }

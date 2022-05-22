@@ -43,6 +43,8 @@ if(!$pageRefresh){
     $checkView = Views::view($id, $sessionId); 
 }
 
+$views = Views::getAll($id);
+
 $userId = Post::getById($_GET['id'])[0];
 
 $idUser = $userId["user_id"];
@@ -67,9 +69,6 @@ if (!empty($_POST)) {
         $error = $error->getMessage();
     }
 }
-/*if (empty($_POST)){
-    $views = Post::views($id);
-}*/
 
 $comments = Comment::getAll($id);
 
@@ -140,7 +139,7 @@ $isBanned = User::isBanned($idUser);
                 </div>
                 <div class="profile-sidebar-info">
                     <?php if(!empty($sessionId) && !$isBanned): ?>
-                        <form action="" method="post" name="like">
+                        <form action="" method="post" name="like" class="project-interactions-form">
                             <div class="project-interactions">
                                 <div class="project-interactions-like" onclick="postLiked(this, <?php echo $post['id'];?>, <?php echo $sessionId?>);">
                                     <a href="#" class="like"> 
@@ -156,8 +155,11 @@ $isBanned = User::isBanned($idUser);
                                 <div class="project-interactions-comment">
                                     <img class="comment-icon" src="./assets/comment.svg" alt="comment icon">
                                     <h4 class="number-of-comments"><?php echo $commentsCount?></h4>
-                                </div>
+                                </div>                                
                             </div>
+                            <div class="project-interactions-views">
+                                <h4 class="views"><?php echo $views;?> Views</h4>
+                            </div>                            
                         </form>
                     <?php endif; ?>
                     <div>

@@ -522,6 +522,13 @@ body {
   margin-top: 1em;
 }
 
+.project-interactions-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .project-interactions h4 {
   margin: 0;
 }

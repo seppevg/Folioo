@@ -145,7 +145,7 @@ class Post implements iPost
     public function save()
     {
         $conn = DB::getInstance();
-        $statement = $conn->prepare("INSERT INTO posts(user_id, title, text, image, tags, colors, showcase) VALUES (:userId, :title, :text, :image, :tags, :colors, 0);");
+        $statement = $conn->prepare("INSERT INTO posts(user_id, title, text, image, tags, colors, showcase, views) VALUES (:userId, :title, :text, :image, :tags, :colors, 0, 0);");
         $statement->bindValue(':userId', $this->userId);
         $statement->bindValue(':title', $this->title);
         $statement->bindValue(':text', $this->text);
