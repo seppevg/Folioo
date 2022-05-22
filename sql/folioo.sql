@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 22 mei 2022 om 15:09
+-- Gegenereerd op: 22 mei 2022 om 15:25
 -- Serverversie: 10.4.22-MariaDB
 -- PHP-versie: 8.1.2
 
@@ -129,19 +129,18 @@ CREATE TABLE `posts` (
   `image` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `tags` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `colors` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `showcase` int(1) NOT NULL,
-  `views` int(11) NOT NULL
+  `showcase` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `posts`
 --
 
-INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`, `colors`, `showcase`, `views`) VALUES
-(33, 1, 'L\'oie', 'stickers ', '1_post-b67a100389310.jpg', 'nice,     interface dev,     stickers', '000000, FFFFCC, FF3333, FFCC99, CC9933', 0, 0),
-(34, 1, 'firoun', 'bookcover', '1_post-c1b74c9cc2f2c.jpg', 'design, book, wow', 'CC6666, 993333, CCCCCC, CC9999, CC9966', 0, 0),
-(35, 1, 'Moscow', 'INN', '1_post-988d86f47a109.jpg', 'moscow, book, wow, nice, design', 'FFFFFF, CCCCCC, CC6666, 339999, FFCC33', 0, 0),
-(36, 1, 'Uber Red User', 'design for cover', '1_post-5b964992e3132.jpg', 'cover, red, bold, design', 'FFCCCC, CC3333, CCCCCC, CC3300, 000000', 0, 0);
+INSERT INTO `posts` (`id`, `user_id`, `title`, `text`, `image`, `tags`, `colors`, `showcase`) VALUES
+(33, 1, 'L\'oie', 'stickers ', '1_post-b67a100389310.jpg', 'nice,     interface dev,     stickers', '000000, FFFFCC, FF3333, FFCC99, CC9933', 0),
+(34, 1, 'firoun', 'bookcover', '1_post-c1b74c9cc2f2c.jpg', 'design, book, wow', 'CC6666, 993333, CCCCCC, CC9999, CC9966', 0),
+(35, 1, 'Moscow', 'INN', '1_post-988d86f47a109.jpg', 'moscow, book, wow, nice, design', 'FFFFFF, CCCCCC, CC6666, 339999, FFCC33', 0),
+(36, 1, 'Uber Red User', 'design for cover', '1_post-5b964992e3132.jpg', 'cover, red, bold, design', 'FFCCCC, CC3333, CCCCCC, CC3300, 000000', 0);
 
 -- --------------------------------------------------------
 
@@ -222,6 +221,13 @@ CREATE TABLE `views` (
   `post_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `views`
+--
+
+INSERT INTO `views` (`id`, `post_id`, `user_id`) VALUES
+(45, 36, 3);
 
 -- --------------------------------------------------------
 
@@ -332,7 +338,7 @@ ALTER TABLE `passwordreset`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT voor een tabel `reportpost`
@@ -350,13 +356,13 @@ ALTER TABLE `reportuser`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT voor een tabel `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT voor een tabel `warnuser`
