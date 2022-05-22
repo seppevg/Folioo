@@ -487,10 +487,14 @@ body {
 .comment-box {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: center;  
 }
 
 .comment-box input {
+  margin-left: 10px;
+}
+
+#delete-icon {
   margin-left: 10px;
 }
 
