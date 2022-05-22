@@ -377,7 +377,8 @@ if (btnaddcommentcheck !== null) {
           let p = `<p>${data.data.comment}</p>`;
           let name = `<h4 class ="project-author-username-comment">${data.data.username}</h4>`;
           let pImage = `<img class="project-author-picture-comment" src="./uploads/profiles/${data.data.image}">`;
-          let div = `<div class="comment-box"> ${pImage + name + p}</div>`;
+          let icon = `<img class="modal-icon" id="delete-icon" src="./assets/delete.svg" alt="Delete icon">`;
+          let div = `<div class="comment-box"> ${pImage + name + p + icon}</div>`;
           //console.log(usernameStyle);
 
           document.querySelector(".number-of-comments").innerHTML++;
