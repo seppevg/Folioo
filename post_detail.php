@@ -184,14 +184,16 @@ $isBanned = User::isBanned($idUser);
                                         <a href="profile.php?id=<?php echo $profile['id']?>">
                                             <img class="project-author-picture-comment" src="./uploads/profiles/<?php echo $profile['image']; ?>" alt="profile picture">
                                             <h4 class="project-author-username-comment"><?php echo htmlspecialchars($profile['username']); ?></h4>
-                                        </a>
-                                        
-                                        <p class="posted-comment"><?php echo htmlspecialchars($c['comment']); ?></p> 
-                                        
+                                        </a>                             
+                                         
                                         <?php if(!empty($c['user_id'] == $sessionId)):?>
-                                            <img class="modal-icon" id="delete-icon" src="./assets/delete.svg" alt="Delete icon">
-                                        <?php endif;?>
-                                        
+                                            <a href="delete_comment.php?id=<?php echo $c['id']?>&postId=<?php echo $post['id']?>">
+                                                <p class="posted-comment"><?php echo htmlspecialchars($c['comment']); ?></p>
+                                                <img class="modal-icon" id="delete-icon" src="./assets/delete.svg" alt="Delete icon">
+                                            </a>
+                                        <?php else:?>     
+                                            <p class="posted-comment"><?php echo htmlspecialchars($c['comment']); ?></p>    
+                                        <?php endif;?>                                
 
                                     </div>
                             <?php endforeach;?>
