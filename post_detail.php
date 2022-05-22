@@ -13,10 +13,7 @@ $posts = Post::getById($id);
 $MAC = strtok($MAC, ' ');
 echo "MAC address of Server is: $MAC";*/
 
-$pageRefresh = isset($_SERVER['HTTP_CACHE_CONTROL']);
-if(!$pageRefresh){
-    $views = Post::views($id);
-}
+
 
 
 if (sizeof($posts) != 1) {
@@ -39,6 +36,11 @@ if (empty($_SESSION['id'])) {
     $sessionId = "";
 } else {
     $sessionId = $_SESSION['id'];
+}
+
+$pageRefresh = isset($_SERVER['HTTP_CACHE_CONTROL']);
+if(!$pageRefresh){
+    $checkView = Views::view($id, $sessionId); 
 }
 
 $userId = Post::getById($_GET['id'])[0];
