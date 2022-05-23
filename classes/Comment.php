@@ -1,5 +1,5 @@
 <?php
-class Comment implements iProject
+class Comment
 {
     private $comment;
     private $userId;

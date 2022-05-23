@@ -101,14 +101,6 @@ class Followers
         $statement->execute();
     }
 
-    // public static function add($userId)
-    // {
-    //     $conn = DB::getInstance();
-    //     $statement = $conn->prepare("UPDATE users SET followers = followers + 1 WHERE id = :userId;");
-    //     $statement->bindValue(":userId", $userId);
-    //     $statement->execute();
-    // }
-
     public static function unfollow($id, $userId)
     {
         $conn = DB::getInstance();
@@ -117,12 +109,4 @@ class Followers
         $statement->bindValue(":followingId", $userId);
         $statement->execute();
     }
-
-    // public static function remove($userId)
-    // {
-    //     $conn = DB::getInstance();
-    //     $statement = $conn->prepare("UPDATE users SET followers = followers - 1 WHERE id = :userId;");
-    //     $statement->bindValue(":userId", $userId);
-    //     $statement->execute();
-    // }
 }
