@@ -1,11 +1,13 @@
-<?php
-session_start();
+<?php session_start();
+
 include_once("bootstrap.php");
+
 if (empty($_SESSION['id'])) {
     $id = "";
 } else {
     $id = $_SESSION['id'];
 }
+
 $isBanned = User::isBanned($id);
 
 $naughtyUsersInstance = new ReportUser;

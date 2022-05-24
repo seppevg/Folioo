@@ -1,5 +1,6 @@
 <?php
-class Warning {
+class Warning 
+{
 
     private $text;
     private $userId; 

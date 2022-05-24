@@ -15,22 +15,14 @@
             $count = $statement->rowCount();
 
             if ($count > 0) {
-                $conn = DB::getInstance();
-                $statement = $conn->prepare("DELETE FROM likes WHERE post_id = :postId AND user_id = :userId;");
-                $statement->bindValue(":postId", $postId);
-                $statement->bindValue(":userId", $userId);
-                $statement->execute();
+                Like::unLike($postId, $userId);
 
                 $result = [
                     "status" => "success",
                     "message" => "Unlike post"
                 ];
             } else {
-                $conn = DB::getInstance();
-                $statement = $conn->prepare("INSERT INTO likes (post_id, user_id) VALUES (:postId, :userId);");
-                $statement->bindValue(":postId", $postId);
-                $statement->bindValue(":userId", $userId);
-                $statement->execute();
+                Like::doLike($postId, $userId);
 
                 $result = [
                     "status" => "success",

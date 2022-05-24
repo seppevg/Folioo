@@ -71,4 +71,22 @@ class Like
             return $output;
         }
     }
+
+    public static function unLike($postId, $userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("DELETE FROM likes WHERE post_id = :postId AND user_id = :userId;");
+        $statement->bindValue(":postId", $postId);
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
+    }
+
+    public static function doLike($postId, $userId)
+    {
+        $conn = DB::getInstance();
+        $statement = $conn->prepare("INSERT INTO likes (post_id, user_id) VALUES (:postId, :userId);");
+        $statement->bindValue(":postId", $postId);
+        $statement->bindValue(":userId", $userId);
+        $statement->execute();
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-class Post implements iPost
+class Post
 {
     private $id;
     private $userId;
