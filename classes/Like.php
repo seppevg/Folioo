@@ -81,7 +81,7 @@ class Like
         $statement->execute();
     }
 
-    public static function like($postId, $userId)
+    public static function doLike($postId, $userId)
     {
         $conn = DB::getInstance();
         $statement = $conn->prepare("INSERT INTO likes (post_id, user_id) VALUES (:postId, :userId);");

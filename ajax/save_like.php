@@ -22,7 +22,7 @@
                     "message" => "Unlike post"
                 ];
             } else {
-                Like::like($postId, $userId);
+                Like::doLike($postId, $userId);
 
                 $result = [
                     "status" => "success",
