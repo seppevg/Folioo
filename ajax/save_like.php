@@ -6,15 +6,9 @@
         $postId = $_POST['postId'];
 
         try {
-            $output = "";
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("SELECT * FROM likes WHERE post_id = :postId AND user_id = :userId;");
-            $statement->bindValue(":postId", $postId);
-            $statement->bindValue(":userId", $userId);
-            $statement->execute();
-            $count = $statement->rowCount();
+            $output = Like::liked($postId, $userId);
 
-            if ($count > 0) {
+            if ($output > 0) {
                 Like::unLike($postId, $userId);
 
                 $result = [
