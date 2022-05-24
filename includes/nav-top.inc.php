@@ -1,4 +1,9 @@
-<nav class="top-nav">
+<?php 
+$profile = User::getInfo($id);
+foreach ($profile as $p){
+    $mainModerator = $p['moderator'];
+} 
+?><nav class="top-nav">
         <div id="container-logo">
             <div class="dropdown">
                 <a href="index.php"><img id="full-logo" src="./assets/folioo-blue.svg" alt="Folioo logo"></a>

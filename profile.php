@@ -40,11 +40,7 @@ if ($pageCounter !== 1) {
     $buttonStyling = "";
 }
 
-$loadedPosts = ($pageCounter - 1) * 10;
-
-$followers = Followers::getAllFollowers($id);
-$following = Followers::getAllFollowing($id);
-
+$loadedPosts = ($pageCounter - 1)*10;
 
 ?>
 <html lang="en">
@@ -61,23 +57,20 @@ $following = Followers::getAllFollowing($id);
 </head>
 
 <body>
-    <?php if (!empty($userId)) : ?>
-        <?php foreach ($userProfiles as $up) : ?>
-            <?php foreach ($profile as $p) : ?>
-                <?php
-                $posts = Post::getAllFromUser($userId, $loadedPosts);
-                $moderator = $up['moderator'];
-                $admin = $up['admin'];
+    <?php include_once("./includes/nav-top.inc.php"); ?>
+    <div id="profile">
+        <?php if (!empty($userId)) : ?>
+            <?php foreach ($userProfiles as $up) : ?>
+                <?php foreach ($profile as $p) : ?>
+                    <?php
+                    $posts = Post::getAllFromUser($userId, $loadedPosts);
+                    $moderator = $up['moderator'];
+                    $admin = $up['admin'];
 
-                $mainAdmin = $p['admin'];
-                $mainModerator = $p['moderator'];
-                ?>
-            <?php endforeach; ?>
-            <?php include_once("./includes/nav-top.inc.php"); ?>
-
-            <div id="profile">
-
-
+                    $mainAdmin = $p['admin'];
+                    $mainModerator = $p['moderator'];
+                    ?>
+                <?php endforeach; ?>
                 <div class="desktop-background"></div>
                 <div class="profile-container">
                     <div class="profile-header">
@@ -111,12 +104,7 @@ $following = Followers::getAllFollowing($id);
                                     <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
                                 <?php endif; ?>
                             <?php endif; ?>
-                            <h3 class="profile-username" <?php if ($isBanned) {
-                                                                echo "style='color:red'";
-                                                            } ?>><?php echo $up['username'];
-                                                                                                            if ($isBanned) {
-                                                                                                                echo " [BANNED]";
-                                                                                                            } ?></h3>
+                            <h3 class="profile-username" <?php if($isBanned){echo "style='color:red'";}?>><?php echo $up['username']; if($isBanned){ echo " [BANNED]"; }?></h3>
                         </div>
                         <img class="modal-button" id="dots-modal" src="./assets/dots-menu.svg" alt="Burger menu">
                     </div>
@@ -150,7 +138,7 @@ $following = Followers::getAllFollowing($id);
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads-profile">
+                    <div id="no-uploads">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
@@ -189,17 +177,17 @@ $following = Followers::getAllFollowing($id);
                                 <img class="modal-icon" src="./assets/warn.svg" alt="Warn icon">
                                 <p>Warn user</p>
                             </a>
-                            <?php if ($isBanned == false) : ?>
-                                <a href="ban_user.php?id=<?php echo $up['id']; ?>">
-                                    <img class="modal-icon" src="./assets/ban.svg" alt="Ban icon">
-                                    <p>Ban user</p>
-                                </a>
-                            <?php else : ?>
+                            <?php if($isBanned == false):?>
+                            <a href="ban_user.php?id=<?php echo $up['id']; ?>">
+                                <img class="modal-icon" src="./assets/ban.svg" alt="Ban icon">
+                                <p>Ban user</p>
+                            </a>    
+                            <?php else:?>
                                 <a href="unban_user.php?id=<?php echo $up['id']; ?>">
-                                    <img class="modal-icon" src="./assets/ban.svg" alt="Ban icon">
-                                    <p>Stop banning user</p>
-                                </a>
-                            <?php endif ?>
+                                <img class="modal-icon" src="./assets/ban.svg" alt="Ban icon">
+                                <p>Stop banning user</p>
+                            </a>    
+                            <?php endif?>
                         <?php endif; ?>
                     </div>
                 </section>
@@ -255,12 +243,7 @@ $following = Followers::getAllFollowing($id);
                             <?php elseif (!empty($mainModerator)) : ?>
                                 <a class="add-moderator-btn"><img class="moderator-icon" src="./assets/moderator-on.svg" alt="Moderator icon blue"></a>
                             <?php endif; ?>
-                            <h3 class="profile-username" <?php if ($iAmBanned) {
-                                                                echo "style='color:red'";
-                                                            } ?>><?php echo htmlspecialchars($p['username']);
-                                                                                                            if ($iAmBanned) {
-                                                                                                                echo " [BANNED]";
-                                                                                                            } ?></h3>
+                            <h3 class="profile-username" <?php if($iAmBanned){echo "style='color:red'";}?>><?php echo htmlspecialchars($p['username']); if($iAmBanned){ echo " [BANNED]"; } ?></h3>
                         </div>
                         <img class="modal-button" id="burgercheck" src="./assets/burger-menu.svg" alt="Burger menu">
                     </div>
@@ -269,11 +252,11 @@ $following = Followers::getAllFollowing($id);
                             <img src="./uploads/profiles/<?php echo $p['image']; ?>">
                         </div>
                         <div class="profile-following">
-                            <p class="following-number"><?php echo $following; ?></p>
+                            <p class="following-number"><?php echo $p['following']; ?></p>
                             <p class="following">Following</p>
                         </div>
                         <div class="profile-following">
-                            <p class="followers-number"><?php echo $followers; ?></p>
+                            <p class="followers-number"><?php echo $p['followers']; ?></p>
                             <p class="following">Followers</p>
                         </div>
                     </div>
@@ -300,7 +283,7 @@ $following = Followers::getAllFollowing($id);
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads-profile">
+                    <div id="no-uploads">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
@@ -337,15 +320,15 @@ $following = Followers::getAllFollowing($id);
                 </div>
 
                 <div class="main-margin flex">
-                    <?php if ($pageCounter !== 1) : ?>
-                        <?php if (count($posts) > 9) : ?>
-                            <a class="main-btn" href="profile.php?page=<?php echo htmlspecialchars($pageCounter - 2); ?>" style="margin-right: 2em;">Previous page</a>
-                        <?php else : ?>
-                            <a class="main-btn" href="profile.php?page=<?php echo htmlspecialchars($pageCounter - 2); ?>">Previous page</a>
+                    <?php if ($pageCounter !== 1): ?>
+                        <?php if (count($posts) > 9): ?> 
+                            <a class="main-btn" href="profile.php?page=<?php echo htmlspecialchars($pageCounter-2); ?>" style="margin-right: 2em;">Previous page</a>
+                        <?php else: ?>
+                            <a class="main-btn" href="profile.php?page=<?php echo htmlspecialchars($pageCounter-2); ?>">Previous page</a>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <?php if (count($posts) > 9) : ?>
-                        <a class="main-btn" href="profile.php?page=<?php echo htmlspecialchars($pageCounter); ?>" <?php echo $buttonStyling; ?>>Next page</a>
+                    <?php if (count($posts) > 9): ?>                
+                        <a class="main-btn" href="profile.php?page=<?php echo htmlspecialchars($pageCounter); ?>" <?php echo $buttonStyling; ?> >Next page</a>
                     <?php endif; ?>
                 </div>
 
@@ -410,19 +393,19 @@ $following = Followers::getAllFollowing($id);
                 </div>
             </div>
         <?php endif; ?>
-            </div>
-            <?php include_once("./includes/nav-bottom.inc.php"); ?>
+    </div>
+    <?php include_once("./includes/nav-bottom.inc.php"); ?>
 
-            <script src="./js/filter.js"></script>
-            <script src="./js/like.js"></script>
-            <script src="./js/dropdown.js"></script>
-            <script src="./js/warning.js"></script>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-            <script src="./js/masonry.js"></script>
-            <script src="./js/moderator.js"></script>
-            <script src="./js/modal.js"></script>
-            <script src="./js/app.js"></script>
+    <script src="./js/filter.js"></script>
+    <script src="./js/like.js"></script>
+    <script src="./js/dropdown.js"></script>
+    <script src="./js/warning.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="./js/masonry.js"></script>
+    <script src="./js/moderator.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>
