@@ -77,6 +77,16 @@
                         <img class="modal-icon" src="./assets/delete.svg" alt="delete">
                         <p>Delete your profile</p>
                     </a>
+                    <?php if (!empty($mainModerator)) : ?>
+                    <a href="the_naughty_list.php">
+                        <img class="modal-icon" src="./assets/list.svg" alt="List icon">
+                        <p>The naughty list</p>
+                    </a>
+                    <a href="#">
+                    <img class="modal-icon" src="./assets/link.svg" alt="List icon">
+                        <p>Invite others</p>
+                    </a>
+                    <?php endif; ?>
                 </div>
             <?php else: ?>
                 <a class="main-btn login-nav-btn" href="login.php">Log in</a>
