@@ -103,7 +103,7 @@
         max-width: 250px;
     }
 
-    .tnl-container{
+    .tnl-container {
         background-color: var(--IMDpink);
         padding: 2em;
         border-radius: 10px;
@@ -185,7 +185,7 @@
         margin: auto;
     }
 
-    #dots-modal{
+    #dots-modal {
         display: block;
     }
 
@@ -362,12 +362,12 @@
 
     /* Naughty list */
 
-    #naughty-title{
+    #naughty-title {
         display: block;
         text-align: center;
     }
 
-    
+
 
 
 

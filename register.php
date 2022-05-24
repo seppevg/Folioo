@@ -5,12 +5,25 @@ include_once("bootstrap.php");
 if (!empty($_POST)) {
     try {
         // create a new user
+        if (!empty($_GET['shareCode'])) {
+            $referralCode = $_GET['shareCode'];
+        } else {
+            $referralCode = "";
+        }
+
+        $currentDate = date("Y-m-d H:i:s");
+        $dateArray = explode(" ", $currentDate );
+        $options = [
+            'cost' => 5
+        ];
+        $dayCode = password_hash($dateArray[0], PASSWORD_DEFAULT, $options);
+
         $user = new User();
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
         $user->setUsername($_POST['username']);
         $user->setImage($_POST['image']);
-        $user->canRegister();
+        $user->canRegister($referralCode, $dayCode);
         $user->save();
         
         // start a session and redirect the user

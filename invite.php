@@ -41,12 +41,24 @@ if (!empty($_POST)) {
                 <div>
                     <h3 class="form-title">Invite a friend!</h3>
                     <p>
-                        Share this link with someone who you would like to join Folioo. This link is only valid once.
+                        Share this link with someone who you would like to join Folioo. This link is only valid today.
                     </p>
                 </div>
 
-                <div id="filler">
-                    <img src="./assets/become-friend.svg" alt="Become a friend" width="180px">
+                <div id="invite-a-friend">
+                    <img src="./assets/invite-friend.svg" alt="Invite a friend" width="180px">
+                </div>
+
+                <div id="invisible-link">
+                    <?php 
+                        $currentDate = date("Y-m-d H:i:s");
+                        $dateArray = explode(" ", $currentDate );
+                        $options = [
+                            'cost' => 5
+                        ];
+                        $date = password_hash($dateArray[0], PASSWORD_DEFAULT, $options);
+                    ?>
+                    register.php?shareCode=<?php echo $date; ?>
                 </div>
 
                 <div class="flex">

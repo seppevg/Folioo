@@ -48,7 +48,7 @@ if (!empty($_POST)) {
                     </p>
                 </div>
 
-                <div id="filler">
+                <div id="filler filler-form">
                     <img src="./assets/password.svg" alt="lock and gear" width="180px">
                 </div>
 

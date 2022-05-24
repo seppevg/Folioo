@@ -420,19 +420,14 @@ function copyToClipboard() {
 }
 
 function copyLinkToClipboard() {
-  let copyText = document.querySelector("#copy-link-to-clipboard");
-  let url =
-    window.location.protocol +
-    "//" +
-    window.location.host +
-    "/" +
-    window.location.pathname +
-    window.location.search;
-  console.log(url);
+  let copyBtn = document.querySelector("#copy-link-to-clipboard");
+  let copyText = document.querySelector("#invisible-link").innerHTML;
+
+  let url = 'https://folioo.seppevangeel.be/' + copyText;
 
   navigator.clipboard.writeText(url).then(
     function () {
-      copyText.classList.toggle("active");
+      copyBtn.classList.toggle("active");
       window.getSelection().removeAllRanges();
     },
     function () {
@@ -441,6 +436,6 @@ function copyLinkToClipboard() {
   );
 
   setTimeout(function () {
-    copyText.classList.remove("active");
+    copyBtn.classList.remove("active");
   }, 2500);
 }
