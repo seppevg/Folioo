@@ -144,7 +144,7 @@ $following = Followers::getAllFollowing($id);
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads">
+                    <div id="no-uploads-profile">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
@@ -293,7 +293,7 @@ $following = Followers::getAllFollowing($id);
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads">
+                    <div id="no-uploads-profile">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
