@@ -77,7 +77,7 @@ if (!empty($_POST)) {
                                 <label class="form-label email-label" for="email">Email</label>
                             </div>
                             <div class="flex">
-                                <input name="email" autocomplete="off" class="form-input" type="email" placeholder="someone@thomasmore.be" id="ajax-email" oninput="checkEmail(this)">
+                                <input name="email" autocomplete="off" class="form-input" type="email" placeholder="Fill in your email" id="ajax-email" oninput="checkEmail(this)">
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@ if (!empty($_POST)) {
                                 <label class="form-label" for="password">Password</label>
                             </div>
                             <div class="flex">
-                                <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Enter a strong password">
+                                <input name="password" autocomplete="off" class="form-input" type="password" placeholder="Use a strong password">
                             </div>
                         </div>
 

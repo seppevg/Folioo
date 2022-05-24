@@ -1,18 +1,16 @@
-<?php
+<?php session_start();
 
 include_once("bootstrap.php");
 
-if (!empty($_POST)) {
-    try {
-        $user = new User();
-        $user->setEmail($_POST['email']);
-        $user->validateEmail();
-        $user->sendPasswordResetLink();
+if (empty($_SESSION['id'])) {
+    $id = "";
+} else {
+    $id = $_SESSION['id'];
+}
 
-        header("Location: index.php");
-    } catch (Throwable $error) {
-        $error = $error->getMessage();
-    }
+$moderatorCheck = User::isModerator($id);
+if (!$moderatorCheck) {
+    header("Location: index.php");
 }
 
 ?>
@@ -36,7 +34,7 @@ if (!empty($_POST)) {
         <h2 class="slogan">Inspire and get inspired</h2>
     </div>
     <div class="form-container">
-        <form action="" method="post" class="form">
+        <div class="form">
             <div class="container">
                 <div>
                     <h3 class="form-title">Invite a friend!</h3>
@@ -70,7 +68,7 @@ if (!empty($_POST)) {
                     <p class="center line">Friend invited? <a class="switch" href="profile.php">Return to profile</a></p>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
     <script src="./js/app.js"></script>
 </body>

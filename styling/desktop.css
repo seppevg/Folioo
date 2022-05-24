@@ -52,11 +52,12 @@
     }
 
     .welcomeIcon {
-        margin-top: 7em;
+        margin-top: 0;
+        height: 100%;
     }
 
     #filler {
-        margin-bottom: 45vh;
+        margin-bottom: 0;
     }
 
     #filler img {

@@ -625,4 +625,20 @@ class User
         $statement->bindValue(":id" , $userId);
         return $statement->execute();
     }
+
+    public static function isModerator($id) {
+        if (!empty($id)) {
+            $conn = DB::getInstance();
+            $statement = $conn->prepare("SELECT moderator FROM users WHERE id = :id");
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            if ($result["moderator"] == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
 }
