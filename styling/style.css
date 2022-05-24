@@ -1240,5 +1240,8 @@ img.post-profile {
 
 /* Naughty list */
 .tnl-container {
+  background-color: var(--IMDpink);
+  padding: 1em;
+  border-radius: 10px;
   margin: 1em 20% 0 20%;
 }
