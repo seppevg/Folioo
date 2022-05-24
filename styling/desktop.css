@@ -171,6 +171,15 @@
         width: 180px;
     }
 
+    #no-uploads-profile {
+        top: 105%;
+        left: 53%;
+    }
+
+    #no-uploads-profile img {
+        width: 180px;
+    }
+
     #profile .main-margin .main-btn {
         max-width: 200px;
         margin: auto;
@@ -183,10 +192,6 @@
     .modal-container {
         position: fixed;
         bottom: 0;
-    }
-
-    #burgercheck{
-        display: block;
     }
 
     /* Add & edit profile*/

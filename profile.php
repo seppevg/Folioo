@@ -45,7 +45,6 @@ $loadedPosts = ($pageCounter - 1)*10;
 $followers = Followers::getAllFollowers($id);
 $following = Followers::getAllFollowing($id);
 
-
 ?>
 <html lang="en">
 
@@ -62,9 +61,7 @@ $following = Followers::getAllFollowing($id);
 
 <body>
     <?php include_once("./includes/nav-top.inc.php"); ?>
-
     <div id="profile">
-
         <?php if (!empty($userId)) : ?>
             <?php foreach ($userProfiles as $up) : ?>
                 <?php foreach ($profile as $p) : ?>
@@ -144,7 +141,7 @@ $following = Followers::getAllFollowing($id);
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads">
+                    <div id="no-uploads-profile">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
@@ -194,10 +191,6 @@ $following = Followers::getAllFollowing($id);
                                 <p>Stop banning user</p>
                             </a>    
                             <?php endif?>
-                            <a href="the_naughty_list.php">
-                                <img class="modal-icon" src="./assets/list.svg" alt="List icon">
-                                <p>The naughty list</p>
-                            </a>
                         <?php endif; ?>
                     </div>
                 </section>
@@ -293,7 +286,7 @@ $following = Followers::getAllFollowing($id);
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads">
+                    <div id="no-uploads-profile">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
