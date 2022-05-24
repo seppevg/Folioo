@@ -417,6 +417,28 @@ function copyToClipboard() {
       alert("Sharing the URL has failed, please try again later.");
     }
   );
+}
+
+function copyLinkToClipboard() {
+  let copyText = document.querySelector("#copy-link-to-clipboard");
+  let url =
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    "/" +
+    window.location.pathname +
+    window.location.search;
+  console.log(url);
+
+  navigator.clipboard.writeText(url).then(
+    function () {
+      copyText.classList.toggle("active");
+      window.getSelection().removeAllRanges();
+    },
+    function () {
+      alert("Sharing the URL has failed, please try again later.");
+    }
+  );
 
   setTimeout(function () {
     copyText.classList.remove("active");
