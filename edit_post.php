@@ -58,6 +58,7 @@ if (!empty($_POST)) {
         $error = $error->getMessage();
     }
 }
+$isBanned = User::isBanned($id);
 
 ?>
 <!DOCTYPE html>
@@ -75,71 +76,72 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+<?php include_once("./includes/nav-top.inc.php"); ?>
     <div id="add">
         <?php if (!empty($id)) : ?>
             <div class="profile-header">
                 <h3 class="profile-username">Edit project</h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
-
-            <form action="" method="POST" enctype="multipart/form-data">
+            <div class="form-container form-container-add">
+            <form action="" method="POST" enctype="multipart/form-data" class="web-flex">
                 <div>
                     <div class="profile-img-edit">
-                        <img style="cursor:pointer" id="profile-display" src="./uploads/posts/<?php if (!empty($oldPost)) {
-    echo $oldPost['image'];
-} else {
-    echo $newPost->getImage;
-} ?>" onclick="triggerClick()">
+                        <img style="cursor:pointer" id="profile-display" src="./uploads/posts/<?php if (!empty($oldPost)) {echo $oldPost['image'];} else {echo $newPost->getImage;} ?>" onclick="triggerClick()">
                     </div>
                     <label class="clickable-text" style="cursor:pointer" for="image" onclick="triggerClick()">Change pic</label>
+                    <em class="specifications">  (Allowed extensions: jpg, jpeg, png, svg. File-size: max. 5 MB.)</em>
                     <input type="file" id="profile-picture" name="image" style="display: none;" onchange="displayImage(this)">
                 </div>
 
-                <div class="input-spacing">
-                    <div class="form-field">
-                        <div>
-                            <label class="form-label" for="title">Title*</label>
-                        </div>
-                        <div class="flex">
-                            <?php if (!empty($oldPost)) : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo htmlspecialchars($oldPost['title']); ?>">
-                            <?php else : ?>
-                                <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <label class="form-label" for="text">Text*</label>
-                        </div>
-                        <div class="flex">
-                            <?php if (!empty($oldPost)) : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo htmlspecialchars($oldPost['text']); ?>">
-                            <?php else : ?>
-                                <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <label class="form-label" for="tags">Tags*</label>
-                        </div>
-                        <div class="flex">
-                            <?php if (!empty($oldPost)) : ?>
-                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo htmlspecialchars($oldPost['tags']); ?>">
-                            <?php else : ?>
-                                <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis">
-                            <?php endif; ?>
+                <div>
+                    <div class="input-spacing">
+                        <div class="form-field">
+                            <div>
+                                <label class="form-label" for="title">Title*</label>
+                            </div>
+                            <div class="flex">
+                                <?php if (!empty($oldPost)) : ?>
+                                    <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X" value="<?php echo htmlspecialchars($oldPost['title']); ?>">
+                                <?php else : ?>
+                                    <input name="title" autocomplete="off" class="form-input" type="text" placeholder="Project X">
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <label class="form-label" for="text">Text*</label>
+                            </div>
+                            <div class="flex">
+                                <?php if (!empty($oldPost)) : ?>
+                                    <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)" value="<?php echo htmlspecialchars($oldPost['text']); ?>">
+                                <?php else : ?>
+                                    <input name="text" autocomplete="off" class="form-input" type="text" placeholder="My newest creation:)">
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <label class="form-label" for="tags">Tags*</label>
+                            </div>
+                            <div class="flex">
+                                <?php if (!empty($oldPost)) : ?>
+                                    <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis" value="<?php echo htmlspecialchars($oldPost['tags']); ?>">
+                                <?php else : ?>
+                                    <input name="tags" autocomplete="off" class="form-input" type="text" placeholder="#LookAtThis">
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <?php if (isset($error)) : ?>
-                    <div class="main-margin">
-                        <p class="error"> <?php echo $error; ?></p>
+                    <?php if (isset($error)) : ?>
+                        <div class="main-margin">
+                            <p class="error"> <?php echo $error; ?></p>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="profile-edit">
+                        <button class="main-btn" type="submit" name="save-post">Save Changes</button>
                     </div>
-                <?php endif; ?>
-
-                <div class="profile-edit">
-                    <button class="main-btn" type="submit" name="save-post">Save Changes</button>
                 </div>
             </form>
+            </div>
 
             <?php foreach ($profile as $p) : ?>
                 <section class="modal modal-container ">
