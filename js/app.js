@@ -417,8 +417,25 @@ function copyToClipboard() {
       alert("Sharing the URL has failed, please try again later.");
     }
   );
+}
+
+function copyLinkToClipboard() {
+  let copyBtn = document.querySelector("#copy-link-to-clipboard");
+  let copyText = document.querySelector("#invisible-link").innerHTML;
+
+  let url = 'https://folioo.seppevangeel.be/' + copyText;
+
+  navigator.clipboard.writeText(url).then(
+    function () {
+      copyBtn.classList.toggle("active");
+      window.getSelection().removeAllRanges();
+    },
+    function () {
+      alert("Sharing the URL has failed, please try again later.");
+    }
+  );
 
   setTimeout(function () {
-    copyText.classList.remove("active");
+    copyBtn.classList.remove("active");
   }, 2500);
 }

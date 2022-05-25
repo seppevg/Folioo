@@ -117,7 +117,7 @@ class User
         }
     }
 
-    public function canRegister()
+    public function canRegister($referralCode, $dayCode)
     {
         //Checking if username is already used
         $conn = DB::getInstance();
@@ -147,10 +147,17 @@ class User
             return false;
         }
 
-        //Checking if email is from thomasmore
-        if (stristr($this->email, '@student.thomasmore.be') == false && stristr($this->email, '@thomasmore.be') == false) {
-            throw new Exception("Email has to contain @thomasmore.be or @student.thomasmore.be 🎓");
-            return false;
+        //If referralcode is valid, we skip this requirement
+        if (!empty($referralCode)) {
+            if (password_verify($dayCode, $referralCode)) {
+                return true;
+            }
+        } else {
+            //Checking if email is from thomasmore
+            if (stristr($this->email, '@student.thomasmore.be') == false && stristr($this->email, '@thomasmore.be') == false) {
+                throw new Exception("Email has to contain @thomasmore.be or @student.thomasmore.be 🎓");
+                return false;
+            }
         }
 
         return true;
@@ -617,5 +624,21 @@ class User
         $statement = $conn->prepare("UPDATE users SET archived = 1 WHERE id = :id;");
         $statement->bindValue(":id" , $userId);
         return $statement->execute();
+    }
+
+    public static function isModerator($id) {
+        if (!empty($id)) {
+            $conn = DB::getInstance();
+            $statement = $conn->prepare("SELECT moderator FROM users WHERE id = :id");
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            if ($result["moderator"] == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }

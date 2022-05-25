@@ -42,6 +42,9 @@ if ($pageCounter !== 1) {
 
 $loadedPosts = ($pageCounter - 1)*10;
 
+$followers = Followers::getAllFollowers($id);
+$following = Followers::getAllFollowing($id);
+
 ?>
 <html lang="en">
 
@@ -138,7 +141,7 @@ $loadedPosts = ($pageCounter - 1)*10;
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads">
+                    <div id="no-uploads-profile">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
@@ -252,11 +255,11 @@ $loadedPosts = ($pageCounter - 1)*10;
                             <img src="./uploads/profiles/<?php echo $p['image']; ?>">
                         </div>
                         <div class="profile-following">
-                            <p class="following-number"><?php echo $p['following']; ?></p>
+                            <p class="following-number"><?php echo $following; ?></p>
                             <p class="following">Following</p>
                         </div>
                         <div class="profile-following">
-                            <p class="followers-number"><?php echo $p['followers']; ?></p>
+                            <p class="followers-number"><?php echo $followers; ?></p>
                             <p class="following">Followers</p>
                         </div>
                     </div>
@@ -283,7 +286,7 @@ $loadedPosts = ($pageCounter - 1)*10;
                 </div>
 
                 <?php if (empty($posts)) : ?>
-                    <div id="no-uploads">
+                    <div id="no-uploads-profile">
                         <img src="./assets/no-posts.svg" alt="No posts yet">
                     </div>
                 <?php endif; ?>
@@ -355,6 +358,16 @@ $loadedPosts = ($pageCounter - 1)*10;
                             <img class="modal-icon" src="./assets/delete.svg" alt="delete">
                             <p>Delete your profile</p>
                         </a>
+                        <?php if (!empty($mainModerator)) : ?>
+                        <a href="the_naughty_list.php">
+                            <img class="modal-icon" src="./assets/list.svg" alt="List icon">
+                            <p>The naughty list</p>
+                        </a>
+                        <a href="#">
+                        <img class="modal-icon" src="./assets/link.svg" alt="List icon">
+                            <p>Invite others</p>
+                        </a>
+                        <?php endif;?>
                     </div>
                 </section>
             <?php endforeach; ?>

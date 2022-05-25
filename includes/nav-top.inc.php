@@ -87,7 +87,8 @@ foreach ($profile as $p){
                         <img class="modal-icon" src="./assets/list.svg" alt="List icon">
                         <p>The naughty list</p>
                     </a>
-                    <a href="#">
+
+                    <a href="invite.php">
                     <img class="modal-icon" src="./assets/link.svg" alt="List icon">
                         <p>Invite others</p>
                     </a>
