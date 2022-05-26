@@ -83,7 +83,7 @@ $isBanned = User::isBanned($id);
                 <h3 class="profile-username">Edit project</h3>
                 <img class="modal-button" src="./assets/burger-menu.svg" alt="Burger menu">
             </div>
-            <div class="form-container form-container-add">
+            <div class="form-container form-container-add margin-web">
             <form action="" method="POST" enctype="multipart/form-data" class="web-flex">
                 <div>
                     <div class="profile-img-edit">
